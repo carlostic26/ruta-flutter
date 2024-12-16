@@ -37,7 +37,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   alignment: MainAxisAlignment.center,
                   width: widthScreen * 0.65,
                   lineHeight: 7,
-                  percent: 50 / 100,
+                  percent: 100 / 100,
                   animation: true,
                   animationDuration: 10000,
                   progressColor: Colors.blueGrey),
@@ -45,8 +45,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
             const Text(
               "Cargando...",
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(fontSize: 12, fontFamily: 'Inter_ExtraLight.ttf'),
+              style: TextStyle(fontSize: 12),
             ),
             SizedBox(
               height: heightScreen * 0.1,
