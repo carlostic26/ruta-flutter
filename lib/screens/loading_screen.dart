@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:ruta_flutter/screens/tutorial/welcome_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -15,17 +16,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Placeholder(
-              child: SizedBox(
-                height: heightScreen * 0.2,
-                width: widthScreen * 0.35,
-                child: Image.asset(fit: BoxFit.fill, 'assets/images/logo.jpg'),
-              ),
+            SizedBox(
+              height: heightScreen * 0.2,
+              width: widthScreen * 0.35,
+              child: Image.asset(fit: BoxFit.fill, 'assets/images/logo.jpg'),
             ),
             SizedBox(
               height: heightScreen * 0.02,
@@ -51,7 +50,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
               height: heightScreen * 0.1,
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
+                  );
+                },
                 style: ButtonStyle(
                   backgroundColor:
                       WidgetStateProperty.all<Color>(Colors.blueGrey),

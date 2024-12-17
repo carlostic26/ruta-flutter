@@ -1,4 +1,4 @@
-name: test_1
+name: ruta_flutter
 description: "A new Flutter project."
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -29,6 +29,8 @@ flutter:
   
   assets:
     - assets/images/logo.jpg
+    - assets/images/emoti_programador.png
+    - assets/images/flecha_level_tutorial.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
