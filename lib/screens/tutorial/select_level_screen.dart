@@ -45,37 +45,34 @@ class SelectLevelScreen extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: widthScreen * 0.42,
-                              height: heightScreen * 0.15,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                //color: Colors.black54,
-                              ),
-                              child: const Positioned(
-                                bottom: 20,
-                                left: 20,
-                                right: 20,
-                                child: Center(
-                                  child: Text(
-                                    'Flutter\nJunior Dev',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
+                      ),
+                    ),
+                    Container(
+                      width: widthScreen * 0.42,
+                      height: heightScreen * 0.15,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        //color: Colors.black54,
+                      ),
+                      child: const Positioned(
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                        child: Center(
+                          child: Text(
+                            'Flutter\nJunior Dev',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
+
                     Positioned(
                       left: widthScreen * 0.42,
                       top: heightScreen * 0.05,
@@ -110,37 +107,35 @@ class SelectLevelScreen extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: widthScreen * 0.42,
-                              height: heightScreen * 0.15,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Colors.black54,
-                              ),
-                              child: const Positioned(
-                                bottom: 20,
-                                left: 20,
-                                right: 20,
-                                child: Center(
-                                  child: Text(
-                                    'Flutter\nJunior Dev',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
+                      ),
+                    ),
+
+                    Container(
+                      width: widthScreen * 0.42,
+                      height: heightScreen * 0.15,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.black54,
+                      ),
+                      child: const Positioned(
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                        child: Center(
+                          child: Text(
+                            'Flutter\nJunior Dev',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
+
                     Positioned(
                       left: widthScreen * 0.42,
                       top: heightScreen * 0.345,
@@ -176,34 +171,31 @@ class SelectLevelScreen extends StatelessWidget {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        child: Stack(
-                          children: [
-                            Container(
-                              width: widthScreen * 0.42,
-                              height: heightScreen * 0.15,
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25),
-                                color: Colors.black54,
-                              ),
-                              child: const Positioned(
-                                bottom: 20,
-                                left: 20,
-                                right: 20,
-                                child: Center(
-                                  child: Text(
-                                    'Flutter\nJunior Dev',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
+                      ),
+                    ),
+
+                    Container(
+                      width: widthScreen * 0.42,
+                      height: heightScreen * 0.15,
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.black54,
+                      ),
+                      child: const Positioned(
+                        bottom: 20,
+                        left: 20,
+                        right: 20,
+                        child: Center(
+                          child: Text(
+                            'Flutter\nJunior Dev',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
