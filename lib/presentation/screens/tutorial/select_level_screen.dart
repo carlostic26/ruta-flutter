@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/screens/home_screen.dart';
+import 'package:ruta_flutter/presentation/screens/main/home_screen.dart';
 
 class SelectLevelScreen extends StatelessWidget {
   const SelectLevelScreen({super.key});

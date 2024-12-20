@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/screens/loading_screen.dart';
+import 'package:ruta_flutter/presentation/screens/loading_screen.dart';
 
 void main() {
   runApp(const MyApp());

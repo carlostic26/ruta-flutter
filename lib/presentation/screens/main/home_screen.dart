@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/screens/path_screen.dart';
+import 'package:ruta_flutter/presentation/screens/main/path_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

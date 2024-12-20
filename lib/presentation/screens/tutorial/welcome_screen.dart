@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/screens/tutorial/select_level_screen.dart';
+import 'package:ruta_flutter/presentation/screens/tutorial/select_level_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
