@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/presentation/screens/main/home_screen.dart';
 
@@ -29,50 +28,9 @@ class SelectLevelScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Stack(
+                  //TODO: Extraer las flechas, dar nombre a cada una e invocarlas dentreo del stack
                   children: [
-                    //primer level
-                    Positioned(
-                      left: widthScreen * 0.05,
-                      child: Container(
-                        width: widthScreen * 0.42,
-                        height: heightScreen * 0.15,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(25),
-                          image: const DecorationImage(
-                            image: AssetImage(
-                                'assets/images/emoti_programador.png'),
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        //color: Colors.black54,
-                      ),
-                      child: const Positioned(
-                        bottom: 20,
-                        left: 20,
-                        right: 20,
-                        child: Center(
-                          child: Text(
-                            'Flutter\nJunior Dev',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ),
-
+                    //flecha 1
                     Positioned(
                       left: widthScreen * 0.42,
                       top: heightScreen * 0.05,
@@ -91,6 +49,38 @@ class SelectLevelScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    //primer level
+                    Positioned(
+                      left: widthScreen * 0.05,
+                      child: Column(
+                        children: [
+                          Container(
+                            width: widthScreen * 0.42,
+                            height: heightScreen * 0.15,
+                            decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(25),
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/emoti_programador.png'),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            'Flutter Junior Dev',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+
                     //segundo level
                     Positioned(
                       right: widthScreen * 0.05,
@@ -110,21 +100,20 @@ class SelectLevelScreen extends StatelessWidget {
                       ),
                     ),
 
-                    Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.black54,
-                      ),
-                      child: const Positioned(
-                        bottom: 20,
-                        left: 20,
-                        right: 20,
-                        child: Center(
+                    Positioned(
+                      right: widthScreen * 0.05,
+                      top: heightScreen * 0.19,
+                      child: Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.black54,
+                        ),
+                        child: const Center(
                           child: Text(
-                            'Flutter\nJunior Dev',
+                            'Flutter\nMiddle Dev',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -136,6 +125,7 @@ class SelectLevelScreen extends StatelessWidget {
                       ),
                     ),
 
+//flecha 2
                     Positioned(
                       left: widthScreen * 0.42,
                       top: heightScreen * 0.345,
@@ -174,21 +164,20 @@ class SelectLevelScreen extends StatelessWidget {
                       ),
                     ),
 
-                    Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        color: Colors.black54,
-                      ),
-                      child: const Positioned(
-                        bottom: 20,
-                        left: 20,
-                        right: 20,
-                        child: Center(
+                    Positioned(
+                      left: widthScreen * 0.05,
+                      bottom: heightScreen * 0.18,
+                      child: Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: Colors.black54,
+                        ),
+                        child: const Center(
                           child: Text(
-                            'Flutter\nJunior Dev',
+                            'Flutter\nSenior Dev',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,

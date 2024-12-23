@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/presentation/screens/modules/module_screen.dart';
+import 'package:ruta_flutter/presentation/screens/modules/choose_topic_screen.dart';
 
 class PathLearningWidget extends StatelessWidget {
   const PathLearningWidget({
@@ -20,9 +20,12 @@ class PathLearningWidget extends StatelessWidget {
         Positioned(
           left: widthScreen * 0.20,
           bottom: heightScreen * 0.135,
-          child: SizedBox(
-              height: heightScreen * 0.12,
-              child: Image.asset('assets/images/linea_asset.png')),
+          child: Transform.rotate(
+            angle: pi,
+            child: SizedBox(
+                height: heightScreen * 0.12,
+                child: Image.asset('assets/images/linea_asset.png')),
+          ),
         ),
 
         //Linea 2
@@ -70,7 +73,7 @@ class PathLearningWidget extends StatelessWidget {
           ),
         ),
 
-        //Linea 2
+        //Linea 6
         Positioned(
           left: widthScreen * 0.162,
           top: heightScreen * 0.1,
@@ -88,7 +91,6 @@ class PathLearningWidget extends StatelessWidget {
           bottom: heightScreen * 0.1,
           child: GestureDetector(
             onTap: () {
-              print('tap');
               showDialogLearning(context);
             },
             child: ClipRRect(
@@ -101,7 +103,7 @@ class PathLearningWidget extends StatelessWidget {
               child: Container(
                 width: widthScreen * 0.2,
                 height: heightScreen * 0.09,
-                color: Colors.yellow,
+                color: Colors.grey,
               ),
             ),
           ),
@@ -265,7 +267,7 @@ class PathLearningWidget extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ModuleScreen()),
+                              builder: (context) => const ChooseTopicScreen()),
                         );
                       }),
                 ),
