@@ -2,63 +2,65 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/presentation/screens/modules/choose_topic_screen.dart';
 
-class PathLearningWidget extends StatelessWidget {
-  const PathLearningWidget({
+class PathCircleModulesWidget extends StatelessWidget {
+  const PathCircleModulesWidget({
     super.key,
-    required this.widthScreen,
-    required this.heightScreen,
   });
-
-  final double widthScreen;
-  final double heightScreen;
 
   @override
   Widget build(BuildContext context) {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
+    double circleCenterScreen = widthScreen * 0.40;
+    double circleLeftScreen = widthScreen * 0.10;
+    double circleRightScreen = widthScreen * 0.10;
+
     return Stack(
       children: [
         //Linea 1
         Positioned(
-          left: widthScreen * 0.20,
-          bottom: heightScreen * 0.135,
+          left: widthScreen * 0.18,
+          bottom: heightScreen * 0.09,
           child: Transform.rotate(
             angle: pi,
             child: SizedBox(
                 height: heightScreen * 0.12,
-                child: Image.asset('assets/images/linea_asset.png')),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
           ),
         ),
 
         //Linea 2
         Positioned(
           left: widthScreen * 0.165,
-          bottom: heightScreen * 0.23,
+          bottom: heightScreen * 0.20,
           child: Transform.rotate(
             angle: -pi / 2,
             child: SizedBox(
                 height: heightScreen * 0.12,
-                child: Image.asset('assets/images/linea_asset.png')),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
           ),
         ),
 
         //Linea 3
         Positioned(
-          right: widthScreen * 0.20,
-          bottom: heightScreen * 0.35,
+          right: widthScreen * 0.17,
+          bottom: heightScreen * 0.325,
           child: Transform.rotate(
             angle: pi / 2,
             child: SizedBox(
                 height: heightScreen * 0.12,
-                child: Image.asset('assets/images/linea_asset.png')),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
           ),
         ),
 
         //Linea 4
         Positioned(
-          right: widthScreen * 0.22,
-          top: heightScreen * 0.295,
+          right: widthScreen * 0.20,
+          top: heightScreen * 0.290,
           child: SizedBox(
               height: heightScreen * 0.12,
-              child: Image.asset('assets/images/linea_asset.png')),
+              child: Image.asset('assets/images/icons/linea_asset.png')),
         ),
 
         //Linea 5
@@ -69,7 +71,7 @@ class PathLearningWidget extends StatelessWidget {
             angle: pi,
             child: SizedBox(
                 height: heightScreen * 0.12,
-                child: Image.asset('assets/images/linea_asset.png')),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
           ),
         ),
 
@@ -81,14 +83,14 @@ class PathLearningWidget extends StatelessWidget {
             angle: -pi / 2,
             child: SizedBox(
                 height: heightScreen * 0.12,
-                child: Image.asset('assets/images/linea_asset.png')),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
           ),
         ),
 
         //Circulo 1
         Positioned(
-          left: widthScreen * 0.40,
-          bottom: heightScreen * 0.1,
+          left: circleCenterScreen,
+          bottom: heightScreen * 0.05,
           child: GestureDetector(
             onTap: () {
               showDialogLearning(context);
@@ -111,8 +113,8 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 2
         Positioned(
-          left: widthScreen * 0.10,
-          bottom: heightScreen * 0.2,
+          left: circleLeftScreen,
+          bottom: heightScreen * 0.155,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(100),
@@ -130,8 +132,8 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 3
         Positioned(
-          left: widthScreen * 0.40,
-          bottom: heightScreen * 0.3,
+          left: circleCenterScreen,
+          bottom: heightScreen * 0.27,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(100),
@@ -149,8 +151,8 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 4
         Positioned(
-          right: widthScreen * 0.14,
-          bottom: heightScreen * 0.45,
+          right: circleRightScreen,
+          bottom: heightScreen * 0.38,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(100),
@@ -168,7 +170,7 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 5
         Positioned(
-          right: widthScreen * 0.40,
+          right: circleCenterScreen,
           top: heightScreen * 0.25,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
@@ -187,7 +189,7 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 6
         Positioned(
-          left: widthScreen * 0.1,
+          left: circleLeftScreen,
           top: heightScreen * 0.15,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(
@@ -206,7 +208,7 @@ class PathLearningWidget extends StatelessWidget {
 
         //Circulo 7
         Positioned(
-          left: widthScreen * 0.40,
+          left: circleCenterScreen,
           top: heightScreen * 0.05,
           child: ClipRRect(
             borderRadius: const BorderRadius.only(

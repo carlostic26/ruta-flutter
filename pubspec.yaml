@@ -1,9 +1,9 @@
 name: ruta_flutter
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
-version: 1.0.2+2
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.4.4 <4.0.0'
@@ -23,15 +23,11 @@ dev_dependencies:
 
 flutter:
 
-
   uses-material-design: true
 
-  
   assets:
-    - assets/images/logo.jpg
-    - assets/images/emoti_programador.png
-    - assets/images/flecha_level_tutorial.png
-    - assets/images/linea_asset.png
+    - assets/images/
+    - assets/images/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
