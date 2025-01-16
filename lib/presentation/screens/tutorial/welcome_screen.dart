@@ -10,7 +10,7 @@ class WelcomeScreen extends StatelessWidget {
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+      //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       body: Column(
         children: [
           SizedBox(

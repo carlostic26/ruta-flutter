@@ -16,7 +16,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+      //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

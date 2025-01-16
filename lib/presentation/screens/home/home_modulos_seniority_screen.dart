@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/commons/path_screen.dart';
+import 'package:ruta_flutter/presentation/screens/path_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,27 +49,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         width: widthScreen * 0.42,
                         height: heightScreen * 0.15,
                         decoration: BoxDecoration(
-                          color: Colors.grey,
+                          color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(25),
                           image: const DecorationImage(
                             image: AssetImage('assets/images/jr_dev.png'),
                             fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      const Positioned(
-                        bottom: 35,
-                        left: 20,
-                        right: 20,
-                        child: Center(
-                          child: Text(
-                            'Flutter\nJunior Dev',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),
@@ -78,15 +62,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Expanded(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
-                      child: Text(
-                        'Encontrarás diversos conceptos básicos sobre: Dart y Flutter, tips, estructura de proyectos y widgets esenciales.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.justify,
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Flutter Junior Dev',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Encontrarás diversos conceptos básicos sobre: Dart y Flutter, tips, estructura de proyectos y widgets esenciales.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.justify,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -103,53 +100,59 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SpacerHome(heightScreen: heightScreen),
+
               //Middle Dev
               Row(
                 children: [
-                  Container(
-                    width: widthScreen * 0.42,
-                    height: heightScreen * 0.15,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(25),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/middle_dev.png'),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    child: Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25),
-                        //color: Colors.black54,
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Flutter\nMiddle Dev',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                  Stack(
+                    children: [
+                      Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        decoration: BoxDecoration(
+                          color: Colors.orange,
+                          borderRadius: BorderRadius.circular(25),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/middle_dev.png'),
+                            fit: BoxFit.contain,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                       ),
-                    ),
+                      Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(167, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                    ],
                   ),
                   const Expanded(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
-                      child: Text(
-                        'Aqui hay gestión de estados, patrones de diseño, clean architecture, consumo de APIs, testing y mejores prácticas para construir apps escalables.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.justify,
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Flutter Middle Dev',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Aqui hay gestión de estados, patrones de diseño, clean architecture, consumo de APIs, testing y mejores prácticas para construir apps escalables.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.justify,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -165,64 +168,61 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white, Icons.arrow_forward_ios)),
                 ],
               ),
+
               SpacerHome(heightScreen: heightScreen),
+
               //Senior Dev
               Row(
                 children: [
-                  Container(
-                    width: widthScreen * 0.42,
-                    height: heightScreen * 0.15,
-                    decoration: BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.circular(25),
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/sr_dev.png'),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: widthScreen * 0.42,
-                          height: heightScreen * 0.15,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            //color: Colors.black54,
-                          ),
-                          child: const Positioned(
-                            bottom: 20,
-                            left: 20,
-                            right: 20,
-                            child: Center(
-                              child: Text(
-                                'Flutter\nJunior Dev',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
+                  Stack(
+                    children: [
+                      Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(25),
+                          image: const DecorationImage(
+                            image: AssetImage('assets/images/sr_dev.png'),
+                            fit: BoxFit.contain,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      Container(
+                        width: widthScreen * 0.42,
+                        height: heightScreen * 0.15,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(167, 0, 0, 0),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                    ],
                   ),
-                  // Senior Dev
                   const Expanded(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
-                      child: Text(
-                        'Aqui están las arquitecturas avanzadas, CI/CD, optimización de rendimiento, seguridad, mentoring y liderazgo técnico para proyectos empresariales.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        ),
-                        textAlign: TextAlign.justify,
-                        maxLines: 5,
-                        overflow: TextOverflow.ellipsis,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Flutter Senior Dev',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Aqui están las arquitecturas avanzadas, CI/CD, optimización de rendimiento, seguridad, mentoring y liderazgo técnico para proyectos empresariales.',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            textAlign: TextAlign.justify,
+                            maxLines: 5,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
 
-          //Circle Jr
+/*           //Circle Icon Jr
           Positioned(
             top: heightScreen * 0.15,
             right: widthScreen * 0.5,
@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
               width: widthScreen * 0.10,
               height: heightScreen * 0.048,
               decoration: BoxDecoration(
-                color: Colors.blueGrey,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Padding(
@@ -260,19 +260,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-          ),
+          ), */
 
-          //Circle Middle
+          //Circle Icon Middle
           Positioned(
-            top: heightScreen * 0.35,
-            right: widthScreen * 0.5,
-            child: Container(
-              width: widthScreen * 0.10,
-              height: heightScreen * 0.048,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(100),
-              ),
+            top: heightScreen * 0.38,
+            left: widthScreen * 0.065,
+            child: SizedBox(
+              width: widthScreen * 0.30,
+              height: heightScreen * 0.1,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Image.asset(
@@ -283,17 +279,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          //Circle Sr
+          //Circle Icon Sr
           Positioned(
-            top: heightScreen * 0.55,
-            right: widthScreen * 0.5,
-            child: Container(
-              width: widthScreen * 0.10,
-              height: heightScreen * 0.048,
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.circular(100),
-              ),
+            top: heightScreen * 0.58,
+            left: widthScreen * 0.065,
+            child: SizedBox(
+              width: widthScreen * 0.30,
+              height: heightScreen * 0.1,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Image.asset(

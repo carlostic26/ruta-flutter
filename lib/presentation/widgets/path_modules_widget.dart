@@ -25,8 +25,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           child: Transform.rotate(
             angle: pi,
             child: SizedBox(
-                height: heightScreen * 0.12,
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+              height: heightScreen * 0.12,
+              child: ColorFiltered(
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  child: Image.asset('assets/images/icons/linea_asset.png')),
+            ),
           ),
         ),
 
@@ -37,8 +41,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           child: Transform.rotate(
             angle: -pi / 2,
             child: SizedBox(
-                height: heightScreen * 0.12,
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+              height: heightScreen * 0.12,
+              child: ColorFiltered(
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  child: Image.asset('assets/images/icons/linea_asset.png')),
+            ),
           ),
         ),
 
@@ -49,8 +57,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           child: Transform.rotate(
             angle: pi / 2,
             child: SizedBox(
-                height: heightScreen * 0.12,
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+              height: heightScreen * 0.12,
+              child: ColorFiltered(
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  child: Image.asset('assets/images/icons/linea_asset.png')),
+            ),
           ),
         ),
 
@@ -59,8 +71,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           right: widthScreen * 0.20,
           top: heightScreen * 0.290,
           child: SizedBox(
-              height: heightScreen * 0.12,
-              child: Image.asset('assets/images/icons/linea_asset.png')),
+            height: heightScreen * 0.12,
+            child: ColorFiltered(
+                colorFilter:
+                    const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                child: Image.asset('assets/images/icons/linea_asset.png')),
+          ),
         ),
 
         //Linea 5
@@ -70,8 +86,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           child: Transform.rotate(
             angle: pi,
             child: SizedBox(
-                height: heightScreen * 0.12,
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+              height: heightScreen * 0.12,
+              child: ColorFiltered(
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  child: Image.asset('assets/images/icons/linea_asset.png')),
+            ),
           ),
         ),
 
@@ -82,8 +102,12 @@ class PathCircleModulesWidget extends StatelessWidget {
           child: Transform.rotate(
             angle: -pi / 2,
             child: SizedBox(
-                height: heightScreen * 0.12,
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+              height: heightScreen * 0.12,
+              child: ColorFiltered(
+                  colorFilter:
+                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  child: Image.asset('assets/images/icons/linea_asset.png')),
+            ),
           ),
         ),
 
@@ -236,7 +260,7 @@ class PathCircleModulesWidget extends StatelessWidget {
           backgroundColor: Colors.grey,
           title: const Center(
             child: Text(
-              'Iniciemos el aprendizaje',
+              'Nivel 1',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.0,
@@ -251,7 +275,7 @@ class PathCircleModulesWidget extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(15, 10, 15, 25),
                   child: Text(
                       textAlign: TextAlign.center,
-                      'Este es el nivel 1 de 10. En el cual .... '),
+                      'En este nivel repasarás los conceptos de ... \nAl final tendrás que superar el test de conocimiento en almenos un 75%'),
                 ),
                 Container(
                   alignment: Alignment.topCenter,

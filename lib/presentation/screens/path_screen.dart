@@ -15,7 +15,7 @@ class _PathScreenState extends State<PathScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+      // backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       appBar: AppBar(
         title: Text(
           'Ruta $_selectedLevel',
@@ -26,7 +26,7 @@ class _PathScreenState extends State<PathScreen> {
         foregroundColor: Colors.white,
         //leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
       ),
-      body: PathCircleModulesWidget(),
+      body: const PathCircleModulesWidget(),
       bottomNavigationBar: const SizedBox(height: 80, child: Placeholder()),
     );
   }
