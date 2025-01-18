@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/presentation/screens/tutorial/welcome_path_screen.dart';
+import 'package:ruta_flutter/presentation/widgets/tutorial_page_widget.dart';
+import 'package:ruta_flutter/presentation/widgets/welcome_page_widget.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -9,58 +10,39 @@ class WelcomeScreen extends StatelessWidget {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
+    //TODO: crear un array que contenga los widgets.
+    //TODO: crear controller y hacer que exista desplazamiento en el boton next
+    //TODO: Detectar la ultima page para que al dar en siguiente nos lleve a home
+
     return Scaffold(
-      //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       body: Column(
         children: [
-          SizedBox(
-            height: heightScreen * 0.15,
-          ),
-          const Text(
-            'Bienvenido a\nRuta Flutter',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: heightScreen * 0.1,
+          Expanded(
+            child: PageView(children: [
+              WelcomePageWidget(
+                  heightScreen: heightScreen, widthScreen: widthScreen),
+              TutorialPageWidget(
+                  heightScreen: heightScreen, widthScreen: widthScreen),
+            ]),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Image.asset('assets/images/logo.jpg',
-                height: heightScreen * 0.2,
-                width: widthScreen * 0.35,
-                fit: BoxFit.fill),
-          ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-            child: Text(
-              'Tu compañero de ruta en el desarrollo móvil, para que cada desarrollador, sin importar su nivel, encuentre su camino.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.white),
-            ),
-          ),
-          SizedBox(
-            height: heightScreen * 0.1,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  iconSize: 30,
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SelectLevelScreen()),
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                  ),
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                iconSize: 30,
+                onPressed: () async {
+/*                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TutorialPageWidget(
+                            heightScreen: heightScreen,
+                            widthScreen: widthScreen)),
+                  ); */
+                },
+                icon: const Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
                 ),
               ),
             ),

@@ -16,6 +16,10 @@ class PathCircleModulesWidget extends StatelessWidget {
     double circleLeftScreen = widthScreen * 0.10;
     double circleRightScreen = widthScreen * 0.10;
 
+    //Todo: crear un mismo color para las lineads de la ruta
+
+    Color rutaColor = Colors.blue;
+
     return Stack(
       children: [
         //Linea 1
@@ -27,8 +31,7 @@ class PathCircleModulesWidget extends StatelessWidget {
             child: SizedBox(
               height: heightScreen * 0.12,
               child: ColorFiltered(
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                   child: Image.asset('assets/images/icons/linea_asset.png')),
             ),
           ),

@@ -22,13 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       appBar: AppBar(
         title: const Text(
-          'Módulos de Seniority',
+          'Módulos',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ),
-        backgroundColor: const Color.fromARGB(255, 64, 64, 64),
         centerTitle: true,
         foregroundColor: Colors.white,
         leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
