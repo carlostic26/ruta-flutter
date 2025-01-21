@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/presentation/screens/home/home_modulos_screen.dart';
 
 class TutorialPageWidget extends StatelessWidget {
   const TutorialPageWidget({
