@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/presentation/screens/home/home_modulos_screen.dart';
-import 'package:ruta_flutter/presentation/state/page_view_state_provider.dart';
-import 'package:ruta_flutter/presentation/state/size_screen_provider.dart';
-import 'package:ruta_flutter/presentation/widgets/tutorial_page_widget.dart';
-import 'package:ruta_flutter/presentation/widgets/welcome_page_widget.dart';
+import 'package:ruta_flutter/features/home/presentation/screens/home_modulos_screen.dart';
+import 'package:ruta_flutter/features/home/presentation/state/page_view_state_provider.dart';
+import 'package:ruta_flutter/features/home/presentation/state/size_screen_provider.dart';
+import 'package:ruta_flutter/features/home/presentation/widgets/tutorial_page_widget.dart';
+import 'package:ruta_flutter/features/home/presentation/widgets/welcome_page_widget.dart';
 
 class WelcomeScreen extends ConsumerWidget {
   const WelcomeScreen({super.key});
@@ -15,7 +15,6 @@ class WelcomeScreen extends ConsumerWidget {
     final widthScreen = ref.watch(screenWidthProvider(context));
 
     final pageController = PageController();
-
     int numberPage = ref.watch(pageProvider);
 
     return Scaffold(

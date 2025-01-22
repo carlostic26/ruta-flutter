@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/presentation/screens/modules/subtopic_list_screen.dart';
-import 'package:ruta_flutter/presentation/screens/modules/detail_topic_screen.dart';
+import 'package:ruta_flutter/features/modules/subtopic_list_screen.dart';
 
 class ItemListChooseWidget extends StatelessWidget {
   const ItemListChooseWidget({

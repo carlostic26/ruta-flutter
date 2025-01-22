@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/presentation/widgets/tutorial_page_widget.dart';
 
 class WelcomePageWidget extends StatelessWidget {
   const WelcomePageWidget({
@@ -29,10 +28,19 @@ class WelcomePageWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 20),
-          child: Image.asset('assets/images/logo.jpg',
-              height: heightScreen * 0.2,
-              width: widthScreen * 0.35,
-              fit: BoxFit.fill),
+          child: SizedBox(
+            height: heightScreen * 0.16,
+            width: widthScreen * 0.35,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/logo.jpg'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
         ),
         const Padding(
           padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
