@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/path_screen.dart';
+import 'package:ruta_flutter/features/path_levels/presentation/path_screen.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
 
 class HomeContainWidget extends StatelessWidget {

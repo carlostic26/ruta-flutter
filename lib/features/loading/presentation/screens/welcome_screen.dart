@@ -3,8 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/home_modulos_screen.dart';
 import 'package:ruta_flutter/features/home/presentation/state/page_view_state_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/state/size_screen_provider.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/tutorial_page_widget.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/welcome_page_widget.dart';
+import 'package:ruta_flutter/features/loading/presentation/widgets/tutorial_page_widget.dart';
+import 'package:ruta_flutter/features/loading/presentation/widgets/welcome_page_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomeScreen extends ConsumerWidget {
   const WelcomeScreen({super.key});
@@ -49,6 +50,8 @@ class WelcomeScreen extends ConsumerWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const HomeScreen()));
+
+                    setFisrtWelcome();
                   }
                 },
                 icon: const Icon(
@@ -68,5 +71,11 @@ class WelcomeScreen extends ConsumerWidget {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  void setFisrtWelcome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setBool('firstWelcome', false);
   }
 }

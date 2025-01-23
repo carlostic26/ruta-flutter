@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/path_modules_widget.dart';
+import 'package:ruta_flutter/features/path_levels/presentation/widgets/path_modules_widget.dart';
 
 class PathScreen extends StatefulWidget {
   const PathScreen({super.key});

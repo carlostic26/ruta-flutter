@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/modules/widgets/item_list_choose_widget.dart';
+import 'package:ruta_flutter/features/path_levels/presentation/widgets/item_list_choose_widget.dart';
 
 class ChooseTopicScreen extends StatelessWidget {
   const ChooseTopicScreen({super.key});
