@@ -18,12 +18,6 @@ class LoadingScreen extends ConsumerWidget {
 
     bool firstWelcome = true;
 
-    Future<void> getFirstWelcome() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-
-      firstWelcome = prefs.getBool('firstWelcome') ?? true;
-    }
-
     return Scaffold(
       body: Center(
         child: Column(
@@ -71,24 +65,7 @@ class LoadingScreen extends ConsumerWidget {
             TextButton(
                 onPressed: () async {
                   if (btnEnabled == true) {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-
-                    firstWelcome = prefs.getBool('firstWelcome') ?? true;
-
-                    if (firstWelcome == true) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const WelcomeScreen()),
-                      );
-                    } else if (firstWelcome == false) {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomeScreen()),
-                      );
-                    }
+                    getFirstWelcome(firstWelcome, context);
                   }
                 },
                 style: ButtonStyle(
@@ -106,5 +83,23 @@ class LoadingScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  void getFirstWelcome(bool firstWelcome, BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    firstWelcome = prefs.getBool('firstWelcome') ?? true;
+
+    if (firstWelcome == true) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+      );
+    } else if (firstWelcome == false) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    }
   }
 }
