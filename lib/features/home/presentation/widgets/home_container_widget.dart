@@ -228,7 +228,7 @@ class HomeContainWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Image.asset(
-              'assets/images/icons/icono_cerrado.png',
+              'assets/icons/icono_cerrado.png',
               fit: BoxFit.contain,
             ),
           ),
@@ -245,7 +245,7 @@ class HomeContainWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Image.asset(
-              'assets/images/icons/icono_cerrado.png',
+              'assets/icons/icono_cerrado.png',
               fit: BoxFit.contain,
             ),
           ),

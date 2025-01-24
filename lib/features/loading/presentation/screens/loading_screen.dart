@@ -76,8 +76,10 @@ class LoadingScreen extends ConsumerWidget {
                 ),
                 child: Text(
                   'Continuar',
-                  style:
-                      TextStyle(color: btnEnabled ? Colors.white : Colors.grey),
+                  style: TextStyle(
+                      color: btnEnabled ? Colors.white : Colors.grey,
+                      fontWeight:
+                          btnEnabled ? FontWeight.bold : FontWeight.normal),
                 ))
           ],
         ),

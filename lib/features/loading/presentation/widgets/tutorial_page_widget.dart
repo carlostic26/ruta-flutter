@@ -54,7 +54,7 @@ class TutorialPageWidget extends StatelessWidget {
                           image: DecorationImage(
                             opacity: 0.5,
                             image: AssetImage(
-                                'assets/images/icons/flecha_level_tutorial.png'),
+                                'assets/icons/flecha_level_tutorial.png'),
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -75,7 +75,7 @@ class TutorialPageWidget extends StatelessWidget {
                           image: DecorationImage(
                             opacity: 0.2,
                             image: AssetImage(
-                                'assets/images/icons/flecha_level_tutorial.png'),
+                                'assets/icons/flecha_level_tutorial.png'),
                             fit: BoxFit.contain,
                           ),
                         ),

@@ -32,7 +32,7 @@ class PathCircleModulesWidget extends StatelessWidget {
               height: heightScreen * 0.12,
               child: ColorFiltered(
                   colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
-                  child: Image.asset('assets/images/icons/linea_asset.png')),
+                  child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
         ),
@@ -48,7 +48,7 @@ class PathCircleModulesWidget extends StatelessWidget {
               child: ColorFiltered(
                   colorFilter:
                       const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                  child: Image.asset('assets/images/icons/linea_asset.png')),
+                  child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
         ),
@@ -64,7 +64,7 @@ class PathCircleModulesWidget extends StatelessWidget {
               child: ColorFiltered(
                   colorFilter:
                       const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                  child: Image.asset('assets/images/icons/linea_asset.png')),
+                  child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
         ),
@@ -78,7 +78,7 @@ class PathCircleModulesWidget extends StatelessWidget {
             child: ColorFiltered(
                 colorFilter:
                     const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                child: Image.asset('assets/images/icons/linea_asset.png')),
+                child: Image.asset('assets/icons/linea_asset.png')),
           ),
         ),
 
@@ -93,7 +93,7 @@ class PathCircleModulesWidget extends StatelessWidget {
               child: ColorFiltered(
                   colorFilter:
                       const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                  child: Image.asset('assets/images/icons/linea_asset.png')),
+                  child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
         ),
@@ -109,7 +109,7 @@ class PathCircleModulesWidget extends StatelessWidget {
               child: ColorFiltered(
                   colorFilter:
                       const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
-                  child: Image.asset('assets/images/icons/linea_asset.png')),
+                  child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
         ),
