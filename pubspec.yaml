@@ -17,6 +17,7 @@ dependencies:
   riverpod: ^2.5.1
   flutter_riverpod: ^2.5.1
   shared_preferences: ^2.3.3
+  sqflite: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/path_levels/presentation/screens/choose_topic_screen.dart';
+import 'package:ruta_flutter/features/topic/presentation/screens/choose_topic_screen.dart';
 
-class PathCircleModulesWidget extends StatelessWidget {
-  const PathCircleModulesWidget({
+class PathCircleLevelsWidget extends StatelessWidget {
+  const PathCircleLevelsWidget({
     super.key,
   });
 

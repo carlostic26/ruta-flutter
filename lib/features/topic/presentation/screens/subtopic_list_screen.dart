@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/path_levels/presentation/screens/detail_topic_screen.dart';
-import 'package:ruta_flutter/features/path_levels/presentation/widgets/item_list_choose_widget.dart';
+import 'package:ruta_flutter/features/topic/presentation/screens/detail_topic_screen.dart';
+import 'package:ruta_flutter/features/home/presentation/widgets/item_list_choose_widget.dart';
 
 class ChooseSubtopicScreen extends StatelessWidget {
   const ChooseSubtopicScreen({super.key});
