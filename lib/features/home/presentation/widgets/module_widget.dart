@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/path_screen.dart';
+import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
 
-class HomeContainWidget extends StatelessWidget {
-  const HomeContainWidget({
+class ModuleWidget extends ConsumerWidget {
+  const ModuleWidget({
     super.key,
     required this.heightScreen,
     required this.widthScreen,
@@ -13,7 +15,7 @@ class HomeContainWidget extends StatelessWidget {
   final double widthScreen;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(children: [
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +72,9 @@ class HomeContainWidget extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
-                      //TODO: establecer el provider de moduleProvider con read
+                      ref.read(moduleProvider.notifier).state =
+                          'Flutter Junior';
+
                       goToPathScreen(context);
                     },
                     icon: const Icon(
@@ -140,6 +144,9 @@ class HomeContainWidget extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
+                      ref.read(moduleProvider.notifier).state =
+                          'Flutter Middle';
+
                       goToPathScreen(context);
                     },
                     icon: const Icon(
@@ -209,6 +216,9 @@ class HomeContainWidget extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
+                      ref.read(moduleProvider.notifier).state =
+                          'Flutter Senior';
+
                       goToPathScreen(context);
                     },
                     icon: const Icon(

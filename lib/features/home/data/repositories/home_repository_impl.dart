@@ -23,6 +23,19 @@ class LevelRepositoryImpl implements LevelRepository {
       );
     });
   }
+
+  Future<void> printAllLevels() async {
+    final db = await _database;
+    final List<Map<String, dynamic>> levels = await db.query('level');
+
+    if (levels.isEmpty) {
+      print('🚨 No hay datos en la tabla level.');
+    } else {
+      for (var level in levels) {
+        print('✅ Level: ${level['title']}');
+      }
+    }
+  }
 }
 
 /*

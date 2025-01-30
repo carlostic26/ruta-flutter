@@ -1,14 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/choose_topic_screen.dart';
 
-class PathCircleLevelsWidget extends StatelessWidget {
+class PathCircleLevelsWidget extends ConsumerWidget {
   const PathCircleLevelsWidget({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
@@ -16,9 +18,15 @@ class PathCircleLevelsWidget extends StatelessWidget {
     double circleLeftScreen = widthScreen * 0.10;
     double circleRightScreen = widthScreen * 0.10;
 
-    //Todo: crear un mismo color para las lineads de la ruta
+    //Todo: crear un mismo color para las lineas de la ruta
 
-    Color rutaColor = Colors.blue;
+    Color rutaColor = Colors.white;
+
+    final levelList = ref.watch(levelListProvider);
+
+    //TODO: Crear un algoritmo (metodo) que dado un numero entero cree o dibuje un numero de circulos en pantalla, teniendo en cuenta que no puede haber mas de 1 circulo por row, se debe tener en cuenta el nivel inicial, las 4 direcciones y las lineas que lo conectan
+
+    //TODO: Recibir la lista de niveles enviarla al metodo de dialogo (widget) y mostrar la info del objeto level x
 
     return Stack(
       children: [
@@ -46,8 +54,7 @@ class PathCircleLevelsWidget extends StatelessWidget {
             child: SizedBox(
               height: heightScreen * 0.12,
               child: ColorFiltered(
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                   child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
@@ -62,8 +69,7 @@ class PathCircleLevelsWidget extends StatelessWidget {
             child: SizedBox(
               height: heightScreen * 0.12,
               child: ColorFiltered(
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                   child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
@@ -76,8 +82,7 @@ class PathCircleLevelsWidget extends StatelessWidget {
           child: SizedBox(
             height: heightScreen * 0.12,
             child: ColorFiltered(
-                colorFilter:
-                    const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                 child: Image.asset('assets/icons/linea_asset.png')),
           ),
         ),
@@ -91,8 +96,7 @@ class PathCircleLevelsWidget extends StatelessWidget {
             child: SizedBox(
               height: heightScreen * 0.12,
               child: ColorFiltered(
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                   child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),
@@ -107,8 +111,7 @@ class PathCircleLevelsWidget extends StatelessWidget {
             child: SizedBox(
               height: heightScreen * 0.12,
               child: ColorFiltered(
-                  colorFilter:
-                      const ColorFilter.mode(Colors.blue, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
                   child: Image.asset('assets/icons/linea_asset.png')),
             ),
           ),

@@ -4,7 +4,9 @@ import 'package:ruta_flutter/core/theme/theme_manager.dart';
 import 'package:ruta_flutter/core/theme/theme_notifier.dart';
 import 'package:ruta_flutter/features/loading/presentation/screens/loading_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 

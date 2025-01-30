@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/home_modulos_screen.dart';
 import 'package:ruta_flutter/features/home/presentation/state/page_view_state_provider.dart';
-import 'package:ruta_flutter/features/home/presentation/state/size_screen_provider.dart';
 import 'package:ruta_flutter/features/loading/presentation/widgets/tutorial_page_widget.dart';
 import 'package:ruta_flutter/features/loading/presentation/widgets/welcome_page_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,8 +11,8 @@ class WelcomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final heightScreen = ref.watch(screenHeightProvider(context));
-    final widthScreen = ref.watch(screenWidthProvider(context));
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
 
     final pageController = PageController();
     int numberPage = ref.watch(pageProvider);

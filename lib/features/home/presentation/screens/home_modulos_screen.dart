@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/home_container_widget.dart';
+import 'package:ruta_flutter/features/home/presentation/widgets/module_widget.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -27,8 +27,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 25),
-        child: HomeContainWidget(
-            heightScreen: heightScreen, widthScreen: widthScreen),
+        child:
+            ModuleWidget(heightScreen: heightScreen, widthScreen: widthScreen),
       ),
       bottomNavigationBar:
           SizedBox(height: heightScreen * 0.08, child: const Placeholder()),

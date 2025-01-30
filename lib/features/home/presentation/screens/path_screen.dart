@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/data/models/level_model.dart';
 import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/path_modules_widget.dart';
 
@@ -9,20 +8,7 @@ class PathScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final String selectedLevel = 'Junior';
-
-    final selectedLevel = ref.watch(moduleProvider.notifier);
-
-    void getLevels(String module) async {
-      final levels =
-          await ref.watch(getLevelUseCaseProvider).call(selectedLevel.state);
-
-      //TODO: verificar por que no imprime los titles de todos los niveles
-
-      for (var level in levels) {
-        print(level.title);
-      }
-    }
+    final selectedLevel = ref.watch(moduleProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +19,7 @@ class PathScreen extends ConsumerWidget {
 
         actions: [
           IconButton(
-            onPressed: () => getLevels(selectedLevel.state),
+            onPressed: () {},
             icon: const Icon(Icons.refresh),
           ),
         ],
