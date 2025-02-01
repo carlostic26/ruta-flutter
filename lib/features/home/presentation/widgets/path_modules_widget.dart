@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/home/presentation/widgets/generate_route_path_widget.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/choose_topic_screen.dart';
 
 class PathCircleLevelsWidget extends ConsumerWidget {
@@ -18,17 +19,20 @@ class PathCircleLevelsWidget extends ConsumerWidget {
     double circleLeftScreen = widthScreen * 0.10;
     double circleRightScreen = widthScreen * 0.10;
 
-    //Todo: crear un mismo color para las lineas de la ruta
-
     Color rutaColor = Colors.white;
 
     final levelList = ref.watch(levelListProvider);
 
-    //TODO: Crear un algoritmo (metodo) que dado un numero entero cree o dibuje un numero de circulos en pantalla, teniendo en cuenta que no puede haber mas de 1 circulo por row, se debe tener en cuenta el nivel inicial, las 4 direcciones y las lineas que lo conectan
-
     //TODO: Recibir la lista de niveles enviarla al metodo de dialogo (widget) y mostrar la info del objeto level x
+    //TODO: Implementar el diseño UI de las rutas (boton, lineas)
 
-    return Stack(
+    return GenerateRoutePathWidget(
+        numeroCirculos: 11,
+        rutaColor: rutaColor,
+        widthScreen: widthScreen,
+        heightScreen: heightScreen);
+
+    /* Stack(
       children: [
         //Linea 1
         Positioned(
@@ -255,7 +259,18 @@ class PathCircleLevelsWidget extends ConsumerWidget {
           ),
         ),
       ],
-    );
+    ); */
+  }
+
+  Future<Widget> buildPathRoute(BuildContext context) async {
+    double heightScreen = MediaQuery.of(context).size.height;
+    double widthScreen = MediaQuery.of(context).size.width;
+
+    double circleCenterScreen = widthScreen * 0.40;
+    double circleLeftScreen = widthScreen * 0.10;
+    double circleRightScreen = widthScreen * 0.10;
+
+    return Container(); // Add a return statement
   }
 
   Future<dynamic> showDialogLearning(BuildContext context) {
