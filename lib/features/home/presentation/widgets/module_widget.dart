@@ -29,8 +29,8 @@ class ModuleWidget extends ConsumerWidget {
                 Stack(
                   children: [
                     Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.12,
                       decoration: BoxDecoration(
                         color: Colors.blueGrey,
                         borderRadius: BorderRadius.circular(25),
@@ -47,20 +47,23 @@ class ModuleWidget extends ConsumerWidget {
                     padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
                     child: Column(
                       children: [
-                        Text(
-                          'Flutter Junior Dev',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Flutter Junior Dev',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Encontrarás diversos conceptos básicos sobre: Dart y Flutter, tips, estructura de proyectos y widgets esenciales.',
+                          'Sintaxis de Dart, tipos de datos, funciones, control de flujo, navegación, widgets, estructura de proyectos, estado básico...',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           textAlign: TextAlign.justify,
                           maxLines: 5,
@@ -93,8 +96,8 @@ class ModuleWidget extends ConsumerWidget {
                 Stack(
                   children: [
                     Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.12,
                       decoration: BoxDecoration(
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(25),
@@ -104,9 +107,11 @@ class ModuleWidget extends ConsumerWidget {
                         ),
                       ),
                     ),
+
+                    //opaco
                     Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.12,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(167, 0, 0, 0),
                         borderRadius: BorderRadius.circular(25),
@@ -118,21 +123,25 @@ class ModuleWidget extends ConsumerWidget {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          'Flutter Middle Dev',
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Flutter Middle Dev',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Aqui hay gestión de estados, patrones de diseño, clean architecture, consumo de APIs, testing y mejores prácticas para construir apps escalables.',
+                          'Basicos de Clean architecture, gestores de estado, animaciones, routing, firebase, sqflite, integracion con APIs',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           textAlign: TextAlign.justify,
                           maxLines: 5,
@@ -165,8 +174,8 @@ class ModuleWidget extends ConsumerWidget {
                 Stack(
                   children: [
                     Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.12,
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(25),
@@ -177,8 +186,8 @@ class ModuleWidget extends ConsumerWidget {
                       ),
                     ),
                     Container(
-                      width: widthScreen * 0.42,
-                      height: heightScreen * 0.15,
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.12,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(167, 0, 0, 0),
                         borderRadius: BorderRadius.circular(25),
@@ -191,20 +200,23 @@ class ModuleWidget extends ConsumerWidget {
                     padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
                     child: Column(
                       children: [
-                        Text(
-                          'Flutter Senior Dev',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Flutter Senior Dev',
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          textAlign: TextAlign.center,
                         ),
                         Text(
-                          'Aqui están las arquitecturas avanzadas, CI/CD, optimización de rendimiento, seguridad, mentoring y liderazgo técnico para proyectos empresariales.',
+                          'Arquitecturas avanzadas, testing, isolates, streams, internacionalización, CI/CD, optimización de rendimiento, ',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: 11,
                           ),
                           textAlign: TextAlign.justify,
                           maxLines: 5,
@@ -231,11 +243,11 @@ class ModuleWidget extends ConsumerWidget {
 
       //Icon Secure Middle
       Positioned(
-        top: heightScreen * 0.38,
+        top: heightScreen * 0.395,
         left: widthScreen * 0.065,
         child: SizedBox(
-          width: widthScreen * 0.30,
-          height: heightScreen * 0.1,
+          width: widthScreen * 0.22,
+          height: heightScreen * 0.08,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Image.asset(
@@ -251,8 +263,8 @@ class ModuleWidget extends ConsumerWidget {
         top: heightScreen * 0.58,
         left: widthScreen * 0.065,
         child: SizedBox(
-          width: widthScreen * 0.30,
-          height: heightScreen * 0.1,
+          width: widthScreen * 0.22,
+          height: heightScreen * 0.08,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Image.asset(
