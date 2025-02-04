@@ -23,37 +23,4 @@ class LevelRepositoryImpl implements LevelRepository {
       );
     });
   }
-
-  Future<void> printAllLevels() async {
-    final db = await _database;
-    final List<Map<String, dynamic>> levels = await db.query('level');
-
-    if (levels.isEmpty) {
-      print('🚨 No hay datos en la tabla level.');
-    } else {
-      for (var level in levels) {
-        print('✅ Level: ${level['title']}');
-      }
-    }
-  }
 }
-
-/*
-
- Future<Database> get _database async => await _dbHelper.getDatabase();
-
-  @override
-  Future<List<TodoModel>> fetchTodos() async {
-    final db = await _database;
-    final maps = await db.query('todos');
-    return List.generate(maps.length, (i) {
-      return TodoModel(
-        id: maps[i]['id'] as String,
-        title: maps[i]['title'] as String,
-        description: maps[i]['description'] as String,
-        isCompleted: (maps[i]['isCompleted'] as int) == 1,
-      );
-    });
-  }
-
-*/

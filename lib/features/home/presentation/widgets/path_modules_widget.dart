@@ -15,6 +15,6 @@ class PathCircleLevelsWidget extends ConsumerWidget {
     //TODO: Recibir la lista de niveles enviarla al metodo de dialogo (widget) y mostrar la info del objeto level x
     //TODO: Implementar el diseño UI de las rutas (boton, lineas)
 
-    return const GenerateRoutePathWidget(numeroCirculos: 11);
+    return const GenerateRoutePathWidget();
   }
 }
