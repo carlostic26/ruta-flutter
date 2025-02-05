@@ -11,7 +11,11 @@ class LevelRepositoryImpl implements LevelRepository {
   @override
   Future<List<LevelModel>> getLevel(String module) async {
     final db = await _database;
-    final maps = await db.query('level');
+    final maps = await db.query(
+      'level',
+      where: 'module = ?',
+      whereArgs: [module],
+    );
 
     return List.generate(maps.length, (i) {
       return LevelModel(

@@ -23,7 +23,7 @@ class ModuleWidget extends ConsumerWidget {
           SpacerHomeWidget(heightScreen: heightScreen),
           //Junior Dev Module
           GestureDetector(
-            onTap: () => goToPathScreen(context),
+            onTap: () => goToPathScreen(context, 'Jr', ref),
             child: Row(
               children: [
                 Stack(
@@ -78,7 +78,7 @@ class ModuleWidget extends ConsumerWidget {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Junior';
 
-                      goToPathScreen(context);
+                      goToPathScreen(context, 'Jr', ref);
                     },
                     icon: const Icon(
                         color: Colors.white, Icons.arrow_forward_ios)),
@@ -90,7 +90,7 @@ class ModuleWidget extends ConsumerWidget {
 
           //Middle Dev Module
           GestureDetector(
-            onTap: () => goToPathScreen(context),
+            onTap: () => goToPathScreen(context, 'Mid', ref),
             child: Row(
               children: [
                 Stack(
@@ -156,7 +156,7 @@ class ModuleWidget extends ConsumerWidget {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Middle';
 
-                      goToPathScreen(context);
+                      goToPathScreen(context, 'Mid', ref);
                     },
                     icon: const Icon(
                         color: Colors.white, Icons.arrow_forward_ios)),
@@ -168,7 +168,7 @@ class ModuleWidget extends ConsumerWidget {
 
           //Senior Dev Module
           GestureDetector(
-            onTap: () => goToPathScreen(context),
+            onTap: () => goToPathScreen(context, 'Sr', ref),
             child: Row(
               children: [
                 Stack(
@@ -231,7 +231,7 @@ class ModuleWidget extends ConsumerWidget {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Senior';
 
-                      goToPathScreen(context);
+                      goToPathScreen(context, 'Sr', ref);
                     },
                     icon: const Icon(
                         color: Colors.white, Icons.arrow_forward_ios)),
@@ -277,7 +277,9 @@ class ModuleWidget extends ConsumerWidget {
     ]);
   }
 
-  void goToPathScreen(BuildContext context) {
+  void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
+    ref.read(moduleProvider.notifier).state = module;
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),

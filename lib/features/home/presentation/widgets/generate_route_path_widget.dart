@@ -18,6 +18,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
 
     // Obtener la instancia de GetLevelUseCase
     final getLevelUseCase = ref.read(getLevelUseCaseProvider);
+    final moduleSelected = ref.watch(moduleProvider);
 
     // Posiciones fijas para el primer círculo y la primera línea
     double circleCenterScreen = widthScreen * 0.40;
@@ -28,7 +29,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
 
     // Usar FutureBuilder para obtener la lista de niveles
     return FutureBuilder<List<LevelModel>>(
-      future: getLevelUseCase.call('jr'),
+      future: getLevelUseCase.call(moduleSelected),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
