@@ -14,123 +14,101 @@ class _DetailTopicScreenState extends State<DetailTopicScreen> {
     double widthScreen = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
-      body: Stack(children: [
-        Column(
+      appBar: AppBar(
+        title: Column(
           children: [
-            SizedBox(height: heightScreen * 0.04),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Row(
               children: [
-                Row(
+                SizedBox(
+                  width: widthScreen * 0.05,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(right: 5),
+                  child: Icon(
+                    Icons.import_contacts,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                ),
+                const Text(
+                  'Definición',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white),
+                ),
+                const Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: widthScreen * 0.15,
-                    ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(right: 5),
                       child: Icon(
-                        Icons.import_contacts,
+                        Icons.code,
                         size: 15,
                         color: Colors.white,
                       ),
                     ),
-                    const Text(
-                      'Definición',
+                    Text(
+                      'Code',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                           color: Colors.white),
                     ),
-                    const Expanded(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        //Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(right: 5),
-                          child: Icon(
-                            Icons.import_contacts,
-                            size: 15,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          'Code',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: Colors.white),
-                        ),
-                      ],
-                    ))
                   ],
+                ))
+              ],
+            ),
+
+            // Section lines
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: widthScreen * 0.01,
+                  ),
+                  child: Container(
+                    height: 4,
+                    width: widthScreen * 0.35,
+                    color: Colors.grey,
+                  ),
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: widthScreen * 0.15,
-                      ),
+
+                //if code section is touched:
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: widthScreen * 0.05),
                       child: Container(
-                        height: 3,
+                        height: 1,
                         width: widthScreen * 0.35,
                         color: Colors.grey,
                       ),
                     ),
-
-                    //if code section is touched:
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: widthScreen * 0.06),
-                          child: Container(
-                            height: 3,
-                            width: widthScreen * 0.35,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
-
-            //line state
-            Row(
-              children: [
-                Container(
-                  height: 10,
-                  color: Colors.white,
-                ),
-                Container(
-                  height: 10,
-                  color: Colors.black,
-                )
-              ],
-            )
           ],
         ),
+        backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+        centerTitle: true,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios)),
+      ),
+      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+      body: Stack(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: heightScreen * 0.03,
-            ),
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
-            SizedBox(
-              height: heightScreen * 0.03,
-            ),
             const Padding(
-              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
               child: Text(
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
                 style: TextStyle(color: Colors.white),

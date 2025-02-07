@@ -14,6 +14,11 @@ class ChooseSubtopicScreen extends StatelessWidget {
           'Name last Topic',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios)),
         backgroundColor: const Color.fromARGB(255, 64, 64, 64),
         centerTitle: true,
         foregroundColor: Colors.white,
