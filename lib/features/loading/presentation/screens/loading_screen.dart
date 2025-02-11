@@ -92,6 +92,8 @@ class LoadingScreen extends ConsumerWidget {
 
     firstWelcome = prefs.getBool('firstWelcome') ?? true;
 
+    if (!context.mounted) return;
+
     if (firstWelcome == true) {
       Navigator.pushReplacement(
         context,

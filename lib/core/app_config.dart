@@ -1,4 +1,4 @@
 class AppConfig {
-  String name_app = 'RutaFlutter';
-  String version_app = '1.0.0';
+  String nameApp = 'RutaFlutter';
+  String versionApp = '1.0.0';
 }

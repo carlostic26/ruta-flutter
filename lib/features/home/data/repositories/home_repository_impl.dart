@@ -21,9 +21,11 @@ class LevelRepositoryImpl implements LevelRepository {
       return LevelModel(
         id: maps[i]['id'] as int,
         module: maps[i]['module'] as String,
+        order: maps[i]['num_order'] as int,
         title: maps[i]['title'] as String,
         description: maps[i]['description'] as String,
         points: maps[i]['points'] as int,
+        isCompleted: maps[i]['isCompleted'] == 1,
       );
     });
   }

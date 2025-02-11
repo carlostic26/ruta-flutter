@@ -15,16 +15,16 @@ class ScoreScreen extends ConsumerWidget {
           style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Inter'),
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             InfoScoreWidget(module: 'Jr'),
-            const SizedBox(
+            SizedBox(
               height: 50,
             ),
             InfoScoreWidget(module: 'Mid'),
-            const SizedBox(
+            SizedBox(
               height: 50,
             ),
             InfoScoreWidget(module: 'Sr'),

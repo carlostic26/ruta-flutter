@@ -36,7 +36,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No levels found.'));
+          return const Center(child: Text('No se encontraron niveles.'));
         }
 
         final levelList = snapshot.data!; // Lista de niveles

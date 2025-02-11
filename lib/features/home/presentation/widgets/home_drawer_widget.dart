@@ -4,10 +4,10 @@ import 'package:ruta_flutter/features/score/presentation/screens/score_screen.da
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeDrawer extends StatelessWidget {
-  BuildContext? context;
-  HomeDrawer({super.key, required context});
+  final BuildContext? context;
+  HomeDrawer({super.key, required this.context});
 
-  AppConfig infoApp = AppConfig();
+  final AppConfig infoApp = AppConfig();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HomeDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  infoApp.name_app,
+                  infoApp.nameApp,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -39,7 +39,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  infoApp.version_app,
+                  infoApp.versionApp,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 10,
@@ -72,6 +72,28 @@ class HomeDrawer extends StatelessWidget {
               // Navegar a otra pantalla
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.checklist_rtl),
+            title: const Text('Examen Flutter Jr'),
+            onTap: () {
+              // Navegar a otra pantalla
+            },
+          ),
+          //TODO: segun el caso de uso que determine cuando el usuario haya terminado el modulo jr, se habilita el modulo mid
+          ListTile(
+            leading: const Icon(Icons.checklist_rtl),
+            title: const Text('Examen Flutter Mid'),
+            onTap: () {
+              // Navegar a otra pantalla
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.checklist_rtl),
+            title: const Text('Examen Flutter Sr'),
+            onTap: () {
+              // Navegar a otra pantalla
+            },
+          ),
           SizedBox(
             height: heightScreen * 0.02,
           ),
@@ -94,7 +116,7 @@ class HomeDrawer extends StatelessWidget {
             title: const Text('Info de la app'),
             onTap: () {
               dialogVersion(context, 'Información',
-                  '${infoApp.name_app} es una app desarrollada por TICnoticos para mostrar y evidenciar datos interesantes sobre el amplio mundo de la informática y la Programación. \n\nVersión: ${infoApp.version_app}');
+                  '${infoApp.nameApp} es una app desarrollada por TICnoticos para mostrar y evidenciar datos interesantes sobre el amplio mundo de la informática y la Programación. \n\nVersión: ${infoApp.versionApp}');
             },
           ),
           ListTile(

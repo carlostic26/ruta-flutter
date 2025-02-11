@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InfoScoreWidget extends StatelessWidget {
-  String module = '';
-  InfoScoreWidget({
+  final String module;
+  const InfoScoreWidget({
     super.key,
-    module,
+    required this.module,
   });
 
   @override
