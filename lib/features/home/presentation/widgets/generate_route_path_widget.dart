@@ -121,7 +121,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
                 shape: BoxShape.circle,
                 height: heightScreen * 0.075,
                 width: heightScreen * 0.075,
-                color: Colors.blueGrey,
+                color: const Color(0xFF2962FF),
                 onPressed: () {
                   // Abrir el diálogo con la información del nivel
                   showDialogLearning(context, level);
@@ -175,7 +175,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          backgroundColor: Colors.grey,
+          backgroundColor: const Color.fromARGB(255, 30, 30, 30),
           title: Center(
             child: Text(
               level.title!,
@@ -191,19 +191,23 @@ class GenerateRoutePathWidget extends ConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 10, 15, 25),
-                  child: Text(textAlign: TextAlign.center, level.description!),
+                  child: Text(textAlign: TextAlign.justify, level.description!),
                 ),
                 Container(
                   alignment: Alignment.topCenter,
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.black12),
+                        backgroundColor: WidgetStateProperty.all<Color>(
+                          const Color(0xFF2962FF),
+                        ),
                       ),
                       child: const Text(
                         'Continuar',
-                        style: TextStyle(fontSize: 15, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
                         Navigator.pushReplacement(

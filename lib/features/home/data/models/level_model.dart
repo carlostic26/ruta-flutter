@@ -23,9 +23,9 @@ class LevelModel extends Level {
   }
 
   Map<String, dynamic> toMap() {
-    int is_completed = 0;
+    int isCompletedParser = 0;
     if (isCompleted == true) {
-      is_completed = 1;
+      isCompletedParser = 1;
     }
     return {
       'id': id,
@@ -34,7 +34,7 @@ class LevelModel extends Level {
       'title': title,
       'description': description,
       'points': points,
-      'is_completed': is_completed,
+      'is_completed': isCompletedParser,
     };
   }
 

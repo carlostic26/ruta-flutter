@@ -7,7 +7,6 @@ class ChooseTopicScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 64, 64, 64),
       appBar: AppBar(
         title: const Text(
           'Choose topic list',

@@ -12,14 +12,8 @@ class LocalDatabaseHelper {
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    return await openDatabase(join(dbPath, 'ruta_flutter_3.db'), version: 1,
+    return await openDatabase(join(dbPath, 'ruta_flutter_4.db'), version: 1,
         onCreate: (db, version) async {
-      //se debe crear campo isCompleted para saber si el usuario ha completado el nivel
-      /*
-          num_order INTEGER,
-          isCompleted INTEGER DEFAULT 0
-        */
-
       /* se debe inicializar la bd en el main
           final dbHelper = LocalDatabaseHelper();
   await dbHelper.insertInitialData();
@@ -29,6 +23,7 @@ class LocalDatabaseHelper {
 
       //TODO: crear tabla topic, subtopic, detail
 
+      // tabla level
       await db.execute('''
         CREATE TABLE level(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -41,12 +36,44 @@ class LocalDatabaseHelper {
         );
       ''');
 
+      // tabla topic
+      await db.execute('''
+        CREATE TABLE topic(
+          id TEXT PRIMARY KEY,
+          level_id INTEGER,
+          title TEXT,
+          FOREIGN KEY (level_id) REFERENCES level(id) ON DELETE CASCADE
+        );
+      ''');
+
+      // tabla subtopic
+      await db.execute('''
+        CREATE TABLE subtopic(
+          id TEXT PRIMARY KEY,
+          topic_id TEXT,
+          title TEXT,
+          FOREIGN KEY (topic_id) REFERENCES topic(id) ON DELETE CASCADE
+        );
+      ''');
+
+/*       // tabla detail
+      await db.execute('''
+        CREATE TABLE detail(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          id TEXT,          
+          definition TEXT,
+          code_example TEXT,
+          img_url TEXT,
+          FOREIGN KEY (id) REFERENCES subtopic(id) ON DELETE CASCADE
+        );
+      '''); */
+
       await _insertLevelsJr(db);
       await _insertLevelsMid(db);
       await _insertLevelsSr(db);
 
-      //await _createLevelTable(db);
-      //await insertInitialData();
+      await _insertTopics(db);
+      await insertSubtopics(db);
     });
   }
 
@@ -176,138 +203,76 @@ class LocalDatabaseHelper {
       ''');
   }
 
-  //TODO: INSERT topic, subtopic, detail
+  Future<void> _insertTopics(db) async {
+    // Nivel 1
+    await db.insert('topic', {
+      'id': 't1n1',
+      'level_id': 1,
+      'title': 'Variables y Tipos de Datos',
+    });
+
+    await db.insert('topic', {
+      'id': 't2n1',
+      'level_id': 1,
+      'title': 'Funciones en Dart',
+    });
+
+    // Nivel 2
+    await db.insert('topic', {
+      'id': 't1n2',
+      'level_id': 2,
+      'title': 'Ciclo de Vida de Widgets',
+    });
+
+    // Nivel 2
+    await db.insert('topic', {
+      'id': 't1n2',
+      'level_id': 2,
+      'title': 'Ciclo de Vida de Widgets',
+    });
+  }
+
+  Future<void> insertSubtopics(db) async {
+    // Evaluar si es necesario etiquetar en codigo al nivel desde detail para poder diferenciar por ej s1t1 de los otros niveles
+
+    // Topic 1 - Subtopics
+    await db.insert('subtopic', {
+      'topic_id': 't1n1', //id de donde viene (Topic 1 del nivel 1)
+      'id': 's1t1', //id de subtopic actual (Subtopic 1 del topic 1)
+      'title': 'Declaración de Variables',
+    });
+
+    await db.insert('subtopic', {
+      'topic_id': 't1n1',
+      'id': 's2t1',
+      'title': 'Tipos de Datos Primitivos',
+    });
+
+    // Topic 2 - Subtopics
+    await db.insert('subtopic', {
+      'topic_id': 't2n1',
+      'id': 's1t2',
+      'title': 'Funciones Básicas',
+    });
+
+    await db.insert('subtopic', {
+      'topic_id': 't2n1',
+      'id': 's2t2',
+      'title': 'Parámetros y Retorno',
+    });
+
+    // Insertar subtemas para el tema 3 (initState y dispose)
+    await db.insert('subtopic', {
+      'topic_id': 't3n1',
+      'id': 's1t3',
+      'title': 'Uso de initState',
+    });
+  }
+  //TODO: INSERT  detail
 }
 
 
 
-/*
-      // tabla topic
-      await db.execute('''
-        CREATE TABLE topic(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          level_id INTEGER,
-          title TEXT,
-          description TEXT,
-          FOREIGN KEY (level_id) REFERENCES level(id) ON DELETE CASCADE
-        );
-      ''');
-
-      // tabla subtopic
-      await db.execute('''
-        CREATE TABLE subtopic(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          topic_id INTEGER,
-          title TEXT,
-          description TEXT,
-          FOREIGN KEY (topic_id) REFERENCES topic(id) ON DELETE CASCADE
-        );
-      ''');
-
-      // tabla detail
-      await db.execute('''
-        CREATE TABLE detail(
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          subtopic_id INTEGER,
-          title TEXT,
-          detail TEXT,
-          code_example TEXT,
-          FOREIGN KEY (subtopic_id) REFERENCES subtopic(id) ON DELETE CASCADE
-        );
-      ''');
-
-*/
-
-
-/*
-Future<void> insertTopics() async {
-  final db = await _initDatabase();
-
-  // Insertar temas para el nivel 1
-  await db.insert('topic', {
-    'level_id': 1, // Relacionado con el nivel 1
-    'title': 'Variables y Tipos de Datos',
-    'description': 'Aprende sobre variables y tipos de datos en Dart.',
-  });
-
-  await db.insert('topic', {
-    'level_id': 1, // Relacionado con el nivel 1
-    'title': 'Funciones en Dart',
-    'description': 'Aprende a definir y usar funciones en Dart.',
-  });
-
-  // Insertar temas para el nivel 2
-  await db.insert('topic', {
-    'level_id': 2, // Relacionado con el nivel 2
-    'title': 'initState y dispose',
-    'description': 'Aprende sobre los métodos initState y dispose en Flutter.',
-  });
-
-  await db.insert('topic', {
-    'level_id': 2, // Relacionado con el nivel 2
-    'title': 'Ciclo de Vida de Widgets',
-    'description': 'Aprende sobre el ciclo de vida de los widgets en Flutter.',
-  });
-}
-*/
-
-/*
-Future<void> insertSubtopics() async {
-  final db = await _initDatabase();
-
-  // Insertar subtemas para el tema 1 (Variables y Tipos de Datos)
-  await db.insert('subtopic', {
-    'topic_id': 1, // Relacionado con el tema 1
-    'title': 'Declaración de Variables',
-    'description': 'Aprende a declarar variables en Dart.',
-  });
-
-  await db.insert('subtopic', {
-    'topic_id': 1, // Relacionado con el tema 1
-    'title': 'Tipos de Datos Primitivos',
-    'description': 'Aprende sobre los tipos de datos primitivos en Dart.',
-  });
-
-  // Insertar subtemas para el tema 2 (Funciones en Dart)
-  await db.insert('subtopic', {
-    'topic_id': 2, // Relacionado con el tema 2
-    'title': 'Funciones Básicas',
-    'description': 'Aprende a definir funciones básicas en Dart.',
-  });
-
-  await db.insert('subtopic', {
-    'topic_id': 2, // Relacionado con el tema 2
-    'title': 'Parámetros y Retorno',
-    'description': 'Aprende a usar parámetros y valores de retorno en funciones.',
-  });
-
-  // Insertar subtemas para el tema 3 (initState y dispose)
-  await db.insert('subtopic', {
-    'topic_id': 3, // Relacionado con el tema 3
-    'title': 'Uso de initState',
-    'description': 'Aprende a usar el método initState en Flutter.',
-  });
-
-  await db.insert('subtopic', {
-    'topic_id': 3, // Relacionado con el tema 3
-    'title': 'Uso de dispose',
-    'description': 'Aprende a usar el método dispose en Flutter.',
-  });
-
-  // Insertar subtemas para el tema 4 (Ciclo de Vida de Widgets)
-  await db.insert('subtopic', {
-    'topic_id': 4, // Relacionado con el tema 4
-    'title': 'Creación de Widgets',
-    'description': 'Aprende sobre la creación de widgets en Flutter.',
-  });
-
-  await db.insert('subtopic', {
-    'topic_id': 4, // Relacionado con el tema 4
-    'title': 'Actualización de Widgets',
-    'description': 'Aprende sobre la actualización de widgets en Flutter.',
-  });
-}
-*/
 
 /*
 Future<void> insertDetails() async {
@@ -315,7 +280,7 @@ Future<void> insertDetails() async {
 
   // Insertar descripción para el subtema 1 (Declaración de Variables)
   await db.insert('detail', {
-    'subtopic_id': 1, // Relacionado con el subtema 1
+    'id': 1, // Relacionado con el subtema 1
     'title': 'Declaración de Variables',
     'detail': 'En Dart, las variables se declaran usando la palabra clave `var` o un tipo específico.',
     'code_example': 'var nombre = "Juan";\nint edad = 25;',
@@ -323,7 +288,7 @@ Future<void> insertDetails() async {
 
   // Insertar descripción para el subtema 2 (Tipos de Datos Primitivos)
   await db.insert('detail', {
-    'subtopic_id': 2, // Relacionado con el subtema 2
+    'id': 2, // Relacionado con el subtema 2
     'title': 'Tipos de Datos Primitivos',
     'detail': 'Dart tiene varios tipos de datos primitivos, como `int`, `double`, `String`, y `bool`.',
     'code_example': 'int numero = 10;\ndouble precio = 19.99;\nString nombre = "Ana";\nbool esActivo = true;',
@@ -331,7 +296,7 @@ Future<void> insertDetails() async {
 
   // Insertar descripción para el subtema 3 (Funciones Básicas)
   await db.insert('detail', {
-    'subtopic_id': 3, // Relacionado con el subtema 3
+    'id': 3, // Relacionado con el subtema 3
     'title': 'Funciones Básicas',
     'detail': 'En Dart, las funciones se definen usando la palabra clave `void` si no devuelven un valor.',
     'code_example': 'void saludar() {\n  print("Hola, Mundo!");\n}',
@@ -339,7 +304,7 @@ Future<void> insertDetails() async {
 
   // Insertar descripción para el subtema 4 (Parámetros y Retorno)
   await db.insert('detail', {
-    'subtopic_id': 4, // Relacionado con el subtema 4
+    'id': 4, // Relacionado con el subtema 4
     'title': 'Parámetros y Retorno',
     'detail': 'Las funciones en Dart pueden recibir parámetros y devolver valores usando `return`.',
     'code_example': 'int sumar(int a, int b) {\n  return a + b;\n}',
