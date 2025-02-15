@@ -21,20 +21,23 @@ class DetailLocalDatabaseHelper {
   }
 
   Future<void> _insertDetails(db) async {
-    // Insertar descripción para el subtema 1 (Declaración de Variables)
+    // Insertar descripción para el subtema 1 del tema 1
     await db.insert('detail', {
-      'subtopic_id': 's1t1', // Relacion: me traigo el subtoic 1 del topic 1
-      'title': 'Declaración de Variables', //TODO: traer el titulo del subtopic
-      'detail':
+      'subtopic_id': 's1t1',
+      'definition':
           'En Dart, las variables se declaran usando la palabra clave `var` o un tipo específico.',
+      'img_url':
+          'https://www.reanimasoluciones.com/images/lenguaje-dart-flutter.jpg',
       'code_example': 'var nombre = "Juan";\nint edad = 25;',
     });
 
+    // Insertar descripción para el subtema 2 del tema 1
     await db.insert('detail', {
-      'subtopic_id': 's2t1',
-      'title': 'Declaración de Variables', //TODO: traer el titulo del subtopic
-      'detail':
+      'subtopic_id': 's1t1',
+      'definition':
           'En Dart, las variables se declaran usando la palabra clave `var` o un tipo específico.',
+      'img_url':
+          'https://www.reanimasoluciones.com/images/lenguaje-dart-flutter.jpg',
       'code_example': 'var nombre = "Juan";\nint edad = 25;',
     });
   }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_flutter/features/topic/data/model/topic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/subtopic_list_screen.dart';
 
-class ItemListChooseWidget extends StatelessWidget {
-  const ItemListChooseWidget({
+class ItemTopicWidget extends StatelessWidget {
+  final TopicModel topic;
+
+  const ItemTopicWidget({
     super.key,
+    required this.topic,
   });
 
   @override
@@ -25,11 +29,11 @@ class ItemListChooseWidget extends StatelessWidget {
             color: Colors.grey,
             borderRadius: BorderRadius.circular(25),
           ),
-          child: const Padding(
-            padding: EdgeInsets.only(left: 12, top: 7),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12, top: 7),
             child: Text(
-              'Fundamentos de dart',
-              style: TextStyle(color: Colors.white),
+              topic.title!,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),

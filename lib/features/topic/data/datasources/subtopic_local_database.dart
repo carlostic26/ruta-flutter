@@ -49,7 +49,7 @@ class SubTopicLocalDatabaseHelper {
       'title': 'Parámetros y Retorno',
     });
 
-    // Insertar subtemas para el tema 3 (initState y dispose)
+    // Topic 3 (initState y dispose)
     await db.insert('subtopic', {
       'topic_id': 't3n1',
       'id': 's1t3',

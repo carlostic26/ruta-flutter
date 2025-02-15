@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/data/models/level_model.dart';
 import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/screens/choose_topic_screen.dart';
+import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
 
 class GenerateRoutePathWidget extends ConsumerWidget {
   const GenerateRoutePathWidget({
@@ -124,7 +124,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
                 color: const Color(0xFF2962FF),
                 onPressed: () {
                   // Abrir el diálogo con la información del nivel
-                  showDialogLearning(context, level);
+                  showDialogLearning(context, level, ref);
                 },
                 enabled: true,
                 shadowDegree: ShadowDegree.light,
@@ -170,7 +170,8 @@ class GenerateRoutePathWidget extends ConsumerWidget {
     );
   }
 
-  Future<dynamic> showDialogLearning(BuildContext context, LevelModel level) {
+  Future<dynamic> showDialogLearning(
+      BuildContext context, LevelModel level, ref) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -210,10 +211,12 @@ class GenerateRoutePathWidget extends ConsumerWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       onPressed: () {
+                        ref.read(levelIdProvider.notifier).state = level.order;
+
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ChooseTopicScreen()),
+                              builder: (context) => const TopicScreen()),
                         );
                       }),
                 ),

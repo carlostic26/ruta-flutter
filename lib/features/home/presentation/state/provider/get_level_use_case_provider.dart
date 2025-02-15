@@ -12,12 +12,16 @@ final levelRepositoryProvider = Provider<LevelRepository>((ref) {
 // Proveedor del módulo seleccionado
 final moduleProvider = StateProvider<String>((ref) => 'Jr');
 
+final levelIdProvider = StateProvider<int>((ref) => 0);
+
 // Proveedor del caso de uso (Inyección de dependencias)
 final getLevelUseCaseProvider = Provider<GetLevelUseCase>((ref) {
   final repository = ref.read(levelRepositoryProvider);
   return GetLevelUseCase(repository);
 });
 
+
+/* 
 // Este proveedor permitirá que el widget que contruya los niveles, pueda leer la información de todos ellos.
 final levelListProvider =
     StateNotifierProvider<LevelListNotifier, List<LevelModel>>((ref) {
@@ -45,3 +49,4 @@ class LevelListNotifier extends StateNotifier<List<LevelModel>> {
     state = levels;
   }
 }
+ */

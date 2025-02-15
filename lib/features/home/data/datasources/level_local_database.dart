@@ -16,8 +16,6 @@ class LevelLocalDatabaseHelper {
     final dbPath = await getDatabasesPath();
     return await openDatabase(join(dbPath, 'ruta_flutter_4.db'), version: 1,
         onCreate: (db, version) async {
-      //TODO: crear tabla detail
-
       await db.execute('''
         CREATE TABLE level(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
