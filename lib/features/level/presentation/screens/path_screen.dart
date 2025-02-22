@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/generate_route_path_widget.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/widgets/generate_route_path_widget.dart';
 
 class PathScreen extends ConsumerWidget {
   const PathScreen({super.key});
@@ -25,7 +25,7 @@ class PathScreen extends ConsumerWidget {
             },
             icon: const Icon(Icons.arrow_back_ios)),
       ),
-      body: const GenerateRoutePathWidget(),
+      body: const GenerateLevelsRoutePathWidget(),
       bottomNavigationBar: const SizedBox(height: 80, child: Placeholder()),
     );
   }

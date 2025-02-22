@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/path_screen.dart';
-import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/screens/path_screen.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
 
 class ModuleWidget extends ConsumerWidget {

@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/home/domain/entities/level.dart';
+import 'package:ruta_flutter/features/level/domain/entities/level.dart';
 
 class LevelModel extends Level {
   LevelModel(

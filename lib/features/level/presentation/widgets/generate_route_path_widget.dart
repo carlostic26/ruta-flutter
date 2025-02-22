@@ -2,12 +2,12 @@ import 'dart:math';
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/data/models/level_model.dart';
-import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/data/models/level_model.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
 
-class GenerateRoutePathWidget extends ConsumerWidget {
-  const GenerateRoutePathWidget({
+class GenerateLevelsRoutePathWidget extends ConsumerWidget {
+  const GenerateLevelsRoutePathWidget({
     super.key,
   });
 
@@ -27,7 +27,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
 
     Color rutaColor = Colors.white;
 
-    // Usar FutureBuilder para obtener la lista de niveles
+    // FutureBuilder para obtener la lista de niveles
     return FutureBuilder<List<LevelModel>>(
       future: getLevelUseCase.call(moduleSelected),
       builder: (context, snapshot) {
@@ -39,7 +39,7 @@ class GenerateRoutePathWidget extends ConsumerWidget {
           return const Center(child: Text('No se encontraron niveles.'));
         }
 
-        final levelList = snapshot.data!; // Lista de niveles
+        final levelList = snapshot.data!;
 
         List<Widget> widgets = [];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/data/model/topic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/widgets/item_topic_widget.dart';

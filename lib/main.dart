@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/core/theme/theme_manager.dart';
 import 'package:ruta_flutter/core/theme/theme_notifier.dart';
-import 'package:ruta_flutter/features/home/data/datasources/level_local_database.dart';
+import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
 import 'package:ruta_flutter/features/loading/presentation/screens/loading_screen.dart';
 
 void main() async {
