@@ -16,19 +16,19 @@ class ScoreScreen extends ConsumerWidget {
         ),
       ),
       body: const SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            InfoScoreWidget(module: 'Jr'),
-            SizedBox(
-              height: 50,
-            ),
-            InfoScoreWidget(module: 'Mid'),
-            SizedBox(
-              height: 50,
-            ),
-            InfoScoreWidget(module: 'Sr'),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(16.0), // Padding general para la pantalla
+          child: Column(
+            children: [
+              InfoScoreWidget(module: 'Jr'),
+              SizedBox(height: 20), // Reducimos el espacio entre widgets
+
+              SizedBox(height: 20),
+              InfoScoreWidget(module: 'Mid'),
+              SizedBox(height: 20),
+              InfoScoreWidget(module: 'Sr'),
+            ],
+          ),
         ),
       ),
     );

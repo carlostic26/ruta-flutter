@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
 import 'package:ruta_flutter/features/topic/data/model/topic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/subtopic_screen.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
-class ItemTopicWidget extends ConsumerWidget {
-  final TopicModel topic;
+class ItemSubtopicWidget extends StatelessWidget {
+  final SubtopicModel subtopic;
 
-  const ItemTopicWidget({
+  const ItemSubtopicWidget({
     super.key,
-    required this.topic,
+    required this.subtopic,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: GestureDetector(
         onTap: () {
-          ref.read(topicIdProvider.notifier).state = topic.id!;
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SubtopicScreen()),
@@ -36,7 +34,7 @@ class ItemTopicWidget extends ConsumerWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                topic.title!,
+                subtopic.title!,
                 style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

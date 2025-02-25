@@ -24,6 +24,9 @@ class LoadingScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
+              height: heightScreen * 0.1,
+            ),
+            SizedBox(
               height: heightScreen * 0.16,
               width: widthScreen * 0.35,
               child: Container(
@@ -40,7 +43,7 @@ class LoadingScreen extends ConsumerWidget {
               height: heightScreen * 0.02,
             ),
             SizedBox(
-              height: heightScreen * 0.03,
+              height: heightScreen * 0.02,
               width: widthScreen * 0.85,
               child: LinearPercentIndicator(
                 alignment: MainAxisAlignment.center,
@@ -57,10 +60,10 @@ class LoadingScreen extends ConsumerWidget {
             const Text(
               "Cargando...",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12),
+              style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: heightScreen * 0.1,
+              height: heightScreen * 0.18,
             ),
             TextButton(
                 onPressed: () async {

@@ -6,7 +6,7 @@ class GetTopicUseCase {
 
   GetTopicUseCase(this.repository);
 
-  Future<List<TopicModel>> call(int levelId) async {
-    return repository.getTopics(levelId);
+  Future<List<TopicModel>> call(int levelId, String module) async {
+    return repository.getTopics(levelId, module);
   }
 }

@@ -12,9 +12,10 @@ class TopicScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
     final levelId = ref.watch(levelIdProvider);
+    final module = ref.watch(moduleProvider);
 
     return FutureBuilder<List<TopicModel>>(
-        future: listTopicUseCase.call(levelId),
+        future: listTopicUseCase.call(levelId, module),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -37,7 +38,7 @@ class TopicScreen extends ConsumerWidget {
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.arrow_back_ios)),
-              backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+              //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
               centerTitle: true,
               foregroundColor: Colors.white,
             ),

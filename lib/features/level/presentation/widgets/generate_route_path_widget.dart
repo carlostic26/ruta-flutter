@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:animated_button/animated_button.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
@@ -192,7 +193,21 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 10, 15, 25),
-                  child: Text(textAlign: TextAlign.justify, level.description!),
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        level.description!,
+                        textStyle: const TextStyle(fontSize: 16),
+                        textAlign: TextAlign.justify,
+                        speed: const Duration(milliseconds: 50),
+                      ),
+                    ],
+                    totalRepeatCount: 1, // Número de repeticiones
+                    displayFullTextOnTap:
+                        true, // Muestra el texto completo al tocar
+                  ),
+
+                  //Text(textAlign: TextAlign.justify, level.description!),
                 ),
                 Container(
                   alignment: Alignment.topCenter,

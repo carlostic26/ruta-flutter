@@ -1,15 +1,17 @@
-import 'package:ruta_flutter/features/topic/domain/entity/topic_entity.dart';
+import 'package:ruta_flutter/features/topic/domain/entities/topic_entity.dart';
 
 class TopicModel extends Topic {
   TopicModel({
     required super.id,
     required super.title,
+    required super.module,
   });
 
   factory TopicModel.fromMap(Map<String, dynamic> map) {
     return TopicModel(
       id: map['id'] ?? '',
       title: map['title'] ?? '',
+      module: map['module'] ?? '',
     );
   }
 
@@ -17,6 +19,7 @@ class TopicModel extends Topic {
     return {
       'id': id,
       'title': title,
+      'module': module,
     };
   }
 
@@ -27,6 +30,7 @@ class TopicModel extends Topic {
     return TopicModel(
       id: id ?? this.id,
       title: title ?? this.title,
+      module: module,
     );
   }
 }
