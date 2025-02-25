@@ -14,7 +14,7 @@ class LevelLocalDatabaseHelper {
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    return await openDatabase(join(dbPath, 'ruta_flutter_15.db'), version: 1,
+    return await openDatabase(join(dbPath, 'ruta_flutter_17.db'), version: 1,
         onCreate: (db, version) async {
       await db.execute('''
         CREATE TABLE level(
@@ -34,7 +34,7 @@ class LevelLocalDatabaseHelper {
 
       //Llamado a la creación de las tablas de topic y subtopic desde este feature (level)
       TopicLocalDatabaseHelper topicDb = TopicLocalDatabaseHelper();
-      topicDb.createTopicTable();
+      topicDb.createTopicTable(db);
 
       SubtopicLocalDatabaseHelper subtopicDb = SubtopicLocalDatabaseHelper();
       subtopicDb.createSubtopicTable();

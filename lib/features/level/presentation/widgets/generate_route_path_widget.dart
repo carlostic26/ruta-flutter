@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
 class GenerateLevelsRoutePathWidget extends ConsumerWidget {
   const GenerateLevelsRoutePathWidget({
@@ -227,6 +228,8 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                       ),
                       onPressed: () {
                         ref.read(levelIdProvider.notifier).state = level.order;
+                        ref.read(levelTitleProvider.notifier).state =
+                            level.title!;
 
                         Navigator.pushReplacement(
                           context,

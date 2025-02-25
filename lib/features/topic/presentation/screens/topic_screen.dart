@@ -13,6 +13,7 @@ class TopicScreen extends ConsumerWidget {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
     final levelId = ref.watch(levelIdProvider);
     final module = ref.watch(moduleProvider);
+    final levelTitle = ref.watch(levelTitleProvider);
 
     return FutureBuilder<List<TopicModel>>(
         future: listTopicUseCase.call(levelId, module),
@@ -29,16 +30,16 @@ class TopicScreen extends ConsumerWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text(
-                'Choose topic list',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              title: Text(
+                levelTitle.toString(),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white),
               ),
               leading: IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   icon: const Icon(Icons.arrow_back_ios)),
-              //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
               centerTitle: true,
               foregroundColor: Colors.white,
             ),

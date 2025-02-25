@@ -1,10 +1,11 @@
 import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 class TopicLocalDatabaseHelper {
   LevelLocalDatabaseHelper dbHelper = LevelLocalDatabaseHelper();
 
-  Future<void> createTopicTable() async {
-    final db = await dbHelper.getDatabase();
+  Future<void> createTopicTable(Database db) async {
+    //final db = await dbHelper.getDatabase();
 
     await db.execute('''
         CREATE TABLE topic(
@@ -50,6 +51,8 @@ class TopicLocalDatabaseHelper {
       'level_id': 1,
       'title': 'Reglas de Sintaxis en Dart',
     });
+
+    print('Inserted topic: t1l1');
 
     await db.insert('topic', {
       'id': 't2l1',

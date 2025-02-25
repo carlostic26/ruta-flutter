@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
-import 'package:ruta_flutter/features/topic/data/model/topic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/subtopic_screen.dart';
 
 class ItemSubtopicWidget extends StatelessWidget {
