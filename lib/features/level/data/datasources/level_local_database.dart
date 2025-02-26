@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 
 class LevelLocalDatabaseHelper {
   Database? _database;
+  int dbVersion = 22;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -14,8 +15,8 @@ class LevelLocalDatabaseHelper {
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-    return await openDatabase(join(dbPath, 'ruta_flutter_17.db'), version: 1,
-        onCreate: (db, version) async {
+    return await openDatabase(join(dbPath, 'ruta_flutter_$dbVersion.db'),
+        version: 1, onCreate: (db, version) async {
       await db.execute('''
         CREATE TABLE level(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,12 +33,12 @@ class LevelLocalDatabaseHelper {
       await _insertLevelsMid(db);
       await _insertLevelsSr(db);
 
+      SubtopicLocalDatabaseHelper subtopicDb = SubtopicLocalDatabaseHelper();
+      subtopicDb.createSubtopicTable(db);
+
       //Llamado a la creación de las tablas de topic y subtopic desde este feature (level)
       TopicLocalDatabaseHelper topicDb = TopicLocalDatabaseHelper();
       topicDb.createTopicTable(db);
-
-      SubtopicLocalDatabaseHelper subtopicDb = SubtopicLocalDatabaseHelper();
-      subtopicDb.createSubtopicTable();
     });
   }
 

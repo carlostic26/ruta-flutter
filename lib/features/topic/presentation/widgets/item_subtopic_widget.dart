@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ruta_flutter/features/detail/presentation/detail_screen.dart';
 import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/subtopic_screen.dart';
 
@@ -18,7 +19,7 @@ class ItemSubtopicWidget extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const SubtopicScreen()),
+            MaterialPageRoute(builder: (context) => const DetailScreen()),
           );
         },
         child: Container(

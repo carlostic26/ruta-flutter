@@ -10,9 +10,9 @@ final topicRepositoryProvider = Provider<TopicRepository>((ref) {
 
 // Proveedor del titulo de topic seleccionado
 final titleTopicProvider = StateProvider<String>((ref) => '');
-//TODO: insertar el estado (titulo de nivel) cuando el usuario haga click en continuar dentro del dialogo del path.
 
 final topicIdProvider = StateProvider<String>((ref) => '');
+final topicTitleProvider = StateProvider<String>((ref) => '');
 
 // Proveedor del caso de uso (Inyección de dependencias)
 final getTopicUseCaseProvider = Provider<GetTopicUseCase>((ref) {

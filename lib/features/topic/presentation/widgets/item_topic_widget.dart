@@ -19,6 +19,7 @@ class ItemTopicWidget extends ConsumerWidget {
       child: GestureDetector(
         onTap: () {
           ref.read(topicIdProvider.notifier).state = topic.id!;
+          ref.read(topicTitleProvider.notifier).state = topic.title!;
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SubtopicScreen()),

@@ -13,6 +13,7 @@ class SubtopicScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listSubtopicUseCase = ref.watch(getSubtopicUseCaseProvider);
     final topicId = ref.watch(topicIdProvider);
+    final titleTopic = ref.watch(topicTitleProvider);
     final module = ref.watch(moduleProvider);
 
     return FutureBuilder<List<SubtopicModel>>(
@@ -23,16 +24,16 @@ class SubtopicScreen extends ConsumerWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No se encontraron niveles.'));
+          return const Center(child: Text('No se encontraron subtemas.'));
         }
 
         final subtopicList = snapshot.data!;
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              'Choose subtopic list',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Text(
+              titleTopic.toString(),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             leading: IconButton(
                 onPressed: () {

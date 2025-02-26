@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/detail/domain/entity/datail_entity.dart';
+import 'package:ruta_flutter/features/detail/domain/entities/detail_entity.dart';
 
 class DetailModel extends Detail {
   DetailModel({

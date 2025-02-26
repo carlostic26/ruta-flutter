@@ -9,8 +9,8 @@ final subtopicRepositoryProvider = Provider<SubtopicRepository>((ref) {
 });
 
 // Proveedor del titulo de subtopic seleccionado
-final titleTopicProvider = StateProvider<String>((ref) => '');
-//TODO: insertar el estado (titulo de subtopic) cuando el usuario haga click en continuar dentro del dialogo del path.
+final titleSubtopicProvider = StateProvider<String>((ref) => '');
+final idSubtopicProvider = StateProvider<String>((ref) => '');
 
 // Proveedor del caso de uso (Inyección de dependencias)
 final getSubtopicUseCaseProvider = Provider<GetSubtopicUseCase>((ref) {

@@ -1,16 +1,13 @@
 import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 class SubtopicLocalDatabaseHelper {
   LevelLocalDatabaseHelper dbHelper = LevelLocalDatabaseHelper();
 
-  //SubTopicLocalDatabaseHelper(this.dbHelper);
-
-  Future<void> createSubtopicTable() async {
-    final db = await dbHelper.getDatabase();
-
+  Future<void> createSubtopicTable(Database db) async {
     await db.execute('''
         CREATE TABLE subtopic(
-          id TEXT PRIMARY KEY,
+          id TEXT,
           topic_id TEXT,
           module TEXT,
           title TEXT,
@@ -25,29 +22,31 @@ class SubtopicLocalDatabaseHelper {
   Future<void> _insertSubtopicsJrLevel1(db) async {
     // Topic 1 - Subtopics
     await db.insert('subtopic', {
-      'topic_id': 't1l1', //id de donde viene (Topic 1 del nivel 1)
-      'id': 's1t1', //id de subtopic actual (Subtopic 1 del topic 1)
+      'topic_id': 't01l1', //id de donde viene (Topic 1 del nivel 1)
+      'id': 's01t1', //id de subtopic actual (Subtopic 1 del topic 1)
       'module': 'Jr',
       'title': 'Declaración de Variables',
     });
 
+    print('Inserted subtopic: s1l1');
+
     await db.insert('subtopic', {
-      'topic_id': 't1l1',
-      'id': 's2t1',
+      'topic_id': 't01l1',
+      'id': 's02t1',
       'module': 'Jr',
       'title': 'Tipos de Datos Primitivos',
     });
 
     // Topic 2 - Subtopics
     await db.insert('subtopic', {
-      'topic_id': 't2l1',
+      'topic_id': 't02l1',
       'id': 's1t2',
       'module': 'Jr',
       'title': 'Funciones Básicas',
     });
 
     await db.insert('subtopic', {
-      'topic_id': 't2l1',
+      'topic_id': 't02l1',
       'id': 's2t2',
       'module': 'Jr',
       'title': 'Parámetros y Retorno',
@@ -55,7 +54,7 @@ class SubtopicLocalDatabaseHelper {
 
     // Topic 3 (initState y dispose)
     await db.insert('subtopic', {
-      'topic_id': 't3l1',
+      'topic_id': 't03l1',
       'id': 's1t3',
       'module': 'Jr',
       'title': 'Uso de initState',

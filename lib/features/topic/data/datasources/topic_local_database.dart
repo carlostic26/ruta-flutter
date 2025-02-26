@@ -5,8 +5,6 @@ class TopicLocalDatabaseHelper {
   LevelLocalDatabaseHelper dbHelper = LevelLocalDatabaseHelper();
 
   Future<void> createTopicTable(Database db) async {
-    //final db = await dbHelper.getDatabase();
-
     await db.execute('''
         CREATE TABLE topic(
           id TEXT,
@@ -29,82 +27,65 @@ class TopicLocalDatabaseHelper {
     _insertTopicsLevel10Jr(db);
   }
 
-  /* Hay un problema en relacion con los topic y modulos. Es obvio que existe un topic 1 level 1, y tenemos 3 modulos.
-  La solucion está en agregar module como clave primaria compuesta para agrantizar que cada topic sea único dentro de un módulo y un nivel.
-      id TEXT,
-      module TEXT,
-      level_id INTEGER,
-      title TEXT,
-      PRIMARY KEY (module, level_id, id), -- Clave primaria compuesta
-      FOREIGN KEY (module, level_id) REFERENCES level(module, id) ON DELETE CASCADE
-      
-      y en insercion:
-      
-      'module': 'Jr', // Módulo al que pertenece
-      
-      */
-
   Future<void> _insertTopicsLevel1Jr(db) async {
     await db.insert('topic', {
-      'id': 't1l1',
+      'id': 't01l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Reglas de Sintaxis en Dart',
     });
 
-    print('Inserted topic: t1l1');
-
     await db.insert('topic', {
-      'id': 't2l1',
+      'id': 't02l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Declaración de Variables',
     });
 
     await db.insert('topic', {
-      'id': 't3l1',
+      'id': 't03l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Tipos de Datos Primitivos',
     });
 
     await db.insert('topic', {
-      'id': 't4l1',
+      'id': 't04l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Constantes y Finales',
     });
 
     await db.insert('topic', {
-      'id': 't5l1',
+      'id': 't05l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Comentarios en Dart',
     });
 
     await db.insert('topic', {
-      'id': 't6l1',
+      'id': 't06l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Estructura Básica de un Programa en Dart',
     });
 
     await db.insert('topic', {
-      'id': 't7l1',
+      'id': 't07l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Impresión en Consola (print)',
     });
 
     await db.insert('topic', {
-      'id': 't8l1',
+      'id': 't08l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Operadores Básicos (Aritméticos, Lógicos, Relacionales)',
     });
 
     await db.insert('topic', {
-      'id': 't9l1',
+      'id': 't09l1',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Interpolación de Cadenas',
@@ -120,63 +101,63 @@ class TopicLocalDatabaseHelper {
 
   Future<void> _insertTopicsLevel2Jr(db) async {
     await db.insert('topic', {
-      'id': 't1l2',
+      'id': 't01l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Condicionales: if, else',
     });
 
     await db.insert('topic', {
-      'id': 't2l2',
+      'id': 't02l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Condicionales: else if',
     });
 
     await db.insert('topic', {
-      'id': 't3l2',
+      'id': 't03l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Condicionales: switch y case',
     });
 
     await db.insert('topic', {
-      'id': 't4l2',
+      'id': 't04l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Operador Ternario',
     });
 
     await db.insert('topic', {
-      'id': 't5l2',
+      'id': 't05l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Bucles: for',
     });
 
     await db.insert('topic', {
-      'id': 't6l2',
+      'id': 't06l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Bucles: while',
     });
 
     await db.insert('topic', {
-      'id': 't7l2',
+      'id': 't07l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Bucles: do-while',
     });
 
     await db.insert('topic', {
-      'id': 't8l2',
+      'id': 't08l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Bucles: for-in',
     });
 
     await db.insert('topic', {
-      'id': 't9l2',
+      'id': 't09l2',
       'module': 'Jr',
       'level_id': 2,
       'title': 'Control de Bucles: break y continue',
@@ -192,63 +173,63 @@ class TopicLocalDatabaseHelper {
 
   Future<void> _insertTopicsLevel3Jr(db) async {
     await db.insert('topic', {
-      'id': 't1l3',
+      'id': 't01l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Introducción a las Funciones',
     });
 
     await db.insert('topic', {
-      'id': 't2l3',
+      'id': 't02l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Declaración de Funciones',
     });
 
     await db.insert('topic', {
-      'id': 't3l3',
+      'id': 't03l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Parámetros y Argumentos',
     });
 
     await db.insert('topic', {
-      'id': 't4l3',
+      'id': 't04l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Retorno de Valores',
     });
 
     await db.insert('topic', {
-      'id': 't5l3',
+      'id': 't05l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Funciones Anónimas',
     });
 
     await db.insert('topic', {
-      'id': 't6l3',
+      'id': 't06l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Funciones de Flecha (Arrow Functions)',
     });
 
     await db.insert('topic', {
-      'id': 't7l3',
+      'id': 't07l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Ámbito (Scope) de las Funciones',
     });
 
     await db.insert('topic', {
-      'id': 't8l3',
+      'id': 't08l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Funciones Recursivas',
     });
 
     await db.insert('topic', {
-      'id': 't9l3',
+      'id': 't0l3',
       'module': 'Jr',
       'level_id': 3,
       'title': 'Funciones como Objetos de Primera Clase',
@@ -612,42 +593,42 @@ class TopicLocalDatabaseHelper {
 
   Future<void> _insertTopicsLevel10Jr(db) async {
     await db.insert('topic', {
-      'id': 't1l10',
+      'id': 't01l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Introducción a la Asincronía en Dart',
     });
 
     await db.insert('topic', {
-      'id': 't2l10',
+      'id': 't02l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Futures en Dart',
     });
 
     await db.insert('topic', {
-      'id': 't3l10',
+      'id': 't03l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Uso de async y await',
     });
 
     await db.insert('topic', {
-      'id': 't4l10',
+      'id': 't04l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Manejo de Errores en Futures',
     });
 
     await db.insert('topic', {
-      'id': 't5l10',
+      'id': 't05l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Streams en Dart',
     });
 
     await db.insert('topic', {
-      'id': 't6l10',
+      'id': 't06l10',
       'module': 'Jr',
       'level_id': 10,
       'title': 'Ejercicios Prácticos de Asincronía',
