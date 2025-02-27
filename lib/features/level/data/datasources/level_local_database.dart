@@ -1,11 +1,12 @@
 import 'package:path/path.dart';
+import 'package:ruta_flutter/features/detail/data/datasourcers/detail_local_database.dart';
 import 'package:ruta_flutter/features/topic/data/datasources/subtopic_local_database.dart';
 import 'package:ruta_flutter/features/topic/data/datasources/topic_local_database.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LevelLocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 22;
+  int dbVersion = 25;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -39,6 +40,9 @@ class LevelLocalDatabaseHelper {
       //Llamado a la creación de las tablas de topic y subtopic desde este feature (level)
       TopicLocalDatabaseHelper topicDb = TopicLocalDatabaseHelper();
       topicDb.createTopicTable(db);
+
+      DetailLocalDatabaseHelper detailDb = DetailLocalDatabaseHelper();
+      detailDb.createDetailTable(db);
     });
   }
 
