@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/provider/appbar_detail_state.dart';
+import 'package:ruta_flutter/features/detail/presentation/state/detail_sections_state.dart';
 
 class AppBarDetailWidget extends ConsumerWidget {
   const AppBarDetailWidget({
@@ -30,6 +30,12 @@ class AppBarDetailWidget extends ConsumerWidget {
             ),
             GestureDetector(
               onTap: () {
+                // Cambiar a la página 0 y actualizar el estado
+                ref.read(pageControllerProvider).animateToPage(
+                      0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                    );
                 ref.read(appBarSectionProvider.notifier).state =
                     AppBarSection.definition;
               },
@@ -58,6 +64,12 @@ class AppBarDetailWidget extends ConsumerWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      // Cambiar a la página 1 y actualizar el estado
+                      ref.read(pageControllerProvider).animateToPage(
+                            1,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
                       ref.read(appBarSectionProvider.notifier).state =
                           AppBarSection.code;
                     },

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/darcula.dart';
-import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
 
-class CodeDetailWidget extends StatelessWidget {
+class CodeDetailWidget extends ConsumerStatefulWidget {
   const CodeDetailWidget({super.key, required this.detail});
 
   final DetailModel detail;
 
   @override
+  ConsumerState<CodeDetailWidget> createState() => _CodeDetailWidgetState();
+}
+
+class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
+  @override
   Widget build(BuildContext context) {
-    String code = detail.codeExample.toString();
+    String code = widget.detail.codeExample.toString();
     final lines = code.split('\n'); // Divide el código en líneas
     const theme = darculaTheme; // Tema oscuro
 

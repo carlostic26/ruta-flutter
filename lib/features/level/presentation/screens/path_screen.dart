@@ -16,7 +16,7 @@ class PathScreen extends ConsumerWidget {
           'Ruta $selectedLevel',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ),
-        backgroundColor: const Color.fromARGB(255, 64, 64, 64),
+        //backgroundColor: const Color.fromARGB(255, 64, 64, 64),
         centerTitle: true,
         foregroundColor: Colors.white,
         leading: IconButton(

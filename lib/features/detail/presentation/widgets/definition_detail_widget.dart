@@ -3,49 +3,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
-class DefinitionDetailWidget extends ConsumerWidget {
-  const DefinitionDetailWidget(
-      {super.key, required this.heightScreen, required this.detail});
+class DefinitionDetailWidget extends ConsumerStatefulWidget {
+  const DefinitionDetailWidget({
+    super.key,
+    required this.heightScreen,
+    required this.detail,
+  });
 
   final double heightScreen;
   final DetailModel detail;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final titleSubtopic = ref.watch(titleSubtopicProvider);
+  ConsumerState<DefinitionDetailWidget> createState() =>
+      _DefinitionDetailWidgetState();
+}
 
+class _DefinitionDetailWidgetState
+    extends ConsumerState<DefinitionDetailWidget> {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                titleSubtopic.toString(),
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18),
-              ),
-              Text(
-                detail.definition.toString(),
-                style: const TextStyle(color: Colors.white),
-              ),
-            ],
+          child: Text(
+            widget.detail.definition.toString(),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
         SizedBox(
-          height: heightScreen * 0.05,
+          height: widget.heightScreen * 0.05,
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: SizedBox(
             height: 350,
-            child: Image.network(detail.imgUrl.toString()),
+            child: Image.network(widget.detail.imgUrl.toString()),
           ),
-        )
+        ),
       ],
     );
   }

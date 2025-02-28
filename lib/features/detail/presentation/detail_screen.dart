@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/provider/appbar_detail_state.dart';
+import 'package:ruta_flutter/features/detail/presentation/state/detail_sections_state.dart';
 import 'package:ruta_flutter/features/detail/presentation/state/provider/get_detail_use_case_provider.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
@@ -20,9 +20,11 @@ class DetailScreen extends ConsumerWidget {
     final getDetailUseCase = ref.read(getDetailUseCaseProvider);
     final subtopicID = ref.watch(subtopicIdProvider);
     final module = ref.watch(moduleProvider);
+    // Obtener el título del subtopic usando Riverpod
+    final titleSubtopic = ref.watch(titleSubtopicProvider);
 
-    // Obtencion de la seccion de appbar activa
-    final activeSection = ref.watch(appBarSectionProvider);
+    // Obtener el PageController
+    final pageController = ref.watch(pageControllerProvider);
 
     return FutureBuilder<DetailModel>(
       future: getDetailUseCase.call(subtopicID, module),
@@ -49,15 +51,43 @@ class DetailScreen extends ConsumerWidget {
                 },
                 icon: const Icon(Icons.arrow_back_ios)),
           ),
-          body: AnimatedSwitcher(
-            duration:
-                const Duration(milliseconds: 1200), // Duración de la animación
-            child: activeSection == AppBarSection.definition
-                ? DefinitionDetailWidget(
-                    heightScreen: heightScreen, detail: detail)
-                : CodeDetailWidget(
-                    detail: detail,
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    titleSubtopic.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
+                ),
+              ),
+              Expanded(
+                child: PageView(
+                  controller: pageController,
+                  onPageChanged: (index) {
+                    // Actualizar el estado según la página actual
+                    ref.read(appBarSectionProvider.notifier).state = index == 0
+                        ? AppBarSection.definition
+                        : AppBarSection.code;
+                  },
+                  children: [
+                    DefinitionDetailWidget(
+                      heightScreen: heightScreen,
+                      detail: detail,
+                    ),
+                    CodeDetailWidget(
+                      detail: detail,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },
