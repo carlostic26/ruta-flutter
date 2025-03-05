@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
 class DefinitionDetailWidget extends ConsumerStatefulWidget {
   const DefinitionDetailWidget({
@@ -29,7 +28,8 @@ class _DefinitionDetailWidgetState
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
           child: Text(
             widget.detail.definition.toString(),
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(
+                color: Colors.white, fontFamily: 'Poppins', fontSize: 12),
           ),
         ),
         SizedBox(
@@ -39,7 +39,22 @@ class _DefinitionDetailWidgetState
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: SizedBox(
             height: 350,
-            child: Image.network(widget.detail.imgUrl.toString()),
+            child: FadeInImage.assetNetwork(
+              placeholder:
+                  'assets/icons/placeholder.png', // Imagen estática de placeholder
+              image: widget.detail.imgUrl.toString(),
+              fit: BoxFit.cover,
+              placeholderErrorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: CircularProgressIndicator(), // Indicador de carga
+                );
+              },
+              imageErrorBuilder: (context, error, stackTrace) {
+                return const Center(
+                  child: Icon(Icons.error), // Ícono de error
+                );
+              },
+            ),
           ),
         ),
       ],

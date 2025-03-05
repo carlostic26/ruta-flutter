@@ -33,7 +33,11 @@ class SubtopicScreen extends ConsumerWidget {
           appBar: AppBar(
             title: Text(
               titleTopic.toString(),
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                fontFamily: 'Poppins',
+              ),
             ),
             leading: IconButton(
                 onPressed: () {

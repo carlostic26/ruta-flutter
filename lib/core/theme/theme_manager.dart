@@ -11,7 +11,7 @@ class ThemeManager {
       brightness: Brightness.light,
     ),
     textTheme: const TextTheme().apply(bodyColor: Colors.black),
-    fontFamily: 'Inter',
+    fontFamily: 'Poppins',
   );
 
   // Tema Oscuro
@@ -23,6 +23,6 @@ class ThemeManager {
     ),
     textTheme: const TextTheme().apply(bodyColor: Colors.white),
     dialogBackgroundColor: Colors.grey[900],
-    fontFamily: 'Inter',
+    fontFamily: 'Poopins',
   );
 }

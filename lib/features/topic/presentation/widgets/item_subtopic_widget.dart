@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/presentation/detail_screen.dart';
+import 'package:ruta_flutter/features/detail/presentation/screens/detail_screen.dart';
 import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
@@ -26,7 +26,7 @@ class ItemSubtopicWidget extends ConsumerWidget {
           );
         },
         child: Container(
-          height: 48,
+          height: 40,
           width: 400,
           decoration: BoxDecoration(
             color: const Color(0xFF2962FF),
@@ -40,8 +40,9 @@ class ItemSubtopicWidget extends ConsumerWidget {
                 subtopic.title!,
                 style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
+                    //fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                    fontSize: 12),
               ),
             ),
           ),

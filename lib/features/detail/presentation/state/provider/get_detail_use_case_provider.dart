@@ -1,6 +1,6 @@
 // Proveedor del repositorio que vamos a usar en los casos de uso
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/data/repositories/detail_repository.dart';
+import 'package:ruta_flutter/features/detail/data/repositories/detail_repository_impl.dart';
 import 'package:ruta_flutter/features/detail/domain/repositories/detail_repository.dart';
 import 'package:ruta_flutter/features/detail/domain/use_cases/get_detail_use_case.dart';
 

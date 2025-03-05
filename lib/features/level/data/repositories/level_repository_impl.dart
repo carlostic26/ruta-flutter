@@ -1,10 +1,10 @@
-import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
+import 'package:ruta_flutter/core/database/database_helper.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
 import 'package:ruta_flutter/features/level/domain/repositories/level_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LevelRepositoryImpl implements LevelRepository {
-  final LevelLocalDatabaseHelper _dbHelper = LevelLocalDatabaseHelper();
+  final LocalDatabaseHelper _dbHelper = LocalDatabaseHelper();
 
   Future<Database> get _database async => await _dbHelper.getDatabase();
 

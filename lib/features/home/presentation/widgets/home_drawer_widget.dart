@@ -19,7 +19,9 @@ class HomeDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.blueGrey),
+            decoration: const BoxDecoration(
+              color: Color(0xFF2962FF),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,

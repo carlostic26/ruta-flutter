@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
@@ -7,23 +8,70 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/score/presentation/state/provider/score_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
-class DetailScreen extends ConsumerWidget {
+class DetailScreen extends ConsumerStatefulWidget {
   const DetailScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends ConsumerState<DetailScreen> {
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer(); // Iniciar el temporizador aquí
+  }
+
+  @override
+  void dispose() {
+    _timer
+        ?.cancel(); // Cancelar el temporizador si el usuario sale de la pantalla
+    super.dispose();
+  }
+
+  void _startTimer() {
+    final scoreUseCases = ref.read(scoreRepositoryProvider);
+
+    // Obtener los parámetros necesarios
+    final subtopicID = ref.read(subtopicIdProvider);
+    final module = ref.read(moduleProvider);
+    final level = ref.read(levelIdProvider);
+    final topic = ref.read(topicIdProvider);
+
+    // Iniciar el temporizador
+    _timer = Timer(const Duration(seconds: 10), () async {
+      await scoreUseCases.addScore(subtopicID, module, level, topic, 2);
+
+      // Mostrar un SnackBar después de registrar los puntos
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              '¡+2 puntos acumulados! Sigue estudiando.',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            duration: Duration(seconds: 3), // Duración del SnackBar
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
 
     final getDetailUseCase = ref.read(getDetailUseCaseProvider);
     final subtopicID = ref.watch(subtopicIdProvider);
     final module = ref.watch(moduleProvider);
-    // Obtener el título del subtopic usando Riverpod
     final titleSubtopic = ref.watch(titleSubtopicProvider);
-
-    // Obtener el PageController
     final pageController = ref.watch(pageControllerProvider);
 
     return FutureBuilder<DetailModel>(
@@ -46,10 +94,11 @@ class DetailScreen extends ConsumerWidget {
             centerTitle: true,
             foregroundColor: Colors.white,
             leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_ios)),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
           ),
           body: Column(
             children: [
@@ -62,6 +111,7 @@ class DetailScreen extends ConsumerWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
                       fontSize: 18,
                     ),
                   ),
@@ -71,7 +121,6 @@ class DetailScreen extends ConsumerWidget {
                 child: PageView(
                   controller: pageController,
                   onPageChanged: (index) {
-                    // Actualizar el estado según la página actual
                     ref.read(appBarSectionProvider.notifier).state = index == 0
                         ? AppBarSection.definition
                         : AppBarSection.code;

@@ -11,7 +11,7 @@ class SpacerHomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: heightScreen * 0.05,
+      height: heightScreen * 0.07,
     );
   }
 }

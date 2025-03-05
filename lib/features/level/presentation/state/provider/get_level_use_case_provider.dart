@@ -12,6 +12,7 @@ final levelRepositoryProvider = Provider<LevelRepository>((ref) {
 final moduleProvider = StateProvider<String>((ref) => 'Jr');
 
 final levelIdProvider = StateProvider<int>((ref) => 0);
+
 final levelTitleProvider = StateProvider<String>((ref) => '');
 
 // Proveedor del caso de uso (Inyección de dependencias)

@@ -26,7 +26,7 @@ class ItemTopicWidget extends ConsumerWidget {
           );
         },
         child: Container(
-          height: 48,
+          height: 40,
           width: 400,
           decoration: BoxDecoration(
             color: const Color(0xFF2962FF),
@@ -40,8 +40,9 @@ class ItemTopicWidget extends ConsumerWidget {
                 topic.title!,
                 style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14),
+                    //fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                    fontSize: 12),
               ),
             ),
           ),

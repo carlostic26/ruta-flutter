@@ -33,7 +33,10 @@ class TopicScreen extends ConsumerWidget {
               title: Text(
                 levelTitle.toString(),
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.white),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'Poppins',
+                    fontSize: 14),
               ),
               leading: IconButton(
                   onPressed: () {
@@ -44,7 +47,7 @@ class TopicScreen extends ConsumerWidget {
               foregroundColor: Colors.white,
             ),
             body: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
               child: ListView.builder(
                 itemCount: topicList.length,
                 itemBuilder: (context, index) {

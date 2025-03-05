@@ -6,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
 class GenerateLevelsRoutePathWidget extends ConsumerWidget {
   const GenerateLevelsRoutePathWidget({
@@ -27,7 +26,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     double circleLeftScreen = widthScreen * 0.10;
     double circleRightScreen = widthScreen * 0.10;
 
-    Color rutaColor = Colors.white;
+    Color rutaColor = Colors.grey;
 
     // FutureBuilder para obtener la lista de niveles
     return FutureBuilder<List<LevelModel>>(
@@ -136,6 +135,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                     fontSize: 22,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
                   ),
                 ),
               ),
@@ -186,6 +186,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                 color: Colors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins',
               ),
             ),
           ),
@@ -198,7 +199,10 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                     animatedTexts: [
                       TypewriterAnimatedText(
                         level.description!,
-                        textStyle: const TextStyle(fontSize: 16),
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          fontFamily: 'Poppins',
+                        ),
                         textAlign: TextAlign.justify,
                         speed: const Duration(milliseconds: 50),
                       ),
@@ -222,9 +226,11 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                       child: const Text(
                         'Continuar',
                         style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                       onPressed: () {
                         ref.read(levelIdProvider.notifier).state = level.order;

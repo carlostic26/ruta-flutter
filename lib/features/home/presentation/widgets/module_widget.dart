@@ -16,6 +16,13 @@ class ModuleWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String jrDescription =
+        'Recorre desde cero los fundamentos esenciales de Flutter y Dart. Repasa la sintaxis, widgets y estructura básica. Gestionar activos y almacenamiento local. Este es el punto de partida perfecto para nuevos desarrolladores.';
+    String midDescription =
+        'Recorre los conceptos avanzados para construir apps robustas y optimizadas. Gestión de estado, integración con APIs, Firebase,Patrones de diseño, principios SOLID, pruebas automatizadas, técnicas de optimización y bases de datos avanzadas.';
+    String srDescription =
+        'Optimiza y escala aplicaciones con técnicas avanzadas. Repasa la programación reactiva, Streams y animaciones complejas. Aprende sobre gestión de memoria, Render Objects y CI/CD. Implementa despliegues automatizados y análisis de métricas. Completar este módulo te llevará al nivel de experto en Flutter.';
+
     return Stack(children: [
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +37,7 @@ class ModuleWidget extends ConsumerWidget {
                   children: [
                     Container(
                       width: widthScreen * 0.35,
-                      height: heightScreen * 0.12,
+                      height: heightScreen * 0.15,
                       decoration: BoxDecoration(
                         color: Colors.blueGrey,
                         borderRadius: BorderRadius.circular(25),
@@ -40,40 +47,63 @@ class ModuleWidget extends ConsumerWidget {
                         ),
                       ),
                     ),
+                    Container(
+                      width: widthScreen * 0.35,
+                      height: heightScreen * 0.15,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: IconButton(
+                          highlightColor: Colors.blue.withOpacity(0.2),
+                          iconSize: 60,
+                          onPressed: () {
+                            ref.read(moduleProvider.notifier).state =
+                                'Flutter Junior';
+
+                            goToPathScreen(context, 'Jr', ref);
+                          },
+                          icon: const Icon(
+                            Icons.play_arrow,
+                            color: Colors.white,
+                          )),
+                    ),
                   ],
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Column(
                       children: [
-                        Align(
+                        const Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
                             'Flutter Junior Dev',
                             style: TextStyle(
                               color: Colors.blue,
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Text(
-                          'Sintaxis de Dart, tipos de datos, funciones, control de flujo, navegación, widgets, estructura de proyectos, estado básico...',
-                          style: TextStyle(
+                          jrDescription,
+                          style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 11,
+                            fontSize: 10,
+                            fontFamily: 'Poppins',
                           ),
                           textAlign: TextAlign.justify,
-                          maxLines: 5,
+                          maxLines: 7,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
                 ),
-                IconButton(
+/*                 IconButton(
                     onPressed: () {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Junior';
@@ -81,7 +111,7 @@ class ModuleWidget extends ConsumerWidget {
                       goToPathScreen(context, 'Jr', ref);
                     },
                     icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)),
+                        color: Colors.white, Icons.arrow_forward_ios)), */
               ],
             ),
           ),
@@ -90,14 +120,21 @@ class ModuleWidget extends ConsumerWidget {
 
           //Middle Dev Module
           GestureDetector(
-            onTap: () => goToPathScreen(context, 'Mid', ref),
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Debes terminar primero el modulo anterior'),
+                ),
+              );
+              //goToPathScreen(context, 'Mid', ref),
+            },
             child: Row(
               children: [
                 Stack(
                   children: [
                     Container(
                       width: widthScreen * 0.35,
-                      height: heightScreen * 0.12,
+                      height: heightScreen * 0.15,
                       decoration: BoxDecoration(
                         color: Colors.orange,
                         borderRadius: BorderRadius.circular(25),
@@ -111,17 +148,17 @@ class ModuleWidget extends ConsumerWidget {
                     //opaco
                     Container(
                       width: widthScreen * 0.35,
-                      height: heightScreen * 0.12,
+                      height: heightScreen * 0.15,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(167, 0, 0, 0),
+                        color: const Color.fromARGB(210, 0, 0, 0),
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                   ],
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -130,28 +167,31 @@ class ModuleWidget extends ConsumerWidget {
                           child: Text(
                             'Flutter Middle Dev',
                             style: TextStyle(
-                              color: Colors.orange,
-                              fontSize: 14,
+                              color: Colors.orange
+                                  .withOpacity(0.3), //Colors.orange,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Text(
-                          'Basicos de Clean architecture, gestores de estado, animaciones, routing, firebase, sqflite, integracion con APIs',
+                          midDescription,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
+                            color: Colors.white.withOpacity(0.3),
+                            fontSize: 10,
+                            fontFamily: 'Poppins',
                           ),
                           textAlign: TextAlign.justify,
-                          maxLines: 5,
+                          maxLines: 7,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
                 ),
-                IconButton(
+                /*        IconButton(
                     onPressed: () {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Middle';
@@ -159,7 +199,7 @@ class ModuleWidget extends ConsumerWidget {
                       goToPathScreen(context, 'Mid', ref);
                     },
                     icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)),
+                        color: Colors.white, Icons.arrow_forward_ios)), */
               ],
             ),
           ),
@@ -168,14 +208,21 @@ class ModuleWidget extends ConsumerWidget {
 
           //Senior Dev Module
           GestureDetector(
-            onTap: () => goToPathScreen(context, 'Sr', ref),
+            onTap: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Debes terminar primero el modulo anterior'),
+                ),
+              );
+              //goToPathScreen(context, 'Sr', ref),
+            },
             child: Row(
               children: [
                 Stack(
                   children: [
                     Container(
                       width: widthScreen * 0.35,
-                      height: heightScreen * 0.12,
+                      height: heightScreen * 0.15,
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(25),
@@ -187,17 +234,17 @@ class ModuleWidget extends ConsumerWidget {
                     ),
                     Container(
                       width: widthScreen * 0.35,
-                      height: heightScreen * 0.12,
+                      height: heightScreen * 0.15,
                       decoration: BoxDecoration(
-                        color: const Color.fromARGB(167, 0, 0, 0),
+                        color: const Color.fromARGB(210, 0, 0, 0),
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
                   ],
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 2, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Column(
                       children: [
                         Align(
@@ -205,28 +252,30 @@ class ModuleWidget extends ConsumerWidget {
                           child: Text(
                             'Flutter Senior Dev',
                             style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 14,
+                              color: Colors.green.withOpacity(0.3),
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Poppins',
                             ),
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Text(
-                          'Arquitecturas avanzadas, testing, isolates, streams, internacionalización, CI/CD, optimización de rendimiento, ',
+                          srDescription,
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
+                            color: Colors.white.withOpacity(0.3),
+                            fontSize: 10,
+                            fontFamily: 'Poppins',
                           ),
                           textAlign: TextAlign.justify,
-                          maxLines: 5,
+                          maxLines: 7,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
                 ),
-                IconButton(
+                /*             IconButton(
                     onPressed: () {
                       ref.read(moduleProvider.notifier).state =
                           'Flutter Senior';
@@ -234,7 +283,7 @@ class ModuleWidget extends ConsumerWidget {
                       goToPathScreen(context, 'Sr', ref);
                     },
                     icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)),
+                        color: Colors.white, Icons.arrow_forward_ios)), */
               ],
             ),
           ),
@@ -260,7 +309,7 @@ class ModuleWidget extends ConsumerWidget {
 
       //Icon Secure Sr
       Positioned(
-        top: heightScreen * 0.58,
+        top: heightScreen * 0.625,
         left: widthScreen * 0.065,
         child: SizedBox(
           width: widthScreen * 0.22,
