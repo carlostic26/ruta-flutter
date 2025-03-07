@@ -8,7 +8,7 @@ import 'package:ruta_flutter/features/score/data/datasources/score_local_databas
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 27;
+  int dbVersion = 32;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
