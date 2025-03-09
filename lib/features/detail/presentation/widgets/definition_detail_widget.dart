@@ -21,40 +21,39 @@ class _DefinitionDetailWidgetState
     extends ConsumerState<DefinitionDetailWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      shrinkWrap: true, // Se ajusta automáticamente al contenido
+      //physics: const NeverScrollableScrollPhysics(), // Evita doble scroll
       children: [
+        SizedBox(height: widget.heightScreen * 0.05),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: SizedBox(
+            height: 350,
+            child: widget.detail.imgUrl.toString().isEmpty
+                ? Image.asset(
+                    'assets/icons/placeholder.png',
+                    fit: BoxFit.cover,
+                  )
+                : FadeInImage.assetNetwork(
+                    placeholder: 'assets/icons/placeholder.png',
+                    image: widget.detail.imgUrl.toString(),
+                    fit: BoxFit.cover,
+                    placeholderErrorBuilder: (context, error, stackTrace) {
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                    imageErrorBuilder: (context, error, stackTrace) {
+                      return const Center(child: Icon(Icons.error));
+                    },
+                  ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
           child: Text(
             widget.detail.definition.toString(),
             style: const TextStyle(
                 color: Colors.white, fontFamily: 'Poppins', fontSize: 12),
-          ),
-        ),
-        SizedBox(
-          height: widget.heightScreen * 0.05,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: SizedBox(
-            height: 350,
-            child: FadeInImage.assetNetwork(
-              placeholder:
-                  'assets/icons/placeholder.png', // Imagen estática de placeholder
-              image: widget.detail.imgUrl.toString(),
-              fit: BoxFit.cover,
-              placeholderErrorBuilder: (context, error, stackTrace) {
-                return const Center(
-                  child: CircularProgressIndicator(), // Indicador de carga
-                );
-              },
-              imageErrorBuilder: (context, error, stackTrace) {
-                return const Center(
-                  child: Icon(Icons.error), // Ícono de error
-                );
-              },
-            ),
           ),
         ),
       ],

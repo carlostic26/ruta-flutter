@@ -96,16 +96,19 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
+                ref.read(appBarSectionProvider.notifier).state =
+                    AppBarSection.definition;
               },
               icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Text(
                     titleSubtopic.toString(),
                     style: const TextStyle(
@@ -116,27 +119,30 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: PageView(
-                  controller: pageController,
-                  onPageChanged: (index) {
-                    ref.read(appBarSectionProvider.notifier).state = index == 0
-                        ? AppBarSection.definition
-                        : AppBarSection.code;
-                  },
-                  children: [
-                    DefinitionDetailWidget(
-                      heightScreen: heightScreen,
-                      detail: detail,
-                    ),
-                    CodeDetailWidget(
-                      detail: detail,
-                    ),
-                  ],
+                const SizedBox(height: 10), // Espacio extra
+                // PageView dentro de un Flexible para que se ajuste correctamente
+                SizedBox(
+                  height: MediaQuery.of(context).size.height *
+                      0.8, // Ajuste dinámico
+                  child: PageView(
+                    controller: pageController,
+                    onPageChanged: (index) {
+                      ref.read(appBarSectionProvider.notifier).state =
+                          index == 0
+                              ? AppBarSection.definition
+                              : AppBarSection.code;
+                    },
+                    children: [
+                      DefinitionDetailWidget(
+                        heightScreen: heightScreen,
+                        detail: detail,
+                      ),
+                      CodeDetailWidget(detail: detail),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

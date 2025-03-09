@@ -8,7 +8,7 @@ import 'package:ruta_flutter/features/score/data/datasources/score_local_databas
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 32;
+  int dbVersion = 42;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -28,26 +28,6 @@ class LocalDatabaseHelper {
         await SubtopicLocalDatabaseHelper().createSubtopicTable(db);
         await DetailLocalDatabaseHelper().createDetailTable(db);
         await ScoreLocalDatabaseHelper().createScoreTable(db);
-
-        /*
-
-      LevelLocalDatabaseHelper levelDb = LevelLocalDatabaseHelper();
-      levelDb.createLevelTable(db);
-
-      SubtopicLocalDatabaseHelper subtopicDb = SubtopicLocalDatabaseHelper();
-      subtopicDb.createSubtopicTable(db);
-
-      //Llamado a la creación de las tablas de topic y subtopic desde este feature (level)
-      TopicLocalDatabaseHelper topicDb = TopicLocalDatabaseHelper();
-      topicDb.createTopicTable(db);
-
-      DetailLocalDatabaseHelper detailDb = DetailLocalDatabaseHelper();
-      detailDb.createDetailTable(db);
-
-      ScoreLocalDatabaseHelper scoreDb = ScoreLocalDatabaseHelper();
-      scoreDb.createScoreTable(db);
-      },
-      */
       },
     );
   }

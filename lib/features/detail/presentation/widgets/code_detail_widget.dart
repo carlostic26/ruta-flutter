@@ -21,12 +21,12 @@ class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
     const theme = darculaTheme; // Tema oscuro
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.fromLTRB(15, 8, 8, 1),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Columna para los números de línea
-          Column(
+          /*  Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: List.generate(lines.length, (index) {
               return Padding(
@@ -41,15 +41,15 @@ class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
                 ),
               );
             }),
-          ),
+          ), */
           // Columna para el código resaltado
           Expanded(
             child: HighlightView(
               code,
               language: 'dart',
               theme: theme,
-              padding: EdgeInsets.zero,
-              textStyle: const TextStyle(fontFamily: 'monospace', fontSize: 20),
+              padding: const EdgeInsets.fromLTRB(10, 8, 8, 1),
+              textStyle: const TextStyle(fontFamily: 'monospace', fontSize: 15),
             ),
           ),
         ],
