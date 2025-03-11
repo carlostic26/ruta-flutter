@@ -2815,7 +2815,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Preparar una aplicación para la App Store implica varios pasos, como configurar el proyecto en Xcode, agregar íconos y pantallas de inicio, y asegurarse de que la aplicación cumpla con las pautas de Apple.\n\n'
-              'Dejame te aclaro: este proceso es crucial para garantizar que tu aplicación esté lista para ser revisada y publicada. Necesitarás un identificador de aplicación (App ID), un perfil de aprovisionamiento y un certificado de distribución.\n\n'
+              'este proceso es crucial para garantizar que tu aplicación esté lista para ser revisada y publicada. Necesitarás un identificador de aplicación (App ID), un perfil de aprovisionamiento y un certificado de distribución.\n\n'
               '¡Sigue cada paso cuidadosamente para evitar problemas durante la revisión! 🍏📱',
       'img_url': '',
       'code_example': '''
@@ -2871,7 +2871,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Preparar una aplicación para la Play Store implica configurar el proyecto en Android Studio, generar un APK o AAB firmado, y asegurarse de que la aplicación cumpla con las políticas de Google.\n\n'
-              'Dejame te aclaro: este proceso incluye la creación de un ícono adecuado, la configuración de permisos y la generación de un archivo firmado para su distribución.\n\n'
+              'este proceso incluye la creación de un ícono adecuado, la configuración de permisos y la generación de un archivo firmado para su distribución.\n\n'
               '¡Sigue cada paso cuidadosamente para evitar problemas durante la publicación! 🤖📱',
       'img_url': '',
       'code_example': '''

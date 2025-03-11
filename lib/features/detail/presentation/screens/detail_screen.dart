@@ -53,7 +53,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text(
-              '¡+2 puntos acumulados! Sigue estudiando.',
+              '¡+2 puntos acumulados! Sigue repasando temas.',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             duration: Duration(seconds: 3), // Duración del SnackBar
