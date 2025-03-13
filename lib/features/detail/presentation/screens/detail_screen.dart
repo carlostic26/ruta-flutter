@@ -8,6 +8,8 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/progress_widget_notifier.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:ruta_flutter/features/score/presentation/state/provider/score_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
@@ -25,28 +27,48 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   @override
   void initState() {
     super.initState();
-    _startTimer(); // Iniciar el temporizador aquí
+    _startTimer();
   }
 
   @override
   void dispose() {
-    _timer
-        ?.cancel(); // Cancelar el temporizador si el usuario sale de la pantalla
+    _timer?.cancel();
     super.dispose();
   }
 
-  void _startTimer() {
+  void _startTimer() async {
     final scoreUseCases = ref.read(scoreRepositoryProvider);
+    final progressUseCases = ref.read(progressRepositoryProvider);
+    final progressNotifier = ref.read(progressNotifierProvider.notifier);
 
     // Obtener los parámetros necesarios
-    final subtopicID = ref.read(subtopicIdProvider);
     final module = ref.read(moduleProvider);
-    final level = ref.read(levelIdProvider);
-    final topic = ref.read(topicIdProvider);
+    final levelId = ref.read(levelIdProvider);
+    final topicId = ref.read(topicIdProvider);
+    final subtopicId = ref.read(subtopicIdProvider);
+
+    // Verificar si el subtopic ya tiene un registro de progreso
+    final isCompleted = await progressUseCases.isSubtopicCompleted(subtopicId);
+
+    // Si el subtopic ya está completado, no hacer nada
+    if (isCompleted) {
+      return;
+    }
 
     // Iniciar el temporizador
     _timer = Timer(const Duration(seconds: 10), () async {
-      await scoreUseCases.addScore(subtopicID, module, level, topic, 2);
+      // Registrar el puntaje y el progreso
+      await scoreUseCases.addScore(subtopicId, module, levelId, topicId, 2);
+      await progressUseCases.createProgressBySubtopic(
+        module: module,
+        levelId: levelId,
+        topicId: topicId,
+        subtopicId: subtopicId,
+        score: 2,
+      );
+
+      // Notificar que el subtopic se completó
+      progressNotifier.addCompletedSubtopic(subtopicId);
 
       // Mostrar un SnackBar después de registrar los puntos
       if (mounted) {
@@ -138,6 +160,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                         detail: detail,
                       ),
                       CodeDetailWidget(detail: detail),
+                      //TODO: Prueba el codigo. Este item es para copiar y pegar en la webview de dartpad lo del codigo anterior
                     ],
                   ),
                 ),

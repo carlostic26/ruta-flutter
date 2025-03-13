@@ -322,7 +322,7 @@ void main() {
       'subtopic_id': 's05t02l01', // Subtopic 'Sets'
       'module': 'Jr',
       'definition': 'Un set en Dart es una colección de elementos únicos, es decir, no permite duplicados.\n\n'
-          '¿Pero qué es un set? 🎲\n\n'
+          'Vamos de nuevo. 🎲\n\n'
           'Imagina que tienes una caja de crayones. No puedes tener dos crayones del mismo color. En Dart, un set funciona de la misma manera. Solo puedes agregar elementos únicos, y si intentas agregar un duplicado, simplemente se ignora.\n\n'
           'Por ejemplo, si escribes `Set<String> colores = {"rojo", "verde", "azul"}`, estás creando un set de colores. Si intentas agregar "rojo" de nuevo, el set no cambiará.\n\n'
           'Los sets son útiles cuando necesitas asegurarte de que no haya elementos duplicados en una colección.',
@@ -347,7 +347,7 @@ void main() {
       'subtopic_id': 's01t03l01',
       'module': 'Jr',
       'definition': 'Una función en Dart es un bloque de código que realiza una tarea específica y puede ser reutilizado en diferentes partes de un programa.\n\n'
-          '¿Pero qué es una función? 🤔\n\n'
+          '¿Pero qué es realmente una función? 🤔\n\n'
           'Imagina que tienes una receta de cocina. En lugar de repetir los mismos pasos cada vez que quieres cocinar, simplemente sigues la receta. En Dart, una función es como esa receta: defines una serie de pasos (código) que se ejecutan cada vez que la llamas.\n\n'
           'Por ejemplo, si escribes una función para saludar, puedes usarla cada vez que necesites mostrar un mensaje de bienvenida. Esto hace que tu código sea más organizado y fácil de mantener.\n\n'
           'Las funciones son una parte fundamental de la programación. Úsalas para dividir tu código en tareas más pequeñas y manejables.',

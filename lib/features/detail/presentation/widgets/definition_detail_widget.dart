@@ -26,7 +26,7 @@ class _DefinitionDetailWidgetState
       //physics: const NeverScrollableScrollPhysics(), // Evita doble scroll
       children: [
         SizedBox(height: widget.heightScreen * 0.05),
-        Padding(
+/*         Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: SizedBox(
             height: 350,
@@ -47,7 +47,7 @@ class _DefinitionDetailWidgetState
                     },
                   ),
           ),
-        ),
+        ), */
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
           child: Text(

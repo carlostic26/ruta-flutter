@@ -14,7 +14,6 @@ final titleTopicProvider = StateProvider<String>((ref) => '');
 final topicIdProvider = StateProvider<String>((ref) => '');
 final topicTitleProvider = StateProvider<String>((ref) => '');
 
-// Proveedor del caso de uso (Inyección de dependencias)
 final getTopicUseCaseProvider = Provider<GetTopicUseCase>((ref) {
   final repository = ref.read(topicRepositoryProvider);
   return GetTopicUseCase(repository);

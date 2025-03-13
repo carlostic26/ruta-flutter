@@ -26,7 +26,7 @@ class ItemSubtopicWidget extends ConsumerWidget {
           );
         },
         child: Container(
-          height: 40,
+          height: 50,
           width: 400,
           decoration: BoxDecoration(
             color: const Color(0xFF2962FF),

@@ -8,7 +8,7 @@ import 'package:ruta_flutter/features/score/data/datasources/score_local_databas
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 42;
+  int dbVersion = 5;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -17,18 +17,24 @@ class LocalDatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final dbPath = await getDatabasesPath();
-    return await openDatabase(
-      join(dbPath, 'ruta_flutter_$dbVersion.db'),
-      version: 1,
-      onCreate: (db, version) async {
-        // Delegar la creación de tablas a cada feature
-        await LevelLocalDatabaseHelper().createLevelTable(db);
-        await TopicLocalDatabaseHelper().createTopicTable(db);
-        await SubtopicLocalDatabaseHelper().createSubtopicTable(db);
-        await DetailLocalDatabaseHelper().createDetailTable(db);
-        await ScoreLocalDatabaseHelper().createScoreTable(db);
-      },
-    );
+    try {
+      final dbPath = await getDatabasesPath();
+      final String dbName = 'ruta_flutter_db_$dbVersion.db';
+
+      return await openDatabase(
+        join(dbPath, dbName),
+        version: 1,
+        onCreate: (db, version) async {
+          // Delegar la creación de tablas a cada feature
+          await LevelLocalDatabaseHelper().createLevelTable(db);
+          await TopicLocalDatabaseHelper().createTopicTable(db);
+          await SubtopicLocalDatabaseHelper().createSubtopicTable(db);
+          await DetailLocalDatabaseHelper().createDetailTable(db);
+          await ScoreLocalDatabaseHelper().createScoreTable(db);
+        },
+      );
+    } catch (e) {
+      throw Exception('Error initializing global database: $e');
+    }
   }
 }
