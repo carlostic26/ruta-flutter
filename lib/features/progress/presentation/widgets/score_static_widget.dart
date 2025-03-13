@@ -37,9 +37,9 @@ class StatisticsScreen extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 5.0), // Espacio entre barras
-                      width: 20, // Ancho de cada barra
+                      width: 20,
                       decoration: BoxDecoration(
-                        color: Colors.blue, // Color de las barras
+                        color: Colors.blue,
                         borderRadius: BorderRadius.circular(4.0),
                       ),
                       height: score * 10, // Altura de la barra (ajustada)
@@ -56,7 +56,7 @@ class StatisticsScreen extends StatelessWidget {
               children: List.generate(scores.length, (index) {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  width: 20, // Ancho de cada etiqueta
+                  width: 20,
                   child: Text(
                     'N${index + 1}',
                     style: const TextStyle(color: Colors.grey, fontSize: 8),
