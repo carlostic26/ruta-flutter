@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/core/app_config.dart';
-import 'package:ruta_flutter/features/score/presentation/screens/score_screen.dart';
+import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -63,7 +63,8 @@ class HomeDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ScoreScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const ProgressScoreScreen()),
               );
             },
           ),

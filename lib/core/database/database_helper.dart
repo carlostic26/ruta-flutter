@@ -4,11 +4,10 @@ import 'package:ruta_flutter/features/topic/data/datasources/subtopic_local_data
 import 'package:sqflite/sqflite.dart';
 import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
 import 'package:ruta_flutter/features/topic/data/datasources/topic_local_database.dart';
-import 'package:ruta_flutter/features/score/data/datasources/score_local_database.dart';
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 5;
+  int dbVersion = 6;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -30,7 +29,6 @@ class LocalDatabaseHelper {
           await TopicLocalDatabaseHelper().createTopicTable(db);
           await SubtopicLocalDatabaseHelper().createSubtopicTable(db);
           await DetailLocalDatabaseHelper().createDetailTable(db);
-          await ScoreLocalDatabaseHelper().createScoreTable(db);
         },
       );
     } catch (e) {

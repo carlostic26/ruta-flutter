@@ -29,4 +29,17 @@ class LevelRepositoryImpl implements LevelRepository {
       );
     });
   }
+
+  // Método para contar los niveles de un módulo
+  @override
+  Future<int> countLevelsByModule(String module) async {
+    final db = await _database;
+    final count = Sqflite.firstIntValue(
+      await db.rawQuery(
+        'SELECT COUNT(*) FROM level WHERE module = ?',
+        [module],
+      ),
+    );
+    return count ?? 0;
+  }
 }

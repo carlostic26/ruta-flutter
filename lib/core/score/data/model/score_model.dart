@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/score/domain/entity/score_entity.dart';
+import 'package:ruta_flutter/core/score/domain/entity/score_entity.dart';
 
 class ScoreModel extends Score {
   ScoreModel({

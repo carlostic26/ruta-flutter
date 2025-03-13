@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/count_levels_use_case_provider.dart';
 import 'package:ruta_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/score/presentation/widgets/score_static_widget.dart';
+import 'package:ruta_flutter/features/progress/presentation/widgets/score_static_widget.dart';
 
 class InfoScoreWidget extends ConsumerWidget {
   final String module;
@@ -16,7 +17,7 @@ class InfoScoreWidget extends ConsumerWidget {
     final getLevelProgress = ref.read(getLevelProgressProvider);
 
     return FutureBuilder<List<double>>(
-      future: _getProgressForLevels(module, getLevelProgress),
+      future: _getProgressForLevels(module, getLevelProgress, ref),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -117,13 +118,21 @@ class InfoScoreWidget extends ConsumerWidget {
 
   // Método para obtener el progreso de cada nivel
   Future<List<double>> _getProgressForLevels(
-      String module, GetLevelProgress getLevelProgress) async {
+      String module, GetLevelProgress getLevelProgress, WidgetRef ref) async {
     final progressList = <double>[];
-    for (int level = 1; level <= 5; level++) {
-      // Suponiendo 5 niveles
+
+    // Obtener el caso de uso desde el provider
+    final countLevelsUseCase = ref.read(countLevelsUseCaseProvider);
+
+    // Obtener el número de niveles del módulo
+    final numberOfLevels = await countLevelsUseCase.call(module);
+
+    // Iterar sobre los niveles y obtener el progreso
+    for (int level = 1; level <= numberOfLevels; level++) {
       final progress = await getLevelProgress.call(module, level);
       progressList.add(progress);
     }
+
     return progressList;
   }
 }

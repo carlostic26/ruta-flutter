@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/score/presentation/widgets/score_info_widget.dart';
+import 'package:ruta_flutter/features/progress/presentation/widgets/score_info_widget.dart';
 
-class ScoreScreen extends ConsumerWidget {
-  const ScoreScreen({super.key});
+class ProgressScoreScreen extends ConsumerWidget {
+  const ProgressScoreScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/score/domain/repository/score_repository.dart';
+import 'package:ruta_flutter/core/score/domain/repository/score_repository.dart';
 
 class ScoreUseCases {
   late final ScoreRepository scoreRepository;

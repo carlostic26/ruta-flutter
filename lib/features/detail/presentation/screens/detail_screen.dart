@@ -10,7 +10,6 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/definition_det
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/progress_widget_notifier.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/score/presentation/state/provider/score_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
@@ -37,7 +36,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   }
 
   void _startTimer() async {
-    final scoreUseCases = ref.read(scoreRepositoryProvider);
+    //final scoreUseCases = ref.read(scoreRepositoryProvider);
     final progressUseCases = ref.read(progressRepositoryProvider);
     final progressNotifier = ref.read(progressNotifierProvider.notifier);
 
@@ -58,7 +57,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     // Iniciar el temporizador
     _timer = Timer(const Duration(seconds: 10), () async {
       // Registrar el puntaje y el progreso
-      await scoreUseCases.addScore(subtopicId, module, levelId, topicId, 2);
+      //await scoreUseCases.addScore(subtopicId, module, levelId, topicId, 2);
       await progressUseCases.createProgressBySubtopic(
         module: module,
         levelId: levelId,
