@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
-  final double progress; // Progreso actual (por ejemplo, 0.1 para 10%)
-  final double maxProgress; // Progreso máximo (por ejemplo, 1.0 para 100%)
-  final Color backgroundColor; // Color de fondo (gris)
-  final Color progressColor; // Color de la barra de progreso (azul)
+  final double progress;
+  final double maxProgress;
+  final Color backgroundColor;
+  final Color progressColor;
 
   const ProgressBar({
     super.key,
