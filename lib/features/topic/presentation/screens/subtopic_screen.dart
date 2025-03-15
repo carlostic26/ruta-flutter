@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/progress_widget_notifier.dart';
+import 'package:ruta_flutter/features/progress/domain/use_cases/is_subtopic_completed_use_case.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/widgets/item_subtopic_widget.dart';
@@ -18,13 +19,6 @@ class SubtopicScreen extends ConsumerWidget {
     final topicId = ref.watch(topicIdProvider);
     final titleTopic = ref.watch(topicTitleProvider);
     final module = ref.watch(moduleProvider);
-    final isSubtopicCompletedUseCase =
-        ref.read(isSubtopicCompletedUseCaseProvider);
-    final completedSubtopics = ref.watch(progressNotifierProvider);
-
-    // Usar completedSubtopics para evitar la advertencia
-    // Esto asegura que el widget se reconstruya cuando el progreso cambie
-    final _ = completedSubtopics;
 
     return FutureBuilder<List<SubtopicModel>>(
       future: listSubtopicUseCase.call(topicId, module),
@@ -64,77 +58,35 @@ class SubtopicScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Stepper Vertical
-                SizedBox(
-                  width: 60,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FutureBuilder<List<bool>>(
-                        future: Future.wait(
-                          subtopicList
-                              .map((subtopic) =>
-                                  isSubtopicCompletedUseCase.call(subtopic.id!))
-                              .toList(),
-                        ),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (!snapshot.hasData) {
-                            return const Text('No data');
-                          }
 
-                          final completedSteps = snapshot.data!;
+                StepperWidget(subtopicList: subtopicList),
 
-                          return EasyStepper(
-                            alignment: Alignment.topLeft,
-                            lineStyle: const LineStyle(
-                              lineLength: 20,
-                              lineThickness: 1,
-                              lineType: LineType.dotted,
-                            ),
-                            activeStepBackgroundColor: Colors.grey,
-                            finishedStepBackgroundColor:
-                                Colors.green, // Color de los steps completados
-                            stepRadius: 8,
-                            activeStep: completedSteps.lastIndexOf(true) + 1,
-                            enableStepTapping: false,
-                            direction: Axis.vertical,
-                            steps: List.generate(
-                              subtopicList.length,
-                              (index) => EasyStep(
-                                icon: completedSteps[index]
-                                    ? const Icon(Icons.check,
-                                        size: 20, color: Colors.white)
-                                    : const Icon(Icons.check,
-                                        size: 20, color: Colors.grey),
-                                activeIcon: const Icon(Icons.check,
-                                    size: 20, color: Colors.white),
-                                finishIcon: const Icon(Icons.check,
-                                    size: 20, color: Colors.white),
-                              ),
-                            ),
-                            onStepReached: (index) {},
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
                 // Lista de Subtopics
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: subtopicList.length,
-                    itemBuilder: (context, index) {
-                      final subtopic = subtopicList[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 7, bottom: 20),
-                        child: ItemSubtopicWidget(subtopic: subtopic),
-                      );
-                    },
-                  ),
+                  child: Stack(children: [
+                    /*       Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 3, right: 20),
+                          child: StepperWidget(
+                            subtopicList: subtopicList,
+                          ),
+                        )), */
+                    ListView.builder(
+                      itemCount: subtopicList.length,
+                      itemBuilder: (context, index) {
+                        final subtopic = subtopicList[index];
+
+                        return Padding(
+                            padding:
+                                const EdgeInsets.only(top: 5, bottom: 22.3),
+                            child: ItemSubtopicWidget(
+                              subtopic: subtopic,
+                              index: index,
+                            ));
+                      },
+                    ),
+                  ]),
                 ),
               ],
             ),
@@ -142,5 +94,70 @@ class SubtopicScreen extends ConsumerWidget {
         );
       },
     );
+  }
+}
+
+class StepperWidget extends ConsumerWidget {
+  final List<SubtopicModel> subtopicList;
+
+  const StepperWidget({
+    super.key,
+    required this.subtopicList,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final completedSubtopics = ref.watch(completedSubtopicsProvider);
+
+    return SizedBox(
+      width: 60,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          EasyStepper(
+            alignment: Alignment.topLeft,
+            lineStyle: const LineStyle(
+              lineLength: 20,
+              lineThickness: 1,
+              lineType: LineType.dotted,
+            ),
+            activeStepBackgroundColor: Colors.grey,
+            finishedStepBackgroundColor: Colors.green,
+            stepRadius: 8,
+            activeStep: _getActiveStep(completedSubtopics, subtopicList),
+            enableStepTapping: false,
+            direction: Axis.vertical,
+            steps: List.generate(
+              subtopicList.length,
+              (index) {
+                final subtopic = subtopicList[index];
+                final isCompleted = completedSubtopics.contains(subtopic.id);
+
+                return EasyStep(
+                  icon: isCompleted
+                      ? const Icon(Icons.check, size: 20, color: Colors.white)
+                      : const Icon(Icons.check, size: 20, color: Colors.grey),
+                  activeIcon:
+                      const Icon(Icons.check, size: 20, color: Colors.white),
+                  finishIcon:
+                      const Icon(Icons.check, size: 20, color: Colors.white),
+                );
+              },
+            ),
+            onStepReached: (index) {},
+          ),
+        ],
+      ),
+    );
+  }
+
+  int _getActiveStep(
+      List<String> completedSteps, List<SubtopicModel> subtopicList) {
+    for (int i = 0; i < subtopicList.length; i++) {
+      if (!completedSteps.contains(subtopicList[i].id)) {
+        return i;
+      }
+    }
+    return subtopicList.length;
   }
 }

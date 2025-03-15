@@ -99,7 +99,7 @@ class ProgressRepositoryImpl implements ProgressRepository {
     return result.isNotEmpty;
   }
 
-  @override
+/*   @override
   Future<bool> isTopicCompleted(
       String module, int levelId, String topicId) async {
     // Obtener todos los subtopics del topic desde la base de datos pre-cargada
@@ -115,7 +115,37 @@ class ProgressRepositoryImpl implements ProgressRepository {
 
     return true;
   }
+ */
 
+  @override
+  Future<bool> isTopicCompleted(
+      String module, int levelId, String topicId) async {
+    // Obtener todos los subtopics del topic
+    final subtopics = await _subtopicRepository.getSubtopics(topicId, module);
+
+    // Verificar si todos los subtopics están completados
+    for (final subtopic in subtopics) {
+      final isCompleted = await isSubtopicCompleted(subtopic.id!);
+      if (!isCompleted) {
+        return false; // Si algún subtopic no está completado, el topic no está completado
+      }
+    }
+
+    print("Verificando subtopics del topic $topicId");
+    for (final subtopic in subtopics) {
+      final isCompleted = await isSubtopicCompleted(subtopic.id!);
+      print("En impl, Subtopic ${subtopic.id}: ¿Completado? $isCompleted");
+    }
+
+    return true; // Todos los subtopics están completados
+  }
+
+  @override
+  Future<List<String>> getAllCompletedSubtopics() async {
+    final db = await localDatabase;
+    final result = await db.query('progress', columns: ['subtopic_id']);
+    return result.map((map) => map['subtopic_id'] as String).toList();
+  }
   //---- Score
 
   //en este metodo se obtiene los puntajes ya creados por los casos de uso de progress
@@ -195,5 +225,12 @@ class ProgressRepositoryImpl implements ProgressRepository {
   ''', [level, module]);
 
     return result.first['count'] as int;
+  }
+
+  @override
+  Future<List<String>> getAllCompletedTopics() async {
+    final db = await localDatabase;
+    final result = await db.query('progress', columns: ['topic_id']);
+    return result.map((map) => map['topic_id'] as String).toList();
   }
 }

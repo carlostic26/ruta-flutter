@@ -8,8 +8,10 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/progress_widget_notifier.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
+    as progress;
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
@@ -36,9 +38,10 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   }
 
   void _startTimer() async {
-    //final scoreUseCases = ref.read(scoreRepositoryProvider);
-    final progressUseCases = ref.read(progressRepositoryProvider);
-    final progressNotifier = ref.read(progressNotifierProvider.notifier);
+    final progressUseCasesProvider =
+        ref.read(progress.progressRepositoryProvider);
+    final completedSubtopicsNotifier =
+        ref.read(completedSubtopicsProvider.notifier);
 
     // Obtener los parámetros necesarios
     final module = ref.read(moduleProvider);
@@ -47,7 +50,8 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     final subtopicId = ref.read(subtopicIdProvider);
 
     // Verificar si el subtopic ya tiene un registro de progreso
-    final isCompleted = await progressUseCases.isSubtopicCompleted(subtopicId);
+    final isCompleted =
+        await progressUseCasesProvider.isSubtopicCompleted(subtopicId);
 
     // Si el subtopic ya está completado, no hacer nada
     if (isCompleted) {
@@ -56,30 +60,52 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
     // Iniciar el temporizador
     _timer = Timer(const Duration(seconds: 10), () async {
-      // Registrar el puntaje y el progreso
-      //await scoreUseCases.addScore(subtopicId, module, levelId, topicId, 2);
-      await progressUseCases.createProgressBySubtopic(
-        module: module,
-        levelId: levelId,
-        topicId: topicId,
-        subtopicId: subtopicId,
-        score: 2,
-      );
-
-      // Notificar que el subtopic se completó
-      progressNotifier.addCompletedSubtopic(subtopicId);
-
-      // Mostrar un SnackBar después de registrar los puntos
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              '¡+2 puntos acumulados! Sigue repasando temas.',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-            duration: Duration(seconds: 3), // Duración del SnackBar
-          ),
+      try {
+        // Registrar el puntaje y el progreso en la base de datos
+        await progressUseCasesProvider.createProgressBySubtopic(
+          module: module,
+          levelId: levelId,
+          topicId: topicId,
+          subtopicId: subtopicId,
+          score: 2,
         );
+
+        // Notificar que el subtopic se completó
+        completedSubtopicsNotifier.markSubtopicAsCompleted(subtopicId);
+
+        // verificar si el topic al que pertenece también está completado
+        final completedTopicsNotifier =
+            ref.read(completedTopicsProvider.notifier);
+        await completedTopicsNotifier.checkAndUpdateTopicCompletion(
+            topicId, module, levelId);
+
+        print(
+            "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId");
+
+        // Mostrar un SnackBar después de registrar los puntos
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                '¡+2 puntos acumulados! Sigue repasando temas.',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              duration: Duration(seconds: 3), // Duración del SnackBar
+            ),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Error al guardar el progreso: $e',
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
       }
     });
   }
@@ -143,8 +169,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                 const SizedBox(height: 10), // Espacio extra
                 // PageView dentro de un Flexible para que se ajuste correctamente
                 SizedBox(
-                  height: MediaQuery.of(context).size.height *
-                      0.8, // Ajuste dinámico
+                  height: MediaQuery.of(context).size.height * 0.8,
                   child: PageView(
                     controller: pageController,
                     onPageChanged: (index) {

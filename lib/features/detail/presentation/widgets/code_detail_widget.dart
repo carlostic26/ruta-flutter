@@ -45,20 +45,24 @@ class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
                   // Este SingleChildScrollView permite desplazarse verticalmente
                   SingleChildScrollView(
                     scrollDirection: Axis.vertical,
-                    child: HighlightView(
-                      code,
-                      language: 'dart',
-                      theme: theme,
-                      padding: const EdgeInsets.fromLTRB(10, 55, 8, 1),
-                      textStyle: TextStyle(
-                        fontFamily: 'monospace',
-                        fontSize: _fontSize,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: HighlightView(
+                        code,
+                        language: 'dart',
+                        theme: theme,
+                        padding: const EdgeInsets.fromLTRB(10, 55, 8, 1),
+                        textStyle: TextStyle(
+                          fontFamily: 'monospace',
+                          fontSize: _fontSize,
+                        ),
                       ),
                     ),
                   ),
                   // Botones de Zoom posicionados arriba del código
                   Container(
                     width: MediaQuery.of(context).size.width,
+                    height: 40,
                     color: Colors.black26,
                     child: Positioned(
                       top: 2,
@@ -71,11 +75,13 @@ class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
                             icon: const Icon(CupertinoIcons.zoom_in),
                             onPressed: _increaseFontSize,
                             color: Colors.white,
+                            iconSize: 20,
                           ),
                           IconButton(
                             icon: const Icon(CupertinoIcons.zoom_out),
                             onPressed: _decreaseFontSize,
                             color: Colors.white,
+                            iconSize: 20,
                           ),
                         ],
                       ),

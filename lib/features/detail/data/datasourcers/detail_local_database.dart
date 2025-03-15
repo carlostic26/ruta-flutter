@@ -100,7 +100,7 @@ void main() {
       'module': 'Jr',
       'definition': 'La palabra clave `const` se utiliza para declarar una variable constante cuyo valor debe ser conocido en tiempo de compilación y no puede cambiar en tiempo de ejecución.\n\n'
           '¿Pero qué significa esto? 🤨\n\n'
-          'Imagina que `const` es como una promesa que haces al compilador: “Este valor no cambiará nunca, y lo sabes desde el momento en que escribes el código”. A diferencia de `final`, que permite asignar un valor en tiempo de ejecución, `const` exige que el valor sea conocido en tiempo de compilación.\n\n'
+          'Imaginemos que `const` es como una promesa que haces al compilador: “Este valor no cambiará nunca, y lo sabes desde el momento en que escribes el código”. A diferencia de `final`, que permite asignar un valor en tiempo de ejecución, `const` exige que el valor sea conocido en tiempo de compilación.\n\n'
           'Por ejemplo, si escribes `const pi = 3.1416`, estás diciendo: “Este valor es constante y no cambiará en ningún momento”. Si intentas cambiar `pi` más adelante, el compilador te detendrá con un error. 🚫\n\n'
           'Usa `const` para valores que sabes que nunca cambiarán, como constantes matemáticas o configuraciones fijas.',
       'img_url': '',
@@ -220,7 +220,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Una lista en Dart es una colección ordenada de elementos que pueden ser de cualquier tipo. Puedes pensar en una lista como una fila de cajas, donde cada caja contiene un valor.\n\n'
           'Ya, pero ¿qué es una lista? 🤔\n\n'
-          'Imagina que tienes una lista de compras. En esa lista, puedes agregar, eliminar o modificar elementos. En Dart, una lista funciona de la misma manera. Puedes agregar elementos, eliminarlos o acceder a ellos usando su posición (índice).\n\n'
+          'Imaginemos que tienes una lista de compras. En esa lista, puedes agregar, eliminar o modificar elementos. En Dart, una lista funciona de la misma manera. Puedes agregar elementos, eliminarlos o acceder a ellos usando su posición (índice).\n\n'
           'Por ejemplo, si escribes `List<String> frutas = ["manzana", "banana"]`, estás creando una lista de cadenas de texto. Puedes acceder a los elementos usando su índice, como `frutas[0]` para obtener "manzana".\n\n'
           'Las listas son una de las estructuras de datos más comunes en programación. Úsalas cuando necesites almacenar y manipular una colección de elementos.',
       'img_url': '',
@@ -242,7 +242,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Las listas en Dart tienen varios métodos y propiedades que te permiten manipular y obtener información sobre sus elementos.\n\n'
           '¿Qué puedes hacer con una lista? 🛠️\n\n'
-          'Imagina que tienes una lista de tareas pendientes. Con los métodos y propiedades de las listas, puedes agregar tareas, eliminar las completadas, ordenarlas o incluso ver cuántas tienes. En Dart, las listas tienen métodos como `add`, `remove`, `sort` y propiedades como `length`.\n\n'
+          'Imaginemos que tienes una lista de tareas pendientes. Con los métodos y propiedades de las listas, puedes agregar tareas, eliminar las completadas, ordenarlas o incluso ver cuántas tienes. En Dart, las listas tienen métodos como `add`, `remove`, `sort` y propiedades como `length`.\n\n'
           'Por ejemplo, si escribes `frutas.length`, obtienes la cantidad de elementos en la lista. Si usas `frutas.sort()`, la lista se ordena alfabéticamente.\n\n'
           'Estos métodos y propiedades hacen que trabajar con listas sea más fácil y eficiente.',
       'img_url': '',
@@ -268,7 +268,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Un mapa en Dart es una colección de pares clave-valor, donde cada clave es única y se asocia a un valor específico.\n\n'
           '¿Pero qué es un mapa? 🗺️\n\n'
-          'Imagina que tienes un diccionario. Cada palabra (clave) tiene un significado (valor). En Dart, un mapa funciona de la misma manera. Puedes usar una clave para acceder a su valor correspondiente.\n\n'
+          'Imaginemos que tienes un diccionario. Cada palabra (clave) tiene un significado (valor). En Dart, un mapa funciona de la misma manera. Puedes usar una clave para acceder a su valor correspondiente.\n\n'
           'Por ejemplo, si escribes `Map<String, int> edades = {"Alice": 25, "Bob": 30}`, estás creando un mapa donde las claves son nombres y los valores son edades. Puedes acceder a la edad de Alice usando `edades["Alice"]`.\n\n'
           'Los mapas son útiles cuando necesitas almacenar y buscar datos de manera eficiente usando claves únicas.',
       'img_url': '',
@@ -294,7 +294,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Los mapas en Dart tienen varios métodos y propiedades que te permiten manipular y obtener información sobre sus pares clave-valor.\n\n'
           '¿Qué puedes hacer con un mapa? 🛠️\n\n'
-          'Imagina que tienes un mapa de tesoros. Con los métodos y propiedades de los mapas, puedes agregar nuevos tesoros, eliminar los que ya encontraste o ver cuántos te faltan. En Dart, los mapas tienen métodos como `putIfAbsent`, `remove` y propiedades como `keys` y `values`.\n\n'
+          'Imaginemos que tienes un mapa de tesoros. Con los métodos y propiedades de los mapas, puedes agregar nuevos tesoros, eliminar los que ya encontraste o ver cuántos te faltan. En Dart, los mapas tienen métodos como `putIfAbsent`, `remove` y propiedades como `keys` y `values`.\n\n'
           'Por ejemplo, si escribes `edades.keys`, obtienes una lista de todas las claves en el mapa. Si usas `edades.remove("Alice")`, eliminas el par clave-valor asociado a "Alice".\n\n'
           'Estos métodos y propiedades hacen que trabajar con mapas sea más fácil y eficiente.',
       'img_url': '',
@@ -323,7 +323,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Un set en Dart es una colección de elementos únicos, es decir, no permite duplicados.\n\n'
           'Vamos de nuevo. 🎲\n\n'
-          'Imagina que tienes una caja de crayones. No puedes tener dos crayones del mismo color. En Dart, un set funciona de la misma manera. Solo puedes agregar elementos únicos, y si intentas agregar un duplicado, simplemente se ignora.\n\n'
+          'Imaginemos que tienes una caja de crayones. No puedes tener dos crayones del mismo color. En Dart, un set funciona de la misma manera. Solo puedes agregar elementos únicos, y si intentas agregar un duplicado, simplemente se ignora.\n\n'
           'Por ejemplo, si escribes `Set<String> colores = {"rojo", "verde", "azul"}`, estás creando un set de colores. Si intentas agregar "rojo" de nuevo, el set no cambiará.\n\n'
           'Los sets son útiles cuando necesitas asegurarte de que no haya elementos duplicados en una colección.',
       'img_url': '',
@@ -348,7 +348,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Una función en Dart es un bloque de código que realiza una tarea específica y puede ser reutilizado en diferentes partes de un programa.\n\n'
           '¿Pero qué es realmente una función? 🤔\n\n'
-          'Imagina que tienes una receta de cocina. En lugar de repetir los mismos pasos cada vez que quieres cocinar, simplemente sigues la receta. En Dart, una función es como esa receta: defines una serie de pasos (código) que se ejecutan cada vez que la llamas.\n\n'
+          'Imaginemos que tienes una receta de cocina. En lugar de repetir los mismos pasos cada vez que quieres cocinar, simplemente sigues la receta. En Dart, una función es como esa receta: defines una serie de pasos (código) que se ejecutan cada vez que la llamas.\n\n'
           'Por ejemplo, si escribes una función para saludar, puedes usarla cada vez que necesites mostrar un mensaje de bienvenida. Esto hace que tu código sea más organizado y fácil de mantener.\n\n'
           'Las funciones son una parte fundamental de la programación. Úsalas para dividir tu código en tareas más pequeñas y manejables.',
       'img_url': '',
@@ -372,7 +372,7 @@ void saludar() {
       'module': 'Jr',
       'definition': 'Declarar una función en Dart implica definir su nombre, parámetros y el código que ejecutará. Llamar a una función significa ejecutar ese código en cualquier parte del programa.\n\n'
           '¿Cómo se declara y llama una función? 🛠️\n\n'
-          'Imagina que tienes una máquina de café. Primero, defines cómo funciona la máquina (declaración). Luego, cada vez que quieres un café, simplemente presionas un botón (llamada). En Dart, declarar una función es como configurar la máquina, y llamarla es como presionar el botón.\n\n'
+          'Imaginemos que tienes una máquina de café. Primero, defines cómo funciona la máquina (declaración). Luego, cada vez que quieres un café, simplemente presionas un botón (llamada). En Dart, declarar una función es como configurar la máquina, y llamarla es como presionar el botón.\n\n'
           'Por ejemplo, si declaras una función `sumar`, puedes llamarla cada vez que necesites realizar una suma. Esto evita repetir el mismo código una y otra vez.\n\n'
           'Declarar y llamar funciones es una de las habilidades más importantes en programación.',
       'img_url': '',
@@ -397,7 +397,7 @@ int sumar(int a, int b) {
       'module': 'Jr',
       'definition': 'Los parámetros son valores que se pasan a una función para que los use en su ejecución. El retorno es el valor que la función devuelve después de realizar su tarea.\n\n'
           '¿Qué son los parámetros y el retorno? 🎯\n\n'
-          'Imagina que tienes una calculadora. Los números que ingresas son los parámetros, y el resultado que muestra es el retorno. En Dart, los parámetros son como los números que le das a la función, y el retorno es el resultado que obtienes después de ejecutarla.\n\n'
+          'Imaginemos que tienes una calculadora. Los números que ingresas son los parámetros, y el resultado que muestra es el retorno. En Dart, los parámetros son como los números que le das a la función, y el retorno es el resultado que obtienes después de ejecutarla.\n\n'
           'Por ejemplo, si escribes una función `multiplicar`, puedes pasarle dos números como parámetros y obtener su producto como retorno. Esto hace que las funciones sean flexibles y reutilizables.\n\n'
           'Los parámetros y el retorno son herramientas poderosas para crear funciones dinámicas y útiles.',
       'img_url': '',
@@ -422,7 +422,7 @@ int multiplicar(int a, int b) {
       'module': 'Jr',
       'definition': 'Una función anónima en Dart es una función que no tiene nombre y se define directamente donde se necesita. Las lambdas son una forma abreviada de escribir funciones anónimas.\n\n'
           '¿Qué son las funciones anónimas y lambdas? 🎭\n\n'
-          'Imagina que tienes una nota adhesiva. En lugar de escribir una receta completa, simplemente anotas los pasos clave. En Dart, una función anónima es como esa nota: no tiene un nombre formal, pero hace su trabajo en el momento.\n\n'
+          'Imaginemos que tienes una nota adhesiva. En lugar de escribir una receta completa, simplemente anotas los pasos clave. En Dart, una función anónima es como esa nota: no tiene un nombre formal, pero hace su trabajo en el momento.\n\n'
           'Por ejemplo, si necesitas una función rápida para sumar dos números, puedes usar una lambda como `(a, b) => a + b`. Esto es útil cuando no necesitas reutilizar la función en otro lugar.\n\n'
           'Las funciones anónimas y lambdas son ideales para tareas rápidas y específicas.',
       'img_url': '',
@@ -451,7 +451,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Los operadores aritméticos en Dart se utilizan para realizar operaciones matemáticas básicas como suma, resta, multiplicación, división y módulo.\n\n'
           '¿Qué son los operadores aritméticos? 🧮\n\n'
-          'Imagina que tienes una calculadora. Los operadores aritméticos son como los botones que usas para sumar, restar, multiplicar o dividir números. En Dart, estos operadores te permiten hacer cálculos directamente en tu código.\n\n'
+          'Imaginemos que tienes una calculadora. Los operadores aritméticos son como los botones que usas para sumar, restar, multiplicar o dividir números. En Dart, estos operadores te permiten hacer cálculos directamente en tu código.\n\n'
           'Por ejemplo, si escribes `5 + 3`, obtienes `8`. Si usas `10 % 3`, obtienes `1` (el resto de la división). Estos operadores son fundamentales para realizar cálculos en tus programas.\n\n'
           'Los operadores aritméticos son herramientas básicas pero poderosas en programación.',
       'img_url': '',
@@ -476,7 +476,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Los operadores de comparación en Dart se utilizan para comparar dos valores y devolver un resultado booleano (`true` o `false`).\n\n'
           '¿Qué son los operadores de comparación? 🔍\n\n'
-          'Imagina que tienes una balanza. Los operadores de comparación son como las pesas que te ayudan a determinar si un lado es más pesado, más ligero o igual que el otro. En Dart, estos operadores te permiten comparar valores y tomar decisiones basadas en el resultado.\n\n'
+          'Imaginemos que tienes una balanza. Los operadores de comparación son como las pesas que te ayudan a determinar si un lado es más pesado, más ligero o igual que el otro. En Dart, estos operadores te permiten comparar valores y tomar decisiones basadas en el resultado.\n\n'
           'Por ejemplo, si escribes `5 > 3`, obtienes `true`. Si usas `10 == 10`, también obtienes `true`. Estos operadores son esenciales para controlar el flujo de tu programa.\n\n'
           'Los operadores de comparación son clave para tomar decisiones en tu código.',
       'img_url': '',
@@ -502,7 +502,7 @@ void main() {
       'module': 'Jr',
       'definition': 'Los operadores lógicos en Dart se utilizan para combinar o invertir expresiones booleanas. Los principales son `&&` (AND), `||` (OR) y `!` (NOT).\n\n'
           '¿Qué son los operadores lógicos? 🧠\n\n'
-          'Imagina que tienes dos interruptores de luz. El operador `&&` (AND) enciende la luz solo si ambos interruptores están activados. El operador `||` (OR) enciende la luz si al menos uno está activado. El operador `!` (NOT) invierte el estado: si la luz está encendida, la apaga, y viceversa.\n\n'
+          'Imaginemos que tienes dos interruptores de luz. El operador `&&` (AND) enciende la luz solo si ambos interruptores están activados. El operador `||` (OR) enciende la luz si al menos uno está activado. El operador `!` (NOT) invierte el estado: si la luz está encendida, la apaga, y viceversa.\n\n'
           'Por ejemplo, si escribes `true && false`, obtienes `false`. Si usas `true || false`, obtienes `true`. Estos operadores son esenciales para crear condiciones complejas en tu código.\n\n'
           'Los operadores lógicos te permiten tomar decisiones más sofisticadas en tus programas.',
       'img_url': '',
@@ -527,7 +527,7 @@ void main() {
       'module': 'Jr',
       'definition': 'La sentencia `if` en Dart se utiliza para ejecutar un bloque de código solo si una condición es verdadera (`true`).\n\n'
           '¿Qué es un `if`? 🤔\n\n'
-          'Imagina que tienes un semáforo. Si la luz está en verde (`true`), puedes cruzar la calle. Si está en rojo (`false`), debes detenerte. En Dart, el `if` funciona de la misma manera: ejecuta un bloque de código solo si la condición es verdadera.\n\n'
+          'Imaginemos que tienes un semáforo. Si la luz está en verde (`true`), puedes cruzar la calle. Si está en rojo (`false`), debes detenerte. En Dart, el `if` funciona de la misma manera: ejecuta un bloque de código solo si la condición es verdadera.\n\n'
           'Por ejemplo, si escribes `if (edad >= 18) { print("Eres mayor de edad"); }`, el mensaje se mostrará solo si la condición `edad >= 18` es verdadera.\n\n'
           'El `if` es una de las estructuras de control más básicas y esenciales en programación.',
       'img_url': '',
@@ -550,7 +550,7 @@ void main() {
       'definition':
           'La sentencia `else` en Dart se utiliza junto con `if` para ejecutar un bloque de código cuando la condición del `if` es falsa (`false`).\n\n'
               '¿Qué es un `else`? 🤷‍♂️\n\n'
-              'Imagina que el semáforo está en rojo. Si no puedes cruzar (`if` es falso), entonces debes esperar (`else`). En Dart, el `else` te permite definir qué hacer cuando la condición del `if` no se cumple.\n\n'
+              'Imaginemos que el semáforo está en rojo. Si no puedes cruzar (`if` es falso), entonces debes esperar (`else`). En Dart, el `else` te permite definir qué hacer cuando la condición del `if` no se cumple.\n\n'
               'Por ejemplo, si escribes `if (edad >= 18) { print("Eres mayor de edad"); } else { print("Eres menor de edad"); }`, el mensaje "Eres menor de edad" se mostrará si la condición `edad >= 18` es falsa.\n\n'
               'El `else` es útil para manejar casos alternativos en tu código.',
       'img_url': '',
@@ -574,7 +574,7 @@ void main() {
       'module': 'Jr',
       'definition': 'La sentencia `else if` en Dart se utiliza para verificar múltiples condiciones en secuencia después de un `if`.\n\n'
           '¿Qué es un `else if`? 🤨\n\n'
-          'Imagina que tienes un semáforo con tres luces: verde, amarillo y rojo. Si no es verde (`if` es falso), verificas si es amarillo (`else if`). Si tampoco es amarillo, entonces es rojo (`else`). En Dart, el `else if` te permite manejar múltiples condiciones de manera ordenada.\n\n'
+          'Imaginemos que tienes un semáforo con tres luces: verde, amarillo y rojo. Si no es verde (`if` es falso), verificas si es amarillo (`else if`). Si tampoco es amarillo, entonces es rojo (`else`). En Dart, el `else if` te permite manejar múltiples condiciones de manera ordenada.\n\n'
           'Por ejemplo, si escribes `if (nota >= 90) { print("Excelente"); } else if (nota >= 70) { print("Aprobado"); } else { print("Reprobado"); }`, el programa evaluará cada condición en orden.\n\n'
           'El `else if` es ideal para manejar decisiones más complejas en tu código.',
       'img_url': '',
@@ -600,7 +600,7 @@ void main() {
       'module': 'Jr',
       'definition': 'El bucle `for` en Dart se utiliza para repetir un bloque de código un número específico de veces.\n\n'
           '¿Qué es un `for`? 🔄\n\n'
-          'Imagina que tienes una lista de tareas y quieres hacer cada una de ellas en orden. El bucle `for` es como un asistente que recorre la lista y realiza cada tarea por ti. En Dart, el `for` te permite repetir un bloque de código mientras una condición sea verdadera.\n\n'
+          'Imaginemos que tienes una lista de tareas y quieres hacer cada una de ellas en orden. El bucle `for` es como un asistente que recorre la lista y realiza cada tarea por ti. En Dart, el `for` te permite repetir un bloque de código mientras una condición sea verdadera.\n\n'
           'Por ejemplo, si escribes `for (int i = 0; i < 5; i++) { print("Iteración \$i"); }`, el mensaje se mostrará 5 veces, una por cada iteración del bucle.\n\n'
           'El `for` es una herramienta poderosa para automatizar tareas repetitivas.',
       'img_url': '',
@@ -620,7 +620,7 @@ void main() {
       'module': 'Jr',
       'definition': 'El bucle `while` en Dart se utiliza para repetir un bloque de código mientras una condición sea verdadera (`true`).\n\n'
           '¿Qué es un `while`? 🔄\n\n'
-          'Imagina que estás lavando platos. Mientras haya platos sucios (`condición verdadera`), sigues lavando. En Dart, el `while` funciona de la misma manera: repite un bloque de código mientras la condición sea verdadera.\n\n'
+          'Imaginemos que estás lavando platos. Mientras haya platos sucios (`condición verdadera`), sigues lavando. En Dart, el `while` funciona de la misma manera: repite un bloque de código mientras la condición sea verdadera.\n\n'
           'Por ejemplo, si escribes `while (contador < 5) { print("Contador: \$contador"); contador++; }`, el mensaje se mostrará hasta que `contador` sea 5.\n\n'
           'El `while` es útil cuando no sabes cuántas veces necesitas repetir una tarea.',
       'img_url': '',
@@ -643,7 +643,7 @@ void main() {
       'module': 'Jr',
       'definition': 'El bucle `do-while` en Dart es similar al `while`, pero garantiza que el bloque de código se ejecute al menos una vez, incluso si la condición es falsa.\n\n'
           '¿Qué es un `do-while`? 🔄\n\n'
-          'Imagina que estás probando un nuevo plato. Primero lo cocinas (`hacer`), y luego decides si te gusta (`condición`). En Dart, el `do-while` funciona de la misma manera: ejecuta el bloque de código al menos una vez y luego verifica la condición.\n\n'
+          'Imaginemos que estás probando un nuevo plato. Primero lo cocinas (`hacer`), y luego decides si te gusta (`condición`). En Dart, el `do-while` funciona de la misma manera: ejecuta el bloque de código al menos una vez y luego verifica la condición.\n\n'
           'Por ejemplo, si escribes `do { print("Contador: \$contador"); contador++; } while (contador < 5);`, el mensaje se mostrará al menos una vez, incluso si `contador` ya es 5.\n\n'
           'El `do-while` es útil cuando necesitas ejecutar un bloque de código al menos una vez antes de verificar la condición.',
       'img_url': '',
@@ -666,7 +666,7 @@ void main() {
       'module': 'Jr',
       'definition': 'La sentencia `switch case` en Dart se utiliza para ejecutar diferentes bloques de código dependiendo del valor de una variable.\n\n'
           '¿Qué es un `switch case`? 🎚️\n\n'
-          'Imagina que tienes un menú de opciones. Dependiendo de la opción que elijas, se ejecuta una acción diferente. En Dart, el `switch case` funciona de la misma manera: evalúa el valor de una variable y ejecuta el bloque de código correspondiente.\n\n'
+          'Imaginemos que tienes un menú de opciones. Dependiendo de la opción que elijas, se ejecuta una acción diferente. En Dart, el `switch case` funciona de la misma manera: evalúa el valor de una variable y ejecuta el bloque de código correspondiente.\n\n'
           'Por ejemplo, si escribes `switch (dia) { case 1: print("Lunes"); break; case 2: print("Martes"); break; }`, el programa mostrará el nombre del día correspondiente al valor de `dia`.\n\n'
           'El `switch case` es ideal para manejar múltiples casos de manera organizada.',
       'img_url': '',
@@ -828,7 +828,7 @@ flutter run
     // Detalle para 'Depuración de código en VS Code'
     await db.insert('detail', {
       'id': 32,
-      'subtopic_id': 's03t02', // Subtopic 'Depuración de código en VS Code'
+      'subtopic_id': 's03t02l02', // Subtopic 'Depuración de código en VS Code'
       'module': 'Jr',
       'definition': 'La depuración de código en VS Code es una de las características más poderosas para identificar y corregir errores en tu aplicación Flutter. VS Code ofrece herramientas integradas para depurar tu código de manera eficiente.\n\n'
           '¿Por qué es importante la depuración en VS Code? 🔍\n\n'
@@ -2483,7 +2483,7 @@ void main() {
       'definition':
           'En programación orientada a objetos (POO), podemos modelar un auto como un objeto con propiedades como color, marca y modelo. Un método para cambiar el color del auto permite modificar esta propiedad de manera dinámica.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que tienes un auto de juguete y decides pintarlo de otro color. En POO, esto se traduce en un método que actualiza la propiedad "color" del objeto "Auto". Por ejemplo, si el auto es rojo y lo cambias a azul, el método se encarga de hacer esa actualización.\n\n'
+              'Imaginemos que tienes un auto de juguete y decides pintarlo de otro color. En POO, esto se traduce en un método que actualiza la propiedad "color" del objeto "Auto". Por ejemplo, si el auto es rojo y lo cambias a azul, el método se encarga de hacer esa actualización.\n\n'
               'Este es un ejemplo práctico de cómo la POO nos permite manipular objetos del mundo real en código. ¡Es como ser el dueño de un taller de pintura de autos virtual! 🚗🎨',
       'img_url': '',
       'code_example': '''
@@ -2572,7 +2572,7 @@ void main() {
       'definition':
           'En POO, las interfaces son contratos que definen qué métodos debe implementar una clase. En Dart, no existen interfaces como tal, pero se pueden simular usando clases abstractas.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que estás construyendo un robot. Le das un manual de instrucciones que dice: "Debes poder caminar y hablar". Cualquier robot que siga este manual debe implementar esas acciones. En programación, las interfaces funcionan de manera similar: definen un conjunto de métodos que las clases deben implementar.\n\n'
+              'Imaginemos que estás construyendo un robot. Le das un manual de instrucciones que dice: "Debes poder caminar y hablar". Cualquier robot que siga este manual debe implementar esas acciones. En programación, las interfaces funcionan de manera similar: definen un conjunto de métodos que las clases deben implementar.\n\n'
               'Este enfoque es útil para garantizar que ciertas clases cumplan con un estándar. ¡Es como darle un contrato a tus objetos! 📜🤖',
       'img_url': '',
       'code_example': '''
@@ -2634,7 +2634,7 @@ void main() {
       'definition':
           'Las pruebas de widgets son esenciales para garantizar que la interfaz de usuario de tu aplicación funcione correctamente. Estas pruebas verifican que los widgets se rendericen y se comporten como se espera.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que estás construyendo una casa y quieres asegurarte de que todas las puertas y ventanas funcionen correctamente. Las pruebas de widgets son como un inspector que revisa cada parte de la casa para asegurarse de que todo esté en orden. En Flutter, este "inspector" es el `WidgetTester`, que te permite probar y validar tus widgets de manera automatizada.\n\n'
+              'Imaginemos que estás construyendo una casa y quieres asegurarte de que todas las puertas y ventanas funcionen correctamente. Las pruebas de widgets son como un inspector que revisa cada parte de la casa para asegurarse de que todo esté en orden. En Flutter, este "inspector" es el `WidgetTester`, que te permite probar y validar tus widgets de manera automatizada.\n\n'
               '¡Las pruebas de widgets son tu mejor aliado para evitar sorpresas desagradables en producción! 🛠️🏠',
       'img_url': '',
       'code_example': '''
@@ -2692,7 +2692,7 @@ void main() {
       'definition':
           'Las pruebas de interacción con widgets verifican cómo los widgets responden a las acciones del usuario, como toques, deslizamientos o entradas de texto.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que tienes una aplicación con un formulario. Quieres asegurarte de que, cuando el usuario escriba su nombre y presione un botón, el nombre se muestre correctamente en la pantalla. Las pruebas de interacción te permiten simular estas acciones y verificar que todo funcione como se espera.\n\n'
+              'Imaginemos que tienes una aplicación con un formulario. Quieres asegurarte de que, cuando el usuario escriba su nombre y presione un botón, el nombre se muestre correctamente en la pantalla. Las pruebas de interacción te permiten simular estas acciones y verificar que todo funcione como se espera.\n\n'
               '¡Estas pruebas son clave para garantizar una experiencia de usuario fluida y sin errores! 🖱️📱',
       'img_url': '',
       'code_example': '''
@@ -2726,7 +2726,7 @@ void main() {
       'definition':
           'Las pruebas unitarias son pruebas que verifican el comportamiento de una función o método específico en tu código. Son esenciales para garantizar que cada parte de tu aplicación funcione correctamente.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que estás construyendo un reloj. Las pruebas unitarias son como probar cada engranaje por separado para asegurarte de que funcione correctamente antes de ensamblar todo el reloj. En programación, esto significa probar funciones y métodos de manera aislada para detectar errores temprano.\n\n'
+              'Imaginemos que estás construyendo un reloj. Las pruebas unitarias son como probar cada engranaje por separado para asegurarte de que funcione correctamente antes de ensamblar todo el reloj. En programación, esto significa probar funciones y métodos de manera aislada para detectar errores temprano.\n\n'
               '¡Las pruebas unitarias son tu primera línea de defensa contra los bugs! 🐛🛡️',
       'img_url': '',
       'code_example': '''
@@ -2778,7 +2778,7 @@ void main() {
       'definition':
           'Las pruebas de funciones y métodos en Dart te permiten verificar que cada parte de tu lógica de negocio funcione correctamente. Esto incluye funciones simples, métodos de clases y más.\n\n'
               '¿No lo entendiste? 😅\n\n'
-              'Imagina que tienes una función que calcula el descuento de un producto. Con las pruebas unitarias, puedes verificar que la función devuelva el descuento correcto para diferentes precios y porcentajes. Esto te da confianza en que tu lógica es sólida y libre de errores.\n\n'
+              'Imaginemos que tienes una función que calcula el descuento de un producto. Con las pruebas unitarias, puedes verificar que la función devuelva el descuento correcto para diferentes precios y porcentajes. Esto te da confianza en que tu lógica es sólida y libre de errores.\n\n'
               '¡Prueba todo, desde las funciones más simples hasta las más complejas! 🧮🔍',
       'img_url': '',
       'code_example': '''
