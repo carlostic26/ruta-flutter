@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/progress/data/repository/progress_repository_impl.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
 //Este provider notifica al steper cualquier cambio que haya respecto al registro de un subtopic. Mostrará cambios en tiempo real en pantalla, para evitar el problema de tener que volver a estrar a subtopic screen para ver el steper completado.
 
@@ -28,7 +29,8 @@ class CompletedSubtopicsNotifier extends StateNotifier<List<String>> {
 // Proveedor para el repositorio de progreso
 final progressRepositoryProvider = Provider<ProgressRepository>((ref) {
   final subtopicRepository = ref.read(subtopicRepositoryProvider);
-  return ProgressRepositoryImpl(subtopicRepository);
+  final topicRepository = ref.read(topicRepositoryProvider);
+  return ProgressRepositoryImpl(subtopicRepository, topicRepository);
 });
 
 // Proveedor para el StateNotifier de subtopics completados

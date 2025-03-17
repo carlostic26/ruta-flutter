@@ -12,11 +12,6 @@ class RegisterScoreAfterDelayUseCase {
     required int level,
     required String topic,
   }) async {
-    /* 
-    // Iniciar un temporizador de 10 segundos
-    await Future.delayed(const Duration(seconds: 10)); */
-
-    // Registrar 2 puntos después de 10 segundos
     await scoreUseCases.add(subtopic, module, level, topic, 2);
   }
 }

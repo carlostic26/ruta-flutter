@@ -26,6 +26,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   sqflite_common: ^2.5.4
   easy_stepper: ^0.8.5
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:

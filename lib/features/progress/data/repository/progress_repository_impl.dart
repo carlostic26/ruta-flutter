@@ -3,14 +3,16 @@ import 'package:ruta_flutter/features/progress/data/datasources/progress_local_d
 import 'package:ruta_flutter/features/progress/data/model/progress_model.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:ruta_flutter/features/topic/domain/repositories/subtopic_repository.dart';
+import 'package:ruta_flutter/features/topic/domain/repositories/topic_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProgressRepositoryImpl implements ProgressRepository {
   final ProgressLocalDatabaseHelper _dbHelper = ProgressLocalDatabaseHelper();
-  final SubtopicRepository _subtopicRepository; // Declaración del campo
+  final SubtopicRepository _subtopicRepository;
+  final TopicRepository _topicRepository;
 
   // Constructor que inicializa _subtopicRepository
-  ProgressRepositoryImpl(this._subtopicRepository);
+  ProgressRepositoryImpl(this._subtopicRepository, this._topicRepository);
 
   Future<Database> get localDatabase async => await _dbHelper.getDatabase();
 
@@ -232,5 +234,28 @@ class ProgressRepositoryImpl implements ProgressRepository {
     final db = await localDatabase;
     final result = await db.query('progress', columns: ['topic_id']);
     return result.map((map) => map['topic_id'] as String).toList();
+  }
+
+  @override
+  Future<bool> isLevelCompleted(String module, int levelId) async {
+    // Obtener todos los topics del nivel
+    final topics = await _topicRepository.getTopics(levelId, module);
+
+    // Verificar si todos los topics están completados
+    for (final topic in topics) {
+      final isCompleted = await isTopicCompleted(module, levelId, topic.id!);
+      if (!isCompleted) {
+        return false; // Si algún topic no está completado, el nivel no está completado
+      }
+    }
+
+    return true; // Todos los topics están completados
+  }
+
+  @override
+  Future<List<int>> getAllCompletedLevels() async {
+    final db = await localDatabase;
+    final result = await db.query('progress', columns: ['level_id']);
+    return result.map((map) => map['level_id'] as int).toList();
   }
 }

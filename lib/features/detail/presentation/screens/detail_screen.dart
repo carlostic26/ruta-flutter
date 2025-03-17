@@ -7,6 +7,7 @@ import 'package:ruta_flutter/features/detail/presentation/state/provider/get_det
 import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
     as progress;
@@ -59,7 +60,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     }
 
     // Iniciar el temporizador
-    _timer = Timer(const Duration(seconds: 10), () async {
+    _timer = Timer(const Duration(seconds: 3), () async {
       try {
         // Registrar el puntaje y el progreso en la base de datos
         await progressUseCasesProvider.createProgressBySubtopic(
@@ -73,14 +74,20 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         // Notificar que el subtopic se completó
         completedSubtopicsNotifier.markSubtopicAsCompleted(subtopicId);
 
-        // verificar si el topic al que pertenece también está completado
+        // Verificar si el topic al que pertenece también está completado
         final completedTopicsNotifier =
             ref.read(completedTopicsProvider.notifier);
         await completedTopicsNotifier.checkAndUpdateTopicCompletion(
             topicId, module, levelId);
 
+        // Verificar si el nivel al que pertenece también está completado
+        final completedLevelsNotifier =
+            ref.read(completedLevelsProvider.notifier);
+        await completedLevelsNotifier.checkAndUpdateLevelCompletion(
+            levelId, module);
+
         print(
-            "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId");
+            "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId y nivel $levelId");
 
         // Mostrar un SnackBar después de registrar los puntos
         if (mounted) {

@@ -1,5 +1,3 @@
-// En el archivo donde tienes los casos de uso (progress_use_case_provider.dart)
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/progress/data/repository/progress_repository_impl.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
@@ -10,11 +8,13 @@ import 'package:ruta_flutter/features/progress/domain/use_cases/get_total_score_
 import 'package:ruta_flutter/features/progress/domain/use_cases/is_subtopic_completed_use_case.dart';
 import 'package:ruta_flutter/features/progress/domain/use_cases/is_topic_completed_use_case.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
 // Proveedor del repositorio de progreso
 final progressRepositoryProvider = Provider<ProgressRepository>((ref) {
   final subtopicRepository = ref.read(subtopicRepositoryProvider);
-  return ProgressRepositoryImpl(subtopicRepository);
+  final topicRepository = ref.read(topicRepositoryProvider);
+  return ProgressRepositoryImpl(subtopicRepository, topicRepository);
 });
 
 // Proveedor de los casos de uso
@@ -67,11 +67,9 @@ class CompletedTopicsUseCaseNotifier extends StateNotifier<List<String>> {
 
   Future<void> checkAndUpdateTopicCompletion(
       String topicId, String module, int levelId) async {
-    // Verificar si todos los subtopics del topic están completados
     final isCompleted =
         await _repository.isTopicCompleted(module, levelId, topicId);
 
-    // Actualizar el estado solo si es necesario
     if (isCompleted && !state.contains(topicId)) {
       state = [...state, topicId]; // Marcar el topic como completado
     } else if (!isCompleted && state.contains(topicId)) {

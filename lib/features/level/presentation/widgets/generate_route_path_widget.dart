@@ -4,7 +4,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/widgets/confeti_widget.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
 
 class GenerateLevelsRoutePathWidget extends ConsumerWidget {
@@ -21,12 +23,16 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     final getLevelUseCase = ref.read(getLevelUseCaseProvider);
     final moduleSelected = ref.watch(moduleProvider);
 
+    // Obtener la lista de niveles completados desde el provider
+    final completedLevels = ref.watch(completedLevelsProvider);
+
     // Posiciones fijas para el primer círculo y la primera línea
     double circleCenterScreen = widthScreen * 0.40;
     double circleLeftScreen = widthScreen * 0.10;
     double circleRightScreen = widthScreen * 0.10;
 
-    Color rutaColor = Colors.grey;
+    Color rutaColorLineDefault = Colors.grey;
+    Color rutaColorLineCompleted = Colors.green;
 
     // FutureBuilder para obtener la lista de niveles
     return FutureBuilder<List<LevelModel>>(
@@ -49,6 +55,9 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
 
         for (int i = 0; i < levelList.length; i++) {
           final level = levelList[i]; // Obtener el nivel actual
+
+          // Determinar si el nivel está completado
+          final isLevelCompleted = completedLevels.contains(level.order);
 
           // Calcular posición del círculo
           double circleX;
@@ -104,7 +113,11 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                   child: SizedBox(
                     height: heightScreen * 0.12,
                     child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(rutaColor, BlendMode.srcIn),
+                      colorFilter: isLevelCompleted
+                          ? ColorFilter.mode(
+                              rutaColorLineCompleted, BlendMode.srcIn)
+                          : ColorFilter.mode(
+                              rutaColorLineDefault, BlendMode.srcIn),
                       child: Image.asset('assets/icons/linea_asset.png'),
                     ),
                   ),
@@ -114,30 +127,42 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
           }
 
           // Añadir círculo
+          // Añadir círculo con animación de confeti
           widgets.add(
             Positioned(
               left: circleX,
               bottom: currentBottom,
-              child: AnimatedButton(
-                shape: BoxShape.circle,
-                height: heightScreen * 0.075,
-                width: heightScreen * 0.075,
-                color: const Color(0xFF2962FF),
-                onPressed: () {
-                  // Abrir el diálogo con la información del nivel
-                  showDialogLearning(context, level, ref);
-                },
-                enabled: true,
-                shadowDegree: ShadowDegree.light,
-                child: Text(
-                  (i + 1).toString(),
-                  style: const TextStyle(
-                    fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins',
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Animación de confeti (detrás del botón)
+                  if (isLevelCompleted)
+                    ConfettiAnimation(isCompleted: isLevelCompleted),
+
+                  // Botón circular
+                  AnimatedButton(
+                    shape: BoxShape.circle,
+                    height: heightScreen * 0.075,
+                    width: heightScreen * 0.075,
+                    color: isLevelCompleted
+                        ? Colors.green
+                        : const Color(0xFF2962FF),
+                    onPressed: () {
+                      showDialogLearning(context, level, ref);
+                    },
+                    enabled: true,
+                    shadowDegree: ShadowDegree.light,
+                    child: Text(
+                      (i + 1).toString(),
+                      style: const TextStyle(
+                        fontSize: 22,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
           );
@@ -173,7 +198,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
   }
 
   Future<dynamic> showDialogLearning(
-      BuildContext context, LevelModel level, ref) {
+      BuildContext context, LevelModel level, WidgetRef ref) {
     return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -211,8 +236,6 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                     displayFullTextOnTap:
                         true, // Muestra el texto completo al tocar
                   ),
-
-                  //Text(textAlign: TextAlign.justify, level.description!),
                 ),
                 Container(
                   alignment: Alignment.topCenter,
@@ -233,7 +256,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                         ),
                       ),
                       onPressed: () {
-                        ref.read(levelIdProvider.notifier).state = level.order;
+                        ref.read(levelIdProvider.notifier).state = level.order!;
                         ref.read(levelTitleProvider.notifier).state =
                             level.title!;
 

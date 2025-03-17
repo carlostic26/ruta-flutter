@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/topic/data/model/topic_model.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/subtopic_screen.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'; // Asegúrate de importar el provider de progreso
 
 class ItemTopicWidget extends ConsumerWidget {
   final TopicModel topic;
@@ -14,6 +15,12 @@ class ItemTopicWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Obtener la lista de topics completados
+    final completedTopics = ref.watch(completedTopicsProvider);
+
+    // Determinar si el topic actual está completado
+    final isCompleted = completedTopics.contains(topic.id);
+
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: GestureDetector(
@@ -29,7 +36,9 @@ class ItemTopicWidget extends ConsumerWidget {
           height: 50,
           width: 400,
           decoration: BoxDecoration(
-            color: const Color(0xFF2962FF),
+            color: isCompleted
+                ? Colors.green
+                : const Color(0xFF2962FF), // Cambiar color basado en el estado
             borderRadius: BorderRadius.circular(25),
           ),
           child: Padding(
@@ -39,10 +48,7 @@ class ItemTopicWidget extends ConsumerWidget {
               child: Text(
                 topic.title!,
                 style: const TextStyle(
-                    color: Colors.white,
-                    //fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins',
-                    fontSize: 12),
+                    color: Colors.white, fontFamily: 'Poppins', fontSize: 12),
               ),
             ),
           ),

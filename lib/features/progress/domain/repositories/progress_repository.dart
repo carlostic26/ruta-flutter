@@ -46,4 +46,7 @@ abstract class ProgressRepository {
   Future<List<String>> getAllCompletedSubtopics();
 
   Future<List<String>> getAllCompletedTopics();
+
+  Future<bool> isLevelCompleted(String module, int levelId);
+  Future<List<int>> getAllCompletedLevels();
 }

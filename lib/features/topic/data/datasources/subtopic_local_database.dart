@@ -645,7 +645,7 @@ class SubtopicLocalDatabaseHelper {
 
     await db.insert('subtopic', {
       'topic_id': 't01l07',
-      'id': 's02t0l07',
+      'id': 's02t01l07',
       'module': 'Jr',
       'title': 'Ventajas de usar POO',
     });

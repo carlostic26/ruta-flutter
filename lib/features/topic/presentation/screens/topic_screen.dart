@@ -31,6 +31,10 @@ class TopicScreen extends ConsumerWidget {
 
         final topicList = snapshot.data!;
 
+        final activeStep = topicList
+            .where((topic) => completedTopics.contains(topic.id))
+            .length;
+
         return Scaffold(
           appBar: AppBar(
             title: Text(
@@ -72,7 +76,7 @@ class TopicScreen extends ConsumerWidget {
                         activeStepBackgroundColor: Colors.grey,
                         finishedStepBackgroundColor: Colors.green,
                         stepRadius: 10,
-                        activeStep: completedTopics.length,
+                        activeStep: activeStep,
                         enableStepTapping: false,
                         direction: Axis.vertical,
                         steps: List.generate(
@@ -90,7 +94,7 @@ class TopicScreen extends ConsumerWidget {
                           ),
                         ),
                         onStepReached: (index) {},
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -115,7 +119,7 @@ class TopicScreen extends ConsumerWidget {
       },
     );
   }
-}
+} 
 
 /* class TopicScreen extends ConsumerWidget {
   const TopicScreen({super.key});
