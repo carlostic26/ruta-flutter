@@ -42,7 +42,7 @@ class InfoScoreWidget extends ConsumerWidget {
                 padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                 child: SizedBox(
                   height: 150,
-                  child: StatisticsScreen(scores: progressList),
+                  child: StatisticsScreen(progressListScores: progressList),
                 ),
               ),
               const Padding(

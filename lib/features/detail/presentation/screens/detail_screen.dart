@@ -9,6 +9,7 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_wi
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
     as progress;
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';

@@ -56,7 +56,7 @@ class DetailLocalDatabaseHelper {
       'subtopic_id': 's01t01l01', // Subtopic 'var'
       'module': 'Jr',
       'definition': 'La palabra clave `var` se utiliza para declarar una variable sin especificar su tipo explícitamente. El tipo se infiere en tiempo de compilación.\n\n'
-          '¿No lo entendiste? 😅\n\n'
+          'En otras palabras... 😅\n\n'
           'Imagínate que entras a una tienda y le dices al vendedor: “Quiero comprar algo, pero todavía no sé qué”. En lugar de forzarte a elegir de inmediato, el vendedor te deja agarrar lo que necesites y luego te cobra según el producto que elijas. Así funciona `var` en programación.\n\n'
           'Cuando usas `var`, le estás diciendo al compilador: “Voy a guardar algo aquí, pero ya verás de qué tipo es cuando lo asigne”. Por ejemplo, si escribes `var edad = 25`, el compilador automáticamente entiende que `edad` es un número entero (`int`). Si en cambio escribes `var nombre = "Carlos"`, sabe que es un `String`.\n\n'
           'Así que recuerda: `var` te da flexibilidad al inicio, pero sigue teniendo reglas. Úsalo sabiamente y deja que el compilador haga su magia. ✨',
@@ -2482,7 +2482,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'En programación orientada a objetos (POO), podemos modelar un auto como un objeto con propiedades como color, marca y modelo. Un método para cambiar el color del auto permite modificar esta propiedad de manera dinámica.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que tienes un auto de juguete y decides pintarlo de otro color. En POO, esto se traduce en un método que actualiza la propiedad "color" del objeto "Auto". Por ejemplo, si el auto es rojo y lo cambias a azul, el método se encarga de hacer esa actualización.\n\n'
               'Este es un ejemplo práctico de cómo la POO nos permite manipular objetos del mundo real en código. ¡Es como ser el dueño de un taller de pintura de autos virtual! 🚗🎨',
       'img_url': '',
@@ -2571,7 +2571,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'En POO, las interfaces son contratos que definen qué métodos debe implementar una clase. En Dart, no existen interfaces como tal, pero se pueden simular usando clases abstractas.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que estás construyendo un robot. Le das un manual de instrucciones que dice: "Debes poder caminar y hablar". Cualquier robot que siga este manual debe implementar esas acciones. En programación, las interfaces funcionan de manera similar: definen un conjunto de métodos que las clases deben implementar.\n\n'
               'Este enfoque es útil para garantizar que ciertas clases cumplan con un estándar. ¡Es como darle un contrato a tus objetos! 📜🤖',
       'img_url': '',
@@ -2633,7 +2633,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Las pruebas de widgets son esenciales para garantizar que la interfaz de usuario de tu aplicación funcione correctamente. Estas pruebas verifican que los widgets se rendericen y se comporten como se espera.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que estás construyendo una casa y quieres asegurarte de que todas las puertas y ventanas funcionen correctamente. Las pruebas de widgets son como un inspector que revisa cada parte de la casa para asegurarse de que todo esté en orden. En Flutter, este "inspector" es el `WidgetTester`, que te permite probar y validar tus widgets de manera automatizada.\n\n'
               '¡Las pruebas de widgets son tu mejor aliado para evitar sorpresas desagradables en producción! 🛠️🏠',
       'img_url': '',
@@ -2691,7 +2691,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Las pruebas de interacción con widgets verifican cómo los widgets responden a las acciones del usuario, como toques, deslizamientos o entradas de texto.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que tienes una aplicación con un formulario. Quieres asegurarte de que, cuando el usuario escriba su nombre y presione un botón, el nombre se muestre correctamente en la pantalla. Las pruebas de interacción te permiten simular estas acciones y verificar que todo funcione como se espera.\n\n'
               '¡Estas pruebas son clave para garantizar una experiencia de usuario fluida y sin errores! 🖱️📱',
       'img_url': '',
@@ -2725,7 +2725,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Las pruebas unitarias son pruebas que verifican el comportamiento de una función o método específico en tu código. Son esenciales para garantizar que cada parte de tu aplicación funcione correctamente.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que estás construyendo un reloj. Las pruebas unitarias son como probar cada engranaje por separado para asegurarte de que funcione correctamente antes de ensamblar todo el reloj. En programación, esto significa probar funciones y métodos de manera aislada para detectar errores temprano.\n\n'
               '¡Las pruebas unitarias son tu primera línea de defensa contra los bugs! 🐛🛡️',
       'img_url': '',
@@ -2777,7 +2777,7 @@ void main() {
       'module': 'Jr',
       'definition':
           'Las pruebas de funciones y métodos en Dart te permiten verificar que cada parte de tu lógica de negocio funcione correctamente. Esto incluye funciones simples, métodos de clases y más.\n\n'
-              '¿No lo entendiste? 😅\n\n'
+              'En otras palabras... 😅\n\n'
               'Imaginemos que tienes una función que calcula el descuento de un producto. Con las pruebas unitarias, puedes verificar que la función devuelva el descuento correcto para diferentes precios y porcentajes. Esto te da confianza en que tu lógica es sólida y libre de errores.\n\n'
               '¡Prueba todo, desde las funciones más simples hasta las más complejas! 🧮🔍',
       'img_url': '',
@@ -2847,7 +2847,7 @@ void main() {
     // Detalle para 'Subida de una aplicación a la App Store'
     await db.insert('detail', {
       'id': 99,
-      'subtopic_id': 's03t01l08',
+      'subtopic_id': 's03t01l09',
       'module': 'Jr',
       'definition':
           'Subir una aplicación a la App Store es el último paso para publicarla. Esto implica crear un registro en App Store Connect, archivar la aplicación en Xcode y subirla usando Xcode o Application Loader.\n\n'

@@ -7,7 +7,7 @@ import 'package:ruta_flutter/features/topic/data/datasources/topic_local_databas
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 11;
+  int dbVersion = 13;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;

@@ -4,8 +4,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/widgets/confeti_widget.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
 
@@ -25,6 +25,10 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
 
     // Obtener la lista de niveles completados desde el provider
     final completedLevels = ref.watch(completedLevelsProvider);
+
+    // Obtener el último nivel completado
+    final lastCompletedLevel =
+        ref.watch(completedLevelsProvider.notifier).getLastCompletedLevel();
 
     // Posiciones fijas para el primer círculo y la primera línea
     double circleCenterScreen = widthScreen * 0.40;
@@ -58,6 +62,9 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
 
           // Determinar si el nivel está completado
           final isLevelCompleted = completedLevels.contains(level.order);
+
+          // Determinar si este es el último nivel completado
+          final isLastCompletedLevel = lastCompletedLevel == level.order;
 
           // Calcular posición del círculo
           double circleX;
@@ -126,7 +133,6 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
             );
           }
 
-          // Añadir círculo
           // Añadir círculo con animación de confeti
           widgets.add(
             Positioned(
@@ -136,8 +142,8 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                 alignment: Alignment.center,
                 children: [
                   // Animación de confeti (detrás del botón)
-                  if (isLevelCompleted)
-                    ConfettiAnimation(isCompleted: isLevelCompleted),
+                  if (isLastCompletedLevel)
+                    ConfettiAnimation(isCompleted: isLastCompletedLevel),
 
                   // Botón circular
                   AnimatedButton(
@@ -169,6 +175,16 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
 
           // Actualizar posición para el siguiente círculo
           currentBottom += heightScreen * 0.10;
+
+          // Obtener el último nivel completado
+          // Limpiar el último nivel completado después de mostrar la animación
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (lastCompletedLevel != null) {
+              ref
+                  .read(completedLevelsProvider.notifier)
+                  .clearLastCompletedLevel();
+            }
+          });
         }
 
         // Calcular la altura total del Stack
@@ -196,82 +212,82 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
       },
     );
   }
+}
 
-  Future<dynamic> showDialogLearning(
-      BuildContext context, LevelModel level, WidgetRef ref) {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          backgroundColor: const Color.fromARGB(255, 30, 30, 30),
-          title: Center(
-            child: Text(
-              level.title!,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Poppins',
-              ),
+Future<dynamic> showDialogLearning(
+    BuildContext context, LevelModel level, WidgetRef ref) {
+  return showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return SimpleDialog(
+        backgroundColor: const Color.fromARGB(255, 30, 30, 30),
+        title: Center(
+          child: Text(
+            level.title!,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
             ),
           ),
-          children: <Widget>[
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 25),
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      TypewriterAnimatedText(
-                        level.description!,
-                        textStyle: const TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                        ),
-                        textAlign: TextAlign.justify,
-                        speed: const Duration(milliseconds: 50),
+        ),
+        children: <Widget>[
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 25),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      level.description!,
+                      textStyle: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'Poppins',
                       ),
-                    ],
-                    totalRepeatCount: 1, // Número de repeticiones
-                    displayFullTextOnTap:
-                        true, // Muestra el texto completo al tocar
-                  ),
+                      textAlign: TextAlign.justify,
+                      speed: const Duration(milliseconds: 50),
+                    ),
+                  ],
+                  totalRepeatCount: 1, // Número de repeticiones
+                  displayFullTextOnTap:
+                      true, // Muestra el texto completo al tocar
                 ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all<Color>(
-                          const Color(0xFF2962FF),
-                        ),
+              ),
+              Container(
+                alignment: Alignment.topCenter,
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStateProperty.all<Color>(
+                        const Color(0xFF2962FF),
                       ),
-                      child: const Text(
-                        'Continuar',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Poppins',
-                        ),
+                    ),
+                    child: const Text(
+                      'Continuar',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
                       ),
-                      onPressed: () {
-                        ref.read(levelIdProvider.notifier).state = level.order!;
-                        ref.read(levelTitleProvider.notifier).state =
-                            level.title!;
+                    ),
+                    onPressed: () {
+                      ref.read(levelIdProvider.notifier).state = level.order!;
+                      ref.read(levelTitleProvider.notifier).state =
+                          level.title!;
 
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const TopicScreen()),
-                        );
-                      }),
-                ),
-              ],
-            ),
-          ],
-        );
-      },
-    );
-  }
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TopicScreen()),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ],
+      );
+    },
+  );
 }

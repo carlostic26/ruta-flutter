@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// StateNotifier para manejar los niveles completados
 class CompletedLevelsNotifier extends StateNotifier<List<int>> {
   final ProgressRepository _repository;
+  final SharedPreferences _sharedPreferences;
 
-  CompletedLevelsNotifier(this._repository) : super([]) {
+  CompletedLevelsNotifier(this._repository, this._sharedPreferences)
+      : super([]) {
     _loadCompletedLevels();
   }
 
@@ -24,6 +25,8 @@ class CompletedLevelsNotifier extends StateNotifier<List<int>> {
     // Actualizar el estado solo si es necesario
     if (isCompleted && !state.contains(levelId)) {
       state = [...state, levelId]; // Marcar el nivel como completado
+      await _sharedPreferences.setInt(
+          'lastCompletedLevel', levelId); // Guardar el último nivel completado
     } else if (!isCompleted && state.contains(levelId)) {
       state = state
           .where((id) => id != levelId)
@@ -32,11 +35,14 @@ class CompletedLevelsNotifier extends StateNotifier<List<int>> {
 
     print("Verificando nivel $levelId: ¿Completado? $isCompleted");
   }
-}
 
-// Proveedor para el StateNotifier de niveles completados
-final completedLevelsProvider =
-    StateNotifierProvider<CompletedLevelsNotifier, List<int>>((ref) {
-  final progressRepository = ref.read(progressRepositoryProvider);
-  return CompletedLevelsNotifier(progressRepository);
-});
+  // Obtener el último nivel completado
+  int? getLastCompletedLevel() {
+    return _sharedPreferences.getInt('lastCompletedLevel');
+  }
+
+  // Limpiar el último nivel completado
+  Future<void> clearLastCompletedLevel() async {
+    await _sharedPreferences.remove('lastCompletedLevel');
+  }
+}
