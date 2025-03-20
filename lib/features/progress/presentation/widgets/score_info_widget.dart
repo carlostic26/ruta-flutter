@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/count_levels_use_case_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:ruta_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:ruta_flutter/features/progress/presentation/widgets/circular_progress_widget.dart';
 import 'package:ruta_flutter/features/progress/presentation/widgets/score_static_widget.dart';
 
-class InfoScoreWidget extends ConsumerWidget {
+class ScoreInfoWidget extends ConsumerWidget {
   final String module;
-  const InfoScoreWidget({
+  const ScoreInfoWidget({
     super.key,
     required this.module,
   });
@@ -15,6 +18,10 @@ class InfoScoreWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final getLevelProgress = ref.read(getLevelProgressProvider);
+    final getCircularProgressPercentageByModuleUseCase =
+        ref.read(getCircularProgressPercentageByModuleUseCaseProvider);
+    final actualLevelId = ref.watch(actualLevelIdProvider); // Nivel actual
+    final progressRepository = ref.read(progressRepositoryProvider);
 
     return FutureBuilder<List<double>>(
       future: _getProgressForLevels(module, getLevelProgress, ref),
@@ -27,89 +34,128 @@ class InfoScoreWidget extends ConsumerWidget {
           return const Center(child: Text('No hay datos disponibles.'));
         } else {
           final progressList = snapshot.data!;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  module,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: SizedBox(
-                  height: 150,
-                  child: StatisticsScreen(progressListScores: progressList),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Nivel Actual',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                        Text(
-                          'Nivel Actual',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Examen final:',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                        Text(
-                          'No iniciado',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          'Puntos acumulados:',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 14),
-                        ),
-                        Text(
-                          '135/800',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    Column(
-                      children: [
-                        Text(
-                          'Progreso',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Placeholder(),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const Divider()
-            ],
+          return FutureBuilder<double>(
+            future: getCircularProgressPercentageByModuleUseCase.call(module),
+            builder: (context, progressSnapshot) {
+              if (progressSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (progressSnapshot.hasError) {
+                return Center(child: Text('Error: ${progressSnapshot.error}'));
+              } else if (!progressSnapshot.hasData) {
+                return const Center(
+                    child: Text('No hay datos de progreso disponibles.'));
+              } else {
+                final progressPercentage = progressSnapshot.data!;
+                return FutureBuilder<Map<String, int>>(
+                  future:
+                      _getAccumulatedPoints(progressRepository, module, ref),
+                  builder: (context, pointsSnapshot) {
+                    if (pointsSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (pointsSnapshot.hasError) {
+                      return Center(
+                          child: Text('Error: ${pointsSnapshot.error}'));
+                    } else if (!pointsSnapshot.hasData) {
+                      return const Center(
+                          child: Text('No hay datos de puntos disponibles.'));
+                    } else {
+                      final pointsData = pointsSnapshot.data!;
+                      final userScore = pointsData['userScore']!;
+                      final maxScore = pointsData['maxScore']!;
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Text(
+                              module,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                            child: SizedBox(
+                              height: 150,
+                              child: StatisticsScoreWidget(
+                                  progressListScores: progressList),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(30, 10, 50, 10),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Nivel Actual',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    Text(
+                                      ' $actualLevelId',
+                                      style: const TextStyle(fontSize: 10),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      'Examen final:',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    const Text(
+                                      'No iniciado',
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      'Puntos acumulados:',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    Text(
+                                      '$userScore/$maxScore',
+                                      style: const TextStyle(fontSize: 10),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Progreso',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10),
+                                    ),
+                                    const SizedBox(
+                                      height: 12,
+                                    ),
+                                    CircularProgressWidget(
+                                        progress: progressPercentage),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Divider(),
+                        ],
+                      );
+                    }
+                  },
+                );
+              }
+            },
           );
         }
       },
@@ -134,5 +180,21 @@ class InfoScoreWidget extends ConsumerWidget {
     }
 
     return progressList;
+  }
+
+  Future<Map<String, int>> _getAccumulatedPoints(
+      ProgressRepository progressRepository, String module, ref) async {
+    final getUserTotalScoreByModuleUseCase =
+        ref.read(getUserTotalScoreByModuleUseCaseProvider);
+
+    final userScore = await getUserTotalScoreByModuleUseCase.call(module);
+    final totalSubtopics =
+        await progressRepository.countAllSubtopicsByModule(module);
+    final maxScore = totalSubtopics * 2; // Cada subtema vale 2 puntos
+
+    return {
+      'userScore': userScore,
+      'maxScore': maxScore,
+    };
   }
 }

@@ -20,12 +20,12 @@ class ProgressScoreScreen extends ConsumerWidget {
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
-              InfoScoreWidget(module: 'Jr'),
+              ScoreInfoWidget(module: 'Jr'),
               SizedBox(height: 20),
               SizedBox(height: 20),
-              InfoScoreWidget(module: 'Mid'),
+              ScoreInfoWidget(module: 'Mid'),
               SizedBox(height: 20),
-              InfoScoreWidget(module: 'Sr'),
+              ScoreInfoWidget(module: 'Sr'),
             ],
           ),
         ),

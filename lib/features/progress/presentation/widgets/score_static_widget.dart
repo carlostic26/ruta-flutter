@@ -1,50 +1,53 @@
 import 'package:flutter/material.dart';
 
-class StatisticsScreen extends StatelessWidget {
-  final List<double> scores;
+class StatisticsScoreWidget extends StatelessWidget {
+  final List<double> progressListScores;
 
-  const StatisticsScreen({
+  const StatisticsScoreWidget({
     super.key,
-    required this.scores,
+    required this.progressListScores,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200, // Altura fija para el gráfico
+      height: 200,
       child: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal, // Scroll horizontal
+              scrollDirection: Axis.horizontal,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: scores.map((score) {
-                  return Stack(alignment: Alignment.bottomCenter, children: [
-                    //sombra de fondo de la barra color oscuro
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5.0), // Espacio entre barras
-                      width: 20, // Ancho de cada barra
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade900,
-                        borderRadius: BorderRadius.circular(4.0),
+                children: progressListScores.map((score) {
+                  return Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      // Sombra de fondo de la barra (color oscuro)
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 5.0), // Espacio entre barras
+                        width: 20, // Ancho de cada barra
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade900,
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        height: 150, // Altura máxima de la barra
                       ),
-                      height: 150, // Altura de la barra
-                    ),
 
-                    //puntaje de barra en color azul
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 5.0), // Espacio entre barras
-                      width: 20,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(4.0),
+                      // Barra de progreso (color azul)
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 5.0), // Espacio entre barras
+                        width: 20,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        height: score * 150, // Altura proporcional al progreso
                       ),
-                      height: score * 10, // Altura de la barra (ajustada)
-                    ),
-                  ]);
+                    ],
+                  );
                 }).toList(),
               ),
             ),
@@ -53,7 +56,7 @@ class StatisticsScreen extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: List.generate(scores.length, (index) {
+              children: List.generate(progressListScores.length, (index) {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   width: 20,

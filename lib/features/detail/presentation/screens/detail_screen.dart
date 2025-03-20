@@ -47,7 +47,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
     // Obtener los parámetros necesarios
     final module = ref.read(moduleProvider);
-    final levelId = ref.read(levelIdProvider);
+    final levelId = ref.read(actualLevelIdProvider);
     final topicId = ref.read(topicIdProvider);
     final subtopicId = ref.read(subtopicIdProvider);
 

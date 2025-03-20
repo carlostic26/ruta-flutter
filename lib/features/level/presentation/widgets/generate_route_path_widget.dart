@@ -4,6 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
+import 'package:ruta_flutter/features/level/presentation/state/actual_level_state.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/widgets/confeti_widget.dart';
@@ -273,7 +274,9 @@ Future<dynamic> showDialogLearning(
                       ),
                     ),
                     onPressed: () {
-                      ref.read(levelIdProvider.notifier).state = level.order!;
+                      ref.read(actualLevelIdProvider.notifier).state =
+                          level.order!;
+                      // ref.read(actualLevelProvider.notifier).state = level.order!;
                       ref.read(levelTitleProvider.notifier).state =
                           level.title!;
 

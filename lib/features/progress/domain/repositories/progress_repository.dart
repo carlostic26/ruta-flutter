@@ -9,6 +9,8 @@ abstract class ProgressRepository {
     required int score,
   });
 
+  Future<int> getUserTotalScoreByModule(String module);
+
   Future<List<ProgressModel>> getAllModuleProgress(String module);
 
   Future<List<ProgressModel>> getAllLevelProgressByModule({
@@ -38,6 +40,8 @@ abstract class ProgressRepository {
     required int level,
   });
 
+  Future<int> countAllSubtopicsByModule(String module);
+
   Future<int> getCompletedSubtopicsByLevel({
     required String module,
     required int level,
@@ -49,4 +53,6 @@ abstract class ProgressRepository {
 
   Future<bool> isLevelCompleted(String module, int levelId);
   Future<List<int>> getAllCompletedLevels();
+
+  Future<double> getCircularProgressPercentageByModule(String module);
 }

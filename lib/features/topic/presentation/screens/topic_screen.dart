@@ -13,7 +13,7 @@ class TopicScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
-    final levelId = ref.watch(levelIdProvider);
+    final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(moduleProvider);
     final levelTitle = ref.watch(levelTitleProvider);
     final completedTopics = ref.watch(completedTopicsProvider);
@@ -127,7 +127,7 @@ class TopicScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
-    final levelId = ref.watch(levelIdProvider);
+    final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(moduleProvider);
     final levelTitle = ref.watch(levelTitleProvider);
     final isTopicCompletedUseCase = ref.read(isTopicCompletedUseCaseProvider);
