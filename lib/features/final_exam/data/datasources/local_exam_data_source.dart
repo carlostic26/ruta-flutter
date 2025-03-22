@@ -38,18 +38,14 @@ class LocalExamDataSource {
     ''');
   }
 
-  // Método genérico para ejecutar consultas
   Future<List<Map<String, dynamic>>> query(String table,
       {String? where, List<dynamic>? whereArgs}) async {
-    final db =
-        await getDatabase(); // Usar getDatabase() para asegurar que _database esté inicializado
+    final db = await getDatabase();
     return await db.query(table, where: where, whereArgs: whereArgs);
   }
 
-  // Método genérico para insertar datos
   Future<void> insert(String table, Map<String, dynamic> data) async {
-    final db =
-        await getDatabase(); // Usar getDatabase() para asegurar que _database esté inicializado
+    final db = await getDatabase();
     await db.insert(table, data, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 }

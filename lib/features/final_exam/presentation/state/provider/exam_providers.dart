@@ -56,10 +56,19 @@ class ExamNotifier extends StateNotifier<ExamState> {
 
   ExamNotifier(this.repository) : super(ExamState(questions: []));
 
-  // Cargar preguntas
   Future<void> loadQuestions(String moduleId) async {
-    final questions = await repository.getFinalExamQuestionsByModule(moduleId);
-    state = state.copyWith(questions: questions);
+    try {
+      final questions =
+          await repository.getFinalExamQuestionsByModule(moduleId);
+      if (questions.isNotEmpty) {
+        state = state.copyWith(questions: questions);
+        print('Preguntas cargadas: ${questions.length}');
+      } else {
+        print('No se encontraron preguntas para el módulo: $moduleId');
+      }
+    } catch (e) {
+      print('Error al cargar preguntas: $e');
+    }
   }
 
   // Guardar respuesta del usuario

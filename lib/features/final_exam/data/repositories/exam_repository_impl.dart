@@ -53,6 +53,11 @@ class ExamRepositoryImpl implements ExamRepository {
       whereArgs: [moduleId],
     );
 
+    if (rawQuestions.isEmpty) {
+      print(
+          'No se encontraron preguntas en la base de datos para el módulo: $moduleId');
+    }
+
     return rawQuestions.map((map) {
       return ExamQuestion(
         id: map['id'],
