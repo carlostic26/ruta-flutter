@@ -19,13 +19,19 @@ class ExamRepositoryImpl implements ExamRepository {
     if (rawQuestions.isEmpty) {
       print(
           'No se encontraron preguntas en la base de datos para el módulo: $moduleId');
+    } else {
+      print('Preguntas obtenidas para el módulo $moduleId:');
+      for (final question in rawQuestions) {
+        print(question);
+      }
     }
 
     return rawQuestions.map((map) {
       return ExamQuestion(
         id: map['id'],
         questionText: map['questionText'],
-        options: List<String>.from(map['options']),
+        options: List<String>.from(
+            (map['options'] as String).split(',')), // Convertir String a List
         correctAnswer: map['correctAnswer'],
       );
     }).toList();

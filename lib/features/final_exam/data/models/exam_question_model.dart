@@ -3,14 +3,14 @@ class ExamQuestionModel {
   final String questionText;
   final List<String> options;
   final String correctAnswer;
-  final String moduleId; // Agregar moduleId
+  final String moduleId;
 
   ExamQuestionModel({
     required this.id,
     required this.questionText,
     required this.options,
     required this.correctAnswer,
-    required this.moduleId, // Agregar moduleId
+    required this.moduleId,
   });
 
   // Convertir un Map a ExamQuestionModel
@@ -18,9 +18,9 @@ class ExamQuestionModel {
     return ExamQuestionModel(
       id: map['id'],
       questionText: map['questionText'],
-      options: List<String>.from(map['options']),
+      options: (map['options'] as String).split(','), // Convertir String a List
       correctAnswer: map['correctAnswer'],
-      moduleId: map['moduleId'], // Agregar moduleId
+      moduleId: map['moduleId'],
     );
   }
 
@@ -29,9 +29,9 @@ class ExamQuestionModel {
     return {
       'id': id,
       'questionText': questionText,
-      'options': options,
+      'options': options.join(','), // Convertir List a String
       'correctAnswer': correctAnswer,
-      'moduleId': moduleId, // Agregar moduleId
+      'moduleId': moduleId,
     };
   }
 }
