@@ -26,25 +26,4 @@ class SubtopicRepositoryImpl implements SubtopicRepository {
       );
     });
   }
-
-  @override
-  Future<int> countAllSubtopicsByModule(String module) async {
-    final db = await _database;
-
-    try {
-      // Consultar todos los subtopics del módulo
-      final maps = await db.query(
-        'subtopic',
-        where: 'module = ?',
-        whereArgs: [module],
-      );
-
-      // Retornar el número de subtopics (longitud de la lista de resultados)
-      return maps.length;
-    } catch (e) {
-      // Manejar errores (por ejemplo, problemas con la base de datos)
-      print('Error al contar subtopics: $e');
-      throw Exception('Error al contar subtopics para el módulo $module');
-    }
-  }
 }

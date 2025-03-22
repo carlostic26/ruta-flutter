@@ -70,7 +70,7 @@ class ScoreInfoWidget extends ConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.only(left: 30),
                             child: Text(
-                              module,
+                              '👨🏼‍💻$module',
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),

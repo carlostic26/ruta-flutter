@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/core/database/database_helper.dart';
 import 'package:ruta_flutter/core/theme/theme_manager.dart';
 import 'package:ruta_flutter/core/theme/theme_notifier.dart';
+import 'package:ruta_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
 import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/loading/presentation/screens/loading_screen.dart';
 import 'package:ruta_flutter/features/progress/data/datasources/progress_local_database.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocalDatabaseHelper().getDatabase();
   ProgressLocalDatabaseHelper().getDatabase;
+  LocalExamDataSource().getDatabase;
   // Inicializar SharedPreferences
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(

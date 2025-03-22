@@ -33,7 +33,7 @@ class DetailLocalDatabaseHelper {
       await insertDetailsJrLevel8(db);
       await insertDetailsJrLevel9(db);
     } catch (e) {
-      print("Error inserting details jr: $e");
+      //print("Error inserting details jr: $e");
     }
   }
 
@@ -45,7 +45,7 @@ class DetailLocalDatabaseHelper {
       await _insertDetailsJrTopic4Level1(db);
       await _insertDetailsJrTopic5Level1(db);
     } catch (e) {
-      print("Error inserting details jr level  1: $e");
+      //print("Error inserting details jr level  1: $e");
     }
   }
 

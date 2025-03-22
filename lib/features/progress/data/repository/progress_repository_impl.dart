@@ -139,10 +139,10 @@ class ProgressRepositoryImpl implements ProgressRepository {
       }
     }
 
-    print("Verificando subtopics del topic $topicId");
+    //print("Verificando subtopics del topic $topicId");
     for (final subtopic in subtopics) {
       final isCompleted = await isSubtopicCompleted(subtopic.id!);
-      print("En impl, Subtopic ${subtopic.id}: ¿Completado? $isCompleted");
+      //print("En impl, Subtopic ${subtopic.id}: ¿Completado? $isCompleted");
     }
 
     return true; // Todos los subtopics están completados
@@ -183,7 +183,6 @@ class ProgressRepositoryImpl implements ProgressRepository {
     return sortedLevels.map((level) => levelScores[level]!).toList();
   }
 
-  @override
   Future<List<int>> calculateCircularProgressByModule(String module) async {
     final db = await progressLocalDatabase;
 
@@ -293,6 +292,7 @@ class ProgressRepositoryImpl implements ProgressRepository {
 
   /// Retorna el número total de subtemas precargados para el módulo indicado.
   /// Se asume que en la tabla "subtopic" existe una columna "module" para filtrar.
+  @override
   Future<int> countAllSubtopicsByModule(String module) async {
     final db = await _localDatabase;
     final result = await db.rawQuery(
@@ -343,7 +343,7 @@ class ProgressRepositoryImpl implements ProgressRepository {
           ? result.first['totalScore'] as int
           : 0;
     } catch (e) {
-      print('Error al obtener el puntaje acumulado: $e');
+      //print('Error al obtener el puntaje acumulado: $e');
       throw Exception(
           'Error al obtener el puntaje acumulado para el módulo $module');
     }

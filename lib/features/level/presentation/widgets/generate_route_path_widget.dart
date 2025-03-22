@@ -4,7 +4,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
-import 'package:ruta_flutter/features/level/presentation/state/actual_level_state.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/widgets/confeti_widget.dart';

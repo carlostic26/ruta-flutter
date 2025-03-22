@@ -9,6 +9,11 @@ class ProgressScoreScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios)),
         centerTitle: true,
         title: const Text(
           'Mis puntajes',

@@ -7,7 +7,6 @@ import 'package:ruta_flutter/features/detail/presentation/state/provider/get_det
 import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
@@ -87,8 +86,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         await completedLevelsNotifier.checkAndUpdateLevelCompletion(
             levelId, module);
 
-        print(
-            "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId y nivel $levelId");
+        //print( "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId y nivel $levelId");
 
         // Mostrar un SnackBar después de registrar los puntos
         if (mounted) {
@@ -192,7 +190,6 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                         detail: detail,
                       ),
                       CodeDetailWidget(detail: detail),
-                      //TODO: Prueba el codigo. Este item es para copiar y pegar en la webview de dartpad lo del codigo anterior
                     ],
                   ),
                 ),

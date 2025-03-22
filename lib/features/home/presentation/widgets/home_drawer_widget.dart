@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/core/app_config.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
 import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -79,7 +80,13 @@ class HomeDrawer extends StatelessWidget {
             leading: const Icon(Icons.checklist_rtl),
             title: const Text('Examen Flutter Jr'),
             onTap: () {
-              // Navegar a otra pantalla
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ExamScreen(
+                          moduleId: 'Jr',
+                        )),
+              );
             },
           ),
           //TODO: segun el caso de uso que determine cuando el usuario haya terminado el modulo jr, se habilita el modulo mid
