@@ -8,8 +8,27 @@ class ResultItemWidget extends StatelessWidget {
   const ResultItemWidget({
     required this.question,
     required this.userAnswer,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
+
+  BoxDecoration _getOptionDecoration(bool isCorrect, bool isWrong) {
+    return BoxDecoration(
+      color: isCorrect
+          ? const Color.fromARGB(80, 76, 175, 79)
+          : isWrong
+              ? const Color.fromARGB(59, 255, 0, 38)
+              : null,
+      border: Border.all(
+        color: isCorrect
+            ? Colors.green
+            : isWrong
+                ? Colors.red
+                : Colors.grey[300]!,
+        width: 1,
+      ),
+      borderRadius: BorderRadius.circular(4),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +38,42 @@ class ResultItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(question.questionText),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                question.questionText,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
             ...question.options.map((option) {
-              final isCorrect = option == question.correctAnswer;
-              final isUserAnswer = option == userAnswer;
+              final optionLetter = option.split(')')[0].trim();
+              final isCorrect = optionLetter == question.correctAnswer;
+              final isWrong =
+                  optionLetter == userAnswer?.split(')')[0].trim() &&
+                      !isCorrect;
+              final decoration = _getOptionDecoration(
+                  isCorrect, isWrong); // Usa el método aquí
+
               return ListTile(
-                title: Text(option),
-                tileColor: isCorrect
-                    ? Colors.green[100]
-                    : isUserAnswer
-                        ? Colors.red[100]
-                        : null,
+                minTileHeight: 10,
+                title: Text(
+                  option,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isCorrect || isWrong ? Colors.white : null,
+                    fontWeight: isCorrect ? FontWeight.bold : null,
+                  ),
+                ),
+                tileColor: decoration.color, // Usa el color del BoxDecoration
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: decoration.border!.top.color,
+                    width: decoration.border!.top.width,
+                  ), // Usa el borde del BoxDecoration
+                  borderRadius: decoration.borderRadius!,
+                ),
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

@@ -28,16 +28,23 @@ class LocalExamDataSource {
   // Crear la tabla de preguntas y pre-cargar preguntas
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE $_tableName (
-        id TEXT PRIMARY KEY,
-        questionText TEXT,
-        options TEXT,
-        correctAnswer TEXT,
-        moduleId TEXT
-      )
-    ''');
+    CREATE TABLE $_tableName (
+      id TEXT PRIMARY KEY,
+      questionText TEXT,
+      options TEXT,
+      correctAnswer TEXT,
+      moduleId TEXT
+    )
+  ''');
 
-    // Pre-cargar preguntas
+    // Añade esta tabla nueva
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS user_answers (
+      questionId TEXT PRIMARY KEY,
+      selectedAnswer TEXT
+    )
+  ''');
+
     await _preloadQuestions(db);
   }
 

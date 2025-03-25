@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/core/app_config.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:ruta_flutter/features/home/presentation/screens/app_support.dart';
+import 'package:ruta_flutter/features/home/presentation/screens/usability_screen.dart';
 import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -73,7 +75,10 @@ class HomeDrawer extends StatelessWidget {
             leading: const Icon(Icons.volunteer_activism),
             title: const Text('Apoya la app'),
             onTap: () {
-              // Navegar a otra pantalla
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AppSupport()),
+              );
             },
           ),
           ListTile(
@@ -119,14 +124,20 @@ class HomeDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.psychology_alt),
             title: const Text('Usabilidad'),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const UsabilityScreen()),
+              );
+            },
           ),
           ListTile(
             leading: const Icon(Icons.info),
             title: const Text('Info de la app'),
             onTap: () {
               dialogVersion(context, 'Información',
-                  '${infoApp.nameApp} es una app desarrollada por TICnoticos para mostrar y evidenciar datos interesantes sobre el amplio mundo de la informática y la Programación. \n\nVersión: ${infoApp.versionApp}');
+                  '${infoApp.nameApp} es una guía definitiva para dominar el framework Flutter de manera estructurada. La app organiza el aprendizaje en niveles progresivos (Jr, Mid, Sr), con contenido práctico y evaluaciones que miden tu dominio real del desarrollo multiplataforma. \n\nVersión: ${infoApp.versionApp}');
             },
           ),
           ListTile(

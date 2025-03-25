@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/timer_widget.dart';
-import '../widgets/progress_widget.dart';
 
 class ExamScreen extends ConsumerStatefulWidget {
   final String moduleId;
@@ -26,150 +26,148 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
   }
 
   @override
+  void dispose() {
+    _pageController.dispose();
+    ref.read(examStateProvider.notifier).resetExamState();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final examState = ref.watch(examStateProvider);
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final screenSize = MediaQuery.of(context).size;
 
-    // Si no hay preguntas, mostrar un mensaje
     if (examState.questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(
-            title: const Text(
-          'Examen Final',
-          style: TextStyle(fontSize: 16),
-        )),
+        appBar: AppBar(title: const Text('Examen Final')),
         body: const Center(child: Text('No hay preguntas disponibles.')),
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Jr',
-          style: TextStyle(fontSize: 16),
-        ),
-        leading: IconButton(
-          iconSize: 30,
-          icon: const Icon(Icons.highlight_off, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          Row(
-            children: [
-              // Barra de progreso
-              Container(
-                height: 8, // Altura de la barra de progreso
-                width: screenWidth * 0.6, // Ancho de la barra de progreso
-                decoration: BoxDecoration(
-                  color: Colors.grey[200], // Color de fondo de la barra
-                  borderRadius: BorderRadius.circular(10), // Bordes redondeados
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10), // Bordes redondeados
-                  child: LinearProgressIndicator(
-                    value:
-                        (examState.currentQuestionIndex + 1) / 15, // Progreso
-                    backgroundColor: Colors.transparent, // Fondo transparente
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                        Colors.green), // Color de la barra de progreso
-                  ),
-                ),
-              ),
-
-              // Texto de progreso (ejemplo: 5/10)
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                child: Text(
-                  '${examState.currentQuestionIndex + 1}/15',
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(examStateProvider.notifier).resetExamState();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Jr'),
+          leading: IconButton(
+            icon: const Icon(Icons.highlight_off, color: Colors.white),
+            onPressed: () {
+              ref.read(examStateProvider.notifier).resetExamState();
+              Navigator.pop(context);
+            },
           ),
-        ],
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // Espacio en la parte superior para bajar el contenido
-              SizedBox(height: screenHeight * 0.1),
-
-              // Pregunta y opciones
-              Expanded(
-                child: PageView.builder(
-                  controller: _pageController,
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Deshabilitar el desplazamiento manual
-                  itemCount: examState.questions.length,
-                  itemBuilder: (context, index) {
-                    final question = examState.questions[index];
-                    return QuestionWidget(
-                      question: question,
-                      selectedAnswer: _selectedAnswer,
-                      onAnswerSelected: (answer) {
-                        setState(() {
-                          _selectedAnswer = answer;
-                        });
-                      },
-                    );
-                  },
-                ),
-              ),
-              // Botón "Continuar"
-              Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, screenHeight * 0.16),
-                child: SizedBox(
-                  width: screenWidth,
-                  height: screenHeight * 0.06,
-                  child: ElevatedButton(
-                    onPressed: _selectedAnswer == null
-                        ? null
-                        : () {
-                            ref.read(examStateProvider.notifier).saveAnswer(
-                                  examState
-                                      .questions[examState.currentQuestionIndex]
-                                      .id,
-                                  _selectedAnswer!,
-                                );
-                            ref.read(examStateProvider.notifier).nextQuestion();
-                            _pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                            setState(() {
-                              _selectedAnswer = null; // Reiniciar la selección
-                            });
-                          },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: _selectedAnswer == null
-                          ? Colors.grey // Color gris cuando está deshabilitado
-                          : Colors.blue, // Color azul cuando está habilitado
-                      foregroundColor: Colors.white, // Color del texto
+          actions: [
+            Row(
+              children: [
+                Container(
+                  height: 8,
+                  width: screenSize.width * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: LinearProgressIndicator(
+                      value: (examState.currentQuestionIndex + 1) /
+                          examState.questions.length,
+                      backgroundColor: Colors.transparent,
+                      valueColor:
+                          const AlwaysStoppedAnimation<Color>(Colors.green),
                     ),
-                    child: const Text('Continuar'),
                   ),
                 ),
-              ),
-            ],
-          ),
-          // Temporizador posicionado en la parte superior
-          Positioned(
-            top: screenHeight * 0.065,
-            left: screenWidth * 0.42,
-            child: TimerWidget(
-              duration: 20 * 15,
-              onTimerEnd: () {
-                // Lógica cuando el tiempo se acaba
-              },
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    '${examState.currentQuestionIndex + 1}/${examState.questions.length}',
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                SizedBox(height: screenSize.height * 0.1),
+                Expanded(
+                  child: PageView.builder(
+                    controller: _pageController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: examState.questions.length,
+                    itemBuilder: (context, index) {
+                      return QuestionWidget(
+                        question: examState.questions[index],
+                        selectedAnswer: _selectedAnswer,
+                        onAnswerSelected: (answer) =>
+                            setState(() => _selectedAnswer = answer),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.fromLTRB(10, 10, 10, screenSize.height * 0.16),
+                  child: SizedBox(
+                    width: screenSize.width,
+                    height: screenSize.height * 0.06,
+                    child: ElevatedButton(
+                      onPressed: _selectedAnswer == null
+                          ? null
+                          : () => _handleAnswer(examState),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            _selectedAnswer == null ? Colors.grey : Colors.blue,
+                        foregroundColor: Colors.white,
+                      ),
+                      child: Text(
+                        examState.currentQuestionIndex + 1 ==
+                                examState.questions.length
+                            ? 'Finalizar'
+                            : 'Continuar',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              top: screenSize.height * 0.065,
+              left: screenSize.width * 0.42,
+              child: const TimerWidget(),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void _handleAnswer(ExamState examState) {
+    ref.read(examStateProvider.notifier).saveAnswer(
+          examState.questions[examState.currentQuestionIndex].id,
+          _selectedAnswer!,
+        );
+
+    if (examState.currentQuestionIndex + 1 == examState.questions.length) {
+      ref.read(examStateProvider.notifier).finishExamEarly();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ResultsScreen()),
+      );
+    } else {
+      ref.read(examStateProvider.notifier).nextQuestion();
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+      setState(() => _selectedAnswer = null);
+    }
   }
 }

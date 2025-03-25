@@ -1,57 +1,89 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 
-class TimerWidget extends StatefulWidget {
-  final int duration; // Dur
-  final VoidCallback? onTimerEnd;
-
-  const TimerWidget({required this.duration, this.onTimerEnd, super.key});
+class TimerWidget extends ConsumerStatefulWidget {
+  const TimerWidget({super.key});
 
   @override
-  _TimerWidgetState createState() => _TimerWidgetState();
+  ConsumerState<TimerWidget> createState() => _TimerWidgetState();
 }
 
-class _TimerWidgetState extends State<TimerWidget> {
+class _TimerWidgetState extends ConsumerState<TimerWidget> {
   late int _remainingTime;
+  Timer? _timer; // Añade esta línea
 
   @override
   void initState() {
     super.initState();
-    _remainingTime = widget.duration;
+    _remainingTime = ExamNotifier.totalExamDuration;
     _startTimer();
   }
 
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancela el timer al destruir el widget
+    super.dispose();
+  }
+
   void _startTimer() {
-    Future.delayed(const Duration(seconds: 1), () {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) return;
       if (_remainingTime > 0) {
-        setState(() {
-          _remainingTime--;
-        });
-        _startTimer();
+        setState(() => _remainingTime--);
       } else {
-        widget.onTimerEnd?.call();
+        _timer?.cancel();
+        _onTimerEnd();
       }
     });
   }
 
-  // Método para formatear el tiempo en minutos y segundos
+  void _onTimerEnd() {
+    if (!mounted) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: const Text("¡Tiempo agotado!"),
+        content: const Text("Se evaluarán las respuestas ingresadas."),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              ref.read(examStateProvider.notifier).finishExamByTime();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ResultsScreen()),
+                );
+              });
+            },
+            child: const Text("Ver resultados"),
+          ),
+        ],
+      ),
+    );
+  }
+
   String _formatTime(int seconds) {
-    int minutes = seconds ~/ 60; // Obtener los minutos
-    int remainingSeconds = seconds % 60; // Obtener los segundos restantes
-    // Formatear como "mm:ss"
+    final minutes = seconds ~/ 60;
+    final remainingSeconds = seconds % 60;
     return '$minutes:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
-    // Calcular el progreso (valor entre 0.0 y 1.0)
-    double progress = _remainingTime / widget.duration;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final progress = _remainingTime / ExamNotifier.totalExamDuration;
+    final screenWidth = MediaQuery.of(context).size.width;
 
     return Stack(
       alignment: Alignment.center,
       children: [
-        // CircularProgressIndicator que se pinta en retroceso
         SizedBox(
           width: screenWidth * 0.17,
           height: screenWidth * 0.17,
@@ -61,15 +93,13 @@ class _TimerWidgetState extends State<TimerWidget> {
               color: Color.fromARGB(255, 25, 25, 28),
             ),
             child: CircularProgressIndicator(
-              value: progress, // Valor del progreso
-              backgroundColor: Colors.grey[300], // Color de fondo del círculo
-              valueColor: const AlwaysStoppedAnimation<Color>(
-                  Colors.blue), // Color del progreso
-              strokeWidth: 8, // Grosor de la línea
+              value: progress,
+              backgroundColor: Colors.grey[300],
+              valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+              strokeWidth: 8,
             ),
           ),
         ),
-        // Texto del temporizador centrado
         Text(
           _formatTime(_remainingTime),
           style: const TextStyle(

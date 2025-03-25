@@ -26,26 +26,29 @@ class ExamState {
   final Map<String, String> userAnswers;
   final int currentQuestionIndex;
   final bool isExamFinished;
+  final bool isTimeOver;
 
   ExamState({
     required this.questions,
     this.userAnswers = const {},
     this.currentQuestionIndex = 0,
     this.isExamFinished = false,
+    this.isTimeOver = false,
   });
 
-  // Método copyWith
   ExamState copyWith({
     List<ExamQuestion>? questions,
     Map<String, String>? userAnswers,
     int? currentQuestionIndex,
     bool? isExamFinished,
+    bool? isTimeOver,
   }) {
     return ExamState(
       questions: questions ?? this.questions,
       userAnswers: userAnswers ?? this.userAnswers,
       currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
       isExamFinished: isExamFinished ?? this.isExamFinished,
+      isTimeOver: isTimeOver ?? this.isTimeOver,
     );
   }
 }
@@ -53,6 +56,10 @@ class ExamState {
 // Notifier para manejar el estado del examen
 class ExamNotifier extends StateNotifier<ExamState> {
   final ExamRepositoryImpl repository;
+
+  static const int secondsPerQuestion = 20;
+  static const int totalQuestions = 15;
+  static const int totalExamDuration = secondsPerQuestion * totalQuestions;
 
   ExamNotifier(this.repository) : super(ExamState(questions: []));
 
@@ -62,23 +69,18 @@ class ExamNotifier extends StateNotifier<ExamState> {
           await repository.getFinalExamQuestionsByModule(moduleId);
       if (questions.isNotEmpty) {
         state = state.copyWith(questions: questions);
-        print('Preguntas cargadas: ${questions.length}');
-      } else {
-        print('No se encontraron preguntas para el módulo: $moduleId');
       }
     } catch (e) {
       print('Error al cargar preguntas: $e');
     }
   }
 
-  // Guardar respuesta del usuario
   void saveAnswer(String questionId, String selectedAnswer) {
     final updatedAnswers = Map<String, String>.from(state.userAnswers)
       ..[questionId] = selectedAnswer;
     state = state.copyWith(userAnswers: updatedAnswers);
   }
 
-  // Cambiar a la siguiente pregunta
   void nextQuestion() {
     if (state.currentQuestionIndex < state.questions.length - 1) {
       state =
@@ -86,5 +88,47 @@ class ExamNotifier extends StateNotifier<ExamState> {
     } else {
       state = state.copyWith(isExamFinished: true);
     }
+  }
+
+  void finishExamByTime() {
+    final updatedAnswers = Map<String, String>.from(state.userAnswers);
+
+    for (final question in state.questions) {
+      if (!updatedAnswers.containsKey(question.id)) {
+        updatedAnswers[question.id] = ""; // Marcar como incorrecta
+      }
+    }
+
+    state = state.copyWith(
+      userAnswers: updatedAnswers,
+      isExamFinished: true,
+      isTimeOver: true,
+    );
+  }
+
+  void finishExamEarly() {
+    final updatedAnswers = Map<String, String>.from(state.userAnswers);
+
+    // Marcar preguntas no respondidas como vacías
+    for (final question in state.questions) {
+      if (!updatedAnswers.containsKey(question.id)) {
+        updatedAnswers[question.id] = "";
+      }
+    }
+
+    state = state.copyWith(
+      userAnswers: updatedAnswers,
+      isExamFinished: true,
+    );
+  }
+
+  void resetExamState() {
+    state = ExamState(
+      questions: state.questions,
+      userAnswers: {},
+      currentQuestionIndex: 0,
+      isExamFinished: false,
+      isTimeOver: false,
+    );
   }
 }

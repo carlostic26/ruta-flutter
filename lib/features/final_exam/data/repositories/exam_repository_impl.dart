@@ -1,4 +1,6 @@
 import 'package:ruta_flutter/features/final_exam/domain/entities/exam_question.dart';
+import 'package:ruta_flutter/features/final_exam/domain/entities/exam_result.dart';
+import 'package:ruta_flutter/features/final_exam/domain/entities/user_answer.dart';
 import 'package:ruta_flutter/features/final_exam/domain/repositories/exam_repository.dart';
 import '../datasources/local_exam_data_source.dart';
 
@@ -57,5 +59,29 @@ class ExamRepositoryImpl implements ExamRepository {
     );
 
     return rawQuestions.map((map) => map['correctAnswer'] as String).toList();
+  }
+
+  @override
+  Future<ExamResult> calculateExamResult(List<UserAnswer> userAnswers) async {
+    final questionIds = userAnswers.map((e) => e.questionId).toList();
+    final correctAnswers = await getCorrectAnswers(questionIds);
+
+    int correct = 0, incorrect = 0, unanswered = 0;
+
+    for (final userAnswer in userAnswers) {
+      if (userAnswer.selectedAnswer.isEmpty) {
+        unanswered++;
+      } else if (correctAnswers.contains(userAnswer.selectedAnswer)) {
+        correct++;
+      } else {
+        incorrect++;
+      }
+    }
+
+    return ExamResult(
+      correctAnswers: correct,
+      incorrectAnswers: incorrect,
+      unanswered: unanswered,
+    );
   }
 }

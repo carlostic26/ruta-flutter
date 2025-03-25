@@ -60,7 +60,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     }
 
     // Iniciar el temporizador
-    _timer = Timer(const Duration(seconds: 3), () async {
+    _timer = Timer(const Duration(seconds: 8), () async {
       try {
         // Registrar el puntaje y el progreso en la base de datos
         await progressUseCasesProvider.createProgressBySubtopic(
@@ -86,8 +86,6 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         await completedLevelsNotifier.checkAndUpdateLevelCompletion(
             levelId, module);
 
-        //print( "En detail screen, Subtopic $subtopicId completado. Verificando topic $topicId y nivel $levelId");
-
         // Mostrar un SnackBar después de registrar los puntos
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -96,7 +94,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                 '¡+2 puntos acumulados! Sigue repasando temas.',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              duration: Duration(seconds: 3), // Duración del SnackBar
+              duration: Duration(seconds: 3),
             ),
           );
         }
