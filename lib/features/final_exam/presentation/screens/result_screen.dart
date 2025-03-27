@@ -14,6 +14,7 @@ class ResultsScreen extends ConsumerStatefulWidget {
 class _ResultsScreenState extends ConsumerState<ResultsScreen> {
   late Future<bool> _loadingFuture;
   int _correctAnswersCount = 0;
+  double _progressValue = 0.0;
 
   @override
   void initState() {
@@ -21,17 +22,34 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
     _loadingFuture = _calculateResults();
   }
 
+  @override
+  void dispose() {
+    _loadingFuture.ignore();
+    super.dispose();
+  }
+
   Future<bool> _calculateResults() async {
-    await Future.delayed(const Duration(seconds: 4));
-    final examState = ref.read(examStateProvider);
-    _correctAnswersCount = examState.userAnswers.entries.where((entry) {
-      final question = examState.questions.firstWhere(
-        (q) => q.id == entry.key,
-        orElse: () => throw Exception("Pregunta no encontrada"),
-      );
-      return entry.value == question.correctAnswer;
-    }).length;
-    return true;
+    try {
+      await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return false;
+
+      final examState = ref.read(examStateProvider);
+
+      _correctAnswersCount = examState.questions
+          .where((question) =>
+              examState.userAnswers[question.id] == question.correctAnswer)
+          .length;
+
+      // Calcular el porcentaje de respuestas correctas
+      _progressValue = _correctAnswersCount / examState.questions.length;
+
+      print(
+          'Resultado calculado: $_correctAnswersCount/${examState.questions.length}');
+      return true;
+    } catch (e) {
+      print('Error calculando resultados: $e');
+      return false;
+    }
   }
 
   @override
@@ -42,9 +60,13 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        centerTitle: true,
         title: const Text(
           'Resultados',
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -86,48 +108,127 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
           ),
         ],
       ),
-      body: FutureBuilder(
-        future: _loadingFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                Positioned(
-                  top: heightScreen * 0.105,
-                  child: Lottie.asset(
-                    'assets/animations/funny_loading.json',
-                    width: widthScreen,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Positioned(
-                  top: heightScreen * 0.43, // Ajusta este valor según necesites
-                  child: Text(
-                    'Calculando tu puntuación...',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800]),
-                  ),
-                ),
-              ],
-            );
-          }
+      body: Column(
+        children: [
+          FutureBuilder(
+            future: _loadingFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: heightScreen * 0.105,
+                      child: Lottie.asset(
+                        'assets/animations/funny_loading.json',
+                        width: widthScreen,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: heightScreen * 0.43,
+                      child: Text(
+                        'Calculando tu puntuación...',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[800]),
+                      ),
+                    ),
+                  ],
+                );
+              }
 
-          return ListView.builder(
-            itemCount: examState.questions.length,
-            itemBuilder: (context, index) {
-              final question = examState.questions[index];
-              final userAnswer = examState.userAnswers[question.id];
-              return ResultItemWidget(
-                question: question,
-                userAnswer: userAnswer,
+              return Expanded(
+                child: Column(
+                  children: [
+                    // Circular Progress Indicator
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: CircularProgressIndicator(
+                              value: _progressValue,
+                              strokeWidth: 12,
+                              backgroundColor: Colors.grey[300],
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                _progressValue >= 0.7
+                                    ? Colors.green
+                                    : _progressValue >= 0.4
+                                        ? Colors.orange
+                                        : Colors.red,
+                              ),
+                            ),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '${(_progressValue * 100).toStringAsFixed(0)}%',
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '${_correctAnswersCount}/${examState.questions.length}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Texto de resultado
+                    Text(
+                      _getResultText(_progressValue),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: _progressValue >= 0.7
+                            ? Colors.green
+                            : _progressValue >= 0.4
+                                ? Colors.orange
+                                : Colors.red,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Lista de resultados
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: examState.questions.length,
+                        itemBuilder: (context, index) {
+                          final question = examState.questions[index];
+                          final userAnswer = examState.userAnswers[question.id];
+                          return ResultItemWidget(
+                            question: question,
+                            userAnswer: userAnswer,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
-          );
-        },
+          ),
+        ],
       ),
     );
+  }
+
+  String _getResultText(double progress) {
+    if (progress >= 0.9) return '¡Excelente!';
+    if (progress >= 0.7) return '¡Muy bien!';
+    if (progress >= 0.5) return 'Buen trabajo';
+    if (progress >= 0.3) return 'Puedes mejorar';
+    return 'Sigue practicando';
   }
 }

@@ -41,40 +41,40 @@ class QuestionWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          // Opciones de respuesta
+          // Opciones de respuesta modificadas
           ...question.options.map((option) {
+            // Extrae solo la letra de la opción (A, B, C, D)
+            final optionLetter = option.split(')')[0].trim();
+            // Extrae solo la letra de la respuesta seleccionada (si existe)
+            final selectedLetter = selectedAnswer?.split(')')[0].trim();
+
             return Container(
-              margin:
-                  const EdgeInsets.only(bottom: 10), // Espacio entre opciones
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
-                color: selectedAnswer == option
-                    ? Colors.blue
-                        .withOpacity(0.2) // Fondo azul si está seleccionada
-                    : Colors
-                        .transparent, // Sin color de fondo si no está seleccionada
+                color: selectedLetter == optionLetter
+                    ? Colors.blue.withOpacity(0.2)
+                    : Colors.transparent,
                 border: Border.all(
-                  color: Colors.grey, // Color del borde
-                  width: 1.0, // Grosor del borde
+                  color: Colors.grey,
+                  width: 1.0,
                 ),
-                borderRadius: BorderRadius.circular(20), // Bordes redondeados
+                borderRadius: BorderRadius.circular(20),
               ),
               child: RadioListTile<String>(
                 title: Text(
                   option,
                   style: const TextStyle(fontSize: 16),
                 ),
-                value: option,
-                groupValue: selectedAnswer,
+                value: optionLetter, // Envía solo la letra (A, B, C, D)
+                groupValue: selectedLetter, // Compara solo las letras
                 onChanged: (value) {
-                  onAnswerSelected(value!);
+                  onAnswerSelected(option); // Envía la opción completa
                 },
-                controlAffinity:
-                    ListTileControlAffinity.trailing, // Radio a la derecha
-                contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16), // Padding interno
-                tileColor: Colors.transparent, // Sin color de fondo
+                controlAffinity: ListTileControlAffinity.trailing,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                tileColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Bordes redondeados
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             );

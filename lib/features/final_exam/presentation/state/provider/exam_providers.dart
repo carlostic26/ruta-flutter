@@ -76,8 +76,10 @@ class ExamNotifier extends StateNotifier<ExamState> {
   }
 
   void saveAnswer(String questionId, String selectedAnswer) {
+    // Extrae solo la letra (primer carácter antes del ')')
+    final cleanedAnswer = selectedAnswer.split(')')[0].trim();
     final updatedAnswers = Map<String, String>.from(state.userAnswers)
-      ..[questionId] = selectedAnswer;
+      ..[questionId] = cleanedAnswer;
     state = state.copyWith(userAnswers: updatedAnswers);
   }
 
@@ -95,7 +97,7 @@ class ExamNotifier extends StateNotifier<ExamState> {
 
     for (final question in state.questions) {
       if (!updatedAnswers.containsKey(question.id)) {
-        updatedAnswers[question.id] = ""; // Marcar como incorrecta
+        updatedAnswers[question.id] = ""; // Respuesta vacía para no respondidas
       }
     }
 
@@ -106,10 +108,9 @@ class ExamNotifier extends StateNotifier<ExamState> {
     );
   }
 
-  void finishExamEarly() {
+  Future<void> finishExamEarly() async {
     final updatedAnswers = Map<String, String>.from(state.userAnswers);
 
-    // Marcar preguntas no respondidas como vacías
     for (final question in state.questions) {
       if (!updatedAnswers.containsKey(question.id)) {
         updatedAnswers[question.id] = "";

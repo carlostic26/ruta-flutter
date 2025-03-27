@@ -15,7 +15,7 @@ void main() async {
   ProgressLocalDatabaseHelper().getDatabase;
   LocalExamDataSource().getDatabase;
   LocalExamDataSource().printAllQuestions();
-  // Inicializar SharedPreferences
+
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(ProviderScope(
     overrides: [

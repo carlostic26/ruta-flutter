@@ -149,7 +149,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
     );
   }
 
-  void _handleAnswer(ExamState examState) {
+  void _handleAnswer(ExamState examState) async {
     ref.read(examStateProvider.notifier).saveAnswer(
           examState.questions[examState.currentQuestionIndex].id,
           _selectedAnswer!,
@@ -157,10 +157,12 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
 
     if (examState.currentQuestionIndex + 1 == examState.questions.length) {
       ref.read(examStateProvider.notifier).finishExamEarly();
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const ResultsScreen()),
-      );
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ResultsScreen()),
+        );
+      }
     } else {
       ref.read(examStateProvider.notifier).nextQuestion();
       _pageController.nextPage(

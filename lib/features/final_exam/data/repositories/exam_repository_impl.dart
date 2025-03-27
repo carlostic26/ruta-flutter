@@ -21,22 +21,27 @@ class ExamRepositoryImpl implements ExamRepository {
     if (rawQuestions.isEmpty) {
       print(
           'No se encontraron preguntas en la base de datos para el módulo: $moduleId');
-    } else {
-      print('Preguntas obtenidas para el módulo $moduleId:');
-      for (final question in rawQuestions) {
-        print(question);
-      }
+      return [];
     }
 
-    return rawQuestions.map((map) {
+    // Convertir todas las preguntas a objetos ExamQuestion
+    final allQuestions = rawQuestions.map((map) {
       return ExamQuestion(
         id: map['id'],
         questionText: map['questionText'],
-        options: List<String>.from(
-            (map['options'] as String).split(',')), // Convertir String a List
+        options: List<String>.from((map['options'] as String).split(',')),
         correctAnswer: map['correctAnswer'],
       );
     }).toList();
+
+    // Si hay 15 o menos preguntas, devolver todas
+    if (allQuestions.length <= 5) {
+      return allQuestions;
+    }
+
+    // Mezclar las preguntas aleatoriamente y tomar las primeras 15
+    final shuffledQuestions = List<ExamQuestion>.from(allQuestions)..shuffle();
+    return shuffledQuestions.take(5).toList();
   }
 
   @override
