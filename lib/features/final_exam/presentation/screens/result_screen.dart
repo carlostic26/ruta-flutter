@@ -108,118 +108,116 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          FutureBuilder(
-            future: _loadingFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState != ConnectionState.done) {
-                return Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      top: heightScreen * 0.105,
+      body: FutureBuilder(
+        future: _loadingFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return SizedBox(
+              height: heightScreen,
+              width: widthScreen,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    top: heightScreen * 0.105,
+                    child: SizedBox(
+                      width: widthScreen,
+                      height: heightScreen * 0.3,
                       child: Lottie.asset(
                         'assets/animations/funny_loading.json',
-                        width: widthScreen,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
-                    Positioned(
-                      top: heightScreen * 0.43,
-                      child: Text(
-                        'Calculando tu puntuación...',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[800]),
+                  ),
+                  Positioned(
+                    top: heightScreen * 0.43,
+                    child: Text(
+                      'Calculando tu puntuación...',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey[800],
                       ),
                     ),
-                  ],
-                );
-              }
+                  ),
+                ],
+              ),
+            );
+          }
 
-              return Expanded(
-                child: Column(
-                  children: [
-                    // Circular Progress Indicator
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 20),
-                      child: Stack(
-                        alignment: Alignment.center,
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                // Circular Progress Indicator
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 20),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        width: 150,
+                        height: 150,
+                        child: CircularProgressIndicator(
+                          value: _progressValue,
+                          strokeWidth: 12,
+                          backgroundColor: Colors.grey[300],
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            _progressValue >= 0.7
+                                ? Colors.green
+                                : _progressValue >= 0.4
+                                    ? Colors.orange
+                                    : Colors.red,
+                          ),
+                        ),
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: CircularProgressIndicator(
-                              value: _progressValue,
-                              strokeWidth: 12,
-                              backgroundColor: Colors.grey[300],
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                _progressValue >= 0.7
-                                    ? Colors.green
-                                    : _progressValue >= 0.4
-                                        ? Colors.orange
-                                        : Colors.red,
-                              ),
+                          Text(
+                            '${(_progressValue * 100).toStringAsFixed(0)}%',
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '${(_progressValue * 100).toStringAsFixed(0)}%',
-                                style: const TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                '${_correctAnswersCount}/${examState.questions.length}',
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            '${_correctAnswersCount}/${examState.questions.length}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                    // Texto de resultado
-                    Text(
-                      _getResultText(_progressValue),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: _progressValue >= 0.7
-                            ? Colors.green
-                            : _progressValue >= 0.4
-                                ? Colors.orange
-                                : Colors.red,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    // Lista de resultados
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: examState.questions.length,
-                        itemBuilder: (context, index) {
-                          final question = examState.questions[index];
-                          final userAnswer = examState.userAnswers[question.id];
-                          return ResultItemWidget(
-                            question: question,
-                            userAnswer: userAnswer,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              );
-            },
-          ),
-        ],
+                // Texto de resultado
+                Text(
+                  _getResultText(_progressValue),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: _progressValue >= 0.7
+                        ? Colors.green
+                        : _progressValue >= 0.4
+                            ? Colors.orange
+                            : Colors.red,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                // Lista de resultados
+                ...examState.questions.map((question) {
+                  final userAnswer = examState.userAnswers[question.id];
+                  return ResultItemWidget(
+                    question: question,
+                    userAnswer: userAnswer,
+                  );
+                }).toList(),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
