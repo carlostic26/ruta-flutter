@@ -39,12 +39,3 @@ class HomeScreen extends ConsumerWidget {
     );
   }
 }
-
-/*
- Builder(
-            builder: (context) => IconButton(
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(Icons.menu))),
-                */

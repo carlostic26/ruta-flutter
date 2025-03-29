@@ -181,7 +181,7 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
                             ),
                           ),
                           Text(
-                            '${_correctAnswersCount}/${examState.questions.length}',
+                            '$_correctAnswersCount/${examState.questions.length}',
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.grey,
@@ -213,7 +213,7 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
                     question: question,
                     userAnswer: userAnswer,
                   );
-                }).toList(),
+                }),
               ],
             ),
           );

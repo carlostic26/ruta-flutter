@@ -47,6 +47,7 @@ class SubtopicLocalDatabaseHelper {
       await _insertSubtopicsMidLevel7(db);
       await _insertSubtopicsMidLevel8(db);
       await _insertSubtopicsMidLevel9(db);
+      await _insertSubtopicsMidLevel10(db);
     } catch (e) {
       print("Error inserting subtopics mid: $e");
     }

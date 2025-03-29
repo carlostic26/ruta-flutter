@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
@@ -14,7 +13,7 @@ class TimerWidget extends ConsumerStatefulWidget {
 
 class _TimerWidgetState extends ConsumerState<TimerWidget> {
   late int _remainingTime;
-  Timer? _timer; // Añade esta línea
+  Timer? _timer;
 
   @override
   void initState() {
@@ -25,7 +24,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   @override
   void dispose() {
-    _timer?.cancel(); // Cancela el timer al destruir el widget
+    _timer?.cancel();
     super.dispose();
   }
 

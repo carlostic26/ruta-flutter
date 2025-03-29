@@ -4,8 +4,7 @@ import 'package:confetti/confetti.dart';
 class ConfettiAnimation extends StatefulWidget {
   final bool isCompleted;
 
-  const ConfettiAnimation({Key? key, required this.isCompleted})
-      : super(key: key);
+  const ConfettiAnimation({super.key, required this.isCompleted});
 
   @override
   _ConfettiAnimationState createState() => _ConfettiAnimationState();

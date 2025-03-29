@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/presentation/screens/path_screen.dart';
+import 'package:ruta_flutter/features/level/presentation/state/module_status_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
 
@@ -16,6 +17,9 @@ class ModuleWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final jrModuleStatus = ref.watch(jrModuleStatusProvider);
+    final middleModuleStatus = ref.watch(middleModuleStatusProvider);
+
     String jrDescription =
         'Recorre desde cero los fundamentos esenciales de Flutter y Dart. Repasa la sintaxis, widgets y estructura básica. Gestionar activos y almacenamiento local. Este es el punto de partida perfecto para nuevos desarrolladores.';
     String midDescription =
@@ -28,307 +32,332 @@ class ModuleWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SpacerHomeWidget(heightScreen: heightScreen),
-          //Junior Dev Module
-          GestureDetector(
-            onTap: () => goToPathScreen(context, 'Jr', ref),
-            child: Row(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: Colors.blueGrey,
-                        borderRadius: BorderRadius.circular(25),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/jr_dev.png'),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: IconButton(
-                          highlightColor: Colors.blue.withOpacity(0.2),
-                          iconSize: 60,
-                          onPressed: () {
-                            ref.read(moduleProvider.notifier).state =
-                                'Flutter Junior';
+          // Junior Dev Module (siempre habilitado)
+          _buildModule(
+            context: context,
+            ref: ref,
+            module: 'Jr',
+            title: 'Flutter Junior Dev',
+            description: jrDescription,
+            color: Colors.blue,
+            imagePath: 'assets/images/jr_dev.png',
+            isEnabled: true,
+          ),
 
-                            goToPathScreen(context, 'Jr', ref);
-                          },
-                          icon: const Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                          )),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Column(
-                      children: [
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Flutter Junior Dev',
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Text(
-                          jrDescription,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                          ),
-                          textAlign: TextAlign.justify,
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-/*                 IconButton(
-                    onPressed: () {
-                      ref.read(moduleProvider.notifier).state =
-                          'Flutter Junior';
+          SpacerHomeWidget(heightScreen: heightScreen),
 
-                      goToPathScreen(context, 'Jr', ref);
-                    },
-                    icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)), */
-              ],
+          // Middle Dev Module
+          jrModuleStatus.when(
+            loading: () => _buildLoadingModule(
+              title: 'Flutter Middle Dev',
+              description: midDescription,
+              color: Colors.orange,
+              imagePath: 'assets/images/middle_dev.png',
+            ),
+            error: (error, stack) => _buildErrorModule(
+              title: 'Flutter Middle Dev',
+              description: midDescription,
+              color: Colors.orange,
+              imagePath: 'assets/images/middle_dev.png',
+            ),
+            data: (isJrCompleted) => _buildModule(
+              context: context,
+              ref: ref,
+              module: 'Mid',
+              title: 'Flutter Middle Dev',
+              description: midDescription,
+              color: Colors.orange,
+              imagePath: 'assets/images/middle_dev.png',
+              isEnabled: isJrCompleted,
             ),
           ),
 
           SpacerHomeWidget(heightScreen: heightScreen),
 
-          //Middle Dev Module
-          GestureDetector(
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Debes terminar primero el modulo anterior'),
-                ),
-              );
-              //goToPathScreen(context, 'Mid', ref),
-            },
-            child: Row(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: Colors.orange,
-                        borderRadius: BorderRadius.circular(25),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/middle_dev.png'),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-
-                    //opaco
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(210, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Flutter Middle Dev',
-                            style: TextStyle(
-                              color: Colors.orange
-                                  .withOpacity(0.3), //Colors.orange,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Text(
-                          midDescription,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.3),
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                          ),
-                          textAlign: TextAlign.justify,
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                /*        IconButton(
-                    onPressed: () {
-                      ref.read(moduleProvider.notifier).state =
-                          'Flutter Middle';
-
-                      goToPathScreen(context, 'Mid', ref);
-                    },
-                    icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)), */
-              ],
+          // Senior Dev Module
+          middleModuleStatus.when(
+            loading: () => _buildLoadingModule(
+              title: 'Flutter Senior Dev',
+              description: srDescription,
+              color: Colors.green,
+              imagePath: 'assets/images/sr_dev.png',
             ),
-          ),
-
-          SpacerHomeWidget(heightScreen: heightScreen),
-
-          //Senior Dev Module
-          GestureDetector(
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Debes terminar primero el modulo anterior'),
-                ),
-              );
-              //goToPathScreen(context, 'Sr', ref),
-            },
-            child: Row(
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(25),
-                        image: const DecorationImage(
-                          image: AssetImage('assets/images/sr_dev.png'),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: widthScreen * 0.35,
-                      height: heightScreen * 0.15,
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(210, 0, 0, 0),
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Flutter Senior Dev',
-                            style: TextStyle(
-                              color: Colors.green.withOpacity(0.3),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
-                        ),
-                        Text(
-                          srDescription,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.3),
-                            fontSize: 10,
-                            fontFamily: 'Poppins',
-                          ),
-                          textAlign: TextAlign.justify,
-                          maxLines: 7,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                /*             IconButton(
-                    onPressed: () {
-                      ref.read(moduleProvider.notifier).state =
-                          'Flutter Senior';
-
-                      goToPathScreen(context, 'Sr', ref);
-                    },
-                    icon: const Icon(
-                        color: Colors.white, Icons.arrow_forward_ios)), */
-              ],
+            error: (error, stack) => _buildErrorModule(
+              title: 'Flutter Senior Dev',
+              description: srDescription,
+              color: Colors.green,
+              imagePath: 'assets/images/sr_dev.png',
+            ),
+            data: (isMiddleCompleted) => _buildModule(
+              context: context,
+              ref: ref,
+              module: 'Sr',
+              title: 'Flutter Senior Dev',
+              description: srDescription,
+              color: Colors.green,
+              imagePath: 'assets/images/sr_dev.png',
+              isEnabled: isMiddleCompleted,
             ),
           ),
         ],
       ),
 
-      //Icon Secure Middle
-      Positioned(
-        top: heightScreen * 0.395,
-        left: widthScreen * 0.065,
-        child: SizedBox(
-          width: widthScreen * 0.22,
-          height: heightScreen * 0.08,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/icons/icono_cerrado.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
+      // Mostrar candados basados en el estado de los módulos
+      jrModuleStatus.maybeWhen(
+        data: (isJrCompleted) => !isJrCompleted
+            ? _buildLockIcon(heightScreen, widthScreen, 0.395)
+            : const SizedBox.shrink(),
+        orElse: () => _buildLockIcon(heightScreen, widthScreen, 0.395),
       ),
-
-      //Icon Secure Sr
-      Positioned(
-        top: heightScreen * 0.625,
-        left: widthScreen * 0.065,
-        child: SizedBox(
-          width: widthScreen * 0.22,
-          height: heightScreen * 0.08,
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Image.asset(
-              'assets/icons/icono_cerrado.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
+      middleModuleStatus.maybeWhen(
+        data: (isMiddleCompleted) => !isMiddleCompleted
+            ? _buildLockIcon(heightScreen, widthScreen, 0.625)
+            : const SizedBox.shrink(),
+        orElse: () => _buildLockIcon(heightScreen, widthScreen, 0.625),
       ),
     ]);
   }
 
+  Widget _buildModule({
+    required BuildContext context,
+    required WidgetRef ref,
+    required String module,
+    required String title,
+    required String description,
+    required Color color,
+    required String imagePath,
+    required bool isEnabled,
+  }) {
+    return GestureDetector(
+      onTap: isEnabled
+          ? () => goToPathScreen(context, module, ref)
+          : () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Debes terminar primero el modulo anterior'),
+                ),
+              );
+            },
+      child: Row(
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: widthScreen * 0.35,
+                height: heightScreen * 0.15,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(25),
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+              if (!isEnabled)
+                Container(
+                  width: widthScreen * 0.35,
+                  height: heightScreen * 0.15,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(210, 0, 0, 0),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+              if (isEnabled)
+                Container(
+                  width: widthScreen * 0.35,
+                  height: heightScreen * 0.15,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: IconButton(
+                    highlightColor: Colors.blue.withOpacity(0.2),
+                    iconSize: 60,
+                    onPressed: () {
+                      ref.read(moduleProvider.notifier).state =
+                          'Flutter $module';
+                      goToPathScreen(context, module, ref);
+                    },
+                    icon: const Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        color: isEnabled ? color : color.withOpacity(0.3),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
+                      ),
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: isEnabled
+                          ? Colors.white
+                          : Colors.white.withOpacity(0.3),
+                      fontSize: 10,
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.justify,
+                    maxLines: 7,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLoadingModule({
+    required String title,
+    required String description,
+    required Color color,
+    required String imagePath,
+  }) {
+    return Row(
+      children: [
+        Container(
+          width: widthScreen * 0.35,
+          height: heightScreen * 0.15,
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: const Center(child: CircularProgressIndicator()),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: color.withOpacity(0.3),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Text(
+                  description,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.3),
+                    fontSize: 10,
+                    fontFamily: 'Poppins',
+                  ),
+                  textAlign: TextAlign.justify,
+                  maxLines: 7,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildErrorModule({
+    required String title,
+    required String description,
+    required Color color,
+    required String imagePath,
+  }) {
+    return Row(
+      children: [
+        Container(
+          width: widthScreen * 0.35,
+          height: heightScreen * 0.15,
+          decoration: BoxDecoration(
+            color: color.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(25),
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.contain,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: color.withOpacity(0.3),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Poppins',
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const Text(
+                  'Error al verificar estado del módulo',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 10,
+                    fontFamily: 'Poppins',
+                  ),
+                  textAlign: TextAlign.justify,
+                  maxLines: 7,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLockIcon(double height, double width, double topPosition) {
+    return Positioned(
+      top: height * topPosition,
+      left: width * 0.065,
+      child: SizedBox(
+        width: width * 0.22,
+        height: height * 0.08,
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Image.asset(
+            'assets/icons/icono_cerrado.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
+  }
+
   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
     ref.read(moduleProvider.notifier).state = module;
-
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),
