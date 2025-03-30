@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
-import 'package:ruta_flutter/features/detail/data/datasourcers/detail_jr_table_db.dart';
-import 'package:ruta_flutter/features/detail/data/datasourcers/detail_mid_table_db.dart';
+import 'package:ruta_flutter/features/detail/data/datasourcers/detail_jr_inserts_db.dart';
+import 'package:ruta_flutter/features/detail/data/datasourcers/detail_mid_inserts_db.dart';
+import 'package:ruta_flutter/features/detail/data/datasourcers/detail_sr_inserts_db.dart';
 import 'package:ruta_flutter/features/topic/data/datasources/subtopic_local_database.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:ruta_flutter/features/level/data/datasources/level_local_database.dart';
@@ -8,7 +9,7 @@ import 'package:ruta_flutter/features/topic/data/datasources/topic_local_databas
 
 class LocalDatabaseHelper {
   Database? _database;
-  int dbVersion = 15;
+  int dbVersion = 17;
 
   Future<Database> getDatabase() async {
     if (_database != null) return _database!;
@@ -31,7 +32,7 @@ class LocalDatabaseHelper {
           await SubtopicLocalDatabaseHelper().createSubtopicTable(db);
           await DetailJrLocalDatabaseHelper().createDetailTable(db);
           await DetailMidLocalDatabaseHelper().insertDetailsMid(db);
-          //await DetailSrLocalDatabaseHelper().createDetailTable(db);
+          await DetailSrLocalDatabaseHelper().insertDetailsSr(db);
         },
       );
     } catch (e) {

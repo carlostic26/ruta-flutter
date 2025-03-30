@@ -18,6 +18,7 @@ class SubtopicLocalDatabaseHelper {
 
     insertSubtopicsJr(db);
     insertSubtopicsMid(db);
+    insertSubtopicsSr(db);
   }
 
   Future<void> insertSubtopicsJr(Database db) async {
