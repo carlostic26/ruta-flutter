@@ -45,4 +45,10 @@ class CompletedLevelsNotifier extends StateNotifier<List<int>> {
   Future<void> clearLastCompletedLevel() async {
     await _sharedPreferences.remove('lastCompletedLevel');
   }
+
+  Future<void> clear() async {
+    state = []; // Resetea la lista interna
+    await _sharedPreferences.remove('lastCompletedLevel');
+    await _sharedPreferences.remove('completed_levels');
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
-import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 
 final cachedLevelsProvider =

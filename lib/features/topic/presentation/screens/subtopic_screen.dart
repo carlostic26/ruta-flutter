@@ -16,7 +16,7 @@ class SubtopicScreen extends ConsumerWidget {
     final listSubtopicUseCase = ref.watch(getSubtopicUseCaseProvider);
     final topicId = ref.watch(topicIdProvider);
     final titleTopic = ref.watch(topicTitleProvider);
-    final module = ref.watch(moduleProvider);
+    final module = ref.watch(actualModuleProvider);
 
     return FutureBuilder<List<SubtopicModel>>(
       future: listSubtopicUseCase.call(topicId, module),
@@ -62,14 +62,6 @@ class SubtopicScreen extends ConsumerWidget {
                 // Lista de Subtopics
                 Expanded(
                   child: Stack(children: [
-                    /*       Align(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 3, right: 20),
-                          child: StepperWidget(
-                            subtopicList: subtopicList,
-                          ),
-                        )), */
                     ListView.builder(
                       itemCount: subtopicList.length,
                       itemBuilder: (context, index) {

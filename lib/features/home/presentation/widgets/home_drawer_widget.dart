@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ruta_flutter/core/app_config.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/app_support.dart';
+import 'package:ruta_flutter/features/home/presentation/screens/delete_progress.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/usability_screen.dart';
 import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -109,6 +110,18 @@ class HomeDrawer extends StatelessWidget {
               // Navegar a otra pantalla
             },
           ),
+
+          ListTile(
+            leading: const Icon(Icons.delete_sweep),
+            title: const Text('Eliminar progresos'),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => const DeleteProgressWidget(),
+              );
+            },
+          ),
+
           SizedBox(
             height: heightScreen * 0.02,
           ),

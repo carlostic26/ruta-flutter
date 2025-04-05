@@ -74,6 +74,12 @@ class CompletedTopicsUseCaseNotifier extends StateNotifier<List<String>> {
     _loadCompletedTopics();
   }
 
+  Future<void> reset() async {
+    state = []; // Vacía la lista de topics completados
+    // forzar recarga
+    await _loadCompletedTopics();
+  }
+
   Future<void> _loadCompletedTopics() async {
     final completedTopics = await _repository.getAllCompletedTopics();
     state = completedTopics;

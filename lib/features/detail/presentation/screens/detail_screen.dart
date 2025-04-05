@@ -8,7 +8,7 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_
 import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
     as progress;
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
@@ -45,7 +45,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         ref.read(completedSubtopicsProvider.notifier);
 
     // Obtener los parámetros necesarios
-    final module = ref.read(moduleProvider);
+    final module = ref.read(actualModuleProvider);
     final levelId = ref.read(actualLevelIdProvider);
     final topicId = ref.read(topicIdProvider);
     final subtopicId = ref.read(subtopicIdProvider);
@@ -121,7 +121,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
     final getDetailUseCase = ref.read(getDetailUseCaseProvider);
     final subtopicID = ref.watch(subtopicIdProvider);
-    final module = ref.watch(moduleProvider);
+    final module = ref.watch(actualModuleProvider);
     final titleSubtopic = ref.watch(titleSubtopicProvider);
     final pageController = ref.watch(pageControllerProvider);
 

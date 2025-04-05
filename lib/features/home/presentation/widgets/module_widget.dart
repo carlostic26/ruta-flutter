@@ -175,7 +175,7 @@ class ModuleWidget extends ConsumerWidget {
                     highlightColor: Colors.blue.withOpacity(0.2),
                     iconSize: 60,
                     onPressed: () {
-                      ref.read(moduleProvider.notifier).state =
+                      ref.read(actualModuleProvider.notifier).state =
                           'Flutter $module';
                       goToPathScreen(context, module, ref);
                     },
@@ -357,7 +357,7 @@ class ModuleWidget extends ConsumerWidget {
   }
 
   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
-    ref.read(moduleProvider.notifier).state = module;
+    ref.read(actualModuleProvider.notifier).state = module;
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),

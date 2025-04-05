@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/data/models/level_model.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/widgets/confeti_widget.dart';
 import 'package:ruta_flutter/features/topic/presentation/screens/topic_screen.dart';
 
@@ -21,7 +21,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
 
     // Obtener la instancia de GetLevelUseCase
     final getLevelUseCase = ref.read(getLevelUseCaseProvider);
-    final moduleSelected = ref.watch(moduleProvider);
+    final moduleSelected = ref.watch(actualModuleProvider);
 
     // Obtener la lista de niveles completados desde el provider
     final completedLevels = ref.watch(completedLevelsProvider);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/shared_preferences_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/widgets/generate_route_path_widget.dart';
 import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 
@@ -10,9 +10,8 @@ class PathScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedLevel = ref.watch(moduleProvider);
+    final selectedLevel = ref.watch(actualModuleProvider);
 
-    // Observar el estado de completedLevelsProvider para forzar la reconstrucción
     ref.watch(completedLevelsProvider);
 
     return Scaffold(
@@ -44,8 +43,7 @@ class PathScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body:
-          const GenerateLevelsRoutePathWidget(), // Este widget se reconstruirá cuando completedLevels cambie
+      body: const GenerateLevelsRoutePathWidget(),
       bottomNavigationBar: const SizedBox(height: 80, child: Placeholder()),
     );
   }

@@ -107,24 +107,6 @@ class ProgressRepositoryImpl implements ProgressRepository {
     return result.isNotEmpty;
   }
 
-/*   @override
-  Future<bool> isTopicCompleted(
-      String module, int levelId, String topicId) async {
-    // Obtener todos los subtopics del topic desde la base de datos pre-cargada
-    final subtopics = await _subtopicRepository.getSubtopics(topicId, module);
-
-    // Verificar si todos los subtopics están completados
-    for (final subtopic in subtopics) {
-      final isCompleted = await isSubtopicCompleted(subtopic.id!);
-      if (!isCompleted) {
-        return false; // Si algún subtopic no está completado, el topic no está completado
-      }
-    }
-
-    return true;
-  }
- */
-
   @override
   Future<bool> isTopicCompleted(
       String module, int levelId, String topicId) async {

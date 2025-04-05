@@ -24,6 +24,10 @@ class CompletedSubtopicsNotifier extends StateNotifier<List<String>> {
       state = [...state, subtopicId];
     }
   }
+
+  Future<void> reset() async {
+    state = []; // Resetea la lista de subtopics completados
+  }
 }
 
 // Proveedor para el repositorio de progreso

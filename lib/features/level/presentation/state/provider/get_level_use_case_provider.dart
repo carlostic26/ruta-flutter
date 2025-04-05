@@ -9,7 +9,7 @@ final levelRepositoryProvider = Provider<LevelRepository>((ref) {
 });
 
 // Proveedor del módulo seleccionado
-final moduleProvider = StateProvider<String>((ref) => 'Jr');
+final actualModuleProvider = StateProvider<String>((ref) => 'Jr');
 
 final actualLevelIdProvider = StateProvider<int>((ref) => 0);
 
