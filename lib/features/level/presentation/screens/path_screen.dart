@@ -10,14 +10,14 @@ class PathScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedLevel = ref.watch(actualModuleProvider);
+    final selectedModule = ref.watch(actualModuleProvider);
 
     ref.watch(completedLevelsProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Ruta $selectedLevel',
+          'Ruta $selectedModule',
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
         ),
         centerTitle: true,

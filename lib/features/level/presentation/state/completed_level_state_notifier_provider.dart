@@ -5,15 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class CompletedLevelsNotifier extends StateNotifier<List<int>> {
   final ProgressRepository _repository;
   final SharedPreferences _sharedPreferences;
+  final String _module;
 
-  CompletedLevelsNotifier(this._repository, this._sharedPreferences)
+  CompletedLevelsNotifier(
+      this._repository, this._sharedPreferences, this._module)
       : super([]) {
-    _loadCompletedLevels();
+    _loadCompletedLevelsByModule(_module);
   }
 
   // Cargar los niveles completados
-  Future<void> _loadCompletedLevels() async {
-    final completedLevels = await _repository.getAllCompletedLevels();
+  Future<void> _loadCompletedLevelsByModule(String module) async {
+    final completedLevels = await _repository.getAllCompletedLevels(module);
     state = completedLevels;
   }
 

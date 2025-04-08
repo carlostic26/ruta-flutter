@@ -16,7 +16,7 @@ class ItemTopicWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Obtener la lista de topics completados
-    final completedTopics = ref.watch(completedTopicsProvider);
+    final completedTopics = ref.watch(completedTopicsProviderByModule);
 
     // Determinar si el topic actual está completado
     final isCompleted = completedTopics.contains(topic.id);

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_level_state_notifier_provider.dart';
+import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 
@@ -8,8 +8,63 @@ final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
 });
 
 final completedLevelsProvider =
-    StateNotifierProvider<CompletedLevelsNotifier, List<int>>((ref) {
+    StateNotifierProvider<CompletedLevelsNotifier, Map<String, List<int>>>(
+        (ref) {
   final progressRepository = ref.read(progressRepositoryProvider);
   final sharedPreferences = ref.read(sharedPreferencesProvider);
   return CompletedLevelsNotifier(progressRepository, sharedPreferences);
 });
+
+class CompletedLevelsNotifier extends StateNotifier<Map<String, List<int>>> {
+  final ProgressRepository _repository;
+  final SharedPreferences _prefs;
+
+  CompletedLevelsNotifier(this._repository, this._prefs) : super({});
+
+  Future<void> checkAndUpdateLevelCompletionByModule(
+      int levelId, String module) async {
+    final current = state[module] ?? [];
+    final isCompleted = await _repository.isLevelCompleted(module, levelId);
+
+    if (isCompleted && !current.contains(levelId)) {
+      final updated = [...current, levelId];
+      await _repository.saveCompletedLevels(module, updated);
+      state = {...state, module: updated};
+    } else if (!isCompleted && current.contains(levelId)) {
+      final updated = current.where((id) => id != levelId).toList();
+      await _repository.saveCompletedLevels(module, updated);
+      state = {...state, module: updated};
+    }
+  }
+
+  Future<void> loadModuleLevels(String module) async {
+    final completed = await _repository.getAllCompletedLevels(module);
+    state = {...state, module: completed};
+  }
+
+  Future<void> addCompletedLevel(String module, int levelOrder) async {
+    final current = state[module] ?? [];
+    if (!current.contains(levelOrder)) {
+      final updated = [...current, levelOrder];
+      await _repository.saveCompletedLevels(module, updated);
+      state = {...state, module: updated};
+    }
+  }
+
+  List<int> getCompletedLevelsForModule(String module) {
+    return state[module] ?? [];
+  }
+
+  Future<void> clear() async {
+    await _repository.saveCompletedLevels('', []);
+    state = {};
+  }
+
+  int? getLastCompletedLevelByModule(String module) {
+    final completedLevels = state[module];
+    if (completedLevels == null || completedLevels.isEmpty) {
+      return null;
+    }
+    return completedLevels.reduce((a, b) => a > b ? a : b);
+  }
+}

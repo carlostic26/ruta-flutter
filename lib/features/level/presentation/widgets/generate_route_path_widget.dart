@@ -22,13 +22,13 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     // Obtener la instancia de GetLevelUseCase
     final getLevelUseCase = ref.read(getLevelUseCaseProvider);
     final moduleSelected = ref.watch(actualModuleProvider);
-
-    // Obtener la lista de niveles completados desde el provider
-    final completedLevels = ref.watch(completedLevelsProvider);
+    final completedLevels = ref.watch(
+        completedLevelsProvider.select((value) => value[moduleSelected] ?? []));
 
     // Obtener el último nivel completado
-    final lastCompletedLevel =
-        ref.watch(completedLevelsProvider.notifier).getLastCompletedLevel();
+    final lastCompletedLevel = ref
+        .watch(completedLevelsProvider.notifier)
+        .getLastCompletedLevelByModule(moduleSelected);
 
     // Posiciones fijas para el primer círculo y la primera línea
     double circleCenterScreen = widthScreen * 0.40;
@@ -182,7 +182,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
             if (lastCompletedLevel != null) {
               ref
                   .read(completedLevelsProvider.notifier)
-                  .clearLastCompletedLevel();
+                  .addCompletedLevel(moduleSelected, level.order!);
             }
           });
         }

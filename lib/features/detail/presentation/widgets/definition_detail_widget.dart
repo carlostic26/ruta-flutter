@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ruta_flutter/features/common/domain/data/services/parse_inline_code_span_service.dart';
 import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
+import 'package:ruta_flutter/features/detail/presentation/state/image_detail_provider.dart';
+import 'package:ruta_flutter/features/detail/presentation/widgets/image_loading_widget.dart';
 
 class DefinitionDetailWidget extends ConsumerStatefulWidget {
   const DefinitionDetailWidget({
@@ -20,40 +23,30 @@ class DefinitionDetailWidget extends ConsumerStatefulWidget {
 class _DefinitionDetailWidgetState
     extends ConsumerState<DefinitionDetailWidget> {
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ref.invalidate(randomImageProvider);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
-      shrinkWrap: true, // Se ajusta automáticamente al contenido
-      //physics: const NeverScrollableScrollPhysics(), // Evita doble scroll
+      shrinkWrap: true,
       children: [
-        SizedBox(height: widget.heightScreen * 0.05),
-/*         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: SizedBox(
-            height: 350,
-            child: widget.detail.imgUrl.toString().isEmpty
-                ? Image.asset(
-                    'assets/icons/placeholder.png',
-                    fit: BoxFit.cover,
-                  )
-                : FadeInImage.assetNetwork(
-                    placeholder: 'assets/icons/placeholder.png',
-                    image: widget.detail.imgUrl.toString(),
-                    fit: BoxFit.cover,
-                    placeholderErrorBuilder: (context, error, stackTrace) {
-                      return const Center(child: CircularProgressIndicator());
-                    },
-                    imageErrorBuilder: (context, error, stackTrace) {
-                      return const Center(child: Icon(Icons.error));
-                    },
-                  ),
-          ),
-        ), */
+        Consumer(
+          builder: (context, ref, child) {
+            final imageUrl = ref.watch(randomImageProvider);
+            return ImageLoadingWrapper(imageUrl: imageUrl);
+          },
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-          child: Text(
-            widget.detail.definition.toString(),
-            style: const TextStyle(
-                color: Colors.white, fontFamily: 'Poppins', fontSize: 12),
+          child: RichText(
+            text: TextSpan(
+              children:
+                  parseInlineCodeSpans(widget.detail.definition.toString()),
+            ),
+            textAlign: TextAlign.justify,
           ),
         ),
       ],

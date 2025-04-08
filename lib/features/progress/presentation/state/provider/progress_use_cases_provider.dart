@@ -104,7 +104,7 @@ class CompletedTopicsUseCaseNotifier extends StateNotifier<List<String>> {
 }
 
 // Proveedor para el StateNotifier de topics completados
-final completedTopicsProvider =
+final completedTopicsProviderByModule =
     StateNotifierProvider<CompletedTopicsUseCaseNotifier, List<String>>((ref) {
   final progressRepository = ref.read(progressRepositoryProvider);
   return CompletedTopicsUseCaseNotifier(progressRepository);

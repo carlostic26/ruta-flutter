@@ -1,4 +1,3 @@
-// lib/features/home/presentation/providers/module_state_provider.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/core/providers/shared_preferences_provider.dart';
 

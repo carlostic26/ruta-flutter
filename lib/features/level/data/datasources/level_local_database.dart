@@ -30,7 +30,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Explora la sintaxis básica de Dart, incluyendo la declaración de variables, tipos de datos primitivos y la estructura básica de un programa. Este es el punto de partida para escribir código funcional en Dart.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -40,7 +40,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Descubre cómo configurar tu entorno de desarrollo con Flutter CLI, VS Code, Android Studio o IntelliJ IDEA. Repasa cómo gestionar proyectos y ejecutar aplicaciones en diferentes dispositivos.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -50,7 +50,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Revisa los widgets básicos de Flutter, como Stateless y Stateful widgets, y cómo usarlos para construir interfaces de usuario. También explora widgets Material y Cupertino para diseños específicos de plataforma.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -60,7 +60,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Explora cómo gestionar activos como fuentes, imágenes y otros archivos en tu aplicación Flutter. Repasa cómo cargar y usar estos recursos en tus proyectos.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -70,7 +70,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Descubre el uso de Git y GitHub para gestionar el control de versiones en tus proyectos. Repasa cómo colaborar en equipo y mantener un historial de cambios.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -80,7 +80,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Revisa cómo almacenar datos localmente en el dispositivo usando SQLite y Shared Preferences. Explora cómo guardar preferencias del usuario o datos en caché.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -90,7 +90,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Repasa los conceptos básicos de la programación orientada a objetos (POO) en Dart, incluyendo clases, objetos, herencia y polimorfismo.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -100,7 +100,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Explora las pruebas unitarias y de widgets para asegurar la calidad de tu código. Descubre cómo escribir pruebas que validen el comportamiento de tu aplicación.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
 
     await db.insert('level', {
@@ -110,7 +110,7 @@ class LevelLocalDatabaseHelper {
       'description':
           "Revisa los pasos necesarios para desplegar aplicaciones en Google Play Store y Apple App Store. Explora cómo publicar tu aplicación en las tiendas oficiales.",
       'points': 0,
-      'is_completed': 0,
+      'is_completed': 1,
     });
   }
 

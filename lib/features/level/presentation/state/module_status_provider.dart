@@ -19,7 +19,9 @@ final jrModuleStatusProvider = FutureProvider<bool>((ref) async {
     error: (_, __) => false,
     data: (levels) {
       final levelNumbers = levels.map((level) => level.order).toList();
-      return levelNumbers.every((level) => completedLevels.contains(level));
+      final jrCompletedLevels = completedLevels['Jr'] ??
+          []; // Obtener los niveles completos específicos para Jr
+      return levelNumbers.every((level) => jrCompletedLevels.contains(level));
     },
   );
 });
@@ -33,7 +35,9 @@ final middleModuleStatusProvider = FutureProvider<bool>((ref) async {
     error: (_, __) => false,
     data: (levels) {
       final levelNumbers = levels.map((level) => level.order).toList();
-      return levelNumbers.every((level) => completedLevels.contains(level));
+      final midCompletedLevels = completedLevels['Mid'] ??
+          []; // Obtener los niveles completos específicos para Mid
+      return levelNumbers.every((level) => midCompletedLevels.contains(level));
     },
   );
 });

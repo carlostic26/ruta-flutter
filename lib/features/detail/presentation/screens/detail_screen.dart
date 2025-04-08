@@ -76,14 +76,14 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
         // Verificar si el topic al que pertenece también está completado
         final completedTopicsNotifier =
-            ref.read(completedTopicsProvider.notifier);
+            ref.read(completedTopicsProviderByModule.notifier);
         await completedTopicsNotifier.checkAndUpdateTopicCompletion(
             topicId, module, levelId);
 
         // Verificar si el nivel al que pertenece también está completado
         final completedLevelsNotifier =
             ref.read(completedLevelsProvider.notifier);
-        await completedLevelsNotifier.checkAndUpdateLevelCompletion(
+        await completedLevelsNotifier.checkAndUpdateLevelCompletionByModule(
             levelId, module);
 
         // Mostrar un SnackBar después de registrar los puntos

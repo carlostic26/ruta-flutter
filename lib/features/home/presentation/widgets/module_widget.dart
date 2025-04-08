@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/level/presentation/screens/path_screen.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/module_status_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
@@ -358,6 +359,8 @@ class ModuleWidget extends ConsumerWidget {
 
   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
     ref.read(actualModuleProvider.notifier).state = module;
+    // Cuando cambies de módulo, carga sus niveles completados
+    ref.read(completedLevelsProvider.notifier).loadModuleLevels(module);
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),

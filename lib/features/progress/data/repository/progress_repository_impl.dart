@@ -4,6 +4,7 @@ import 'package:ruta_flutter/features/progress/data/model/progress_model.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:ruta_flutter/features/topic/domain/repositories/subtopic_repository.dart';
 import 'package:ruta_flutter/features/topic/domain/repositories/topic_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProgressRepositoryImpl implements ProgressRepository {
@@ -45,6 +46,33 @@ class ProgressRepositoryImpl implements ProgressRepository {
         'score': score,
       },
     );
+  }
+
+  @override
+  Future<void> saveCompletedLevels(
+      String module, List<int> completedLevels) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // Convertimos la lista de IDs a lista de strings
+    final levelsAsStrings = completedLevels.map((id) => id.toString()).toList();
+
+    // Guardamos usando una clave única por módulo
+    await prefs.setStringList('completed_levels_$module', levelsAsStrings);
+  }
+
+  @override
+  Future<List<int>> getAllCompletedLevels(String module) async {
+    final db = await progressLocalDatabase;
+
+    // Asumiendo que tu tabla progress tiene una columna 'module'
+    final result = await db.query(
+      'progress',
+      columns: ['level_id'],
+      where: 'module = ?',
+      whereArgs: [module],
+    );
+
+    return result.map((map) => map['level_id'] as int).toList();
   }
 
   @override
@@ -191,6 +219,34 @@ class ProgressRepositoryImpl implements ProgressRepository {
   }
 
   @override
+  Future<bool> isLevelCompleted(String module, int levelId) async {
+    // Obtener todos los topics del nivel
+    final topics = await _topicRepository.getTopics(levelId, module);
+
+    // Verificar si todos los topics están completados
+    for (final topic in topics) {
+      final isCompleted = await isTopicCompleted(module, levelId, topic.id!);
+      if (!isCompleted) {
+        return false; // Si algún topic no está completado, el nivel no está completado
+      }
+    }
+
+    return true; // Todos los topics están completados
+  }
+
+  /// Retorna el número total de subtemas precargados para el módulo indicado.
+  /// Se asume que en la tabla "subtopic" existe una columna "module" para filtrar.
+  @override
+  Future<int> countAllSubtopicsByModule(String module) async {
+    final db = await _localDatabase;
+    final result = await db.rawQuery(
+      'SELECT COUNT(*) as total FROM subtopic WHERE module = ?',
+      [module],
+    );
+    return result.first['total'] as int;
+  }
+
+  @override
   Future<int> getTotalScoreByLevelOfModule(
       {required String module, required int levelId}) async {
     final db = await progressLocalDatabase;
@@ -247,41 +303,6 @@ class ProgressRepositoryImpl implements ProgressRepository {
     final db = await progressLocalDatabase;
     final result = await db.query('progress', columns: ['topic_id']);
     return result.map((map) => map['topic_id'] as String).toList();
-  }
-
-  @override
-  Future<bool> isLevelCompleted(String module, int levelId) async {
-    // Obtener todos los topics del nivel
-    final topics = await _topicRepository.getTopics(levelId, module);
-
-    // Verificar si todos los topics están completados
-    for (final topic in topics) {
-      final isCompleted = await isTopicCompleted(module, levelId, topic.id!);
-      if (!isCompleted) {
-        return false; // Si algún topic no está completado, el nivel no está completado
-      }
-    }
-
-    return true; // Todos los topics están completados
-  }
-
-  @override
-  Future<List<int>> getAllCompletedLevels() async {
-    final db = await progressLocalDatabase;
-    final result = await db.query('progress', columns: ['level_id']);
-    return result.map((map) => map['level_id'] as int).toList();
-  }
-
-  /// Retorna el número total de subtemas precargados para el módulo indicado.
-  /// Se asume que en la tabla "subtopic" existe una columna "module" para filtrar.
-  @override
-  Future<int> countAllSubtopicsByModule(String module) async {
-    final db = await _localDatabase;
-    final result = await db.rawQuery(
-      'SELECT COUNT(*) as total FROM subtopic WHERE module = ?',
-      [module],
-    );
-    return result.first['total'] as int;
   }
 
   /// Retorna el puntaje total obtenido por el usuario para el módulo indicado,

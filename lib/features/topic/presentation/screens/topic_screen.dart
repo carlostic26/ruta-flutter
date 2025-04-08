@@ -16,7 +16,7 @@ class TopicScreen extends ConsumerWidget {
     final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(actualModuleProvider);
     final levelTitle = ref.watch(levelTitleProvider);
-    final completedTopics = ref.watch(completedTopicsProvider);
+    final completedTopics = ref.watch(completedTopicsProviderByModule);
 
     return FutureBuilder<List<TopicModel>>(
       future: listTopicUseCase.call(levelId, module),

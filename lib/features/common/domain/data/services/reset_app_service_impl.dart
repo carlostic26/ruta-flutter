@@ -62,7 +62,7 @@ class ResetServiceImpl implements ResetService {
   Future<void> _resetStateNotifiers() async {
     await Future.wait([
       ref.read(completedLevelsProvider.notifier).clear(),
-      ref.read(completedTopicsProvider.notifier).reset(),
+      ref.read(completedTopicsProviderByModule.notifier).reset(),
       ref.read(completedSubtopicsProvider.notifier).reset(),
     ]);
   }
@@ -70,7 +70,7 @@ class ResetServiceImpl implements ResetService {
   Future<void> _invalidateProviders() async {
     final List<ProviderOrFamily> providersToInvalidate = [
       getLevelUseCaseProvider,
-      completedTopicsProvider,
+      completedTopicsProviderByModule,
       completedSubtopicsProvider,
       isTopicCompletedUseCaseProvider,
       isSubtopicCompletedUseCaseProvider,
