@@ -16,7 +16,31 @@ class TopicScreen extends ConsumerWidget {
     final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(actualModuleProvider);
     final levelTitle = ref.watch(levelTitleProvider);
-    final completedTopics = ref.watch(completedTopicsProviderByModule);
+
+/*     // Validación del módulo
+    final normalizedModule = module;
+    if (!['jr', 'mid', 'sr'].contains(normalizedModule)) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Error'),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back),
+          ),
+        ),
+        body: const Center(
+          child: Text('Módulo no válido. Por favor selecciona otro.'),
+        ),
+      );
+    }
+ */
+    // Obtener los topics completados según el módulo
+    final completedTopics = switch (module) {
+      'Jr' => ref.watch(jrCompletedTopicsProvider),
+      'Mid' => ref.watch(midCompletedTopicsProvider),
+      'Sr' => ref.watch(srCompletedTopicsProvider),
+      _ => throw Exception('Módulo no válido'),
+    };
 
     return FutureBuilder<List<TopicModel>>(
       future: listTopicUseCase.call(levelId, module),
@@ -47,9 +71,7 @@ class TopicScreen extends ConsumerWidget {
               ),
             ),
             leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.arrow_back_ios),
             ),
             centerTitle: true,
@@ -79,35 +101,23 @@ class TopicScreen extends ConsumerWidget {
                         activeStep: activeStep,
                         enableStepTapping: false,
                         direction: Axis.vertical,
-                        steps: List.generate(
-                          topicList.length,
-                          (index) => EasyStep(
-                            icon: completedTopics.contains(topicList[index].id)
-                                ? const Icon(Icons.check,
-                                    size: 20, color: Colors.white)
-                                : const Icon(Icons.check,
-                                    size: 20, color: Colors.grey),
-                            activeIcon: const Icon(Icons.check,
-                                size: 20, color: Colors.white),
-                            finishIcon: const Icon(Icons.check,
-                                size: 20, color: Colors.white),
-                          ),
-                        ),
+                        steps: _buildSteps(topicList, completedTopics),
                         onStepReached: (index) {},
                       )
                     ],
                   ),
                 ),
-
                 // Lista de Topics
                 Expanded(
                   child: ListView.builder(
                     itemCount: topicList.length,
                     itemBuilder: (context, index) {
-                      final topic = topicList[index];
                       return Padding(
                         padding: const EdgeInsets.only(top: 5, bottom: 28),
-                        child: ItemTopicWidget(topic: topic),
+                        child: ItemTopicWidget(
+                          topic: topicList[index],
+                          module: module,
+                        ),
                       );
                     },
                   ),
@@ -118,5 +128,21 @@ class TopicScreen extends ConsumerWidget {
         );
       },
     );
+  }
+
+  List<EasyStep> _buildSteps(
+      List<TopicModel> topics, List<String> completedTopics) {
+    return topics.map((topic) {
+      final isCompleted = completedTopics.contains(topic.id);
+      return EasyStep(
+        icon: Icon(
+          Icons.check,
+          size: 20,
+          color: isCompleted ? Colors.white : Colors.grey,
+        ),
+        activeIcon: const Icon(Icons.check, size: 20, color: Colors.white),
+        finishIcon: const Icon(Icons.check, size: 20, color: Colors.white),
+      );
+    }).toList();
   }
 }

@@ -5,7 +5,7 @@ class IsSubtopicCompletedUseCase {
 
   IsSubtopicCompletedUseCase(this._progressRepository);
 
-  Future<bool> call(String subtopicId) async {
-    return await _progressRepository.isSubtopicCompleted(subtopicId);
+  Future<bool> call(String module, String subtopicId) async {
+    return await _progressRepository.isSubtopicCompleted(module, subtopicId);
   }
 }

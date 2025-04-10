@@ -9,10 +9,7 @@ import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_wi
 import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart'
-    as progress;
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
@@ -39,31 +36,26 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   }
 
   void _startTimer() async {
-    final progressUseCasesProvider =
-        ref.read(progress.progressRepositoryProvider);
-    final completedSubtopicsNotifier =
-        ref.read(completedSubtopicsProvider.notifier);
-
-    // Obtener los parámetros necesarios
+    final progressRepository = ref.read(progressRepositoryProvider);
     final module = ref.read(actualModuleProvider);
     final levelId = ref.read(actualLevelIdProvider);
     final topicId = ref.read(topicIdProvider);
     final subtopicId = ref.read(subtopicIdProvider);
 
-    // Verificar si el subtopic ya tiene un registro de progreso
+    // Obtener los notifiers usando los providers family
+    final completedSubtopicsNotifier =
+        ref.read(completedSubtopicsProvider(module).notifier);
+    final topicsNotifier = ref.read(completedTopicsProvider(module).notifier);
+    final completedLevelsNotifier = ref.read(completedLevelsProvider.notifier);
+
+    // Verificar si el subtopic ya está completado
     final isCompleted =
-        await progressUseCasesProvider.isSubtopicCompleted(subtopicId);
+        await progressRepository.isSubtopicCompleted(module, subtopicId);
+    if (isCompleted) return;
 
-    // Si el subtopic ya está completado, no hacer nada
-    if (isCompleted) {
-      return;
-    }
-
-    // Iniciar el temporizador
     _timer = Timer(const Duration(seconds: 8), () async {
       try {
-        // Registrar el puntaje y el progreso en la base de datos
-        await progressUseCasesProvider.createProgressBySubtopic(
+        await progressRepository.createProgressBySubtopic(
           module: module,
           levelId: levelId,
           topicId: topicId,
@@ -71,29 +63,15 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
           score: 2,
         );
 
-        // Notificar que el subtopic se completó
         completedSubtopicsNotifier.markSubtopicAsCompleted(subtopicId);
-
-        // Verificar si el topic al que pertenece también está completado
-        final completedTopicsNotifier =
-            ref.read(completedTopicsProviderByModule.notifier);
-        await completedTopicsNotifier.checkAndUpdateTopicCompletion(
-            topicId, module, levelId);
-
-        // Verificar si el nivel al que pertenece también está completado
-        final completedLevelsNotifier =
-            ref.read(completedLevelsProvider.notifier);
+        await topicsNotifier.checkAndUpdateTopicCompletion(topicId, levelId);
         await completedLevelsNotifier.checkAndUpdateLevelCompletionByModule(
             levelId, module);
 
-        // Mostrar un SnackBar después de registrar los puntos
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text(
-                '¡+2 puntos acumulados! Sigue repasando temas.',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              content: Text('¡+2 puntos acumulados! Sigue repasando temas.'),
               duration: Duration(seconds: 3),
             ),
           );
@@ -102,10 +80,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(
-                'Error al guardar el progreso: $e',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+              content: Text('Error al guardar el progreso: $e'),
               duration: const Duration(seconds: 3),
             ),
           );
@@ -116,9 +91,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double heightScreen = MediaQuery.of(context).size.height;
-    double widthScreen = MediaQuery.of(context).size.width;
-
+    final size = MediaQuery.of(context).size;
     final getDetailUseCase = ref.read(getDetailUseCaseProvider);
     final subtopicID = ref.watch(subtopicIdProvider);
     final module = ref.watch(actualModuleProvider);
@@ -141,7 +114,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: AppBarDetailWidget(widthScreen: widthScreen),
+            title: AppBarDetailWidget(widthScreen: size.width),
             centerTitle: true,
             foregroundColor: Colors.white,
             leading: IconButton(
@@ -154,14 +127,13 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
             ),
           ),
           body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                   child: Text(
-                    titleSubtopic.toString(),
+                    titleSubtopic,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -170,10 +142,9 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10), // Espacio extra
-                // PageView dentro de un Flexible para que se ajuste correctamente
+                const SizedBox(height: 10),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
+                  height: size.height * 0.8,
                   child: PageView(
                     controller: pageController,
                     onPageChanged: (index) {
@@ -184,7 +155,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                     },
                     children: [
                       DefinitionDetailWidget(
-                        heightScreen: heightScreen,
+                        heightScreen: size.height,
                         detail: detail,
                       ),
                       CodeDetailWidget(detail: detail),

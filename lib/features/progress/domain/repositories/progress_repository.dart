@@ -24,13 +24,12 @@ abstract class ProgressRepository {
     required String topicId,
   });
 
-  Future<List<int>> getAllCompletedLevels(String module);
-
   Future<void> saveCompletedLevels(String module, List<int> completedLevels);
 
-  Future<bool> isSubtopicCompleted(String subtopicId);
-
+  Future<bool> isSubtopicCompleted(String module, String subtopicId);
   Future<bool> isTopicCompleted(String module, int levelId, String topicId);
+
+  Future<List<int>> getAllCompletedLevels(String module);
 
   Future<List<int>> getScoresByModule(String module);
 
@@ -45,16 +44,13 @@ abstract class ProgressRepository {
   });
 
   Future<int> countAllSubtopicsByModule(String module);
-
   Future<int> getCompletedSubtopicsByLevel({
     required String module,
     required int level,
   });
 
-  Future<List<String>> getAllCompletedSubtopics();
-
-  Future<List<String>> getAllCompletedTopics();
-
+  Future<List<String>> getAllCompletedTopics(String module);
+  Future<List<String>> getAllCompletedSubtopics(String module);
   Future<bool> isLevelCompleted(String module, int levelId);
 
   Future<double> getCircularProgressPercentageByModule(String module);

@@ -5,7 +5,6 @@ import 'package:ruta_flutter/features/level/presentation/state/provider/get_leve
 import 'package:ruta_flutter/features/progress/data/datasources/progress_local_database.dart';
 import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,29 +48,31 @@ class ResetServiceImpl implements ResetService {
 
   Future<void> _resetProgressDatabase() async {
     final db = await progressLocalDatabase;
-
     await db.delete('progress');
   }
 
   Future<void> _resetProviders() async {
     await _resetStateNotifiers();
-    ref.read(actualModuleProvider.notifier).state = 'Jr';
+    ref.read(actualModuleProvider.notifier).state =
+        'Jr'; // Cambiado a minúscula para consistencia
     await _invalidateProviders();
   }
 
   Future<void> _resetStateNotifiers() async {
-    await Future.wait([
-      ref.read(completedLevelsProvider.notifier).clear(),
-      ref.read(completedTopicsProviderByModule.notifier).reset(),
-      ref.read(completedSubtopicsProvider.notifier).reset(),
-    ]);
+    // Limpiar los providers de niveles
+    await ref.read(completedLevelsProvider.notifier).clear();
+
+    // Limpiar los providers de topics y subtopics para cada módulo
+    final modules = ['Jr', 'Mid', 'Sr'];
+    for (final module in modules) {
+      await ref.read(completedTopicsProvider(module).notifier).reset();
+      await ref.read(completedSubtopicsProvider(module).notifier).reset();
+    }
   }
 
   Future<void> _invalidateProviders() async {
     final List<ProviderOrFamily> providersToInvalidate = [
       getLevelUseCaseProvider,
-      completedTopicsProviderByModule,
-      completedSubtopicsProvider,
       isTopicCompletedUseCaseProvider,
       isSubtopicCompletedUseCaseProvider,
       getUserTotalScoreByModuleUseCaseProvider,
@@ -81,9 +82,13 @@ class ResetServiceImpl implements ResetService {
       getTopicUseCaseProvider,
     ];
 
-    // 2. Invalidación segura
+    // Invalidación de los providers base
     for (final provider in providersToInvalidate) {
       ref.invalidate(provider);
     }
+
+    // Invalidación de los providers family (necesario para Riverpod 2.0+)
+    ref.invalidate(completedTopicsProvider);
+    ref.invalidate(completedSubtopicsProvider);
   }
 }

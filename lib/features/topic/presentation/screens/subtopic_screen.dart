@@ -7,6 +7,7 @@ import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subt
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/widgets/item_subtopic_widget.dart';
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 
 class SubtopicScreen extends ConsumerWidget {
   const SubtopicScreen({super.key});
@@ -56,8 +57,10 @@ class SubtopicScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Stepper Vertical
-
-                StepperWidget(subtopicList: subtopicList),
+                StepperWidget(
+                  subtopicList: subtopicList,
+                  module: module, // Pasamos el módulo al stepper
+                ),
 
                 // Lista de Subtopics
                 Expanded(
@@ -66,14 +69,13 @@ class SubtopicScreen extends ConsumerWidget {
                       itemCount: subtopicList.length,
                       itemBuilder: (context, index) {
                         final subtopic = subtopicList[index];
-
                         return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 5, bottom: 22.3),
-                            child: ItemSubtopicWidget(
-                              subtopic: subtopic,
-                              index: index,
-                            ));
+                          padding: const EdgeInsets.only(top: 5, bottom: 22.3),
+                          child: ItemSubtopicWidget(
+                            subtopic: subtopic,
+                            index: index,
+                          ),
+                        );
                       },
                     ),
                   ]),
@@ -89,15 +91,23 @@ class SubtopicScreen extends ConsumerWidget {
 
 class StepperWidget extends ConsumerWidget {
   final List<SubtopicModel> subtopicList;
+  final String module;
 
   const StepperWidget({
     super.key,
     required this.subtopicList,
+    required this.module,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final completedSubtopics = ref.watch(completedSubtopicsProvider);
+    // Obtenemos los subtopics completados según el módulo
+    final completedSubtopics = switch (module) {
+      'Jr' => ref.watch(jrCompletedSubtopicsProvider),
+      'Mid' => ref.watch(midCompletedSubtopicsProvider),
+      'Sr' => ref.watch(srCompletedSubtopicsProvider),
+      _ => throw Exception('Módulo no válido'),
+    };
 
     return SizedBox(
       width: 60,

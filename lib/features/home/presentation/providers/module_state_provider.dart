@@ -9,13 +9,13 @@ final moduleStateProvider = FutureProvider<Map<String, bool>>((ref) async {
 
   final sharedPreferencesService = ref.read(sharedPreferencesServiceProvider);
 
-  final isJrCompleted = await sharedPreferencesService.isExamCompleted('jr');
-  final isMidCompleted = await sharedPreferencesService.isExamCompleted('mid');
-  final isSrCompleted = await sharedPreferencesService.isExamCompleted('sr');
+  final isJrCompleted = await sharedPreferencesService.isExamCompleted('Jr');
+  final isMidCompleted = await sharedPreferencesService.isExamCompleted('Mid');
+  final isSrCompleted = await sharedPreferencesService.isExamCompleted('Sr');
 
   return {
-    'jr': true, // El módulo Jr siempre está habilitado
-    'mid': isJrCompleted, // Mid depende de Jr
-    'sr': isMidCompleted, // Sr depende de Mid
+    'Jr': true, // El módulo Jr siempre está habilitado
+    'Mid': isJrCompleted, // Mid depende de Jr
+    'Sr': isMidCompleted, // Sr depende de Mid
   };
 });

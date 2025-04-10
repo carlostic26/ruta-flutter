@@ -8,12 +8,12 @@ class CheckModuleAvailability {
 
   Future<bool> isModuleEnabled(String moduleName) async {
     switch (moduleName) {
-      case 'jr':
+      case 'Jr':
         return true; // El módulo JR siempre está disponible
-      case 'md':
-        return await sharedPreferencesService.isExamCompleted('jr');
-      case 'sr':
-        return await sharedPreferencesService.isExamCompleted('md');
+      case 'Mid':
+        return await sharedPreferencesService.isExamCompleted('Jr');
+      case 'Sr':
+        return await sharedPreferencesService.isExamCompleted('Mid');
       default:
         return false;
     }

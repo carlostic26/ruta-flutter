@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/detail/presentation/screens/detail_screen.dart';
+import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
 class ItemSubtopicWidget extends ConsumerWidget {
@@ -17,9 +18,18 @@ class ItemSubtopicWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isCompleted =
-        ref.watch(completedSubtopicsProvider).contains(subtopic.id);
+    // Obtener el módulo actual
+    final module = ref.watch(actualModuleProvider);
 
+    // Seleccionar el provider correcto según el módulo
+    final completedSubtopics = switch (module) {
+      'Jr' => ref.watch(jrCompletedSubtopicsProvider),
+      'Mid' => ref.watch(midCompletedSubtopicsProvider),
+      'Sr' => ref.watch(srCompletedSubtopicsProvider),
+      _ => throw Exception('Módulo no válido'),
+    };
+
+    final isCompleted = completedSubtopics.contains(subtopic.id);
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: GestureDetector(

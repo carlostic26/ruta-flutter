@@ -125,17 +125,6 @@ class ProgressRepositoryImpl implements ProgressRepository {
   }
 
   @override
-  Future<bool> isSubtopicCompleted(String subtopicId) async {
-    final db = await progressLocalDatabase;
-    final result = await db.query(
-      'progress',
-      where: 'subtopic_id = ?',
-      whereArgs: [subtopicId],
-    );
-    return result.isNotEmpty;
-  }
-
-  @override
   Future<bool> isTopicCompleted(
       String module, int levelId, String topicId) async {
     // Obtener todos los subtopics del topic
@@ -143,7 +132,7 @@ class ProgressRepositoryImpl implements ProgressRepository {
 
     // Verificar si todos los subtopics están completados
     for (final subtopic in subtopics) {
-      final isCompleted = await isSubtopicCompleted(subtopic.id!);
+      final isCompleted = await isSubtopicCompleted(module, subtopic.id!);
       if (!isCompleted) {
         return false; // Si algún subtopic no está completado, el topic no está completado
       }
@@ -151,7 +140,7 @@ class ProgressRepositoryImpl implements ProgressRepository {
 
     //print("Verificando subtopics del topic $topicId");
     for (final subtopic in subtopics) {
-      final isCompleted = await isSubtopicCompleted(subtopic.id!);
+      final isCompleted = await isSubtopicCompleted(module, subtopic.id!);
       //print("En impl, Subtopic ${subtopic.id}: ¿Completado? $isCompleted");
     }
 
@@ -159,11 +148,48 @@ class ProgressRepositoryImpl implements ProgressRepository {
   }
 
   @override
-  Future<List<String>> getAllCompletedSubtopics() async {
+  Future<bool> isSubtopicCompleted(String module, String subtopicId) async {
     final db = await progressLocalDatabase;
-    final result = await db.query('progress', columns: ['subtopic_id']);
+    final result = await db.query(
+      'progress',
+      where: 'module = ? AND subtopic_id = ?',
+      whereArgs: [module, subtopicId],
+    );
+    return result.isNotEmpty;
+  }
+
+  @override
+  Future<List<String>> getAllCompletedSubtopics(String module) async {
+    final db = await progressLocalDatabase;
+    final result = await db.query(
+      'progress',
+      columns: ['subtopic_id'],
+      where: 'module = ?',
+      whereArgs: [module],
+      distinct: true,
+    );
     return result.map((map) => map['subtopic_id'] as String).toList();
   }
+
+/*     @override
+  Future<List<String>> getAllCompletedTopics() async {
+    final db = await progressLocalDatabase;
+    final result = await db.query('progress', columns: ['topic_id']);
+    return result.map((map) => map['topic_id'] as String).toList();
+  }
+ */
+  @override
+  Future<List<String>> getAllCompletedTopics(String module) async {
+    final db = await progressLocalDatabase;
+    final result = await db.query(
+      'progress',
+      columns: ['topic_id'],
+      where: 'module = ?',
+      whereArgs: [module],
+    );
+    return result.map((map) => map['topic_id'] as String).toList();
+  }
+
   //---- Score
 
   //en este metodo se obtiene los puntajes ya creados por los casos de uso de progress
@@ -296,13 +322,6 @@ class ProgressRepositoryImpl implements ProgressRepository {
   ''', [level, module]);
 
     return result.first['count'] as int;
-  }
-
-  @override
-  Future<List<String>> getAllCompletedTopics() async {
-    final db = await progressLocalDatabase;
-    final result = await db.query('progress', columns: ['topic_id']);
-    return result.map((map) => map['topic_id'] as String).toList();
   }
 
   /// Retorna el puntaje total obtenido por el usuario para el módulo indicado,

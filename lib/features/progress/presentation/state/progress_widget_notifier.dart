@@ -3,13 +3,16 @@ import 'package:ruta_flutter/features/progress/domain/repositories/progress_repo
 
 class ProgressNotifier extends StateNotifier<List<String>> {
   final ProgressRepository _repository;
+  final String _module; // Añadir campo para el módulo
 
-  ProgressNotifier(this._repository) : super([]) {
+  ProgressNotifier(this._repository, this._module) : super([]) {
     _loadCompletedSubtopics();
   }
 
   Future<void> _loadCompletedSubtopics() async {
-    final completedSubtopics = await _repository.getAllCompletedSubtopics();
+    // Pasar el módulo como parámetro
+    final completedSubtopics =
+        await _repository.getAllCompletedSubtopics(_module);
     state = completedSubtopics;
   }
 

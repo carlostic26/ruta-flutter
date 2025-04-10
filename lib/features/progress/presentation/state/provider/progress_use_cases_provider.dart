@@ -12,14 +12,17 @@ import 'package:ruta_flutter/features/progress/domain/use_cases/is_topic_complet
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
-// Proveedor del repositorio de progreso
+/// Proveedor del repositorio de progreso que centraliza el acceso a datos
 final progressRepositoryProvider = Provider<ProgressRepository>((ref) {
   final subtopicRepository = ref.read(subtopicRepositoryProvider);
   final topicRepository = ref.read(topicRepositoryProvider);
   return ProgressRepositoryImpl(subtopicRepository, topicRepository);
 });
 
-// Proveedor de los casos de uso
+/* ************************************************************************
+ *                     PROVEEDORES DE CASOS DE USO                        *
+ ************************************************************************ */
+
 final createProgressBySubtopicUseCaseProvider =
     Provider<CreateProgressBySubtopicUseCase>((ref) {
   final repository = ref.read(progressRepositoryProvider);
@@ -36,7 +39,9 @@ final isTopicCompletedUseCaseProvider =
   return IsTopicCompletedUseCase(progressRepository);
 });
 
-// --- Score
+/* ************************************************************************
+ *                     PROVEEDORES RELACIONADOS A SCORE                   *
+ ************************************************************************ */
 
 final getUserTotalScoreByModuleUseCaseProvider =
     Provider<GetUserTotalScoreByModuleUseCase>((ref) {
@@ -65,47 +70,107 @@ final getCircularProgressPercentageByModuleUseCaseProvider =
   return GetCircularProgressPercentageByModuleUseCase(progressRepository);
 });
 
-// --- StateNotifier para topics completados
+/* ************************************************************************
+ *           STATENOTIFIERS Y PROVEEDORES PARA MÓDULOS                   *
+ ************************************************************************ */
 
-class CompletedTopicsUseCaseNotifier extends StateNotifier<List<String>> {
+/// StateNotifier para manejar los topics completados por módulo
+class CompletedTopicsNotifier extends StateNotifier<List<String>> {
   final ProgressRepository _repository;
+  final String _module;
 
-  CompletedTopicsUseCaseNotifier(this._repository) : super([]) {
+  CompletedTopicsNotifier(this._repository, this._module) : super([]) {
     _loadCompletedTopics();
   }
 
-  Future<void> reset() async {
-    state = []; // Vacía la lista de topics completados
-    // forzar recarga
-    await _loadCompletedTopics();
-  }
-
   Future<void> _loadCompletedTopics() async {
-    final completedTopics = await _repository.getAllCompletedTopics();
+    final completedTopics = await _repository.getAllCompletedTopics(_module);
     state = completedTopics;
   }
 
   Future<void> checkAndUpdateTopicCompletion(
-      String topicId, String module, int levelId) async {
+      String topicId, int levelId) async {
     final isCompleted =
-        await _repository.isTopicCompleted(module, levelId, topicId);
-
+        await _repository.isTopicCompleted(_module, levelId, topicId);
     if (isCompleted && !state.contains(topicId)) {
-      state = [...state, topicId]; // Marcar el topic como completado
+      state = [...state, topicId];
     } else if (!isCompleted && state.contains(topicId)) {
-      state = state
-          .where((id) => id != topicId)
-          .toList(); // Remover el topic si ya no está completado
+      state = state.where((id) => id != topicId).toList();
     }
+  }
 
-    print(
-        "Verificando topic en progress use case provider $topicId: ¿Completado? $isCompleted");
+  Future<void> reset() async {
+    state = []; // Limpia la lista de topics completados
+    await _loadCompletedTopics(); // Vuelve a cargar desde la base de datos
   }
 }
 
-// Proveedor para el StateNotifier de topics completados
-final completedTopicsProviderByModule =
-    StateNotifierProvider<CompletedTopicsUseCaseNotifier, List<String>>((ref) {
-  final progressRepository = ref.read(progressRepositoryProvider);
-  return CompletedTopicsUseCaseNotifier(progressRepository);
+/// StateNotifier para manejar los subtopics completados por módulo
+class CompletedSubtopicsNotifier extends StateNotifier<List<String>> {
+  final ProgressRepository _repository;
+  final String _module;
+
+  CompletedSubtopicsNotifier(this._repository, this._module) : super([]) {
+    _loadCompletedSubtopics();
+  }
+
+  Future<void> _loadCompletedSubtopics() async {
+    final completedSubtopics =
+        await _repository.getAllCompletedSubtopics(_module);
+    state = completedSubtopics;
+  }
+
+  void markSubtopicAsCompleted(String subtopicId) {
+    if (!state.contains(subtopicId)) {
+      state = [...state, subtopicId];
+    }
+  }
+
+  Future<void> reset() async {
+    state = []; // Limpia la lista de subtopics completados
+    await _loadCompletedSubtopics(); // Vuelve a cargar desde la base de datos
+  }
+}
+
+/* ************************************************************************
+ *              PROVEEDORES BASE (FAMILY) POR MÓDULO                     *
+ ************************************************************************ */
+
+final completedTopicsProvider =
+    StateNotifierProvider.family<CompletedTopicsNotifier, List<String>, String>(
+        (ref, module) {
+  final repository = ref.read(progressRepositoryProvider);
+  return CompletedTopicsNotifier(repository, module);
 });
+
+final completedSubtopicsProvider = StateNotifierProvider.family<
+    CompletedSubtopicsNotifier, List<String>, String>((ref, module) {
+  final repository = ref.read(progressRepositoryProvider);
+  return CompletedSubtopicsNotifier(repository, module);
+});
+
+/* ************************************************************************
+ *              PROVEEDORES ESPECÍFICOS POR MÓDULO                       *
+ ************************************************************************ */
+
+// ------------------------- PARA TOPICS ---------------------------------
+
+final jrCompletedTopicsProvider =
+    Provider<List<String>>((ref) => ref.watch(completedTopicsProvider('Jr')));
+
+final midCompletedTopicsProvider =
+    Provider<List<String>>((ref) => ref.watch(completedTopicsProvider('Mid')));
+
+final srCompletedTopicsProvider =
+    Provider<List<String>>((ref) => ref.watch(completedTopicsProvider('Sr')));
+
+// ----------------------- PARA SUBTOPICS -------------------------------
+
+final jrCompletedSubtopicsProvider = Provider<List<String>>(
+    (ref) => ref.watch(completedSubtopicsProvider('Jr')));
+
+final midCompletedSubtopicsProvider = Provider<List<String>>(
+    (ref) => ref.watch(completedSubtopicsProvider('Mid')));
+
+final srCompletedSubtopicsProvider = Provider<List<String>>(
+    (ref) => ref.watch(completedSubtopicsProvider('Sr')));

@@ -131,7 +131,12 @@ class ModuleWidget extends ConsumerWidget {
   }) {
     return GestureDetector(
       onTap: isEnabled
-          ? () => goToPathScreen(context, module, ref)
+          ? () {
+              // Normaliza el módulo antes de navegar
+              final normalizedModule = module;
+              ref.read(actualModuleProvider.notifier).state = normalizedModule;
+              goToPathScreen(context, normalizedModule, ref);
+            }
           : () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -176,8 +181,7 @@ class ModuleWidget extends ConsumerWidget {
                     highlightColor: Colors.blue.withOpacity(0.2),
                     iconSize: 60,
                     onPressed: () {
-                      ref.read(actualModuleProvider.notifier).state =
-                          'Flutter $module';
+                      ref.read(actualModuleProvider.notifier).state = module;
                       goToPathScreen(context, module, ref);
                     },
                     icon: const Icon(
@@ -358,9 +362,17 @@ class ModuleWidget extends ConsumerWidget {
   }
 
   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
-    ref.read(actualModuleProvider.notifier).state = module;
+    // Normaliza el módulo a minúsculas
+    final normalizedModule = module;
+
+    // Establece el módulo actual
+    ref.read(actualModuleProvider.notifier).state = normalizedModule;
+
     // Cuando cambies de módulo, carga sus niveles completados
-    ref.read(completedLevelsProvider.notifier).loadModuleLevels(module);
+    ref
+        .read(completedLevelsProvider.notifier)
+        .loadModuleLevels(normalizedModule);
+
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),
