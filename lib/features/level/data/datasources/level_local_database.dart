@@ -33,7 +33,7 @@ class LevelLocalDatabaseHelper {
       'is_completed': 1,
     });
 
-    await db.insert('level', {
+/*     await db.insert('level', {
       'module': 'Jr',
       'num_order': 2,
       'title': 'Configuración del Entorno de Desarrollo',
@@ -111,7 +111,7 @@ class LevelLocalDatabaseHelper {
           "Revisa los pasos necesarios para desplegar aplicaciones en Google Play Store y Apple App Store. Explora cómo publicar tu aplicación en las tiendas oficiales.",
       'points': 0,
       'is_completed': 1,
-    });
+    }); */
   }
 
   Future<void> _insertLevelsMid(db) async {
@@ -135,7 +135,7 @@ class LevelLocalDatabaseHelper {
       'is_completed': 0,
     });
 
-    await db.insert('level', {
+/*     await db.insert('level', {
       'module': 'Mid',
       'num_order': 3,
       'title': 'Principios de Diseño',
@@ -214,6 +214,7 @@ class LevelLocalDatabaseHelper {
       'points': 0,
       'is_completed': 0,
     });
+   */
   }
 
   Future<void> _insertLevelsSr(db) async {
@@ -236,7 +237,7 @@ class LevelLocalDatabaseHelper {
       'points': 0,
       'is_completed': 0,
     });
-
+/* 
     await db.insert('level', {
       'module': 'Sr',
       'num_order': 3,
@@ -276,5 +277,6 @@ class LevelLocalDatabaseHelper {
       'points': 0,
       'is_completed': 0,
     });
+ */
   }
 }

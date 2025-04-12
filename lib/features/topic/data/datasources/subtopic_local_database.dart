@@ -943,7 +943,7 @@ class SubtopicLocalDatabaseHelper {
     // Topic 2: Futures - Subtopics
     await db.insert('subtopic', {
       'topic_id': 't02l02', // Topic 2 del Nivel 2
-      'id': 's01t02', // Subtopic 1 del Topic 2
+      'id': 's01t02l02', // Subtopic 1 del Topic 2
       'module': 'Mid',
       'title': 'Introducción a los Futures en Dart',
     });

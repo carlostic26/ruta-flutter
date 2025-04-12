@@ -12,7 +12,6 @@ import 'package:ruta_flutter/features/level/presentation/state/completed_levels_
 import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
   const DetailScreen({super.key});
@@ -42,17 +41,19 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     final levelId = ref.read(actualLevelIdProvider);
     final topicId = ref.read(topicIdProvider);
     final subtopicId = ref.read(subtopicIdProvider);
-    final getLevelUseCase = ref.read(getLevelUseCaseProvider);
 
+    // Obtener los notifiers usando los providers family
     final completedSubtopicsNotifier =
         ref.read(completedSubtopicsProvider(module).notifier);
     final topicsNotifier = ref.read(completedTopicsProvider(module).notifier);
     final completedLevelsNotifier = ref.read(completedLevelsProvider.notifier);
 
-    if (await progressRepository.isSubtopicCompleted(module, subtopicId))
-      return;
+    // Verificar si el subtopic ya está completado
+    final isCompleted =
+        await progressRepository.isSubtopicCompleted(module, subtopicId);
+    if (isCompleted) return;
 
-    _timer = Timer(const Duration(seconds: 8), () async {
+    _timer = Timer(const Duration(seconds: 1), () async {
       try {
         await progressRepository.createProgressBySubtopic(
           module: module,
@@ -67,17 +68,6 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         await completedLevelsNotifier.checkAndUpdateLevelCompletionByModule(
             levelId, module);
 
-        // Verificar si se completó el último nivel
-        final levels = await getLevelUseCase.call(module);
-        final completedLevels =
-            completedLevelsNotifier.getCompletedLevelsForModule(module);
-
-        if (levels.length == completedLevels.length) {
-          // Guardar en SharedPreferences que se completó el módulo
-          final prefs = await SharedPreferences.getInstance();
-          await prefs.setBool('${module}_completed', true);
-        }
-
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -91,7 +81,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Error al guardar el progreso: $e'),
-              duration: const Duration(seconds: 3),
+              duration: const Duration(seconds: 1),
             ),
           );
         }
