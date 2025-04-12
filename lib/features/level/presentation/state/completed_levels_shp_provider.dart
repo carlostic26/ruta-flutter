@@ -19,7 +19,25 @@ class CompletedLevelsNotifier extends StateNotifier<Map<String, List<int>>> {
   final ProgressRepository _repository;
   final SharedPreferences _prefs;
 
-  CompletedLevelsNotifier(this._repository, this._prefs) : super({});
+  CompletedLevelsNotifier(this._repository, this._prefs) : super({}) {
+    // Cargar todos los módulos al inicializar
+    _loadAllModules();
+  }
+
+  Future<void> _loadAllModules() async {
+    // Lista de todos los módulos disponibles
+    const modules = ['Jr', 'Mid', 'Sr'];
+
+    // Cargar los niveles completados para cada módulo
+    final Map<String, List<int>> loadedLevels = {};
+
+    for (final module in modules) {
+      final completed = await _repository.getAllCompletedLevels(module);
+      loadedLevels[module] = completed;
+    }
+
+    state = loadedLevels;
+  }
 
   Future<void> checkAndUpdateLevelCompletionByModule(
       int levelId, String module) async {

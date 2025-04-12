@@ -2,15 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/home_drawer_widget.dart';
 import 'package:ruta_flutter/features/home/presentation/widgets/module_widget.dart';
+import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:ruta_flutter/features/level/presentation/state/module_status_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final completedLevels = ref.watch(completedLevelsProvider);
+    final jrModuleStatus = ref.watch(jrModuleStatusProvider);
+    final middleModuleStatus = ref.watch(middleModuleStatusProvider);
+
+    // Mostrar loading mientras se cargan los datos
+    if (jrModuleStatus.isLoading || middleModuleStatus.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     double heightScreen = MediaQuery.of(context).size.height;
     double widthScreen = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(

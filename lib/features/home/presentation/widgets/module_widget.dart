@@ -21,6 +21,9 @@ class ModuleWidget extends ConsumerWidget {
     final jrModuleStatus = ref.watch(jrModuleStatusProvider);
     final middleModuleStatus = ref.watch(middleModuleStatusProvider);
 
+    //se observa este provider para habilitar el sig modulo
+    ref.watch(completedLevelsProvider);
+
     String jrDescription =
         'Recorre desde cero los fundamentos esenciales de Flutter y Dart. Repasa la sintaxis, widgets y estructura básica. Gestionar activos y almacenamiento local. Este es el punto de partida perfecto para nuevos desarrolladores.';
     String midDescription =
