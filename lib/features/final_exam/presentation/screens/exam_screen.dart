@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/timer_widget.dart';
@@ -9,6 +10,15 @@ class ExamScreen extends ConsumerStatefulWidget {
   final String moduleId;
 
   const ExamScreen({required this.moduleId, super.key});
+
+  static Future<void> navigate(BuildContext context, String moduleId) {
+    return Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StartExamScreen(moduleId: moduleId),
+      ),
+    );
+  }
 
   @override
   ConsumerState<ExamScreen> createState() => _ExamScreenState();
@@ -44,14 +54,17 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
       );
     }
 
-    return WillPopScope(
-      onWillPop: () async {
-        ref.read(examStateProvider.notifier).resetExamState();
-        return true;
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          ref.read(examStateProvider.notifier).resetExamState();
+          Navigator.pop(context);
+        }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Jr'),
+          title: Text(widget.moduleId),
           leading: IconButton(
             icon: const Icon(Icons.highlight_off, color: Colors.white),
             onPressed: () {

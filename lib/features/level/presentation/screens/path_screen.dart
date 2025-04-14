@@ -93,9 +93,11 @@ class _PathScreenState extends ConsumerState<PathScreen> {
       context: context,
       barrierDismissible: true,
       builder: (context) => AlertDialog(
-        title: const Text(
-          '¡Logro Desbloqueado!',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+        title: const Center(
+          child: Text(
+            '¡Logro Desbloqueado!',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ruta_flutter/core/app_config.dart';
 import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:ruta_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/app_support.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/delete_progress.dart';
 import 'package:ruta_flutter/features/home/presentation/screens/usability_screen.dart';
@@ -89,28 +90,38 @@ class HomeDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const ExamScreen(
+                    builder: (context) => const StartExamScreen(
                           moduleId: 'Jr',
                         )),
               );
             },
           ),
-          //TODO: segun el caso de uso que determine cuando el usuario haya terminado el modulo jr, se habilita el modulo mid
           ListTile(
             leading: const Icon(Icons.checklist_rtl),
             title: const Text('Examen Flutter Mid'),
             onTap: () {
-              // Navegar a otra pantalla
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const StartExamScreen(
+                          moduleId: 'Mid',
+                        )),
+              );
             },
           ),
           ListTile(
             leading: const Icon(Icons.checklist_rtl),
             title: const Text('Examen Flutter Sr'),
             onTap: () {
-              // Navegar a otra pantalla
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const StartExamScreen(
+                          moduleId: 'Sr',
+                        )),
+              );
             },
           ),
-
           ListTile(
             leading: const Icon(Icons.delete_sweep),
             title: const Text('Eliminar progresos'),
@@ -121,7 +132,6 @@ class HomeDrawer extends StatelessWidget {
               );
             },
           ),
-
           SizedBox(
             height: heightScreen * 0.02,
           ),
