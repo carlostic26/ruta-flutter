@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/widgets/generate_route_path_widget.dart';
-import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/widgets/generate_route_path_widget.dart';
+import 'package:rutas_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 
 class PathScreen extends ConsumerStatefulWidget {
   const PathScreen({super.key});

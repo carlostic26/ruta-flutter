@@ -1,5 +1,5 @@
-import 'package:ruta_flutter/features/topic/data/model/subtopic_model.dart';
-import 'package:ruta_flutter/features/topic/domain/repositories/subtopic_repository.dart';
+import 'package:rutas_flutter/features/topic/data/model/subtopic_model.dart';
+import 'package:rutas_flutter/features/topic/domain/repositories/subtopic_repository.dart';
 
 class GetSubtopicUseCase {
   late final SubtopicRepository repository;

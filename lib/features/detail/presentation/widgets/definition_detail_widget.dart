@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/common/domain/data/services/parse_inline_code_span_service.dart';
-import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/image_detail_provider.dart';
-import 'package:ruta_flutter/features/detail/presentation/widgets/image_loading_widget.dart';
+import 'package:rutas_flutter/features/common/domain/data/services/parse_inline_code_span_service.dart';
+import 'package:rutas_flutter/features/detail/data/models/detail_model.dart';
+import 'package:rutas_flutter/features/detail/presentation/state/image_detail_provider.dart';
+import 'package:rutas_flutter/features/detail/presentation/widgets/image_loading_widget.dart';
 
 class DefinitionDetailWidget extends ConsumerStatefulWidget {
   const DefinitionDetailWidget({

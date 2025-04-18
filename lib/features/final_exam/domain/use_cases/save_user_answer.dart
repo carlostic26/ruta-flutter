@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/final_exam/domain/repositories/exam_repository.dart';
+import 'package:rutas_flutter/features/final_exam/domain/repositories/exam_repository.dart';
 
 class SaveUserAnswer {
   final ExamRepository repository;

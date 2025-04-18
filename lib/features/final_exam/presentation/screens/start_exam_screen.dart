@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/start_exam_provider.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/start_exam_provider.dart';
 
 class StartExamScreen extends ConsumerStatefulWidget {
   final String moduleId;

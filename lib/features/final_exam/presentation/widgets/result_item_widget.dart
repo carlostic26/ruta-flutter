@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/features/final_exam/domain/entities/exam_question.dart';
+import 'package:rutas_flutter/features/final_exam/domain/entities/exam_question.dart';
 
 class ResultItemWidget extends StatelessWidget {
   final ExamQuestion question;

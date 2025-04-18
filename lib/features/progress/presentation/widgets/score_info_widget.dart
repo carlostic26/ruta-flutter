@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/count_levels_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/start_exam_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/widgets/circular_progress_widget.dart';
-import 'package:ruta_flutter/features/progress/presentation/widgets/score_static_widget.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/count_levels_use_case_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/start_exam_provider.dart';
+import 'package:rutas_flutter/features/progress/presentation/widgets/circular_progress_widget.dart';
+import 'package:rutas_flutter/features/progress/presentation/widgets/score_static_widget.dart';
 
 class ScoreInfoWidget extends ConsumerWidget {
   final String module;

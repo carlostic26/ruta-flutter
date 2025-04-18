@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 
 // Este archivo queda obsoleto ya que todo está centralizado en progress_use_cases_provider.dart
 // Se puede eliminar este archivo o dejarlo como legacy con esta nota:

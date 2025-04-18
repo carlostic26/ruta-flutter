@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/core/database/database_helper.dart';
-import 'package:ruta_flutter/core/theme/theme_manager.dart';
-import 'package:ruta_flutter/core/theme/theme_notifier.dart';
-import 'package:ruta_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/loading/presentation/screens/loading_screen.dart';
-import 'package:ruta_flutter/features/progress/data/datasources/progress_local_database.dart';
+import 'package:rutas_flutter/core/database/database_helper.dart';
+import 'package:rutas_flutter/core/theme/theme_manager.dart';
+import 'package:rutas_flutter/core/theme/theme_notifier.dart';
+import 'package:rutas_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
+import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:rutas_flutter/features/loading/presentation/screens/loading_screen.dart';
+import 'package:rutas_flutter/features/progress/data/datasources/progress_local_database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

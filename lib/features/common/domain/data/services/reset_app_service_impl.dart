@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/common/domain/services/reset_app_service.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/progress/data/datasources/progress_local_database.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/common/domain/services/reset_app_service.dart';
+import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/progress/data/datasources/progress_local_database.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 

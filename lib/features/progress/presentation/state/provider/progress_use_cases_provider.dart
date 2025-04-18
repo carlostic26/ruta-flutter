@@ -1,16 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/progress/data/repository/progress_repository_impl.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/create_progress_by_subtopic_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_circular_progress_percentage_by_module_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_scores_progress_by_module_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_total_score_by_level.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/get_user_score_by_module_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/is_subtopic_completed_use_case.dart';
-import 'package:ruta_flutter/features/progress/domain/use_cases/is_topic_completed_use_case.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/progress/data/repository/progress_repository_impl.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/create_progress_by_subtopic_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_circular_progress_percentage_by_module_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_level_progress_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_scores_progress_by_module_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_total_score_by_level.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/get_user_score_by_module_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/is_subtopic_completed_use_case.dart';
+import 'package:rutas_flutter/features/progress/domain/use_cases/is_topic_completed_use_case.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
 /// Proveedor del repositorio de progreso que centraliza el acceso a datos
 final progressRepositoryProvider = Provider<ProgressRepository>((ref) {

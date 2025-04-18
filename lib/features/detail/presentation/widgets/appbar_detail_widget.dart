@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/detail_sections_state.dart';
+import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
 
 class AppBarDetailWidget extends ConsumerWidget {
   const AppBarDetailWidget({

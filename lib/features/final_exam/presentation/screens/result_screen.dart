@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/result_item_widget.dart';
 
 class ResultsScreen extends ConsumerStatefulWidget {

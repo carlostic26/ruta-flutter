@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
 
 class ProgressNotifier extends StateNotifier<List<String>> {
   final ProgressRepository _repository;

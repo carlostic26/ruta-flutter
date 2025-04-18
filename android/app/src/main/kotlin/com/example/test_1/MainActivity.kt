@@ -1,4 +1,4 @@
-package com.example.ruta_flutter
+package com.example.rutas_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
-import 'package:ruta_flutter/core/database/database_helper.dart';
-import 'package:ruta_flutter/features/level/data/models/level_model.dart';
-import 'package:ruta_flutter/features/level/domain/repositories/level_repository.dart';
+import 'package:rutas_flutter/core/database/database_helper.dart';
+import 'package:rutas_flutter/features/level/data/models/level_model.dart';
+import 'package:rutas_flutter/features/level/domain/repositories/level_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class LevelRepositoryImpl implements LevelRepository {

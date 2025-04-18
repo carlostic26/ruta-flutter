@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/home_modulos_screen.dart';
-import 'package:ruta_flutter/features/loading/presentation/screens/welcome_screen.dart';
-import 'package:ruta_flutter/features/loading/presentation/state/button_loading_state_provider.dart';
+import 'package:rutas_flutter/features/home/presentation/screens/home_modulos_screen.dart';
+import 'package:rutas_flutter/features/loading/presentation/screens/welcome_screen.dart';
+import 'package:rutas_flutter/features/loading/presentation/state/button_loading_state_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoadingScreen extends ConsumerWidget {

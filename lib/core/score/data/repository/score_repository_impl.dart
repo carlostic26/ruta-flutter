@@ -1,6 +1,6 @@
 // data/repository/score_repository_impl.dart
-import 'package:ruta_flutter/core/database/database_helper.dart';
-import 'package:ruta_flutter/core/score/domain/repository/score_repository.dart';
+import 'package:rutas_flutter/core/database/database_helper.dart';
+import 'package:rutas_flutter/core/score/domain/repository/score_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ScoreRepositoryImpl implements ScoreRepository {

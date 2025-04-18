@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/progress/domain/entities/progress_entity.dart';
+import 'package:rutas_flutter/features/progress/domain/entities/progress_entity.dart';
 
 class ProgressModel extends ProgressEntity {
   ProgressModel(

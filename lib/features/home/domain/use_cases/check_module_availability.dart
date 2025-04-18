@@ -1,5 +1,5 @@
 // lib/features/home/domain/use_cases/check_module_availability.dart
-import 'package:ruta_flutter/core/services/shared_preferences_service.dart';
+import 'package:rutas_flutter/core/services/shared_preferences_service.dart';
 
 class CheckModuleAvailability {
   final SharedPreferencesService sharedPreferencesService;

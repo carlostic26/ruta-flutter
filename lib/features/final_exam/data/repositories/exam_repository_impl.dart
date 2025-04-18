@@ -1,7 +1,7 @@
-import 'package:ruta_flutter/features/final_exam/domain/entities/exam_question.dart';
-import 'package:ruta_flutter/features/final_exam/domain/entities/exam_result.dart';
-import 'package:ruta_flutter/features/final_exam/domain/entities/user_answer.dart';
-import 'package:ruta_flutter/features/final_exam/domain/repositories/exam_repository.dart';
+import 'package:rutas_flutter/features/final_exam/domain/entities/exam_question.dart';
+import 'package:rutas_flutter/features/final_exam/domain/entities/exam_result.dart';
+import 'package:rutas_flutter/features/final_exam/domain/entities/user_answer.dart';
+import 'package:rutas_flutter/features/final_exam/domain/repositories/exam_repository.dart';
 import '../datasources/local_exam_data_source.dart';
 
 class ExamRepositoryImpl implements ExamRepository {

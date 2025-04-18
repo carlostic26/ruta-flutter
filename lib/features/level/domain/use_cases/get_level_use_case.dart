@@ -1,5 +1,5 @@
-import 'package:ruta_flutter/features/level/data/models/level_model.dart';
-import 'package:ruta_flutter/features/level/domain/repositories/level_repository.dart';
+import 'package:rutas_flutter/features/level/data/models/level_model.dart';
+import 'package:rutas_flutter/features/level/domain/repositories/level_repository.dart';
 
 class GetLevelUseCase {
   late final LevelRepository repository;

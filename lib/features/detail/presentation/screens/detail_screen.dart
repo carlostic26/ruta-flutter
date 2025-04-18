@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/detail_sections_state.dart';
-import 'package:ruta_flutter/features/detail/presentation/state/provider/get_detail_use_case_provider.dart';
-import 'package:ruta_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
-import 'package:ruta_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
-import 'package:ruta_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
-import 'package:ruta_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/detail/data/models/detail_model.dart';
+import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
+import 'package:rutas_flutter/features/detail/presentation/state/provider/get_detail_use_case_provider.dart';
+import 'package:rutas_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
+import 'package:rutas_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
+import 'package:rutas_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
   const DetailScreen({super.key});

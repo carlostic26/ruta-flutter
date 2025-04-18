@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
 
 class IsTopicCompletedUseCase {
   final ProgressRepository _progressRepository;

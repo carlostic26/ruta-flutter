@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/result_screen.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/timer_widget.dart';
 

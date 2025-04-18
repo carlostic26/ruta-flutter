@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/core/score/domain/use_cases/crud_score_use_cases.dart';
+import 'package:rutas_flutter/core/score/domain/use_cases/crud_score_use_cases.dart';
 
 //Este es un caso de uso para el tiempo, que usa otro caso de uso para registrar una puntuación después de un retraso
 class RegisterScoreAfterDelayUseCase {

@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/topic/domain/entities/topic_entity.dart';
+import 'package:rutas_flutter/features/topic/domain/entities/topic_entity.dart';
 
 class TopicModel extends Topic {
   TopicModel({

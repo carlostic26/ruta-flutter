@@ -1,5 +1,5 @@
-import 'package:ruta_flutter/features/progress/data/model/progress_model.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/data/model/progress_model.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
 
 class GetAllProgressTopicsByModuleUseCase {
   final ProgressRepository _progressRepository;

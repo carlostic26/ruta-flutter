@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/darcula.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/detail/data/models/detail_model.dart';
+import 'package:rutas_flutter/features/detail/data/models/detail_model.dart';
 
 class CodeDetailWidget extends ConsumerStatefulWidget {
   const CodeDetailWidget({super.key, required this.detail});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/home_drawer_widget.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/module_widget.dart';
-import 'package:ruta_flutter/features/level/presentation/state/module_status_provider.dart';
+import 'package:rutas_flutter/features/home/presentation/widgets/home_drawer_widget.dart';
+import 'package:rutas_flutter/features/home/presentation/widgets/module_widget.dart';
+import 'package:rutas_flutter/features/level/presentation/state/module_status_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

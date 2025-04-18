@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ruta_flutter/core/app_config.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/exam_screen.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/app_support.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/delete_progress.dart';
-import 'package:ruta_flutter/features/home/presentation/screens/usability_screen.dart';
-import 'package:ruta_flutter/features/progress/presentation/screens/progres_score_screen.dart';
+import 'package:rutas_flutter/core/app_config.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
+import 'package:rutas_flutter/features/home/presentation/screens/app_support.dart';
+import 'package:rutas_flutter/features/home/presentation/screens/delete_progress.dart';
+import 'package:rutas_flutter/features/home/presentation/screens/usability_screen.dart';
+import 'package:rutas_flutter/features/progress/presentation/screens/progres_score_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeDrawer extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/core/providers/shared_preferences_provider.dart';
+import 'package:rutas_flutter/core/providers/shared_preferences_provider.dart';
 
 final moduleStateProvider = FutureProvider<Map<String, bool>>((ref) async {
   final isInitialized = ref.read(sharedPreferencesInitializedProvider);

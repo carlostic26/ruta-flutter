@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/progress/presentation/widgets/score_info_widget.dart';
+import 'package:rutas_flutter/features/progress/presentation/widgets/score_info_widget.dart';
 
 class ProgressScoreScreen extends ConsumerWidget {
   const ProgressScoreScreen({super.key});

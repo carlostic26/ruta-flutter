@@ -1,9 +1,9 @@
-import 'package:ruta_flutter/core/database/database_helper.dart';
-import 'package:ruta_flutter/features/progress/data/datasources/progress_local_database.dart';
-import 'package:ruta_flutter/features/progress/data/model/progress_model.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
-import 'package:ruta_flutter/features/topic/domain/repositories/subtopic_repository.dart';
-import 'package:ruta_flutter/features/topic/domain/repositories/topic_repository.dart';
+import 'package:rutas_flutter/core/database/database_helper.dart';
+import 'package:rutas_flutter/features/progress/data/datasources/progress_local_database.dart';
+import 'package:rutas_flutter/features/progress/data/model/progress_model.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/topic/domain/repositories/subtopic_repository.dart';
+import 'package:rutas_flutter/features/topic/domain/repositories/topic_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 

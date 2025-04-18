@@ -14,7 +14,7 @@ class ProgressLocalDatabaseHelper {
   Future<Database> _initDatabase() async {
     try {
       final dbPath = await getDatabasesPath();
-      final String dbName = 'ruta_flutter_progress_v$dbVersion.db';
+      final String dbName = 'rutas_flutter_progress_v$dbVersion.db';
 
       return await openDatabase(
         join(dbPath, dbName),

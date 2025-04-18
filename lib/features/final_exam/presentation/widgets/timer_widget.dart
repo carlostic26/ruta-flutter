@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/screens/result_screen.dart';
-import 'package:ruta_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/screens/result_screen.dart';
+import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
 
 class TimerWidget extends ConsumerStatefulWidget {
   const TimerWidget({super.key});

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/level/presentation/screens/path_screen.dart';
-import 'package:ruta_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/module_status_provider.dart';
-import 'package:ruta_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
-import 'package:ruta_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
+import 'package:rutas_flutter/features/level/presentation/screens/path_screen.dart';
+import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/module_status_provider.dart';
+import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/home/presentation/widgets/spacer_home_widget.dart';
 
 class ModuleWidget extends ConsumerWidget {
   const ModuleWidget({

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/progress/domain/repositories/progress_repository.dart';
+import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ruta_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
+import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('SharedPreferencesProvider should be overridden');

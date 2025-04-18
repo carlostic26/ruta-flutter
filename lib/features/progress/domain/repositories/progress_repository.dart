@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/progress/data/model/progress_model.dart';
+import 'package:rutas_flutter/features/progress/data/model/progress_model.dart';
 
 abstract class ProgressRepository {
   Future<void> createProgressBySubtopic({

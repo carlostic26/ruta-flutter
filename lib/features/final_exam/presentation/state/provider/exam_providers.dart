@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ruta_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
-import 'package:ruta_flutter/features/final_exam/data/repositories/exam_repository_impl.dart';
-import 'package:ruta_flutter/features/final_exam/domain/entities/exam_question.dart';
+import 'package:rutas_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
+import 'package:rutas_flutter/features/final_exam/data/repositories/exam_repository_impl.dart';
+import 'package:rutas_flutter/features/final_exam/domain/entities/exam_question.dart';
 
 // Proveedor para el DataSource
 final localExamDataSourceProvider = Provider<LocalExamDataSource>((ref) {

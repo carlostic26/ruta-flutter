@@ -1,4 +1,4 @@
-import 'package:ruta_flutter/features/topic/domain/entities/subtopic_entity.dart';
+import 'package:rutas_flutter/features/topic/domain/entities/subtopic_entity.dart';
 
 class SubtopicModel extends SubTopic {
   SubtopicModel({
