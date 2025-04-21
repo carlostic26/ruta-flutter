@@ -7,6 +7,7 @@ import 'package:rutas_flutter/features/level/data/models/level_model.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/widgets/confeti_widget.dart';
+import 'package:rutas_flutter/features/topic/presentation/screens/list_items_screen.dart';
 import 'package:rutas_flutter/features/topic/presentation/screens/topic_screen.dart';
 
 class GenerateLevelsRoutePathWidget extends ConsumerWidget {
@@ -270,7 +271,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const TopicScreen()),
+                        builder: (context) => const ListItemsScreen()),
                   );
                 },
               ),

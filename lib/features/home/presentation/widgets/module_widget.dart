@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/features/level/presentation/screens/path_screen.dart';
+import 'package:rutas_flutter/features/home/presentation/providers/navigation_home_page_state.dart';
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/state/module_status_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
@@ -143,7 +144,11 @@ class ModuleWidget extends ConsumerWidget {
           : () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Debes terminar primero el modulo anterior'),
+                  backgroundColor: Colors.red,
+                  content: Text(
+                    'Debes terminar primero el modulo anterior',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               );
             },
@@ -365,6 +370,17 @@ class ModuleWidget extends ConsumerWidget {
   }
 
   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
+    final normalizedModule = module;
+    ref.read(actualModuleProvider.notifier).state = normalizedModule;
+    ref
+        .read(completedLevelsProvider.notifier)
+        .loadModuleLevels(normalizedModule);
+
+    final navService = ref.read(navigationServiceProvider);
+    navService.navigateTo(1);
+  }
+
+/*   void goToPathScreen(BuildContext context, String module, WidgetRef ref) {
     // Normaliza el módulo a minúsculas
     final normalizedModule = module;
 
@@ -380,5 +396,5 @@ class ModuleWidget extends ConsumerWidget {
       context,
       MaterialPageRoute(builder: (context) => const PathScreen()),
     );
-  }
+  } */
 }

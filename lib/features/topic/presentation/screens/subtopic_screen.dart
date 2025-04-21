@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/topic/data/model/subtopic_model.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/completed_subtopic_state_notifier.dart';
+import 'package:rutas_flutter/features/topic/presentation/screens/list_items_screen.dart';
 import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:rutas_flutter/features/topic/presentation/widgets/item_subtopic_widget.dart';
@@ -16,7 +16,6 @@ class SubtopicScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final listSubtopicUseCase = ref.watch(getSubtopicUseCaseProvider);
     final topicId = ref.watch(topicIdProvider);
-    final titleTopic = ref.watch(topicTitleProvider);
     final module = ref.watch(actualModuleProvider);
 
     return FutureBuilder<List<SubtopicModel>>(
@@ -33,24 +32,6 @@ class SubtopicScreen extends ConsumerWidget {
         final subtopicList = snapshot.data!;
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              titleTopic.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-                fontFamily: 'Poppins',
-              ),
-            ),
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.arrow_back_ios),
-            ),
-            centerTitle: true,
-            foregroundColor: Colors.white,
-          ),
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
             child: Row(

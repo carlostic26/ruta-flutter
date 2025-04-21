@@ -15,25 +15,7 @@ class TopicScreen extends ConsumerWidget {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
     final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(actualModuleProvider);
-    final levelTitle = ref.watch(levelTitleProvider);
 
-/*     // Validación del módulo
-    final normalizedModule = module;
-    if (!['jr', 'mid', 'sr'].contains(normalizedModule)) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Error'),
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(Icons.arrow_back),
-          ),
-        ),
-        body: const Center(
-          child: Text('Módulo no válido. Por favor selecciona otro.'),
-        ),
-      );
-    }
- */
     // Obtener los topics completados según el módulo
     final completedTopics = switch (module) {
       'Jr' => ref.watch(jrCompletedTopicsProvider),
@@ -60,23 +42,6 @@ class TopicScreen extends ConsumerWidget {
             .length;
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              levelTitle.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'Poppins',
-                fontSize: 14,
-              ),
-            ),
-            leading: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.arrow_back_ios),
-            ),
-            centerTitle: true,
-            foregroundColor: Colors.white,
-          ),
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
             child: Row(

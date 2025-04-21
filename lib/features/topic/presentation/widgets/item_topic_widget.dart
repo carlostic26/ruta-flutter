@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:rutas_flutter/features/topic/data/model/topic_model.dart';
-import 'package:rutas_flutter/features/topic/presentation/screens/subtopic_screen.dart';
+import 'package:rutas_flutter/features/topic/presentation/screens/list_items_screen.dart';
 import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
 
 class ItemTopicWidget extends ConsumerWidget {
@@ -29,13 +29,18 @@ class ItemTopicWidget extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: GestureDetector(
-        onTap: () {
+/*         onTap: () {
           ref.read(topicIdProvider.notifier).state = topic.id!;
           ref.read(topicTitleProvider.notifier).state = topic.title!;
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const SubtopicScreen()),
           );
+        }, */
+        onTap: () {
+          ref.read(topicIdProvider.notifier).state = topic.id!;
+          ref.read(topicTitleProvider.notifier).state = topic.title!;
+          ref.read(currentPageProvider.notifier).state = 1;
         },
         child: Container(
           height: 50,

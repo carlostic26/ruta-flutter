@@ -43,7 +43,7 @@ Future<void> loadOpenAd() async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await MobileAds.instance.initialize();
+  await MobileAds.instance.initialize();
   LocalDatabaseHelper().getDatabase();
   ProgressLocalDatabaseHelper().getDatabase;
   LocalExamDataSource().getDatabase;

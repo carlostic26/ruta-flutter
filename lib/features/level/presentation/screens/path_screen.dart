@@ -1,8 +1,8 @@
-import 'dart:async';
-
+/* import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:rutas_flutter/features/home/presentation/providers/navigation_home_page_state.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/widgets/generate_route_path_widget.dart';
@@ -58,10 +58,12 @@ class _PathScreenState extends ConsumerState<PathScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios)),
+          onPressed: () {
+            final navService = ref.read(navigationServiceProvider);
+            navService.goBack();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.emoji_events),
@@ -118,7 +120,7 @@ class _PathScreenState extends ConsumerState<PathScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context); // Cerrar el diálogo
+                Navigator.pop(context);
                 switch (selectedModule) {
                   case 'Jr':
                     Navigator.push(
@@ -170,3 +172,4 @@ class _PathScreenState extends ConsumerState<PathScreen> {
     );
   }
 }
+ */
