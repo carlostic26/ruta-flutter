@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:rutas_flutter/core/ads/ad_banner_provider_detail.dart';
+import 'package:rutas_flutter/core/ads/banner/ad_banner_provider_detail.dart';
 import 'package:rutas_flutter/features/detail/presentation/screens/detail_screen.dart';
 import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
 import 'package:rutas_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
@@ -145,14 +145,6 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
             },
             icon: const Icon(Icons.arrow_back_ios),
           ),
-          /*   leading: IconButton(
-            onPressed: () {
-              ref.read(appBarSectionProvider.notifier).state =
-                  AppBarSection.definition;
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios),
-          ), */
         );
       default:
         return AppBar();

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:rutas_flutter/core/ads/banner/ad_banner_provider_exam.dart';
 import 'package:rutas_flutter/features/final_exam/presentation/screens/result_screen.dart';
 import 'package:rutas_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
 import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
@@ -33,18 +35,28 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
     super.initState();
     _pageController = PageController();
     ref.read(examStateProvider.notifier).loadQuestions(widget.moduleId);
+
+    // Inicializar el banner después de que el widget esté construido
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(adBannerProviderExam.notifier).loadAdaptiveAd(
+            context,
+            screenId: 'examScreen',
+          );
+    });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
     ref.read(examStateProvider.notifier).resetExamState();
+    ref.read(adBannerProviderExam.notifier).disposeCurrentAd();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final examState = ref.watch(examStateProvider);
+    final adState = ref.watch(adBannerProviderExam);
     final screenSize = MediaQuery.of(context).size;
 
     if (examState.questions.isEmpty) {
@@ -126,8 +138,7 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.fromLTRB(10, 10, 10, screenSize.height * 0.16),
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
                   child: SizedBox(
                     width: screenSize.width,
                     height: screenSize.height * 0.06,
@@ -158,8 +169,23 @@ class _ExamScreenState extends ConsumerState<ExamScreen> {
             ),
           ],
         ),
+        bottomNavigationBar: _buildAdBanner(adState),
       ),
     );
+  }
+
+  Widget _buildAdBanner(AdBannerStateExam adState) {
+    if (adState.currentScreen == 'examScreen' &&
+        adState.bannerAd != null &&
+        adState.isLoaded) {
+      return SizedBox(
+        width: adState.bannerAd!.size.width.toDouble(),
+        height: adState.bannerAd!.size.height.toDouble(),
+        child: AdWidget(ad: adState.bannerAd!),
+      );
+    } else {
+      return const SizedBox(height: 50);
+    }
   }
 
   void _handleAnswer(ExamState examState) async {

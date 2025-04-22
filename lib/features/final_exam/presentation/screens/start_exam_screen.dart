@@ -87,6 +87,7 @@ class _StartExamScreenState extends ConsumerState<StartExamScreen>
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
+                        textAlign: TextAlign.center,
                         currentStep['text'],
                         style: const TextStyle(
                           fontSize: 28,

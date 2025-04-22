@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/core/ads/ad_banner_provider_home.dart';
+import 'package:rutas_flutter/core/ads/banner/ad_banner_provider_home.dart';
 import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
 import 'package:rutas_flutter/features/home/presentation/providers/navigation_home_page_state.dart';
 import 'package:rutas_flutter/features/home/presentation/widgets/home_drawer_widget.dart';
