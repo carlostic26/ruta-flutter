@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/list_items/data/model/subtopic_model.dart';
-import 'package:rutas_flutter/features/list_items/presentation/screens/list_items_screen.dart';
 import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
 import 'package:rutas_flutter/features/list_items/presentation/widgets/item_subtopic_widget.dart';

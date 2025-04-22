@@ -114,7 +114,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         final detail = snapshot.data!;
 
         return Scaffold(
-          appBar: AppBar(
+/*           appBar: AppBar(
             title: AppBarDetailWidget(widthScreen: size.width),
             centerTitle: true,
             foregroundColor: Colors.white,
@@ -126,7 +126,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
               },
               icon: const Icon(Icons.arrow_back_ios),
             ),
-          ),
+          ), */
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

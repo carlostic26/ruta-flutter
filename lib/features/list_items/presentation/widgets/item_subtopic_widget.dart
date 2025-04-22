@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/detail/presentation/screens/detail_screen.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/screens/list_items_screen.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
 import 'package:rutas_flutter/features/list_items/data/model/subtopic_model.dart';
 import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
@@ -37,10 +38,13 @@ class ItemSubtopicWidget extends ConsumerWidget {
           // Navegar a la pantalla de detalles
           ref.read(subtopicIdProvider.notifier).state = subtopic.id!;
           ref.read(titleSubtopicProvider.notifier).state = subtopic.title!;
-          Navigator.push(
+/*           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const DetailScreen()),
-          );
+          ); */
+
+          // En algún lugar donde navegas a DetailScreen:
+          ref.read(currentPageProvider.notifier).state = 2;
         },
         child: Container(
           height: 50,

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:rutas_flutter/core/ads/ad_banner_provider_detail.dart';
-import 'package:rutas_flutter/core/ads/ad_banner_provider_home.dart';
 import 'package:rutas_flutter/features/detail/presentation/screens/detail_screen.dart';
+import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
+import 'package:rutas_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/list_items/presentation/screens/topic_screen.dart';
 import 'package:rutas_flutter/features/list_items/presentation/screens/subtopic_screen.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
 import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
 
 final currentPageProvider = StateProvider<int>((ref) => 0);
@@ -54,7 +56,9 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
   Widget build(BuildContext context) {
     final levelTitle = ref.watch(levelTitleProvider);
     final titleTopic = ref.watch(topicTitleProvider);
+    final titleSubtopic = ref.watch(titleSubtopicProvider);
     final adState = ref.watch(adBannerProviderDetail);
+    final size = MediaQuery.of(context).size;
 
     // Escuchar cambios en el provider para actualizar el PageController
     ref.listen<int>(currentPageProvider, (_, nextPage) {
@@ -70,43 +74,8 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
 
     return Scaffold(
       //si estoy en page 0 este es el appbar
-      appBar: ref.watch(currentPageProvider) == 0
-          ? AppBar(
-              title: Text(
-                levelTitle.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontFamily: 'Poppins',
-                  fontSize: 14,
-                ),
-              ),
-              leading: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios),
-              ),
-              centerTitle: true,
-              foregroundColor: Colors.white,
-            )
-          : AppBar(
-              title: Text(
-                titleTopic.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  fontFamily: 'Poppins',
-                ),
-              ),
-              leading: IconButton(
-                onPressed: () {
-                  ref.read(currentPageProvider.notifier).state = 0;
-                },
-                icon: const Icon(Icons.arrow_back_ios),
-              ),
-              centerTitle: true,
-              foregroundColor: Colors.white,
-            ),
-
+      appBar: _buildAppBar(ref.watch(currentPageProvider), levelTitle,
+          titleTopic, titleSubtopic, size),
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
@@ -118,6 +87,76 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
       ),
       bottomNavigationBar: _buildAdBanner(adState),
     );
+  }
+
+  PreferredSizeWidget _buildAppBar(
+    int currentPage,
+    String levelTitle,
+    String titleTopic,
+    String titleSubtopic,
+    Size size,
+  ) {
+    switch (currentPage) {
+      case 0:
+        return AppBar(
+          title: Text(
+            levelTitle,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Poppins',
+              fontSize: 14,
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+        );
+      case 1:
+        return AppBar(
+          title: Text(
+            titleTopic,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              fontFamily: 'Poppins',
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              ref.read(currentPageProvider.notifier).state = 0;
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+        );
+      case 2:
+        return AppBar(
+          title: AppBarDetailWidget(widthScreen: size.width),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+          leading: IconButton(
+            onPressed: () {
+              ref.read(currentPageProvider.notifier).state = 1;
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          /*   leading: IconButton(
+            onPressed: () {
+              ref.read(appBarSectionProvider.notifier).state =
+                  AppBarSection.definition;
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ), */
+        );
+      default:
+        return AppBar();
+    }
   }
 
   Widget _buildAdBanner(AdBannerStateDetail adState) {
@@ -134,22 +173,4 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
       return const SizedBox(height: 50);
     }
   }
-
-/*   Widget _buildAdBanner(AdBannerStateDetail adState) {
-    if (adState.bannerAd != null && adState.isLoaded) {
-      return Container(
-        color: Colors.transparent,
-        width: adState.bannerAd!.size.width.toDouble(),
-        height: adState.bannerAd!.size.height.toDouble(),
-        alignment: Alignment.center,
-        child: AdWidget(ad: adState.bannerAd!),
-      );
-    } else {
-      // Mostrar un placeholder mientras carga el anuncio
-      return Container(
-        height: 50, // Altura aproximada de un banner
-        color: Colors.transparent,
-      );
-    }
-  } */
 }
