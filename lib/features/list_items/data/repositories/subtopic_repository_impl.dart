@@ -1,24 +1,25 @@
 import 'package:rutas_flutter/core/database/database_helper.dart';
-import 'package:rutas_flutter/features/topic/data/model/topic_model.dart';
-import 'package:rutas_flutter/features/topic/domain/repositories/topic_repository.dart';
+import 'package:rutas_flutter/features/list_items/data/model/subtopic_model.dart';
+import 'package:rutas_flutter/features/list_items/domain/repositories/subtopic_repository.dart';
 import 'package:sqflite/sqflite.dart';
 
-class TopicRepositoryImpl implements TopicRepository {
+class SubtopicRepositoryImpl implements SubtopicRepository {
   final LocalDatabaseHelper _dbHelper = LocalDatabaseHelper();
 
   Future<Database> get _database async => await _dbHelper.getDatabase();
 
   @override
-  Future<List<TopicModel>> getTopics(int levelId, String module) async {
+  Future<List<SubtopicModel>> getSubtopics(
+      String topicID, String module) async {
     final db = await _database;
     final maps = await db.query(
-      'topic',
-      where: "level_id = ? and module = ?",
-      whereArgs: [levelId, module],
+      'subtopic',
+      where: 'topic_id = ? and module = ?',
+      whereArgs: [topicID, module],
     );
 
     return List.generate(maps.length, (i) {
-      return TopicModel(
+      return SubtopicModel(
         id: maps[i]['id'] as String,
         title: maps[i]['title'] as String,
         module: maps[i]['module'] as String,

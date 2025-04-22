@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/features/topic/data/repositories/subtopic_repository_impl.dart';
-import 'package:rutas_flutter/features/topic/domain/repositories/subtopic_repository.dart';
-import 'package:rutas_flutter/features/topic/domain/use_cases/get_subtopic_use_case.dart';
+import 'package:rutas_flutter/features/list_items/data/repositories/subtopic_repository_impl.dart';
+import 'package:rutas_flutter/features/list_items/domain/repositories/subtopic_repository.dart';
+import 'package:rutas_flutter/features/list_items/domain/use_cases/get_subtopic_use_case.dart';
 
 // Proveedor del repositorio que vamos a usar en los casos de uso
 final subtopicRepositoryProvider = Provider<SubtopicRepository>((ref) {

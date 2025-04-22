@@ -1,14 +1,14 @@
-import 'package:rutas_flutter/features/topic/domain/entities/topic_entity.dart';
+import 'package:rutas_flutter/features/list_items/domain/entities/subtopic_entity.dart';
 
-class TopicModel extends Topic {
-  TopicModel({
+class SubtopicModel extends SubTopic {
+  SubtopicModel({
     required super.id,
     required super.title,
     required super.module,
   });
 
-  factory TopicModel.fromMap(Map<String, dynamic> map) {
-    return TopicModel(
+  factory SubtopicModel.fromMap(Map<String, dynamic> map) {
+    return SubtopicModel(
       id: map['id'] ?? '',
       title: map['title'] ?? '',
       module: map['module'] ?? '',
@@ -23,11 +23,12 @@ class TopicModel extends Topic {
     };
   }
 
-  TopicModel copyWith({
+  SubtopicModel copyWith({
     String? id,
     String? title,
+    String? module,
   }) {
-    return TopicModel(
+    return SubtopicModel(
       id: id ?? this.id,
       title: title ?? this.title,
       module: module,

@@ -9,8 +9,8 @@ import 'package:rutas_flutter/features/progress/domain/use_cases/get_total_score
 import 'package:rutas_flutter/features/progress/domain/use_cases/get_user_score_by_module_use_case.dart';
 import 'package:rutas_flutter/features/progress/domain/use_cases/is_subtopic_completed_use_case.dart';
 import 'package:rutas_flutter/features/progress/domain/use_cases/is_topic_completed_use_case.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
 
 /// Proveedor del repositorio de progreso que centraliza el acceso a datos
 final progressRepositoryProvider = Provider<ProgressRepository>((ref) {

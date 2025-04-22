@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:rutas_flutter/features/topic/data/model/topic_model.dart';
-import 'package:rutas_flutter/features/topic/presentation/screens/list_items_screen.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/data/model/topic_model.dart';
+import 'package:rutas_flutter/features/list_items/presentation/screens/list_items_screen.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
 
 class ItemTopicWidget extends ConsumerWidget {
   final TopicModel topic;

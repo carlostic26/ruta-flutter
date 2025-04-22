@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/core/ads/ad_banner_provider.dart';
+import 'package:rutas_flutter/core/ads/ad_banner_provider_home.dart';
 import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
 import 'package:rutas_flutter/features/home/presentation/providers/navigation_home_page_state.dart';
 import 'package:rutas_flutter/features/home/presentation/widgets/home_drawer_widget.dart';
@@ -21,15 +21,19 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Cargar el anuncio cuando cambian las dependencias
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(adBannerProvider.notifier).loadAdaptiveAd(context);
+      ref
+          .read(adBannerProviderHome.notifier)
+          .loadAdaptiveAd(context, screenId: 'home');
     });
   }
 
   @override
   void dispose() {
-    ref.read(adBannerProvider.notifier).dispose();
+    // Solo disponer si estamos en esta pantalla
+    if (ref.read(adBannerProviderHome).currentScreen == 'home') {
+      ref.read(adBannerProviderHome.notifier).disposeCurrentAd();
+    }
     super.dispose();
   }
 
@@ -37,7 +41,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
   Widget build(BuildContext context) {
     final pageController = ref.watch(pageControllerProvider);
     final currentIndex = ref.watch(pageIndexProvider);
-    final adState = ref.watch(adBannerProvider);
+    final adState = ref.watch(adBannerProviderHome);
 
     // Define los AppBars para cada pantalla
     final List<PreferredSizeWidget> appBars = [
@@ -107,7 +111,7 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
     );
   }
 
-  Widget _buildAdBanner(AdBannerState adState) {
+  Widget _buildAdBanner(AdBannerStateHome adState) {
     if (adState.bannerAd != null && adState.isLoaded) {
       return Container(
         color: Colors.transparent,

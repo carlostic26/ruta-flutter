@@ -2,10 +2,10 @@ import 'package:path/path.dart';
 import 'package:rutas_flutter/features/detail/data/datasourcers/detail_jr_inserts_db.dart';
 import 'package:rutas_flutter/features/detail/data/datasourcers/detail_mid_inserts_db.dart';
 import 'package:rutas_flutter/features/detail/data/datasourcers/detail_sr_inserts_db.dart';
-import 'package:rutas_flutter/features/topic/data/datasources/subtopic_local_database.dart';
+import 'package:rutas_flutter/features/list_items/data/datasources/subtopic_local_database.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:rutas_flutter/features/level/data/datasources/level_local_database.dart';
-import 'package:rutas_flutter/features/topic/data/datasources/topic_local_database.dart';
+import 'package:rutas_flutter/features/list_items/data/datasources/topic_local_database.dart';
 
 class LocalDatabaseHelper {
   Database? _database;

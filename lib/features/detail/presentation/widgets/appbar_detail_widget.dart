@@ -12,7 +12,6 @@ class AppBarDetailWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Obtenemos la sección activa
     final activeSection = ref.watch(appBarSectionProvider);
 
     return Column(
@@ -30,14 +29,17 @@ class AppBarDetailWidget extends ConsumerWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Cambiar a la página 0 y actualizar el estado
-                ref.read(pageControllerProvider).animateToPage(
-                      0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                ref.read(appBarSectionProvider.notifier).state =
-                    AppBarSection.definition;
+                final pageController = ref.read(pageControllerItemsProvider);
+                pageController
+                    .animateToPage(
+                  0,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                )
+                    .then((_) {
+                  ref.read(appBarSectionProvider.notifier).state =
+                      AppBarSection.definition;
+                });
               },
               child: Text(
                 'Definición',
@@ -65,14 +67,18 @@ class AppBarDetailWidget extends ConsumerWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Cambiar a la página 1 y actualizar el estado
-                      ref.read(pageControllerProvider).animateToPage(
-                            1,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                      ref.read(appBarSectionProvider.notifier).state =
-                          AppBarSection.code;
+                      final pageController =
+                          ref.read(pageControllerItemsProvider);
+                      pageController
+                          .animateToPage(
+                        1, // Cambiado de 0 a 1 para la sección Code
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      )
+                          .then((_) {
+                        ref.read(appBarSectionProvider.notifier).state =
+                            AppBarSection.code;
+                      });
                     },
                     child: Text(
                       'Code',

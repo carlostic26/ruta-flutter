@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/detail/presentation/screens/detail_screen.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:rutas_flutter/features/topic/data/model/subtopic_model.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/data/model/subtopic_model.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
 
 class ItemSubtopicWidget extends ConsumerWidget {
   final SubtopicModel subtopic;

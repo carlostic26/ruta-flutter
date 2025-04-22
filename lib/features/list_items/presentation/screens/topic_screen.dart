@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:rutas_flutter/features/topic/data/model/topic_model.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
-import 'package:rutas_flutter/features/topic/presentation/widgets/item_topic_widget.dart';
+import 'package:rutas_flutter/features/list_items/data/model/topic_model.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/widgets/item_topic_widget.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 
 class TopicScreen extends ConsumerWidget {

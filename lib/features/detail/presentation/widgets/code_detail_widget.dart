@@ -34,62 +34,61 @@ class _CodeDetailWidgetState extends ConsumerState<CodeDetailWidget> {
     String code = widget.detail.codeExample.toString();
     const theme = darculaTheme;
 
+    // Personalización manual del tema como alternativa
+    final customTheme = {
+      ...darculaTheme,
+      'root': TextStyle(
+          backgroundColor: Colors.grey[900]), // Fondo oscuro garantizado
+    };
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 8, 8, 1),
         child: Column(
           children: [
-            Expanded(
-              child: Stack(
+            // Barra de herramientas separada
+            Container(
+              color: const Color.fromARGB(66, 35, 35, 35),
+              alignment: Alignment.centerRight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  // Este SingleChildScrollView permite desplazarse verticalmente
-                  SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: HighlightView(
-                        code,
-                        language: 'dart',
-                        theme: theme,
-                        padding: const EdgeInsets.fromLTRB(10, 55, 8, 1),
-                        textStyle: TextStyle(
-                          fontFamily: 'monospace',
-                          fontSize: _fontSize,
-                        ),
-                      ),
-                    ),
+                  IconButton(
+                    icon: const Icon(CupertinoIcons.zoom_in),
+                    onPressed: _increaseFontSize,
+                    color: Colors.white,
+                    iconSize: 20,
                   ),
-                  // Botones de Zoom posicionados arriba del código
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 40,
-                    color: Colors.black26,
-                    child: Positioned(
-                      top: 2,
-                      right: 8,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: const Icon(CupertinoIcons.zoom_in),
-                            onPressed: _increaseFontSize,
-                            color: Colors.white,
-                            iconSize: 20,
-                          ),
-                          IconButton(
-                            icon: const Icon(CupertinoIcons.zoom_out),
-                            onPressed: _decreaseFontSize,
-                            color: Colors.white,
-                            iconSize: 20,
-                          ),
-                        ],
-                      ),
-                    ),
+                  IconButton(
+                    icon: const Icon(CupertinoIcons.zoom_out),
+                    onPressed: _decreaseFontSize,
+                    color: Colors.white,
+                    iconSize: 20,
                   ),
                 ],
               ),
             ),
+            // Área del código
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: HighlightView(
+                    code,
+                    language: 'dart',
+                    theme: theme, // Usamos el tema personalizado
+                    padding: const EdgeInsets.all(12),
+                    textStyle: TextStyle(
+                      fontFamily: 'monospace',
+                      fontSize: _fontSize,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            //const Spacer(),
           ],
         ),
       ),

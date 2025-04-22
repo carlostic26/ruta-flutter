@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/features/topic/data/repositories/topic_repository_impl.dart';
-import 'package:rutas_flutter/features/topic/domain/repositories/topic_repository.dart';
-import 'package:rutas_flutter/features/topic/domain/use_cases/get_topic_use_case.dart';
+import 'package:rutas_flutter/features/list_items/data/repositories/topic_repository_impl.dart';
+import 'package:rutas_flutter/features/list_items/domain/repositories/topic_repository.dart';
+import 'package:rutas_flutter/features/list_items/domain/use_cases/get_topic_use_case.dart';
 
 // Proveedor del repositorio que vamos a usar en los casos de uso
 final topicRepositoryProvider = Provider<TopicRepository>((ref) {

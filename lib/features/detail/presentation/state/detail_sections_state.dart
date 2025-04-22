@@ -10,10 +10,15 @@ final appBarSectionProvider = StateProvider<AppBarSection>(
 );
 
 // Provider para el PageController
-final pageControllerProvider = StateProvider<PageController>((ref) {
+final pageControllerItemsProvider = Provider<PageController>((ref) {
   final controller = PageController(initialPage: 0);
-  ref.onDispose(() {
-    controller.dispose();
-  });
+  ref.onDispose(() => controller.dispose());
+  return controller;
+});
+
+// Provider para el PageController
+final pageControllerProvider = Provider<PageController>((ref) {
+  final controller = PageController(initialPage: 0);
+  ref.onDispose(() => controller.dispose());
   return controller;
 });

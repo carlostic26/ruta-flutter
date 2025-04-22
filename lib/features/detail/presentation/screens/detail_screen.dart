@@ -10,8 +10,8 @@ import 'package:rutas_flutter/features/detail/presentation/widgets/definition_de
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/provider/progress_use_cases_provider.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_subtopic_use_case_provider.dart';
-import 'package:rutas_flutter/features/topic/presentation/state/provider/get_topic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_subtopic_use_case_provider.dart';
+import 'package:rutas_flutter/features/list_items/presentation/state/provider/get_topic_use_case_provider.dart';
 
 class DetailScreen extends ConsumerStatefulWidget {
   const DetailScreen({super.key});
@@ -32,6 +32,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    // NO disposed el _pageController aquí (ya lo hace el provider)
     super.dispose();
   }
 
@@ -96,7 +97,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     final subtopicID = ref.watch(subtopicIdProvider);
     final module = ref.watch(actualModuleProvider);
     final titleSubtopic = ref.watch(titleSubtopicProvider);
-    final pageController = ref.watch(pageControllerProvider);
+    final pageController = ref.watch(pageControllerItemsProvider);
 
     return FutureBuilder<DetailModel>(
       future: getDetailUseCase.call(subtopicID, module),
@@ -119,51 +120,47 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
             foregroundColor: Colors.white,
             leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
                 ref.read(appBarSectionProvider.notifier).state =
                     AppBarSection.definition;
+                Navigator.pop(context);
               },
               icon: const Icon(Icons.arrow_back_ios),
             ),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                  child: Text(
-                    titleSubtopic,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                      fontSize: 18,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: Text(
+                  titleSubtopic,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins',
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: PageView(
+                  controller: pageController, // Usa el controlador del provider
+                  onPageChanged: (index) {
+                    ref.read(appBarSectionProvider.notifier).state = index == 0
+                        ? AppBarSection.definition
+                        : AppBarSection.code;
+                  },
+                  children: [
+                    DefinitionDetailWidget(
+                      heightScreen: size.height,
+                      detail: detail,
                     ),
-                  ),
+                    CodeDetailWidget(detail: detail),
+                  ],
                 ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  height: size.height * 0.8,
-                  child: PageView(
-                    controller: pageController,
-                    onPageChanged: (index) {
-                      ref.read(appBarSectionProvider.notifier).state =
-                          index == 0
-                              ? AppBarSection.definition
-                              : AppBarSection.code;
-                    },
-                    children: [
-                      DefinitionDetailWidget(
-                        heightScreen: size.height,
-                        detail: detail,
-                      ),
-                      CodeDetailWidget(detail: detail),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              )
+            ],
           ),
         );
       },
