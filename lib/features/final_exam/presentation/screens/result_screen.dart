@@ -242,7 +242,6 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
   }
 
   Widget _buildAdBanner(AdBannerStateResult adState) {
-    // Solo mostrar el banner si es para esta pantalla
     if (adState.currentScreen == 'resultScreen' &&
         adState.bannerAd != null &&
         adState.isLoaded) {

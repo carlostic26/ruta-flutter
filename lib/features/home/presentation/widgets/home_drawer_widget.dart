@@ -224,7 +224,7 @@ class HomeDrawer extends StatelessWidget {
 
   void _launchUrlPolicyPrivacy() async {
     final Uri url = Uri.parse(
-        'https://www.privacypolicies.com/live/4417a2dc-ecb0-4001-98eb-87e74ecb3e23');
+        'https://www.termsfeed.com/live/00b5994d-ba57-4b14-b52e-a048f4b25c39');
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     } else {
