@@ -8,7 +8,6 @@ import 'package:rutas_flutter/features/level/presentation/state/provider/get_lev
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/level/presentation/widgets/confeti_widget.dart';
 import 'package:rutas_flutter/features/list_items/presentation/screens/list_items_screen.dart';
-import 'package:rutas_flutter/features/list_items/presentation/screens/topic_screen.dart';
 
 class GenerateLevelsRoutePathWidget extends ConsumerWidget {
   const GenerateLevelsRoutePathWidget({
@@ -41,8 +40,8 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
       'Mid': Colors.orange,
       'Sr': Colors.green,
     };
-    final moduleBaseColor = moduleColors[moduleSelected] ?? Colors.blue;
-    final rutaColorLineDefault = Colors.grey;
+    final moduleBaseColor = moduleColors[moduleSelected] ?? Colors.green;
+    const rutaColorLineDefault = Colors.grey;
     final rutaColorLineCompleted = moduleBaseColor;
 
     return FutureBuilder<List<LevelModel>>(
@@ -95,7 +94,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                       colorFilter: isLevelCompleted
                           ? ColorFilter.mode(
                               rutaColorLineCompleted, BlendMode.srcIn)
-                          : ColorFilter.mode(
+                          : const ColorFilter.mode(
                               rutaColorLineDefault, BlendMode.srcIn),
                       child: Image.asset('assets/icons/linea_asset.png'),
                     ),
@@ -120,7 +119,8 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                     height: heightScreen * 0.075,
                     width: heightScreen * 0.075,
                     color: isLevelCompleted ? Colors.green : moduleBaseColor,
-                    onPressed: () => _showLevelDialog(context, level, ref),
+                    onPressed: () =>
+                        _showLevelDialog(context, level, ref, moduleSelected),
                     enabled: true,
                     shadowDegree: ShadowDegree.light,
                     child: Text(
@@ -213,7 +213,8 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     }
   }
 
-  void _showLevelDialog(BuildContext context, LevelModel level, WidgetRef ref) {
+  void _showLevelDialog(
+      BuildContext context, LevelModel level, WidgetRef ref, moduleSelected) {
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
@@ -266,7 +267,23 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                   ),
                 ),
                 onPressed: () {
-                  ref.read(actualLevelIdProvider.notifier).state = level.order!;
+                  switch (moduleSelected) {
+                    case 'Jr':
+                      ref.read(actualLevelIdJrProvider.notifier).state =
+                          level.order!;
+                      break;
+                    case 'Mid':
+                      ref.read(actualLevelIdMidProvider.notifier).state =
+                          level.order!;
+                      break;
+                    case 'Sr':
+                      ref.read(actualLevelIdSrProvider.notifier).state =
+                          level.order!;
+                      break;
+                    default:
+                      break;
+                  }
+
                   ref.read(levelTitleProvider.notifier).state = level.title!;
                   Navigator.pushReplacement(
                     context,

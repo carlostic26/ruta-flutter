@@ -57,8 +57,8 @@ class ExamState {
 class ExamNotifier extends StateNotifier<ExamState> {
   final ExamRepositoryImpl repository;
 
-  static const int secondsPerQuestion = 20;
-  static const int totalQuestions = 15;
+  static const int secondsPerQuestion = 25;
+  static const int totalQuestions = 12;
   static const int totalExamDuration = secondsPerQuestion * totalQuestions;
 
   ExamNotifier(this.repository) : super(ExamState(questions: []));

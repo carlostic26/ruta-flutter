@@ -160,7 +160,7 @@ class HomeDrawer extends StatelessWidget {
             title: const Text('Info de la app'),
             onTap: () {
               dialogVersion(context, 'Información',
-                  '${infoApp.nameApp} es una guía definitiva para dominar el framework Flutter de manera estructurada. La app organiza el aprendizaje en niveles progresivos (Jr, Mid, Sr), con contenido práctico y evaluaciones que miden tu dominio real del desarrollo multiplataforma. \n\nVersión: ${infoApp.versionApp}');
+                  '${infoApp.nameApp} es una guía definitiva para dominar el framework Flutter de manera estructurada. La app organiza el aprendizaje en niveles progresivos (Jr, Mid, Sr), con contenido práctico y evaluaciones que miden tu dominio real del desarrollo multiplataforma.\n\n Desarrollada por el grupo de estudio "Creciendo con Flutter" liderado por el Ing. Carlos Peñaranda. \n\nVersión: ${infoApp.versionApp}');
             },
           ),
           ListTile(

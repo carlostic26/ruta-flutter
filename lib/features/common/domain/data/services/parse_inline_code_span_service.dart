@@ -31,7 +31,7 @@ List<InlineSpan> parseInlineCodeSpans(String input) {
           style: const TextStyle(
             fontFamily: 'monospace',
             fontSize: 12,
-            color: Color(0xFF80CBC4), // verde-agua tipo "Darcula"
+            color: Color(0xFF80CBC4),
           ),
         ),
       ),

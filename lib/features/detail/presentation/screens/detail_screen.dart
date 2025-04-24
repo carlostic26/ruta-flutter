@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/detail/data/models/detail_model.dart';
 import 'package:rutas_flutter/features/detail/presentation/state/detail_sections_state.dart';
 import 'package:rutas_flutter/features/detail/presentation/state/provider/get_detail_use_case_provider.dart';
-import 'package:rutas_flutter/features/detail/presentation/widgets/appbar_detail_widget.dart';
 import 'package:rutas_flutter/features/detail/presentation/widgets/code_detail_widget.dart';
 import 'package:rutas_flutter/features/detail/presentation/widgets/definition_detail_widget.dart';
 import 'package:rutas_flutter/features/level/presentation/state/provider/get_level_use_case_provider.dart';
@@ -39,9 +38,27 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
   void _startTimer() async {
     final progressRepository = ref.read(progressRepositoryProvider);
     final module = ref.read(actualModuleProvider);
-    final levelId = ref.read(actualLevelIdProvider);
+
     final topicId = ref.read(topicIdProvider);
     final subtopicId = ref.read(subtopicIdProvider);
+
+    late final int levelId;
+
+    // Handle different modules using a switch statement
+    switch (module) {
+      case 'Jr':
+        levelId = ref.read(actualLevelIdJrProvider);
+        break;
+      case 'Mid':
+        levelId = ref.read(actualLevelIdMidProvider);
+        break;
+      case 'Sr':
+        levelId = ref.read(actualLevelIdSrProvider);
+        break;
+      default:
+        // Default logic for unknown modules
+        break;
+    }
 
     // Obtener los notifiers usando los providers family
     final completedSubtopicsNotifier =
@@ -54,7 +71,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         await progressRepository.isSubtopicCompleted(module, subtopicId);
     if (isCompleted) return;
 
-    _timer = Timer(const Duration(seconds: 1), () async {
+    _timer = Timer(const Duration(seconds: 12), () async {
       try {
         await progressRepository.createProgressBySubtopic(
           module: module,
@@ -72,7 +89,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('¡+2 puntos acumulados! Sigue repasando temas.'),
+              content: Text('¡+2 puntos acumulados! Sigue repasando.'),
               duration: Duration(seconds: 3),
             ),
           );

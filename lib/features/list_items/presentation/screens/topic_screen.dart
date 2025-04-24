@@ -13,8 +13,25 @@ class TopicScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final listTopicUseCase = ref.read(getTopicUseCaseProvider);
-    final levelId = ref.watch(actualLevelIdProvider);
     final module = ref.watch(actualModuleProvider);
+
+    late final int levelId;
+
+    // Handle different modules using a switch statement
+    switch (module) {
+      case 'Jr':
+        levelId = ref.read(actualLevelIdJrProvider);
+        break;
+      case 'Mid':
+        levelId = ref.read(actualLevelIdMidProvider);
+        break;
+      case 'Sr':
+        levelId = ref.read(actualLevelIdSrProvider);
+        break;
+      default:
+        // Default logic for unknown modules
+        break;
+    }
 
     // Obtener los topics completados según el módulo
     final completedTopics = switch (module) {

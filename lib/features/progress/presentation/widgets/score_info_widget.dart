@@ -25,7 +25,9 @@ class ScoreInfoWidget extends ConsumerWidget {
     final getLevelProgress = ref.read(getLevelProgressProvider);
     final getCircularProgressPercentageByModuleUseCase =
         ref.read(getCircularProgressPercentageByModuleUseCaseProvider);
-    final actualLevelId = ref.watch(actualLevelIdProvider);
+    final actualLevelIdJr = ref.watch(actualLevelIdJrProvider);
+    final actualLevelIdMid = ref.watch(actualLevelIdMidProvider);
+    final actualLevelIdSr = ref.watch(actualLevelIdSrProvider);
     final progressRepository = ref.read(progressRepositoryProvider);
 
     return FutureBuilder<List<double>>(
@@ -101,13 +103,27 @@ class ScoreInfoWidget extends ConsumerWidget {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 12),
                                     ),
-                                    Text(
-                                      ' $actualLevelId',
-                                      style: const TextStyle(fontSize: 10),
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    module == 'Jr'
+                                        ? Text(
+                                            ' $actualLevelIdJr',
+                                            style:
+                                                const TextStyle(fontSize: 10),
+                                          )
+                                        : module == 'Mid'
+                                            ? Text(
+                                                ' $actualLevelIdMid',
+                                                style: const TextStyle(
+                                                    fontSize: 10),
+                                              )
+                                            : module == 'Sr'
+                                                ? Text(
+                                                    ' $actualLevelIdSr',
+                                                    style: const TextStyle(
+                                                        fontSize: 10),
+                                                  )
+                                                : const SizedBox(
+                                                    height: 10,
+                                                  ),
                                     const Text(
                                       'Examen final:',
                                       style: TextStyle(

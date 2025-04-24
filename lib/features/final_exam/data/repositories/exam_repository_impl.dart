@@ -34,14 +34,14 @@ class ExamRepositoryImpl implements ExamRepository {
       );
     }).toList();
 
-    // Si hay 15 o menos preguntas, devolver todas
-    if (allQuestions.length <= 5) {
+    // Si hay 12 o menos preguntas, devolver todas
+    if (allQuestions.length <= 12) {
       return allQuestions;
     }
 
-    // Mezclar las preguntas aleatoriamente y tomar las primeras 15
+    // Mezclar las preguntas aleatoriamente y tomar las primeras 12
     final shuffledQuestions = List<ExamQuestion>.from(allQuestions)..shuffle();
-    return shuffledQuestions.take(5).toList();
+    return shuffledQuestions.take(12).toList();
   }
 
   @override
