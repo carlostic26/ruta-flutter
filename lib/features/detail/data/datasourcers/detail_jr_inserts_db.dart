@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:rutas_flutter/features/level/data/datasources/level_local_database.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
@@ -66,7 +67,7 @@ void main() {
   var edad = 25;
   var nombre = "Carlos";
 
-  print("Nombre: \$nombre, Edad: \$edad");
+ debugPrint("Nombre: \$nombre, Edad: \$edad");
 }
 ''',
     });
@@ -87,8 +88,8 @@ void main() {
   final pi = 3.1416;
   final nombre = "Alice";
 
-  print("El valor de pi es: \$pi");
-  print("Nombre: \$nombre");
+ debugPrint("El valor de pi es: \$pi");
+ debugPrint("Nombre: \$nombre");
 }
 ''',
     });
@@ -109,8 +110,8 @@ void main() {
   const pi = 3.1416;
   const diasSemana = 7;
 
-  print("El valor de pi es: \$pi");
-  print("Días en una semana: \$diasSemana");
+ debugPrint("El valor de pi es: \$pi");
+ debugPrint("Días en una semana: \$diasSemana");
 }
 ''',
     });
@@ -131,8 +132,8 @@ void main() {
   int edad = 25;
   int cantidadLikes = 100;
 
-  print("Edad: \$edad");
-  print("Likes: \$cantidadLikes");
+ debugPrint("Edad: \$edad");
+ debugPrint("Likes: \$cantidadLikes");
 }
 ''',
     });
@@ -153,8 +154,8 @@ void main() {
   double pi = 3.1416;
   double precio = 19.99;
 
-  print("El valor de pi es: \$pi");
-  print("Precio: \$precio");
+ debugPrint("El valor de pi es: \$pi");
+ debugPrint("Precio: \$precio");
 
   pi = 3;
 }
@@ -178,9 +179,9 @@ void main() {
   bool isCompleted = false;
 
   if (isActive) {
-    print("El usuario está activo.");
+   debugPrint("El usuario está activo.");
   } else {
-    print("El usuario no está activo.");
+   debugPrint("El usuario no está activo.");
   }
 }
 ''',
@@ -202,11 +203,11 @@ void main() {
   String nombre = "Alice";
   String mensaje = "¡Hola, mundo!";
 
-  print("Nombre: \$nombre");
-  print("Mensaje: \$mensaje");
+ debugPrint("Nombre: \$nombre");
+ debugPrint("Mensaje: \$mensaje");
 
   String saludo = "Hola, " + nombre + "!";
-  print(saludo);
+ debugPrint(saludo);
 }
 ''',
     });
@@ -227,10 +228,10 @@ void main() {
       'code_example': '''
 void main() {
   List<String> frutas = ["manzana", "banana", "naranja"]; // Lista de cadenas
-  print("Mi fruta favorita es: \${frutas[0]}"); // Acceso por índice
+ debugPrint("Mi fruta favorita es: \${frutas[0]}"); // Acceso por índice
 
   frutas.add("uva"); // Agregar un elemento
-  print("Todas las frutas: \$frutas");
+ debugPrint("Todas las frutas: \$frutas");
 }
 ''',
     });
@@ -250,13 +251,13 @@ void main() {
 void main() {
   List<String> frutas = ["manzana", "banana", "naranja"];
 
-  print("Número de frutas: \${frutas.length}"); // Propiedad length
+ debugPrint("Número de frutas: \${frutas.length}"); // Propiedad length
 
   frutas.add("uva"); // Método add
   frutas.remove("banana"); // Método remove
   frutas.sort(); // Método sort
 
-  print("Frutas actualizadas: \$frutas");
+ debugPrint("Frutas actualizadas: \$frutas");
 }
 ''',
     });
@@ -279,10 +280,10 @@ void main() {
     "Bob": 30,
   };
 
-  print("La edad de Alice es: \${edades["Alice"]}"); // Acceso por clave
+ debugPrint("La edad de Alice es: \${edades["Alice"]}"); // Acceso por clave
 
   edades["Carlos"] = 28; // Agregar un nuevo par clave-valor
-  print("Todas las edades: \$edades");
+ debugPrint("Todas las edades: \$edades");
 }
 ''',
     });
@@ -305,13 +306,13 @@ void main() {
     "Bob": 30,
   };
 
-  print("Claves del mapa: \${edades.keys}"); // Propiedad keys
-  print("Valores del mapa: \${edades.values}"); // Propiedad values
+ debugPrint("Claves del mapa: \${edades.keys}"); // Propiedad keys
+ debugPrint("Valores del mapa: \${edades.values}"); // Propiedad values
 
   edades.remove("Alice"); // Método remove
   edades.putIfAbsent("Carlos", () => 28); // Método putIfAbsent
 
-  print("Mapa actualizado: \$edades");
+ debugPrint("Mapa actualizado: \$edades");
 }
 ''',
     });
@@ -334,7 +335,7 @@ void main() {
   colores.add("amarillo"); // Agregar un nuevo color
   colores.add("rojo"); // Intentar agregar un duplicado (no se agrega)
 
-  print("Colores disponibles: \$colores");
+ debugPrint("Colores disponibles: \$colores");
 }
 ''',
     });
@@ -360,7 +361,7 @@ void main() {
 
 // Definición de la función saludar
 void saludar() {
-  print("¡Hola, bienvenido a Ruta Flutter!");
+ debugPrint("¡Hola, bienvenido a Ruta Flutter!");
 }
 ''',
     });
@@ -380,7 +381,7 @@ void saludar() {
 void main() {
   // Llamada a la función sumar
   int resultado = sumar(5, 3);
-  print("El resultado es: \$resultado");
+ debugPrint("El resultado es: \$resultado");
 }
 
 // Declaración de la función sumar
@@ -405,7 +406,7 @@ int sumar(int a, int b) {
 void main() {
   // Llamada a la función multiplicar
   int resultado = multiplicar(4, 7);
-  print("El producto es: \$resultado");
+ debugPrint("El producto es: \$resultado");
 }
 
 // Declaración de la función multiplicar
@@ -433,11 +434,11 @@ void main() {
     return a + b;
   };
 
-  print("Suma: \${sumar(5, 3)}");
+ debugPrint("Suma: \${sumar(5, 3)}");
 
   // Uso de una lambda
   var multiplicar = (int a, int b) => a * b;
-  print("Multiplicación: \${multiplicar(4, 7)}");
+ debugPrint("Multiplicación: \${multiplicar(4, 7)}");
 }
 ''',
     });
@@ -460,11 +461,11 @@ void main() {
   int a = 10;
   int b = 3;
 
-  print("Suma: \${a + b}"); // 13
-  print("Resta: \${a - b}"); // 7
-  print("Multiplicación: \${a * b}"); // 30
-  print("División: \${a / b}"); // 3.333...
-  print("Módulo: \${a % b}"); // 1
+ debugPrint("Suma: \${a + b}"); // 13
+ debugPrint("Resta: \${a - b}"); // 7
+ debugPrint("Multiplicación: \${a * b}"); // 30
+ debugPrint("División: \${a / b}"); // 3.333...
+ debugPrint("Módulo: \${a % b}"); // 1
 }
 ''',
     });
@@ -485,12 +486,12 @@ void main() {
   int a = 10;
   int b = 3;
 
-  print("¿a es igual a b? \${a == b}"); // false
-  print("¿a es diferente de b? \${a != b}"); // true
-  print("¿a es mayor que b? \${a > b}"); // true
-  print("¿a es menor que b? \${a < b}"); // false
-  print("¿a es mayor o igual que b? \${a >= b}"); // true
-  print("¿a es menor o igual que b? \${a <= b}"); // false
+ debugPrint("¿a es igual a b? \${a == b}"); // false
+ debugPrint("¿a es diferente de b? \${a != b}"); // true
+ debugPrint("¿a es mayor que b? \${a > b}"); // true
+ debugPrint("¿a es menor que b? \${a < b}"); // false
+ debugPrint("¿a es mayor o igual que b? \${a >= b}"); // true
+ debugPrint("¿a es menor o igual que b? \${a <= b}"); // false
 }
 ''',
     });
@@ -511,9 +512,9 @@ void main() {
   bool a = true;
   bool b = false;
 
-  print("AND: \${a && b}"); // false
-  print("OR: \${a || b}"); // true
-  print("NOT: \${!a}"); // false
+ debugPrint("AND: \${a && b}"); // false
+ debugPrint("OR: \${a || b}"); // true
+ debugPrint("NOT: \${!a}"); // false
 }
 ''',
     });
@@ -528,7 +529,7 @@ void main() {
       'definition': 'La sentencia `if` en Dart se utiliza para ejecutar un bloque de código solo si una condición es verdadera (`true`).\n\n'
           '¿Qué es un `if`? 🤔\n\n'
           'Imaginemos que tienes un semáforo. Si la luz está en verde (`true`), puedes cruzar la calle. Si está en rojo (`false`), debes detenerte. En Dart, el `if` funciona de la misma manera: ejecuta un bloque de código solo si la condición es verdadera.\n\n'
-          'Por ejemplo, si escribes `if (edad >= 18) { print("Eres mayor de edad"); }`, el mensaje se mostrará solo si la condición `edad >= 18` es verdadera.\n\n'
+          'Por ejemplo, si escribes `if (edad >= 18) {debugPrint("Eres mayor de edad"); }`, el mensaje se mostrará solo si la condición `edad >= 18` es verdadera.\n\n'
           'El `if` es una de las estructuras de control más básicas y esenciales en programación.',
       'img_url': '',
       'code_example': '''
@@ -536,7 +537,7 @@ void main() {
   int edad = 20;
 
   if (edad >= 18) {
-    print("Eres mayor de edad");
+   debugPrint("Eres mayor de edad");
   }
 }
 ''',
@@ -551,7 +552,7 @@ void main() {
           'La sentencia `else` en Dart se utiliza junto con `if` para ejecutar un bloque de código cuando la condición del `if` es falsa (`false`).\n\n'
               '¿Qué es un `else`? 🤷‍♂️\n\n'
               'Imaginemos que el semáforo está en rojo. Si no puedes cruzar (`if` es falso), entonces debes esperar (`else`). En Dart, el `else` te permite definir qué hacer cuando la condición del `if` no se cumple.\n\n'
-              'Por ejemplo, si escribes `if (edad >= 18) { print("Eres mayor de edad"); } else { print("Eres menor de edad"); }`, el mensaje "Eres menor de edad" se mostrará si la condición `edad >= 18` es falsa.\n\n'
+              'Por ejemplo, si escribes `if (edad >= 18) {debugPrint("Eres mayor de edad"); } else {debugPrint("Eres menor de edad"); }`, el mensaje "Eres menor de edad" se mostrará si la condición `edad >= 18` es falsa.\n\n'
               'El `else` es útil para manejar casos alternativos en tu código.',
       'img_url': '',
       'code_example': '''
@@ -559,9 +560,9 @@ void main() {
   int edad = 15;
 
   if (edad >= 18) {
-    print("Eres mayor de edad");
+   debugPrint("Eres mayor de edad");
   } else {
-    print("Eres menor de edad");
+   debugPrint("Eres menor de edad");
   }
 }
 ''',
@@ -575,7 +576,7 @@ void main() {
       'definition': 'La sentencia `else if` en Dart se utiliza para verificar múltiples condiciones en secuencia después de un `if`.\n\n'
           '¿Qué es un `else if`? 🤨\n\n'
           'Imaginemos que tienes un semáforo con tres luces: verde, amarillo y rojo. Si no es verde (`if` es falso), verificas si es amarillo (`else if`). Si tampoco es amarillo, entonces es rojo (`else`). En Dart, el `else if` te permite manejar múltiples condiciones de manera ordenada.\n\n'
-          'Por ejemplo, si escribes `if (nota >= 90) { print("Excelente"); } else if (nota >= 70) { print("Aprobado"); } else { print("Reprobado"); }`, el programa evaluará cada condición en orden.\n\n'
+          'Por ejemplo, si escribes `if (nota >= 90) {debugPrint("Excelente"); } else if (nota >= 70) {debugPrint("Aprobado"); } else {debugPrint("Reprobado"); }`, el programa evaluará cada condición en orden.\n\n'
           'El `else if` es ideal para manejar decisiones más complejas en tu código.',
       'img_url': '',
       'code_example': '''
@@ -583,11 +584,11 @@ void main() {
   int nota = 85;
 
   if (nota >= 90) {
-    print("Excelente");
+   debugPrint("Excelente");
   } else if (nota >= 70) {
-    print("Aprobado");
+   debugPrint("Aprobado");
   } else {
-    print("Reprobado");
+   debugPrint("Reprobado");
   }
 }
 ''',
@@ -601,13 +602,13 @@ void main() {
       'definition': 'El bucle `for` en Dart se utiliza para repetir un bloque de código un número específico de veces.\n\n'
           '¿Qué es un `for`? 🔄\n\n'
           'Imaginemos que tienes una lista de tareas y quieres hacer cada una de ellas en orden. El bucle `for` es como un asistente que recorre la lista y realiza cada tarea por ti. En Dart, el `for` te permite repetir un bloque de código mientras una condición sea verdadera.\n\n'
-          'Por ejemplo, si escribes `for (int i = 0; i < 5; i++) { print("Iteración \$i"); }`, el mensaje se mostrará 5 veces, una por cada iteración del bucle.\n\n'
+          'Por ejemplo, si escribes `for (int i = 0; i < 5; i++) {debugPrint("Iteración \$i"); }`, el mensaje se mostrará 5 veces, una por cada iteración del bucle.\n\n'
           'El `for` es una herramienta poderosa para automatizar tareas repetitivas.',
       'img_url': '',
       'code_example': '''
 void main() {
   for (int i = 0; i < 5; i++) {
-    print("Iteración \$i");
+   debugPrint("Iteración \$i");
   }
 }
 ''',
@@ -621,7 +622,7 @@ void main() {
       'definition': 'El bucle `while` en Dart se utiliza para repetir un bloque de código mientras una condición sea verdadera (`true`).\n\n'
           '¿Qué es un `while`? 🔄\n\n'
           'Imaginemos que estás lavando platos. Mientras haya platos sucios (`condición verdadera`), sigues lavando. En Dart, el `while` funciona de la misma manera: repite un bloque de código mientras la condición sea verdadera.\n\n'
-          'Por ejemplo, si escribes `while (contador < 5) { print("Contador: \$contador"); contador++; }`, el mensaje se mostrará hasta que `contador` sea 5.\n\n'
+          'Por ejemplo, si escribes `while (contador < 5) {debugPrint("Contador: \$contador"); contador++; }`, el mensaje se mostrará hasta que `contador` sea 5.\n\n'
           'El `while` es útil cuando no sabes cuántas veces necesitas repetir una tarea.',
       'img_url': '',
       'code_example': '''
@@ -629,7 +630,7 @@ void main() {
   int contador = 0;
 
   while (contador < 5) {
-    print("Contador: \$contador");
+   debugPrint("Contador: \$contador");
     contador++;
   }
 }
@@ -644,7 +645,7 @@ void main() {
       'definition': 'El bucle `do-while` en Dart es similar al `while`, pero garantiza que el bloque de código se ejecute al menos una vez, incluso si la condición es falsa.\n\n'
           '¿Qué es un `do-while`? 🔄\n\n'
           'Imaginemos que estás probando un nuevo plato. Primero lo cocinas (`hacer`), y luego decides si te gusta (`condición`). En Dart, el `do-while` funciona de la misma manera: ejecuta el bloque de código al menos una vez y luego verifica la condición.\n\n'
-          'Por ejemplo, si escribes `do { print("Contador: \$contador"); contador++; } while (contador < 5);`, el mensaje se mostrará al menos una vez, incluso si `contador` ya es 5.\n\n'
+          'Por ejemplo, si escribes `do {debugPrint("Contador: \$contador"); contador++; } while (contador < 5);`, el mensaje se mostrará al menos una vez, incluso si `contador` ya es 5.\n\n'
           'El `do-while` es útil cuando necesitas ejecutar un bloque de código al menos una vez antes de verificar la condición.',
       'img_url': '',
       'code_example': '''
@@ -652,7 +653,7 @@ void main() {
   int contador = 0;
 
   do {
-    print("Contador: \$contador");
+   debugPrint("Contador: \$contador");
     contador++;
   } while (contador < 5);
 }
@@ -667,7 +668,7 @@ void main() {
       'definition': 'La sentencia `switch case` en Dart se utiliza para ejecutar diferentes bloques de código dependiendo del valor de una variable.\n\n'
           '¿Qué es un `switch case`? 🎚️\n\n'
           'Imaginemos que tienes un menú de opciones. Dependiendo de la opción que elijas, se ejecuta una acción diferente. En Dart, el `switch case` funciona de la misma manera: evalúa el valor de una variable y ejecuta el bloque de código correspondiente.\n\n'
-          'Por ejemplo, si escribes `switch (dia) { case 1: print("Lunes"); break; case 2: print("Martes"); break; }`, el programa mostrará el nombre del día correspondiente al valor de `dia`.\n\n'
+          'Por ejemplo, si escribes `switch (dia) { case 1:debugPrint("Lunes"); break; case 2:debugPrint("Martes"); break; }`, el programa mostrará el nombre del día correspondiente al valor de `dia`.\n\n'
           'El `switch case` es ideal para manejar múltiples casos de manera organizada.',
       'img_url': '',
       'code_example': '''
@@ -676,13 +677,13 @@ void main() {
 
   switch (dia) {
     case 1:
-      print("Lunes");
+     debugPrint("Lunes");
       break;
     case 2:
-      print("Martes");
+     debugPrint("Martes");
       break;
     default:
-      print("Día no válido");
+     debugPrint("Día no válido");
   }
 }
 ''',
@@ -696,7 +697,7 @@ void main() {
       await _insertDetailsJrTopic3Level2(db);
       await _insertDetailsJrTopic4Level2(db);
     } catch (e) {
-      print("Error inserting details jr level 2: $e");
+      debugPrint("Error inserting details jr level 2: $e");
     }
   }
 
@@ -992,7 +993,7 @@ flutter run
       await _insertDetailsJrTopic5Level3(db);
       await _insertDetailsJrTopic6Level3(db);
     } catch (e) {
-      print("Error inserting details jr level 3: $e");
+      debugPrint("Error inserting details jr level 3: $e");
     }
   }
 
@@ -1147,7 +1148,7 @@ class MiBoton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        print("Botón presionado");
+       debugPrint("Botón presionado");
       },
       child: Text("Presiona aquí"),
     );
@@ -1257,12 +1258,12 @@ class _MiWidgetState extends State<MiWidget> {
   @override
   void initState() {
     super.initState();
-    print("Widget inicializado");
+   debugPrint("Widget inicializado");
   }
 
   @override
   void dispose() {
-    print("Widget eliminado");
+   debugPrint("Widget eliminado");
     super.dispose();
   }
 
@@ -1571,7 +1572,7 @@ CupertinoApp(
       await _insertDetailsJrTopic2Level4(db);
       await _insertDetailsJrTopic3Level4(db);
     } catch (e) {
-      print("Error inserting details jr level 4: $e");
+      debugPrint("Error inserting details jr level 4: $e");
     }
   }
 
@@ -1790,7 +1791,7 @@ Future<void> leerArchivo() async {
   final directory = await getApplicationDocumentsDirectory();
   final file = File("\${directory.path}/mi_archivo.txt");
   String contenido = await file.readAsString();
-  print(contenido);
+ debugPrint(contenido);
 }
 ''',
     });
@@ -1801,7 +1802,7 @@ Future<void> leerArchivo() async {
       await _insertDetailsJrTopic1Level5(db);
       await _insertDetailsJrTopic2Level5(db);
     } catch (e) {
-      print("Error inserting details jr level 5: $e");
+      debugPrint("Error inserting details jr level 5: $e");
     }
   }
 
@@ -1946,7 +1947,7 @@ git pull origin main
       await _insertDetailsJrTopic1Level6(db);
       await _insertDetailsJrTopic2Level6(db);
     } catch (e) {
-      print("Error inserting details jr level 6: $e");
+      debugPrint("Error inserting details jr level 6: $e");
     }
   }
 
@@ -2157,7 +2158,7 @@ Future<void> aplicarTema() async {
       await _insertDetailsJrTopic3Level7(db);
       await _insertDetailsJrTopic4Level7(db);
     } catch (e) {
-      print("Error inserting details jr level 7: $e");
+      debugPrint("Error inserting details jr level 7: $e");
     }
   }
 
@@ -2182,7 +2183,7 @@ class Coche {
   Coche(this.marca, this.modelo);
 
   void arrancar() {
-    print("El coche \$marca \$modelo está arrancando.");
+   debugPrint("El coche \$marca \$modelo está arrancando.");
   }
 }
 ''',
@@ -2206,14 +2207,14 @@ class Coche {
 // Ejemplo de modularidad y reutilización
 class Animal {
   void hacerSonido() {
-    print("Sonido genérico");
+   debugPrint("Sonido genérico");
   }
 }
 
 class Perro extends Animal {
   @override
   void hacerSonido() {
-    print("Guau guau");
+   debugPrint("Guau guau");
   }
 }
 ''',
@@ -2241,7 +2242,7 @@ class Persona {
   Persona(this.nombre, this.edad);
 
   void saludar() {
-    print("Hola, mi nombre es \$nombre y tengo \$edad años.");
+   debugPrint("Hola, mi nombre es \$nombre y tengo \$edad años.");
   }
 }
 
@@ -2274,11 +2275,11 @@ class Coche {
   Coche(this.marca, this.modelo);
 
   void arrancar() {
-    print("El coche \$marca \$modelo está arrancando.");
+   debugPrint("El coche \$marca \$modelo está arrancando.");
   }
 
   void detener() {
-    print("El coche \$marca \$modelo se ha detenido.");
+   debugPrint("El coche \$marca \$modelo se ha detenido.");
   }
 }
 ''',
@@ -2362,12 +2363,12 @@ abstract class Vehiculo {
 class Coche extends Vehiculo {
   @override
   void arrancar() {
-    print("Coche arrancado");
+   debugPrint("Coche arrancado");
   }
 
   @override
   void detener() {
-    print("Coche detenido");
+   debugPrint("Coche detenido");
   }
 }
 ''',
@@ -2417,14 +2418,14 @@ class CuentaBancaria {
 // Ejemplo de herencia
 class Vehiculo {
   void arrancar() {
-    print("Vehículo arrancado");
+   debugPrint("Vehículo arrancado");
   }
 }
 
 class Coche extends Vehiculo {
   @override
   void arrancar() {
-    print("Coche arrancado");
+   debugPrint("Coche arrancado");
   }
 }
 ''',
@@ -2445,21 +2446,21 @@ class Coche extends Vehiculo {
 // Ejemplo de polimorfismo
 class Animal {
   void hacerSonido() {
-    print("Sonido genérico");
+   debugPrint("Sonido genérico");
   }
 }
 
 class Perro extends Animal {
   @override
   void hacerSonido() {
-    print("Guau guau");
+   debugPrint("Guau guau");
   }
 }
 
 class Gato extends Animal {
   @override
   void hacerSonido() {
-    print("Miau");
+   debugPrint("Miau");
   }
 }
 
@@ -2496,15 +2497,15 @@ class Auto {
 
   void cambiarColor(String nuevoColor) {
     this.color = nuevoColor;
-    print("El auto ahora es de color: \$color");
+   debugPrint("El auto ahora es de color: \$color");
   }
 }
 
 void main() {
   Auto miAuto = Auto("Toyota", "Corolla", "Rojo");
-  print("Color actual: \${miAuto.color}"); // Output: Rojo
+ debugPrint("Color actual: \${miAuto.color}"); // Output: Rojo
   miAuto.cambiarColor("Azul");            // Cambia el color a Azul
-  print("Nuevo color: \${miAuto.color}"); // Output: Azul
+ debugPrint("Nuevo color: \${miAuto.color}"); // Output: Azul
 }
 ''',
     });
@@ -2528,7 +2529,7 @@ class Vehiculo {
   Vehiculo(this.marca, this.modelo);
 
   void describir() {
-    print("\$marca \$modelo");
+   debugPrint("\$marca \$modelo");
   }
 }
 
@@ -2539,7 +2540,7 @@ class Auto extends Vehiculo {
 
   @override
   void describir() {
-    print("\$marca \$modelo con \$numPuertas puertas");
+   debugPrint("\$marca \$modelo con \$numPuertas puertas");
   }
 }
 
@@ -2550,7 +2551,7 @@ class Moto extends Vehiculo {
 
   @override
   void describir() {
-    print("\$marca \$modelo, Tipo: \$tipo");
+   debugPrint("\$marca \$modelo, Tipo: \$tipo");
   }
 }
 
@@ -2584,24 +2585,24 @@ abstract class Vehiculo {
 class Auto implements Vehiculo {
   @override
   void arrancar() {
-    print("El auto está arrancando...");
+   debugPrint("El auto está arrancando...");
   }
 
   @override
   void detener() {
-    print("El auto se ha detenido.");
+   debugPrint("El auto se ha detenido.");
   }
 }
 
 class Moto implements Vehiculo {
   @override
   void arrancar() {
-    print("La moto está arrancando...");
+   debugPrint("La moto está arrancando...");
   }
 
   @override
   void detener() {
-    print("La moto se ha detenido.");
+   debugPrint("La moto se ha detenido.");
   }
 }
 
@@ -2621,7 +2622,7 @@ void main() {
       await _insertDetailsJrTopic1Level8(db);
       await _insertDetailsJrTopic2Level8(db);
     } catch (e) {
-      print("Error inserting details jr level 8: $e");
+      debugPrint("Error inserting details jr level 8: $e");
     }
   }
 
@@ -2803,7 +2804,7 @@ void main() {
       await _insertDetailsJrTopic1Level9(db);
       await _insertDetailsJrTopic2Level9(db);
     } catch (e) {
-      print("Error inserting details jr level 9: $e");
+      debugPrint("Error inserting details jr level 9: $e");
     }
   }
 

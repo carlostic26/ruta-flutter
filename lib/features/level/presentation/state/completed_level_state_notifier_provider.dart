@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/progress/domain/repositories/progress_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,7 +36,7 @@ class CompletedLevelsNotifier extends StateNotifier<List<int>> {
           .toList(); // Remover el nivel si ya no está completado
     }
 
-    print("Verificando nivel $levelId: ¿Completado? $isCompleted");
+    debugPrint("Verificando nivel $levelId: ¿Completado? $isCompleted");
   }
 
   // Obtener el último nivel completado

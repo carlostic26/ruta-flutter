@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 class DetailMidLocalDatabaseHelper {
@@ -14,7 +15,7 @@ class DetailMidLocalDatabaseHelper {
       await insertDetailsMidLevel9(db);
       await insertDetailsMidLevel10(db);
     } catch (e) {
-      print("Error inserting details mid: $e");
+      debugPrint("Error inserting details mid: $e");
     }
   }
 
@@ -25,7 +26,7 @@ class DetailMidLocalDatabaseHelper {
       await _insertDetailsMidTopic3Level1(db); // Notificar cambios
       await _insertDetailsMidTopic4Level1(db); // Ejemplos prácticos
     } catch (e) {
-      print("Error inserting details mid level 1: $e");
+      debugPrint("Error inserting details mid level 1: $e");
     }
   }
 
@@ -549,7 +550,7 @@ class LoginScreen extends ConsumerWidget {
     final authState = ref.watch(authProvider);
     
     if (authState.isLoading) return CircularProgressIndicator();
-    if (authState.error != null) return Text('Error: \{authState.error}');
+    if (authState.error != null) return Text('Error: {authState.error}');
     if (authState.user != null) return HomeScreen();
 
     return Column(
@@ -575,7 +576,7 @@ class LoginScreen extends ConsumerWidget {
       await _insertDetailsMidTopic1Level2(db); // Streams
       await _insertDetailsMidTopic2Level2(db); // Futures
     } catch (e) {
-      print("Error inserting details mid level 2: $e");
+      debugPrint("Error inserting details mid level 2: $e");
     }
   }
 
@@ -608,9 +609,9 @@ Stream<int> countStream() async* {
 
 void main() async {
   await for (final number in countStream()) {
-    print('Número recibido: \$number');
+   debugPrint('Número recibido: \$number');
   }
-  print('¡Stream completado!');
+ debugPrint('¡Stream completado!');
 }
 
 /* Salida:
@@ -655,7 +656,7 @@ class StreamExample extends StatelessWidget {
           stream: streamController.stream,
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Text('Esperando datos...');
-            return Text('Valor actual: \{snapshot.data}');
+            return Text('Valor actual: {snapshot.data}');
           },
         ),
         // Parte 2: Botón para añadir datos al stream
@@ -710,7 +711,7 @@ void main() async {
       .skip(2);
   
   await for (final n in transformed) {
-    print(n); 
+   debugPrint(n); 
   }
 }
 
@@ -750,9 +751,9 @@ Future<String> fetchUserName() async {
 }
 
 void main() async {
-  print('Cargando nombre de usuario...');
+ debugPrint('Cargando nombre de usuario...');
   final name = await fetchUserName();
-  print('Nombre recibido: \$name');
+ debugPrint('Nombre recibido: \$name');
 }
 
 /* Salida:
@@ -784,7 +785,7 @@ Nombre recibido: Juan Pérez
 // Ejemplo completo con manejo de errores
 Future<void> loadUserData() async {
   try {
-    print('Iniciando carga de datos...');
+   debugPrint('Iniciando carga de datos...');
     
     // Esperar múltiples Futures de forma secuencial
     final user = await fetchUser();
@@ -792,12 +793,12 @@ Future<void> loadUserData() async {
     final friends = await fetchUserFriends(user.id);
     
     // Procesar los datos recibidos
-    print(''Datos cargados:  Usuario: \{user.name} Posts: \{posts.length} Amigos: \{friends.length}'');
+   debugPrint(''Datos cargados:  Usuario: {user.name} Posts: {posts.length} Amigos: {friends.length}'');
     
   } catch (e) {
-    print('Error al cargar datos: \$e');
+   debugPrint('Error al cargar datos: \$e');
   } finally {
-    print('Carga de datos completada');
+   debugPrint('Carga de datos completada');
   }
 }
 
@@ -843,24 +844,24 @@ Future<List<User>> fetchUserFriends(int userId) async {
 Future<void> loadData() async {
   try {
     final data = await fetchDataFromInternet();
-    print('Datos recibidos: \$data');
+   debugPrint('Datos recibidos: \$data');
   } on SocketException catch (e) {
-    print('Error de conexión: \$e');
+   debugPrint('Error de conexión: \$e');
     showErrorMessage('No hay internet');
   } on FormatException {
-    print('Datos corruptos');
+   debugPrint('Datos corruptos');
     showErrorMessage('Datos inválidos');
   } catch (e) {
-    print('Error inesperado: \$e');
+   debugPrint('Error inesperado: \$e');
     showErrorMessage('Error desconocido');
   }
 }
 
 // 2. then() con onError
 fetchDataFromInternet()
-    .then((data) => print('Datos: \$data'))
+    .then((data) =>debugPrint('Datos: \$data'))
     .onError((error, stack) {
-      print('Error: \$error');
+     debugPrint('Error: \$error');
       return null; // Valor alternativo
     });
 
@@ -888,7 +889,7 @@ Future<String> fetchDataFromInternet() async {
       await _insertDetailsMidTopic1Level3(db); // Principios SOLID
       await _insertDetailsMidTopic2Level3(db); // Patrones de diseño
     } catch (e) {
-      print("Error inserting details mid level 3: $e");
+      debugPrint("Error inserting details mid level 3: $e");
     }
   }
 
@@ -1214,7 +1215,7 @@ class DatabaseConnection {
   
   // Constructor privado
   DatabaseConnection._internal() {
-    print('Creando nueva conexión a BD');
+   debugPrint('Creando nueva conexión a BD');
   }
   
   // Factory constructor para devolver la única instancia
@@ -1230,7 +1231,7 @@ void main() {
   final db1 = DatabaseConnection();
   final db2 = DatabaseConnection();
   
-  print(identical(db1, db2)); // true - misma instancia
+ debugPrint(identical(db1, db2)); // true - misma instancia
 }
 
 /* Salida:
@@ -1265,15 +1266,15 @@ abstract class Notification {
 }
 
 class EmailNotification implements Notification {
-  void send() => print('Enviando email...');
+  void send() =>debugPrint('Enviando email...');
 }
 
 class SMSNotification implements Notification {
-  void send() => print('Enviando SMS...');
+  void send() =>debugPrint('Enviando SMS...');
 }
 
 class PushNotification implements Notification {
-  void send() => print('Enviando push notification...');
+  void send() =>debugPrint('Enviando push notification...');
 }
 
 class NotificationFactory {
@@ -1305,7 +1306,7 @@ void main() {
       await _insertDetailsMidTopic1Level4(db); // Serialización JSON
       await _insertDetailsMidTopic2Level4(db); // APIs RESTful
     } catch (e) {
-      print("Error inserting details mid level 4: $e");
+      debugPrint("Error inserting details mid level 4: $e");
     }
   }
 
@@ -1346,17 +1347,17 @@ void main() {
   
   // 1. Decodificar JSON a Map
   final userMap = jsonDecode(jsonString);
-  print(userMap['name']); // Juan Pérez
+ debugPrint(userMap['name']); // Juan Pérez
   
   // 2. Convertir a objeto Dart
   final user = User.fromJson(userMap);
   
   // 3. Usar el objeto
-  print(user.email); // juan@example.com
+ debugPrint(user.email); // juan@example.com
   
   // 4. Codificar de vuelta a JSON
   final newJson = jsonEncode(user.toJson());
-  print(newJson);
+ debugPrint(newJson);
 }
 
 class User {
@@ -1457,10 +1458,10 @@ void main() {
   );
   
   final json = product.toJson();
-  print(json); // Map correctamente formateado
+ debugPrint(json); // Map correctamente formateado
   
   final product2 = Product.fromJson(json);
-  print(product2.name); // Laptop
+ debugPrint(product2.name); // Laptop
 }
 ''',
     });
@@ -1590,7 +1591,7 @@ Future<void> fetchUsers() async {
   
   if (response.statusCode == 200) {
     final List<dynamic> users = jsonDecode(response.body);
-    print('Usuarios: \$users');
+   debugPrint('Usuarios: \$users');
   } else {
     throw Exception('Error al cargar usuarios');
   }
@@ -1690,9 +1691,9 @@ void createUser() async {
       'email': 'carlos@example.com',
     }, null);
     
-    print('Usuario creado: \{data['id']}');
+   debugPrint('Usuario creado: {data['id']}');
   } on ApiException catch (e) {
-    print('Error: \{e.message}');
+   debugPrint('Error: {e.message}');
   }
 }
 ''',
@@ -1850,7 +1851,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
       await _insertDetailsMidTopic4Level5(db); // Configuración Remota
       await _insertDetailsMidTopic5Level5(db); // Cloud Functions
     } catch (e) {
-      print("Error inserting details mid level 5: $e");
+      debugPrint("Error inserting details mid level 5: $e");
     }
   }
 
@@ -2366,7 +2367,7 @@ class EmailVerificationScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Text('Por favor verifica tu email: \{user.email}'),
+            Text('Por favor verifica tu email: {user.email}'),
             ElevatedButton(
               onPressed: () async {
                 await user.reload(); // Refrescar estado de verificación
@@ -2547,7 +2548,7 @@ void main() async {
   
   // Configurar FCM
   final fcmToken = await FirebaseMessaging.instance.getToken();
-  print('FCM Token: \$fcmToken'); // Guardar este token en tu backend
+ debugPrint('FCM Token: \$fcmToken'); // Guardar este token en tu backend
   
   // Manejar mensajes en segundo plano
   FirebaseMessaging.onBackgroundMessage(_firebaseBackgroundMessage);
@@ -2559,7 +2560,7 @@ void main() async {
 @pragma('vm:entry-point')
 Future<void> _firebaseBackgroundMessage(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('Mensaje en background: \{message.notification?.title}');
+ debugPrint('Mensaje en background: {message.notification?.title}');
 }
 
 // En tu clase de mensajería
@@ -2575,18 +2576,18 @@ class MessagingService {
       sound: true,
     );
     
-    print('Permisos: \{settings.authorizationStatus}');
+   debugPrint('Permisos: {settings.authorizationStatus}');
     
     // Escuchar mensajes en primer plano
     FirebaseMessaging.onMessage.listen((message) {
-      print('Mensaje en primer plano: \{message.notification?.body}');
+     debugPrint('Mensaje en primer plano: {message.notification?.body}');
       // Mostrar notificación local
       showFlutterNotification(message);
     });
     
     // Manejar cuando se toca la notificación
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Notificación abierta: \{message.data}');
+     debugPrint('Notificación abierta: {message.data}');
       // Navegar a pantalla relevante
     });
     
@@ -2664,7 +2665,7 @@ extension AdvancedFCM on MessagingService {
   // Manejar tokens de dispositivo
   Future<void> monitorTokenRefresh() async {
     _fcm.onTokenRefresh.listen((newToken) {
-      print('Nuevo FCM token: \$newToken');
+     debugPrint('Nuevo FCM token: \$newToken');
       // Actualizar token en tu backend
       _updateTokenOnServer(newToken);
     });
@@ -2676,7 +2677,7 @@ extension AdvancedFCM on MessagingService {
     required Map<String, String> data,
   }) async {
     // En implementación real, esto se haría desde tu backend
-    print('Simulando envío de mensaje con data: \$data');
+   debugPrint('Simulando envío de mensaje con data: \$data');
   }
 
   // Configurar canal de notificaciones (Android)
@@ -2797,7 +2798,7 @@ class LocalNotifications {
         navigatorKey.currentState?.pushNamed('/chat', arguments: data['chat_id']);
       }
     } catch (e) {
-      print('Error al manejar payload: \$e');
+     debugPrint('Error al manejar payload: \$e');
     }
   }
 }
@@ -2902,7 +2903,7 @@ class RemoteConfigService {
     try {
       await _remoteConfig.fetchAndActivate();
     } catch (e) {
-      print('Error al obtener Remote Config: \$e');
+     debugPrint('Error al obtener Remote Config: \$e');
     }
   }
   
@@ -3288,12 +3289,12 @@ export const onUserCreate = functions.auth
       }
       
       // 3. Inicializar datos del usuario
-      await admin.firestore().doc(`users/\{user.uid}`).set({
+      await admin.firestore().doc(`users/{user.uid}`).set({
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
         status: 'active',
       });
       
-      functions.logger.info(`Usuario creado: \{user.uid}`);
+      functions.logger.info(`Usuario creado: {user.uid}`);
     } catch (error) {
       functions.logger.error('Error en onUserCreate:', error);
       throw error;
@@ -3320,9 +3321,9 @@ Future<void> createStripePayment() async {
       'description': 'Compra en la app',
     });
     
-    print('Resultado: \{result.data}');
+   debugPrint('Resultado: {result.data}');
   } on FirebaseFunctionsException catch (e) {
-    print('Error en la función: \{e.code} - \{e.message}');
+   debugPrint('Error en la función: {e.code} - {e.message}');
   }
 }
 ''',
@@ -3369,7 +3370,7 @@ exports.onPostCreate = functions.firestore
     
     if (hashtags.length > 0) {
       batch.set(
-        admin.firestore().doc(`posts/\{context.params.postId}/metadata/hashtags`),
+        admin.firestore().doc(`posts/{context.params.postId}/metadata/hashtags`),
         { hashtags },
       );
     }
@@ -3379,7 +3380,7 @@ exports.onPostCreate = functions.firestore
       const user = await findUserByUsername(username);
       if (user) {
         batch.set(
-          admin.firestore().collection(`users/\{user.id}/notifications`).doc(),
+          admin.firestore().collection(`users/{user.id}/notifications`).doc(),
           {
             type: 'mention',
             postId: context.params.postId,
@@ -3463,7 +3464,7 @@ class PaymentResult {
       await _insertDetailsMidTopic3Level6(db); // BLoC
       await _insertDetailsMidTopic4Level6(db); // GetX
     } catch (e) {
-      print("Error inserting details mid level 6: $e");
+      debugPrint("Error inserting details mid level 6: $e");
     }
   }
 
@@ -3514,7 +3515,7 @@ class CounterDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
-    return Text('Count: \{counter.count}');
+    return Text('Count: {counter.count}');
   }
 }
 
@@ -3537,7 +3538,7 @@ class OptimizedCounterDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Counter>(
       builder: (context, counter, child) {
-        return Text('Count: \{counter.count}');
+        return Text('Count: {counter.count}');
       },
     );
   }
@@ -3627,7 +3628,7 @@ class AppSettings extends StatelessWidget {
           value: prefs.themeMode == ThemeMode.dark,
           onChanged: (_) => prefs.toggleTheme(),
         ),
-        Text('Items en carrito: \{cart.items.length}'),
+        Text('Items en carrito: {cart.items.length}'),
       ],
     );
   }
@@ -3756,7 +3757,7 @@ class CounterPage extends StatelessWidget {
       builder: (context, snapshot) {
         return Column(
           children: [
-            Text('Count: \{snapshot.data ?? 0}'),
+            Text('Count: {snapshot.data ?? 0}'),
             ElevatedButton(
               onPressed: bloc.increment,
               child: Text('Increment'),
@@ -3844,7 +3845,7 @@ class UserProfile extends ConsumerWidget {
     return userAsync.when(
       loading: () => CircularProgressIndicator(),
       error: (err, stack) => Text('Error: \$err'),
-      data: (user) => Text('Welcome \{user.name}'),
+      data: (user) => Text('Welcome {user.name}'),
     );
   }
 }
@@ -3933,7 +3934,7 @@ class ProductList extends ConsumerWidget {
           
           return ListTile(
             title: Text(product.name),
-            subtitle: Text('\{product.price}'),
+            subtitle: Text('{product.price}'),
             trailing: IconButton(
               icon: Icon(inCart ? Icons.remove : Icons.add),
               onPressed: () {
@@ -4028,7 +4029,7 @@ class CounterDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
-    return Text('\{counter.count}');
+    return Text('{counter.count}');
   }
 }
 
@@ -4065,7 +4066,7 @@ class CounterDisplay extends ConsumerWidget {
 // 1. Sin dependencia de BuildContext
 void someFunction(WidgetRef ref) {
   final count = ref.read(counterProvider);
-  print(count);
+ debugPrint(count);
 }
 
 // 2. Testing más fácil
@@ -4171,7 +4172,7 @@ class CounterDisplay extends StatelessWidget {
     return BlocBuilder<CounterBloc, CounterState>(
       builder: (context, state) {
         if (state is CounterIncrement) {
-          return Text('Count: \{state.value}');
+          return Text('Count: {state.value}');
         }
         return const Text('Count: 0');
       },
@@ -4311,11 +4312,11 @@ class ProfileScreen extends StatelessWidget {
         if (authState is AuthSuccess) {
           return Column(
             children: [
-              Text('Welcome \{authState.user.name}'),
+              Text('Welcome {authState.user.name}'),
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, cartState) {
                   if (cartState is CartLoaded) {
-                    return Text('Items in cart: \{cartState.items.length}');
+                    return Text('Items in cart: {cartState.items.length}');
                   }
                   return const Text('Loading cart...');
                 },
@@ -4501,11 +4502,11 @@ class WeatherScreen extends StatelessWidget {
                   return Column(
                     children: [
                       Text(
-                        '\{state.weather.city}',
+                        '{state.weather.city}',
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       Text(
-                        '\{state.weather.temperature}°C',
+                        '{state.weather.temperature}°C',
                         style: Theme.of(context).textTheme.headline2,
                       ),
                       Text(
@@ -4626,7 +4627,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(title: Text('GetX Counter')),
       body: Center(
         child: Obx(() => Text(
-          'Count: \{controller.count}',
+          'Count: {controller.count}',
           style: TextStyle(fontSize: 24),
         )),
       ),
@@ -4790,7 +4791,7 @@ class ProductPage extends StatelessWidget {
                 final product = snapshot.data![index];
                 return ListTile(
                   title: Text(product.name),
-                  subtitle: Text('\{product.price}'),
+                  subtitle: Text('{product.price}'),
                   trailing: IconButton(
                     icon: Icon(Icons.add),
                     onPressed: () => cartController.addProduct(product),
@@ -4823,7 +4824,7 @@ class CartPage extends StatelessWidget {
                 final product = controller.products[index];
                 return ListTile(
                   title: Text(product.name),
-                  subtitle: Text('\{product.price}'),
+                  subtitle: Text('{product.price}'),
                   trailing: IconButton(
                     icon: Icon(Icons.remove),
                     onPressed: () => controller.removeProduct(product),
@@ -4835,7 +4836,7 @@ class CartPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Obx(() => Text(
-              'Total: \{controller.total}',
+              'Total: {controller.total}',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             )),
           ),
@@ -4851,11 +4852,11 @@ class AuthController extends GetxController {
   
   @override
   void onInit() {
-    ever(user, (_) => print('User changed: \$user'));
-    once(user, (_) => print('First user change'));
-    debounce(user, (_) => print('User stopped changing after 1 second'), 
+    ever(user, (_) =>debugPrint('User changed: \$user'));
+    once(user, (_) =>debugPrint('First user change'));
+    debounce(user, (_) =>debugPrint('User stopped changing after 1 second'), 
       time: Duration(seconds: 1));
-    interval(user, (_) => print('User changed every 1 second'), 
+    interval(user, (_) =>debugPrint('User changed every 1 second'), 
       time: Duration(seconds: 1));
     
     super.onInit();
@@ -4914,7 +4915,7 @@ class CounterDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counter = Provider.of<Counter>(context);
-    return Text('\{counter.count}');
+    return Text('{counter.count}');
   }
 }
 
@@ -4934,7 +4935,7 @@ class CounterDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CounterBloc, CounterState>(
       builder: (context, state) {
-        return Text('\{state.count}');
+        return Text('{state.count}');
       },
     );
   }
@@ -4953,7 +4954,7 @@ class CounterDisplay extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Text('\{controller.count}'));
+    return Obx(() => Text('{controller.count}'));
   }
 }
 
@@ -4998,7 +4999,7 @@ class Controller extends GetxController {
   
   @override
   void onInit() {
-    ever(count, (_) => print('count changed'));
+    ever(count, (_) =>debugPrint('count changed'));
     super.onInit();
   }
 }
@@ -5014,7 +5015,7 @@ class Controller extends GetxController {
       await _insertDetailsMidTopic4Level7(db);
       await _insertDetailsMidTopic5Level7(db);
     } catch (e) {
-      print("Error inserting details mid level 6: $e");
+      debugPrint("Error inserting details mid level 6: $e");
     }
   }
 
@@ -5166,17 +5167,17 @@ class ProductListScreen extends StatelessWidget {
           return Card(
             child: ListTile(
               leading: Hero(
-                tag: 'product-image-\{product.id}',
+                tag: 'product-image-{product.id}',
                 child: Image.network(product.imageUrl, width: 50, height: 50),
               ),
               title: Hero(
-                tag: 'product-title-\{product.id}',
+                tag: 'product-title-{product.id}',
                 child: Material(
                   type: MaterialType.transparency,
                   child: Text(product.name),
                 ),
               ),
-              subtitle: Text('\{product.price}€'),
+              subtitle: Text('{product.price}€'),
               onTap: () {
                 Navigator.push(
                   context,
@@ -5202,7 +5203,7 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Hero(
-        tag: 'product-title-\{product.id}',
+        tag: 'product-title-{product.id}',
         child: Material(
           type: MaterialType.transparency,
           child: Text(product.name),
@@ -5211,10 +5212,10 @@ class ProductDetailScreen extends StatelessWidget {
       body: Column(
         children: [
           Hero(
-            tag: 'product-image-\{product.id}',
+            tag: 'product-image-{product.id}',
             child: Image.network(product.imageUrl),
           ),
-          Text('\{product.price}€', style: TextStyle(fontSize: 24)),
+          Text('{product.price}€', style: TextStyle(fontSize: 24)),
           Text('Descripción detallada del producto...'),
         ],
       ),
@@ -6900,7 +6901,7 @@ class _AnimatedListBuilderState extends State<AnimatedListBuilder> {
   int _counter = 0;
 
   void _addItem() {
-    _items.insert(0, 'Item \{++_counter}');
+    _items.insert(0, 'Item {++_counter}');
     _listKey.currentState!.insertItem(0);
   }
 
@@ -7724,7 +7725,7 @@ class ColorPicker extends StatelessWidget {
     try {
       await _insertDetailsMidTopic1Level8(db); // Introducción a RxDart
     } catch (e) {
-      print("Error inserting details mid level 8: $e");
+      debugPrint("Error inserting details mid level 8: $e");
     }
   }
 
@@ -7766,7 +7767,7 @@ void main() {
   
   // Escuchar los valores emitidos
   final subscription = subject.stream.listen(
-    (value) => print('Valor recibido: \$value'),
+    (value) =>debugPrint('Valor recibido: \$value'),
   );
   
   // Emitir valores
@@ -7787,7 +7788,7 @@ void rxdartOperatorsExample() {
     .where((number) => number % 2 == 0) // Filtra números pares
     .map((number) => number * 2)        // Multiplica por 2
     .debounceTime(Duration(milliseconds: 500)) // Espera 500ms sin eventos
-    .listen((number) => print('Número procesado: \$number'));
+    .listen((number) =>debugPrint('Número procesado: \$number'));
   
   // Simular entrada de datos
   subject.add(1);
@@ -8021,7 +8022,7 @@ class CounterPage extends StatelessWidget {
           stream: bloc.count,
           builder: (context, snapshot) {
             return Text(
-              'Count: \{snapshot.data ?? 0}',
+              'Count: {snapshot.data ?? 0}',
               style: TextStyle(fontSize: 24),
             );
           },
@@ -8124,7 +8125,7 @@ class SearchApi {
       // Topic 5: Firebase App Distribution
       await _insertDetailsMidTopic5Level9(db); // Firebase App Distribution
     } catch (e) {
-      print("Error inserting details mid level 9: $e");
+      debugPrint("Error inserting details mid level 9: $e");
     }
   }
 
@@ -8556,8 +8557,8 @@ workflows:
       # Paso 4: Subir a Firebase
       - name: Deploy to Firebase
         script: |
-          flutter pub run flutterfire_cli:flutterfire distribute \
-            --release-notes-file release_notes.txt \
+          flutter pub run flutterfire_cli:flutterfire distribute 
+            --release-notes-file release_notes.txt 
             --groups testers
         
     publishing:
@@ -9251,10 +9252,10 @@ end
   run: |
     flutter build ios --flavor prod --release --no-codesign
     cd ios
-    fastlane distribute_to_testers \
-      app_id:{{secrets.IOS_APP_ID}} \
-      firebase_token:{{secrets.FIREBASE_TOKEN}} \
-      groups:"testers" \
+    fastlane distribute_to_testers 
+      app_id:{{secrets.IOS_APP_ID}} 
+      firebase_token:{{secrets.FIREBASE_TOKEN}} 
+      groups:"testers" 
       notes:"Build {{github.run_number}}"
 ''',
     });
@@ -9380,7 +9381,7 @@ jobs:
       // Topic 3: Asignación de memoria
       await _insertDetailsMidTopic3Level10(db); // Asignación de memoria
     } catch (e) {
-      print("Error inserting details mid level 10: $e");
+      debugPrint("Error inserting details mid level 10: $e");
     }
   }
 

@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/exam_question_model.dart'; // Importar el modelo
+import '../models/exam_question_model.dart';
 
 class LocalExamDataSource {
   static const String _tableName = 'exam_questions';
@@ -2013,13 +2013,13 @@ class LocalExamDataSource {
     }
   }
 
-  Future<void> printAllQuestions() async {
+/*   Future<void> printAllQuestions() async {
     final db = await getDatabase();
     final questions = await db.query('exam_questions');
     for (final question in questions) {
-      print(question);
+      debugPrint(question);
     }
-  }
+  } */
 
   // Método genérico para ejecutar consultas
   Future<List<Map<String, dynamic>>> query(String table,

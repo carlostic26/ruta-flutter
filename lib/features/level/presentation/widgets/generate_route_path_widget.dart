@@ -34,6 +34,11 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     final circleLeftScreen = widthScreen * 0.10;
     final circleRightScreen = widthScreen * 0.10;
 
+    // Configuración de posiciones
+    final squareCenterScreen = widthScreen * 0.40;
+    final squareLeftScreen = widthScreen * 0.10;
+    final squareRightScreen = widthScreen * 0.10;
+
     // Configuración de colores por módulo
     final moduleColors = {
       'Jr': Colors.blue,
@@ -64,7 +69,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
           final isLevelCompleted = completedLevels.contains(level.order);
           final isLastCompletedLevel = lastCompletedLevel == level.order;
 
-          // Calcular posición del círculo
+          /*    // Calcular posición del círculo
           final circleX = _calculateCirclePosition(
             i: i,
             circleCenter: circleCenterScreen,
@@ -72,11 +77,37 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
             circleRight: circleRightScreen,
           );
 
+          // Calcular posición del cuadrado
+          final squareX = _calculateSquarePosition(
+            i: i,
+            squareCenter: squareCenterScreen,
+            squareLeft: squareLeftScreen,
+            squareRight: squareRightScreen,
+          );
+
           // Añadir línea entre niveles (excepto para el último)
           if (i < levelList.length - 1) {
             final lineData = _calculateLinePosition(
               i: i,
               circleX: circleX,
+              currentBottom: currentBottom,
+              heightScreen: heightScreen,
+              widthScreen: widthScreen,
+            ); */
+
+          // Calcular posición del cuadrado
+          final squareX = _calculateSquarePosition(
+            i: i,
+            squareCenter: squareCenterScreen,
+            squareLeft: squareLeftScreen,
+            squareRight: squareRightScreen,
+          );
+
+          // Añadir línea entre niveles (excepto para el último)
+          if (i < levelList.length - 1) {
+            final lineData = _calculateLinePosition(
+              i: i,
+              squareX: squareX,
               currentBottom: currentBottom,
               heightScreen: heightScreen,
               widthScreen: widthScreen,
@@ -96,18 +127,39 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                               rutaColorLineCompleted, BlendMode.srcIn)
                           : const ColorFilter.mode(
                               rutaColorLineDefault, BlendMode.srcIn),
-                      child: Image.asset('assets/icons/linea_asset.png'),
+                      child: Image.asset('assets/icons/bold_linea_asset.png'),
                     ),
                   ),
                 ),
               ),
             );
+
+/*             widgets.add(
+              Positioned(
+                left: lineData.left,
+                bottom: lineData.bottom,
+                child: Transform.rotate(
+                  angle: lineData.angle,
+                  child: SizedBox(
+                    height: heightScreen * 0.12,
+                    child: ColorFiltered(
+                      colorFilter: isLevelCompleted
+                          ? ColorFilter.mode(
+                              rutaColorLineCompleted, BlendMode.srcIn)
+                          : const ColorFilter.mode(
+                              rutaColorLineDefault, BlendMode.srcIn),
+                      child: Image.asset('assets/icons/linea_asset.png'),
+                    ),
+                  ),
+                ),
+              ),
+            ); */
           }
 
-          // Añadir círculo del nivel
+          /*  // Añadir círculo del nivel
           widgets.add(
             Positioned(
-              left: circleX,
+              left: squareX, //circleX,
               bottom: currentBottom,
               child: Stack(
                 alignment: Alignment.center,
@@ -130,6 +182,51 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ); */
+
+          // Añadir cuadrado del nivel (con bordes redondeados)
+          widgets.add(
+            Positioned(
+              left: squareX,
+              bottom: currentBottom,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (isLastCompletedLevel)
+                    ConfettiAnimation(isCompleted: isLastCompletedLevel),
+                  AnimatedButton(
+                    shadowDegree: ShadowDegree.dark,
+                    duration: 0,
+                    height: heightScreen * 0.07,
+                    width: widthScreen * 0.20,
+                    shape: BoxShape.rectangle,
+                    onPressed: () =>
+                        _showLevelDialog(context, level, ref, moduleSelected),
+                    child: Container(
+                      width: widthScreen * 0.3,
+                      height: heightScreen * 0.10,
+                      decoration: BoxDecoration(
+                        color:
+                            isLevelCompleted ? Colors.green : moduleBaseColor,
+                        borderRadius: BorderRadius.circular(
+                            12.0), // Ajusta este valor para cambiar el redondeo
+                      ),
+                      child: Center(
+                        child: Text(
+                          (i + 1).toString(),
+                          style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -164,7 +261,7 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
     );
   }
 
-  double _calculateCirclePosition({
+/*   double _calculateCirclePosition({
     required int i,
     required double circleCenter,
     required double circleLeft,
@@ -208,6 +305,56 @@ class GenerateLevelsRoutePathWidget extends ConsumerWidget {
         return (
           angle: 2 * pi,
           left: circleX - widthScreen * 0.21,
+          bottom: lineBottom - heightScreen * 0.01,
+        );
+    }
+  }
+ */
+
+  double _calculateSquarePosition({
+    required int i,
+    required double squareCenter,
+    required double squareLeft,
+    required double squareRight,
+  }) {
+    if (i % 2 == 0) {
+      return i % 4 == 0 ? squareRight * 7 : squareLeft;
+    }
+    return squareCenter;
+  }
+
+  ({double angle, double left, double bottom}) _calculateLinePosition({
+    required int i,
+    required double squareX,
+    required double currentBottom,
+    required double heightScreen,
+    required double widthScreen,
+  }) {
+    final lineBottom = currentBottom + heightScreen * 0.035;
+
+    switch (i % 4) {
+      case 1:
+        return (
+          angle: pi,
+          left: squareX - widthScreen * 0.225,
+          bottom: lineBottom,
+        );
+      case 2:
+        return (
+          angle: -pi / 2,
+          left: squareX + widthScreen * 0.045,
+          bottom: lineBottom - heightScreen * 0.019,
+        );
+      case 3:
+        return (
+          angle: pi / 2,
+          left: squareX + widthScreen * 0.115,
+          bottom: lineBottom + heightScreen * 0.005,
+        );
+      default:
+        return (
+          angle: 2 * pi,
+          left: squareX - widthScreen * 0.21,
           bottom: lineBottom - heightScreen * 0.01,
         );
     }

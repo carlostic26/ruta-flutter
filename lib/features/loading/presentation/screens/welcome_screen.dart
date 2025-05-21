@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rutas_flutter/features/home/presentation/screens/home_page_screen.dart';
-import 'package:rutas_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:rutas_flutter/features/loading/presentation/state/page_view_state_provider.dart';
 import 'package:rutas_flutter/features/loading/presentation/widgets/tutorial_page_widget.dart';
 import 'package:rutas_flutter/features/loading/presentation/widgets/welcome_page_widget.dart';

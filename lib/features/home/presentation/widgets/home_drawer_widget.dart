@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rutas_flutter/core/app_config.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
+import 'package:rutas_flutter/features/exam/presentation/screens/start_exam_screen.dart';
 import 'package:rutas_flutter/features/home/presentation/screens/app_support.dart';
 import 'package:rutas_flutter/features/home/presentation/screens/delete_progress.dart';
 import 'package:rutas_flutter/features/home/presentation/screens/usability_screen.dart';

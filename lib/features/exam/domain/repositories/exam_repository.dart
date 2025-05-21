@@ -1,6 +1,6 @@
-import 'package:rutas_flutter/features/final_exam/domain/entities/exam_question.dart';
-import 'package:rutas_flutter/features/final_exam/domain/entities/exam_result.dart';
-import 'package:rutas_flutter/features/final_exam/domain/entities/user_answer.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/exam_question.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/exam_result.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/user_answer.dart';
 
 abstract class ExamRepository {
   Future<List<ExamQuestion>> getFinalExamQuestionsByModule(String moduleId);

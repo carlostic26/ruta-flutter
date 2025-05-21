@@ -1,7 +1,8 @@
-import 'package:rutas_flutter/features/final_exam/domain/entities/exam_question.dart';
-import 'package:rutas_flutter/features/final_exam/domain/entities/exam_result.dart';
-import 'package:rutas_flutter/features/final_exam/domain/entities/user_answer.dart';
-import 'package:rutas_flutter/features/final_exam/domain/repositories/exam_repository.dart';
+import 'package:flutter/material.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/exam_question.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/exam_result.dart';
+import 'package:rutas_flutter/features/exam/domain/entities/user_answer.dart';
+import 'package:rutas_flutter/features/exam/domain/repositories/exam_repository.dart';
 import '../datasources/local_exam_data_source.dart';
 
 class ExamRepositoryImpl implements ExamRepository {
@@ -19,7 +20,7 @@ class ExamRepositoryImpl implements ExamRepository {
     );
 
     if (rawQuestions.isEmpty) {
-      print(
+      debugPrint(
           'No se encontraron preguntas en la base de datos para el módulo: $moduleId');
       return [];
     }

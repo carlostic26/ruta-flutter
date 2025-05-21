@@ -8,7 +8,7 @@ import 'package:rutas_flutter/core/ads/ads_manager.dart';
 import 'package:rutas_flutter/core/database/database_helper.dart';
 import 'package:rutas_flutter/core/theme/theme_manager.dart';
 import 'package:rutas_flutter/core/theme/theme_notifier.dart';
-import 'package:rutas_flutter/features/final_exam/data/datasources/local_exam_data_source.dart';
+import 'package:rutas_flutter/features/exam/data/datasources/local_exam_data_source.dart';
 import 'package:rutas_flutter/features/level/presentation/state/completed_levels_shp_provider.dart';
 import 'package:rutas_flutter/features/loading/presentation/screens/loading_screen.dart';
 import 'package:rutas_flutter/features/progress/data/datasources/progress_local_database.dart';
@@ -47,7 +47,7 @@ void main() async {
   LocalDatabaseHelper().getDatabase();
   ProgressLocalDatabaseHelper().getDatabase;
   LocalExamDataSource().getDatabase;
-  LocalExamDataSource().printAllQuestions();
+  //LocalExamDataSource().printAllQuestions();
 
   await dotenv.load(fileName: '.env');
 

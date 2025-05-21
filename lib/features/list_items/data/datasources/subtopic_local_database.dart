@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:rutas_flutter/features/level/data/datasources/level_local_database.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
@@ -33,7 +34,7 @@ class SubtopicLocalDatabaseHelper {
       await _insertSubtopicsJrLevel8(db);
       await _insertSubtopicsJrLevel9(db);
     } catch (e) {
-      print("Error inserting subtopics jr: $e");
+      debugPrint("Error inserting subtopics jr: $e");
     }
   }
 
@@ -50,7 +51,7 @@ class SubtopicLocalDatabaseHelper {
       await _insertSubtopicsMidLevel9(db);
       await _insertSubtopicsMidLevel10(db);
     } catch (e) {
-      print("Error inserting subtopics mid: $e");
+      debugPrint("Error inserting subtopics mid: $e");
     }
   }
 
@@ -63,7 +64,7 @@ class SubtopicLocalDatabaseHelper {
       await _insertSubtopicsSrLevel5(db);
       await _insertSubtopicsSrLevel6(db);
     } catch (e) {
-      print("Error inserting subtopics sr: $e");
+      debugPrint("Error inserting subtopics sr: $e");
     }
   }
 

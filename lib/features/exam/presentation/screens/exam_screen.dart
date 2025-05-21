@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:rutas_flutter/core/ads/banner/ad_banner_provider_exam.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/screens/result_screen.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/screens/start_exam_screen.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
+import 'package:rutas_flutter/features/exam/presentation/screens/result_screen.dart';
+import 'package:rutas_flutter/features/exam/presentation/screens/start_exam_screen.dart';
+import 'package:rutas_flutter/features/exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/question_widget.dart';
 import '../widgets/timer_widget.dart';
 

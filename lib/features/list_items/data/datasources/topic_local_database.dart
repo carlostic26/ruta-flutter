@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:rutas_flutter/features/level/data/datasources/level_local_database.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
@@ -33,7 +34,7 @@ class TopicLocalDatabaseHelper {
       await _insertTopicsLevel8Jr(db);
       await _insertTopicsLevel9Jr(db);
     } catch (e) {
-      print("Error inserting topics jr: $e");
+      debugPrint("Error inserting topics jr: $e");
     }
   }
 
@@ -50,7 +51,7 @@ class TopicLocalDatabaseHelper {
       await _insertTopicsLevel9Mid(db);
       await _insertTopicsLevel10Mid(db);
     } catch (e) {
-      print("Error inserting topics mid: $e");
+      debugPrint("Error inserting topics mid: $e");
     }
   }
 
@@ -63,7 +64,7 @@ class TopicLocalDatabaseHelper {
       await _insertTopicsLevel5Sr(db);
       await _insertTopicsLevel6Sr(db);
     } catch (e) {
-      print("Error inserting topics sr: $e");
+      debugPrint("Error inserting topics sr: $e");
     }
   }
 
@@ -74,7 +75,7 @@ class TopicLocalDatabaseHelper {
 
   Future<void> _insertTopicsLevel1Jr(db) async {
     await db.insert('topic', {
-      'id': 't01l01', // topic 01 - level 01
+      'id': 't01l01',
       'module': 'Jr',
       'level_id': 1,
       'title': 'Variables',

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/screens/exam_screen.dart';
+import 'package:rutas_flutter/features/exam/presentation/screens/exam_screen.dart';
 import 'package:rutas_flutter/features/progress/presentation/state/start_exam_provider.dart';
 
 class StartExamScreen extends ConsumerStatefulWidget {
@@ -90,12 +90,12 @@ class _StartExamScreenState extends ConsumerState<StartExamScreen>
                         textAlign: TextAlign.center,
                         currentStep['text'],
                         style: const TextStyle(
-                          fontSize: 28,
+                          fontSize: 22,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 2),
                       Text(
                         'Flutter ${widget.moduleId}',
                         style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 class DetailSrLocalDatabaseHelper {
@@ -10,7 +11,7 @@ class DetailSrLocalDatabaseHelper {
       await insertDetailsSrLevel5(db);
       await insertDetailsSrLevel6(db);
     } catch (e) {
-      print("Error inserting details sr: $e");
+      debugPrint("Error inserting details sr: $e");
     }
   }
 
@@ -19,7 +20,7 @@ class DetailSrLocalDatabaseHelper {
       await _insertDetailsSrTopic1Level1(db); // Web Sockets
       await _insertDetailsSrTopic2Level1(db); // GraphQL
     } catch (e) {
-      print("Error inserting details sr level 1: $e");
+      debugPrint("Error inserting details sr level 1: $e");
     }
   }
 
@@ -44,7 +45,7 @@ final channel = IOWebSocketChannel.connect('ws://echo.websocket.org');
 
 // Escuchar mensajes
 channel.stream.listen((message) {
-  print('Received: \$message');
+ debugPrint('Received: \$message');
 });
 
 // Enviar mensaje
@@ -287,7 +288,7 @@ class UserProfile extends StatelessWidget {
       await _insertDetailsSrTopic1Level2(db);
       await _insertDetailsSrTopic2Level2(db);
     } catch (e) {
-      print("Error inserting details sr level 2: $e");
+      debugPrint("Error inserting details sr level 2: $e");
     }
   }
 
@@ -613,7 +614,7 @@ exports.secureApiEndpoint = functions
     try {
       await _insertDetailsSrTopic1Level3(db);
     } catch (e) {
-      print("Error inserting details sr level 3: $e");
+      debugPrint("Error inserting details sr level 3: $e");
     }
   }
 
@@ -780,7 +781,7 @@ final Animation<double> secondPart = Tween(begin: 0.0, end: 1.0).animate(
       await _insertDetailsSrTopic2Level4(db);
       await _insertDetailsSrTopic3Level4(db);
     } catch (e) {
-      print("Error inserting details sr level 4: $e");
+      debugPrint("Error inserting details sr level 4: $e");
     }
   }
 
@@ -1012,7 +1013,7 @@ class ThreeTreesExample extends StatelessWidget {
         builder: (context) {
           // El contexto es el Element
           final renderObject = context.findRenderObject();
-          print('RenderObject: \$renderObject');
+         debugPrint('RenderObject: \$renderObject');
           
           return Text('Hello Trees');
         },
@@ -1026,10 +1027,10 @@ class TreeDebugger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final element = context as Element;
-    print('Element: \$element');
+   debugPrint('Element: \$element');
     
     final renderObject = element.renderObject;
-    print('RenderObject: \$renderObject');
+   debugPrint('RenderObject: \$renderObject');
     
     return Container();
   }
@@ -1401,7 +1402,7 @@ class HybridState {
     try {
       await _insertDetailsSrTopic1Level5(db);
     } catch (e) {
-      print("Error inserting details sr level 5: $e");
+      debugPrint("Error inserting details sr level 5: $e");
     }
   }
 
@@ -1661,7 +1662,7 @@ jobs:
       await _insertDetailsSrTopic3Level6(db);
       await _insertDetailsSrTopic4Level6(db);
     } catch (e) {
-      print("Error inserting details sr level 6: $e");
+      debugPrint("Error inserting details sr level 6: $e");
     }
   }
 

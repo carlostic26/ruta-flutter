@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
 import 'package:rutas_flutter/core/ads/banner/ad_banner_provider_result.dart';
-import 'package:rutas_flutter/features/final_exam/presentation/state/provider/exam_providers.dart';
+import 'package:rutas_flutter/features/exam/presentation/state/provider/exam_providers.dart';
 import '../widgets/result_item_widget.dart';
 
 class ResultsScreen extends ConsumerStatefulWidget {
@@ -22,6 +22,7 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
   void initState() {
     super.initState();
     _loadingFuture = _calculateResults();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(adBannerProviderResult.notifier).loadAdaptiveAd(
             context,
@@ -33,7 +34,7 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
   @override
   void dispose() {
     _loadingFuture.ignore();
-    // Añadir disposición del banner
+    ref.read(examStateProvider.notifier).resetExamState();
     ref.read(adBannerProviderResult.notifier).disposeCurrentAd();
     super.dispose();
   }
@@ -53,11 +54,11 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
       // Calcular el porcentaje de respuestas correctas
       _progressValue = _correctAnswersCount / examState.questions.length;
 
-      print(
+      debugPrint(
           'Resultado calculado: $_correctAnswersCount/${examState.questions.length}');
       return true;
     } catch (e) {
-      print('Error calculando resultados: $e');
+      debugPrint('Error calculando resultados: $e');
       return false;
     }
   }
@@ -69,10 +70,6 @@ class _ResultsScreenState extends ConsumerState<ResultsScreen> {
     final double widthScreen = MediaQuery.of(context).size.width;
     final adState = ref.watch(adBannerProviderResult);
 
-    // Calcular la altura del banner si está cargado
-    final bannerHeight = adState.isLoaded && adState.bannerAd != null
-        ? adState.bannerAd!.size.height.toDouble()
-        : 0.0;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
