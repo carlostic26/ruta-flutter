@@ -2,7 +2,7 @@
     package = "com.blogspot.rutaflutter">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="Ruta Flutter"
+        android:label="RutaFlutter"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
 

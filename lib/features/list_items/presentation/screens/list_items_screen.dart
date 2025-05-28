@@ -19,6 +19,9 @@ class ListItemsScreen extends ConsumerStatefulWidget {
   ConsumerState<ListItemsScreen> createState() => _ListItemsScreenState();
 }
 
+/* 
+
+
 class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
   late PageController _pageController;
   bool _adLoaded = false;
@@ -108,7 +111,9 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
             ),
           ),
           leading: IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context);
+            },
             icon: const Icon(Icons.arrow_back_ios),
           ),
           centerTitle: true,
@@ -152,6 +157,183 @@ class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
 
   Widget _buildAdBanner(AdBannerStateDetail adState) {
     // Solo mostrar el banner si es para esta pantalla
+    if (adState.currentScreen == 'listItems' &&
+        adState.bannerAd != null &&
+        adState.isLoaded) {
+      return SizedBox(
+        width: adState.bannerAd!.size.width.toDouble(),
+        height: adState.bannerAd!.size.height.toDouble(),
+        child: AdWidget(ad: adState.bannerAd!),
+      );
+    } else {
+      return const SizedBox(height: 50);
+    }
+  }
+}
+ */
+
+class _ListItemsScreenState extends ConsumerState<ListItemsScreen> {
+  late PageController _pageController;
+  bool _adLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController =
+        PageController(initialPage: ref.read(currentPageProvider));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_adLoaded) {
+        ref.read(adBannerProviderDetail.notifier)
+          ..disposeCurrentAd()
+          ..loadAdaptiveAd(context, screenId: 'listItems')
+              .then((_) => _adLoaded = true);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    ref.read(adBannerProviderDetail.notifier).disposeCurrentAd();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  Future<bool> _handleSystemBack() async {
+    final currentPage = ref.read(currentPageProvider);
+
+    if (currentPage == 2) {
+      // DetailScreen
+      // Delegamos completamente el manejo del retroceso a DetailScreen
+      return false; // No permitimos que ListItemsScreen maneje el retroceso aquí
+    } else if (currentPage == 1) {
+      // SubtopicScreen
+      ref.read(currentPageProvider.notifier).state = 0;
+      return false; // Evitar el pop normal
+    } else {
+      // TopicScreen (0)
+      return true; // Permitir el pop normal
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final levelTitle = ref.watch(levelTitleProvider);
+    final titleTopic = ref.watch(topicTitleProvider);
+    final titleSubtopic = ref.watch(titleSubtopicProvider);
+    final adState = ref.watch(adBannerProviderDetail);
+    final size = MediaQuery.of(context).size;
+
+    ref.listen<int>(currentPageProvider, (_, nextPage) {
+      if (_pageController.hasClients &&
+          _pageController.page?.round() != nextPage) {
+        _pageController.animateToPage(
+          nextPage,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (!didPop) {
+          final shouldPop = await _handleSystemBack();
+          if (shouldPop && mounted) {
+            Navigator.of(context).pop();
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: _buildAppBar(ref.watch(currentPageProvider), levelTitle,
+            titleTopic, titleSubtopic, size),
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (index) {
+            ref.read(currentPageProvider.notifier).state = index;
+          },
+          children: [
+            const TopicScreen(),
+            const SubtopicScreen(),
+            DetailScreen(parentPageController: _pageController)
+          ],
+        ),
+        bottomNavigationBar: _buildAdBanner(adState),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(
+    int currentPage,
+    String levelTitle,
+    String titleTopic,
+    String titleSubtopic,
+    Size size,
+  ) {
+    switch (currentPage) {
+      case 0:
+        return AppBar(
+          title: Text(
+            levelTitle,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Poppins',
+              fontSize: 14,
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+        );
+      case 1:
+        return AppBar(
+          title: Text(
+            titleTopic,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              fontFamily: 'Poppins',
+            ),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              ref.read(currentPageProvider.notifier).state = 0;
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+        );
+      case 2:
+        return AppBar(
+          title: AppBarDetailWidget(widthScreen: size.width),
+          centerTitle: true,
+          foregroundColor: Colors.white,
+          leading: IconButton(
+            onPressed: () {
+              ref.read(currentPageProvider.notifier).state = 1;
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+          ),
+        );
+      default:
+        return AppBar();
+    }
+  }
+
+  Widget _buildAdBanner(AdBannerStateDetail adState) {
     if (adState.currentScreen == 'listItems' &&
         adState.bannerAd != null &&
         adState.isLoaded) {

@@ -78,7 +78,7 @@ class MyApp extends ConsumerWidget {
     final isDarkMode = ref.watch(themeProvider);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Ruta Flutter',
+        title: 'RutaFlutter',
         theme: isDarkMode ? ThemeManager.darkTheme : ThemeManager.lightTheme,
         home: const LoadingScreen());
   }
